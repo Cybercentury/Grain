@@ -241,11 +241,45 @@ dialog{background:#fffdf8}button:focus-visible,a:focus-visible,input:focus-visib
 @media(max-width:1000px){.analytics-grid{grid-template-columns:1fr}.analytics-quality{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:620px){.analytics-quality{grid-template-columns:1fr}.analytics-cost-row{grid-template-columns:1fr}.analytics-toolbar label{min-width:100%}}
 
+
+/* v0.13 — Executive Trading Dashboard */
+.exec-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:18px;margin-bottom:18px}
+.exec-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}
+.exec-kpis article{background:#fffdf8;border:1px solid var(--line);border-top:3px solid var(--green);border-radius:10px;padding:16px}
+.exec-kpis article.warning{border-top-color:#bd842c}.exec-kpis article.critical{border-top-color:#a54d3f}
+.exec-kpis small{display:block;color:var(--muted)}.exec-kpis b{display:block;font-size:23px;margin:7px 0 3px}
+.exec-position{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;padding:18px}
+.exec-position article{padding:14px;border:1px solid #e2d6bf;border-radius:8px;background:#fffefb}
+.exec-position b{display:block;font-size:20px;margin-top:5px}
+.exec-terminal{padding:18px}.exec-terminal-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.exec-terminal-grid article{border:1px solid #e2d6bf;border-radius:8px;padding:13px;background:#fffefb}
+.exec-terminal-grid b{display:block;font-size:20px;margin-top:5px}
+.exec-risk-list{padding:8px 18px 18px}.exec-risk{border-left:4px solid #c28a2f;background:#fff8e8;border-radius:8px;padding:12px 14px;margin:8px 0}
+.exec-risk.critical{border-left-color:#a64a3a;background:#fff1ee}.exec-risk small{display:block;color:var(--muted);margin-top:4px}
+.exec-status{display:inline-block;padding:4px 7px;border-radius:5px;font-size:10px;font-weight:700;background:#e7efe3;color:#365d3c}
+.exec-status.delay{background:#f6dfd7;color:#8a3d31}.exec-status.transit{background:#e7edf3;color:#3d5d73}
+.exec-mini-bar{height:8px;background:#ede6d9;border-radius:999px;overflow:hidden;margin-top:8px}.exec-mini-bar span{display:block;height:100%;background:var(--green)}
+@media(max-width:1000px){.exec-grid{grid-template-columns:1fr}.exec-kpis{grid-template-columns:repeat(2,1fr)}.exec-position{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:620px){.exec-kpis,.exec-position,.exec-terminal-grid{grid-template-columns:1fr}}
+
 </style></head><body>
-<aside><div class="brand"><svg class="brand-wheat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 22V5M12 5c-3-2-2-4 0-4 2 0 3 2 0 4ZM12 10C7 10 5 7 5 4c4 0 7 2 7 6ZM12 15c-5 0-7-3-7-6 4 0 7 2 7 6ZM12 20c-5 0-7-3-7-6 4 0 7 2 7 6ZM12 10c5 0 7-3 7-6-4 0-7 2-7 6ZM12 15c5 0 7-3 7-6-4 0-7 2-7 6ZM12 20c5 0 7-3 7-6-4 0-7 2-7 6Z"/></svg><span class="brand-name">grain<span>.</span></span></div><small>ТОРГОВЫЕ ОПЕРАЦИИ</small><nav aria-label="Основная навигация"><button class="active" data-view="overview"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg><span>Обзор</span></button><button data-view="pipeline"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 4h18l-7 8v6l-4 2v-8z"/></svg><span>Воронка продаж</span></button><button data-view="shipments"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 6h11v12H3zM14 10h4l3 4v4h-7"/><path d="M14 14h7"/><circle cx="7" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg><span>План отгрузок</span></button><button data-view="clients"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="9" cy="7" r="3"/><path d="M3 21v-3a6 6 0 0 1 12 0v3M16 4a3 3 0 0 1 0 6M18 14a5 5 0 0 1 3 4v3"/></svg><span>База клиентов</span></button><button data-view="finance"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/><path d="M3 7l6-4 6 6 6-5"/></svg><span>Финансы</span></button><button data-view="analytics"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19V9M10 19V5M16 19v-7M22 19H2"/><path d="M3 6l6-3 6 5 6-4"/></svg><span>Аналитика</span></button><button data-view="documents"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H5v20h14V7zM14 2v6h5M8 12h8M8 16h5"/></svg><span>Документооборот</span></button><button data-view="masterdata"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v7c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12v7c0 1.7 3.6 3 8 3s8-1.3 8-3v-7"/></svg><span>Master Data</span></button><button data-view="managerqa"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v7M12 17h.01"/></svg><span>Ответы руководителю</span></button></nav><footer>МОЛДОВА · B2B<br>Зерно и минеральные удобрения<br><br>Прототип / 01<br>Все компании и сделки вымышлены</footer></aside>
+<aside><div class="brand"><svg class="brand-wheat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 22V5M12 5c-3-2-2-4 0-4 2 0 3 2 0 4ZM12 10C7 10 5 7 5 4c4 0 7 2 7 6ZM12 15c-5 0-7-3-7-6 4 0 7 2 7 6ZM12 20c-5 0-7-3-7-6 4 0 7 2 7 6ZM12 10c5 0 7-3 7-6-4 0-7 2-7 6ZM12 15c5 0 7-3 7-6-4 0-7 2-7 6ZM12 20c5 0 7-3 7-6-4 0-7 2-7 6Z"/></svg><span class="brand-name">grain<span>.</span></span></div><small>ТОРГОВЫЕ ОПЕРАЦИИ</small><nav aria-label="Основная навигация"><button class="active" data-view="overview"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg><span>Обзор</span></button><button data-view="executive"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20h18M5 17V9h4v8M11 17V5h4v12M17 17v-4h4v4"/><path d="M4 6l5-3 4 4 7-5"/></svg><span>Дашборд руководителя</span></button><button data-view="pipeline"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 4h18l-7 8v6l-4 2v-8z"/></svg><span>Воронка продаж</span></button><button data-view="shipments"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 6h11v12H3zM14 10h4l3 4v4h-7"/><path d="M14 14h7"/><circle cx="7" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg><span>План отгрузок</span></button><button data-view="clients"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="9" cy="7" r="3"/><path d="M3 21v-3a6 6 0 0 1 12 0v3M16 4a3 3 0 0 1 0 6M18 14a5 5 0 0 1 3 4v3"/></svg><span>База клиентов</span></button><button data-view="finance"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/><path d="M3 7l6-4 6 6 6-5"/></svg><span>Финансы</span></button><button data-view="analytics"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="8" height="6" rx="1.3"/><rect x="13" y="3" width="8" height="10" rx="1.3"/><rect x="3" y="11" width="8" height="10" rx="1.3"/><rect x="13" y="15" width="8" height="6" rx="1.3"/></svg><span>Аналитика</span></button><button data-view="documents"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H5v20h14V7zM14 2v6h5M8 12h8M8 16h5"/></svg><span>Документооборот</span></button><button data-view="masterdata"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v7c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12v7c0 1.7 3.6 3 8 3s8-1.3 8-3v-7"/></svg><span>Master Data</span></button><button data-view="managerqa"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v7M12 17h.01"/></svg><span>Ответы руководителю</span></button></nav><footer>МОЛДОВА · B2B<br>Зерно и минеральные удобрения<br><br>Прототип / 01<br>Все компании и сделки вымышлены</footer></aside>
 <main><div class="top"><span>Рабочее пространство / Продажи по Молдове</span><span class="demo">Демонстрационные данные</span></div><button class="task-banner" id="task-banner" aria-haspopup="dialog" aria-controls="task-drawer"></button><div class="heading"><div><h1 id="page-title">Продажи в деталях.</h1><p id="subtitle">От первого запроса до последней отгруженной тонны.</p></div></div>
 <div class="filters"><label>Период отгрузки<select id="month"><option value="2026-10">Октябрь 2026</option><option value="2026-11">Ноябрь 2026</option><option value="2026-12">Декабрь 2026</option><option value="all">IV квартал 2026</option></select></label><label>Товар<select id="product"><option value="all">Все товары</option><option>Пшеница</option><option>Кукуруза</option><option>Удобрения NPK</option></select></label><label>Район<select id="region"><option value="all">Вся Молдова</option><option>Бельцы</option><option>Оргеев</option><option>Кагул</option><option>Унгены</option></select></label><span class="scope">Дата примера: 30 сентября 2026 <button class="help" data-help="date" aria-label="О дате примера">?</button></span></div>
 <section id="overview"><div class="metrics" id="metrics"></div><div class="grid"><section class="panel"><div class="panel-head"><h2>Горизонт отгрузок <button class="help" data-help="chart" aria-label="О горизонте отгрузок">?</button></h2><small>IV квартал · тонны</small></div><div class="chart" id="chart"></div></section><section class="panel"><div class="panel-head"><h2>Требуют внимания <button class="help" data-help="risks" aria-label="О рисках">?</button></h2><small id="risk-count"></small></div><div id="risks"></div></section></div><section class="panel lower integrity-overview"><div class="panel-head"><h2>Контроль целостности и рисков <button class="help" data-help="integrity" aria-label="О контроле целостности">?</button></h2><small>Автоматические сверки Shipment · вес · качество · финансы · MTM</small></div><div class="integrity-summary" id="integrity-summary"></div><div id="integrity-exceptions"></div></section><section class="panel lower"><div class="panel-head"><h2>Сделки выбранного периода</h2><small>Нажмите на клиента, чтобы открыть сделку</small></div><div class="table-wrap" id="deals-table"></div></section></section>
+<section id="executive" class="hidden">
+  <div class="exec-kpis" id="exec-kpis"></div>
+  <div class="exec-grid">
+    <section class="panel"><div class="panel-head"><h2>Физическая позиция товара</h2><small>Контракты → Transit → Terminal → исполнение</small></div><div class="exec-position" id="exec-position"></div></section>
+    <section class="panel"><div class="panel-head"><h2>Терминал Джурджулешты</h2><small>Мощность, throughput и оборачиваемость</small></div><div class="exec-terminal" id="exec-terminal"></div></section>
+  </div>
+  <div class="exec-grid">
+    <section class="panel"><div class="panel-head"><h2>Исполнение контрактов</h2><small>Физический прогресс + Operating Margin</small></div><div class="table-wrap" id="exec-contracts"></div></section>
+    <section class="panel"><div class="panel-head"><h2>Риски руководителя</h2><small>Исключения, требующие решения</small></div><div class="exec-risk-list" id="exec-risks"></div></section>
+  </div>
+  <section class="panel"><div class="panel-head"><h2>Логистика и Transit</h2><small>Текущие физические перемещения по Shipment</small></div><div class="table-wrap" id="exec-logistics"></div></section>
+  <p class="note">Верхний уровень трейдингового dashboard — товар, контракты, маржа, деньги, риски и терминал. Звонки, лиды и CRM-конверсия остаются операционными метриками команды.</p>
+</section>
 <section id="pipeline" class="hidden"><div class="board" id="board"></div><p class="note">Все активные сделки по выбранным товару и району, независимо от месяца. Тонны — весь оставшийся объём. Этап меняется в карточке сделки.</p></section>
 <section id="shipments" class="hidden"><section class="panel"><div class="panel-head"><h2>График партий <button class="help" data-help="schedule" aria-label="О графике партий">?</button></h2><small>Факт и остаток по каждой партии</small></div><div class="table-wrap" id="shipment-table"></div></section></section>
 
@@ -755,6 +789,30 @@ dialog{background:#fffdf8}button:focus-visible,a:focus-visible,input:focus-visib
     <div class="manager-qa-head">
       <span class="manager-qa-mark" aria-hidden="true">!</span>
       <div>
+        <small>ВОПРОС РУКОВОДИТЕЛЯ · TRADING DASHBOARD</small>
+        <h2>Какие KPI должны быть на dashboard руководителя</h2>
+        <p>Физический товарный поток и экономика выше CRM-активности.</p>
+      </div>
+    </div>
+    <div class="manager-qa-body">
+      <div class="manager-qa-quote"><small>ДОСЛОВНЫЙ ВОПРОС</small>«Представьте, что мы внедряем трейдинговый дашборд. Какие метрики вы бы предложили мне на согласование в первую очередь?»</div>
+      <h3 class="manager-qa-subtitle">Какие управленческие проблемы из этого следуют</h3>
+      <div class="manager-qa-items">
+        <details class="manager-qa-item"><summary>Как увидеть реальную физическую позицию товара, а не только CRM-статус сделки?</summary><div class="manager-qa-item-body"><span class="manager-qa-status done">РЕАЛИЗОВАНО v0.13</span><p>В dashboard отдельно показываются подписанный объём, открытый остаток, объём в пути, stock на терминале и фактически отгруженный объём. «В пути» считается только из Logistics Movements со статусом in_transit / delayed, а не из общего plannedQty.</p><p>Поэтому руководитель видит, где физически находится товар, а не делает вывод о движении из стадии Deal.</p></div></details>
+        <details class="manager-qa-item"><summary>Как контролировать исполнение контракта после подписания?</summary><div class="manager-qa-item-body"><span class="manager-qa-status done">РЕАЛИЗОВАНО</span><p>Для signed Deal рассчитываются contracted tons, shipped tons, transit, terminal stock, open remainder, execution % и следующая Shipment. Подписанный документ становится началом контроля исполнения, а не финальной точкой CRM.</p><p>В таблице руководитель одновременно видит физический прогресс и задержки transit.</p></div></details>
+        <details class="manager-qa-item"><summary>Маржинальность действительно показывает выгоду контракта?</summary><div class="manager-qa-item-body"><span class="manager-qa-status done">РЕАЛИЗОВАНО</span><p>Да, но нужно различать уровни. Contribution Margin показывает результат после COGS и прямых расходов; Operating Margin дополнительно учитывает allocated shared costs и поэтому ближе к реальной управленческой выгоде контракта.</p><p>Это не бухгалтерская чистая прибыль: налоги, финансирование, FX и другие корпоративные статьи могут находиться вне этой модели. В executive dashboard для signed Deal показывается именно Operating Margin и сумма Analytical Operating Result.</p></div></details>
+        <details class="manager-qa-item"><summary>Как измерить эффективность терминала?</summary><div class="manager-qa-item-body"><span class="manager-qa-status done">РЕАЛИЗОВАНО DEMO</span><p>Добавлен Terminal Operations layer: capacity, current stock, inbound/outbound throughput, average stock, utilization, turnover и average dwell time. Turnover считается как outbound throughput / average stock.</p><p>Это отделено от Cost Center терминала: Cost Center отвечает за деньги, Terminal Operations — за физическую производительность инфраструктуры.</p></div></details>
+        <details class="manager-qa-item"><summary>Что должно быть выше обычных метрик CRM?</summary><div class="manager-qa-item-body"><span class="manager-qa-status done">ЗАФИКСИРОВАН ПРИНЦИП</span><p>На верхний уровень вынесены товар, контракт, Operating Margin, Cash Gap, MTM, Integrity и terminal utilization. Звонки, лиды и конверсия могут оставаться метриками работы команды, но не заменяют бизнес-KPI трейдинга.</p><p>Dashboard руководителя поэтому отвечает на вопрос «что происходит с товаром и экономикой», а не «сколько действий сделал менеджер».</p></div></details>
+        <details class="manager-qa-item"><summary>Как руководитель понимает, куда смотреть в первую очередь?</summary><div class="manager-qa-item-body"><span class="manager-qa-status done">РЕАЛИЗОВАНО</span><p>Executive Risk Board объединяет Integrity Critical, блокировки Shipment clearance, задержки Logistics, stale MTM marks, кассовый разрыв и перегрузку терминала. Исключения идут рядом с KPI, а не скрываются в отдельных модулях.</p><p>Тем самым dashboard становится инструментом принятия решений, а не только витриной средних показателей.</p></div></details>
+      </div>
+      <div class="manager-qa-summary"><b>Краткий архитектурный вывод.</b><br>Дашборд руководителя в Grain строится вокруг физического положения товара, исполнения подписанных контрактов, Operating Margin, Cash Gap, MTM, управленческих рисков и эффективности терминала. CRM activity metrics остаются вторичным уровнем, потому что они не показывают напрямую ни движение товара, ни реальную экономику контракта.</div>
+    </div>
+  </article>
+
+  <article class="manager-qa-card">
+    <div class="manager-qa-head">
+      <span class="manager-qa-mark" aria-hidden="true">!</span>
+      <div>
         <small>ВОПРОС РУКОВОДИТЕЛЯ · BI / АНАЛИТИКА</small>
         <h2>От CRM-виджетов к P&L, Cash Flow и Cost Centers</h2>
         <p>Не отдельные красивые отчёты, а единая аналитическая модель поверх первичных операций.</p>
@@ -896,7 +954,7 @@ try{
   if(main)main.innerHTML='<section class="panel" style="padding:24px"><h1>Не удалось загрузить данные Grain</h1><p>Интерфейс использует data.json как мини-базу данных. Откройте проект через GitHub Pages или локальный HTTP-сервер и проверьте доступность data.json.</p></section>';
   throw error;
 }
-let financeState=structuredClone(DB.finance.shipmentFinancials||[]),cashMovements=structuredClone(DB.finance.cashMovements||[]),marketMarks=structuredClone(DB.market?.marks||[]),integrityState=structuredClone(DB.integrity||{}),masterData=structuredClone(DB.masterData||{}),analyticsState=structuredClone(DB.analytics||{}),auditTrail=structuredClone(DB.auditSeed||[]);
+let financeState=structuredClone(DB.finance.shipmentFinancials||[]),cashMovements=structuredClone(DB.finance.cashMovements||[]),marketMarks=structuredClone(DB.market?.marks||[]),integrityState=structuredClone(DB.integrity||{}),masterData=structuredClone(DB.masterData||{}),analyticsState=structuredClone(DB.analytics||{}),logisticsState=structuredClone(DB.logistics||{}),terminalState=structuredClone(DB.terminal||{}),auditTrail=structuredClone(DB.auditSeed||[]);
 const stages=['Новый запрос','Потребность уточнена','Предложение отправлено','Согласование условий','Контракт подписан','Исполнение'];
 const probability=[0,.2,.4,.7,1,1], today='2026-09-30';
 const sourceClients=Object.fromEntries(DB.clients.map(c=>[c.id,c]));
@@ -949,7 +1007,7 @@ const form=$('#edit');function draft(){const f=new FormData(form);return {...d,s
 function update(){const x=draft(),r=remaining(x,'all'),displayVolume=x.parts.length?r:(x.expectedVolume||0);$('#deal-summary').innerHTML=`<b>${x.parts.length?'Весь оставшийся объём':'Ориентировочная потребность'}: ${fmt(displayVolume)} т</b><br>${x.stage>=4?'По контракту':'Взвешенный ориентир'}: ${fmt(displayVolume*probability[x.stage])} т<br>Оценка объёма ${qhelp('revenue')}: <b>${fmt(displayVolume*x.price)} MDL</b><br><span style="font-size:12px">${x.fixed?'Сумма по фиксированной цене':'Предварительная сумма'} · без взвешивания по вероятности</span>`}
 form.addEventListener('input',update);form.addEventListener('change',update);form.onsubmit=e=>{e.preventDefault();const x=draft();if(x.parts.some(p=>p.shipped>p.qty)){$('#form-error').textContent='Фактическая отгрузка не может превышать план партии.';return}if(x.parts.some(p=>p.shipped>0)&&x.stage<4){$('#form-error').textContent='В этой модели факт отгрузки доступен только для подписанных сделок.';return}if(x.parts.some(p=>p.shipped>0&&p.date>today)){$('#form-error').textContent='Нельзя отметить будущую партию отгруженной. Дата примера: 30.09.2026.';return}auditDiff('Сделка',d.sourceId,d,x,d.manager,'Менеджер продаж');auditShipmentChanges(d,x);deals[deals.findIndex(y=>y.id===id)]=x;$('#detail').close();render();toast('Сделка обновлена. Прогноз пересчитан.')};update();$('#detail').showModal()}
 function toast(s){$('#toast').textContent=s;$('#toast').classList.remove('hidden');clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>$('#toast').classList.add('hidden'),3200)}
-document.addEventListener('click',e=>{const h=e.target.closest('[data-help]');if(h){const [title,body]=help[h.dataset.help];$('#tip-title').textContent=title;$('#tip-text').textContent=body;$('#tip').showModal();return}const d=e.target.closest('[data-deal]');if(d){detail(+d.dataset.deal);return}if(e.target.closest('.close,.close-detail'))e.target.closest('dialog').close();const n=e.target.closest('[data-view]');if(n){currentView=n.dataset.view;if(currentView==='masterdata')renderMasterData();if(currentView==='analytics')renderAnalytics();for(const id of ['overview','pipeline','shipments','finance','analytics','clients','documents','masterdata','managerqa'])$('#'+id).classList.toggle('hidden',id!==currentView);document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b===n));$('#page-title').textContent={overview:'Продажи в деталях.',pipeline:'От запроса к контракту.',shipments:'Каждая тонна — по плану.',finance:'Финансы продаж.',analytics:'Управленческая аналитика.',clients:'Клиенты и новые закупки.',documents:'Договоры в движении.',masterdata:'Master Data и синхронизация.',managerqa:'Ответы на вопросы руководителя.'}[currentView];$('#subtitle').textContent={overview:'От первого запроса до последней отгруженной тонны.',pipeline:'Этапы переговоров и объёмы будущих поставок.',shipments:'График отгрузок по клиентам и партиям.',finance:'P&L, Cash Flow и контроль финансовых данных по реальным партиям.',analytics:'P&L, Cash Flow, центры затрат и маржинальность по единой модели данных.',clients:'История отношений, поводы для контакта и напоминания менеджеру.',documents:'От подготовки договора до согласования и подписания.',masterdata:'Единые контрагенты, номенклатура, mappings и владельцы полей.',managerqa:'Вопросы, которые формируют архитектуру Grain, и зафиксированные ответы на них.'}[currentView];$('.filters').classList.toggle('hidden',['finance','analytics','clients','documents','masterdata','managerqa'].includes(currentView));$('#month').closest('label').classList.toggle('hidden',currentView==='pipeline')}});
+document.addEventListener('click',e=>{const h=e.target.closest('[data-help]');if(h){const [title,body]=help[h.dataset.help];$('#tip-title').textContent=title;$('#tip-text').textContent=body;$('#tip').showModal();return}const d=e.target.closest('[data-deal]');if(d){detail(+d.dataset.deal);return}if(e.target.closest('.close,.close-detail'))e.target.closest('dialog').close();const n=e.target.closest('[data-view]');if(n){currentView=n.dataset.view;if(currentView==='masterdata')renderMasterData();if(currentView==='analytics')renderAnalytics();if(currentView==='executive')renderExecutive();for(const id of ['overview','executive','pipeline','shipments','finance','analytics','clients','documents','masterdata','managerqa'])$('#'+id).classList.toggle('hidden',id!==currentView);document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b===n));$('#page-title').textContent={overview:'Продажи в деталях.',executive:'Трейдинг под контролем.',pipeline:'От запроса к контракту.',shipments:'Каждая тонна — по плану.',finance:'Финансы продаж.',analytics:'Управленческая аналитика.',clients:'Клиенты и новые закупки.',documents:'Договоры в движении.',masterdata:'Master Data и синхронизация.',managerqa:'Ответы на вопросы руководителя.'}[currentView];$('#subtitle').textContent={overview:'От первого запроса до последней отгруженной тонны.',executive:'Товар, контракт, деньги, риски и терминал — в одном управленческом представлении.',pipeline:'Этапы переговоров и объёмы будущих поставок.',shipments:'График отгрузок по клиентам и партиям.',finance:'P&L, Cash Flow и контроль финансовых данных по реальным партиям.',analytics:'P&L, Cash Flow, центры затрат и маржинальность по единой модели данных.',clients:'История отношений, поводы для контакта и напоминания менеджеру.',documents:'От подготовки договора до согласования и подписания.',masterdata:'Единые контрагенты, номенклатура, mappings и владельцы полей.',managerqa:'Вопросы, которые формируют архитектуру Grain, и зафиксированные ответы на них.'}[currentView];$('.filters').classList.toggle('hidden',['executive','finance','analytics','clients','documents','masterdata','managerqa'].includes(currentView));$('#month').closest('label').classList.toggle('hidden',currentView==='pipeline')}});
 for(const dlg of document.querySelectorAll('dialog'))dlg.addEventListener('click',e=>{if(e.target===dlg){const r=dlg.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dlg.close()}});
 for(const s of document.querySelectorAll('.filters select'))s.onchange=render;
 
@@ -1468,6 +1526,107 @@ function renderFinance(){
       return '<tr><td><button class="link" data-financial="'+x.p.shipmentId+'">'+x.p.shipmentId+'</button><small>'+x.d.sourceId+'</small></td><td>'+escapeHTML(x.c?.name||'')+'<small>'+escapeHTML(x.d.product)+' · '+escapeHTML(x.d.businessLine)+'</small></td><td>'+fmt(x.calc.openQty)+' т<small>из '+fmt(x.calc.plannedQty)+' т</small></td><td>'+escapeHTML(x.row.valueStatus)+'</td><td>'+money(scenario.contribution)+'</td><td>'+(x.calc.mark?money(x.calc.marketPrice)+'/т<small>'+escapeHTML(x.calc.mark.source)+' · '+escapeHTML(x.calc.mark.status==='current'?'актуальна':'устарела')+'</small>':'—')+'</td><td class="'+mtmClass(x.calc.mtm)+'"><b>'+money(x.calc.mtm)+'</b></td><td><button class="btn '+finStatusClass(x.gate)+'" data-financial="'+x.p.shipmentId+'">'+x.gate.status+'</button></td></tr>';
     }).join('')+'</tbody></table>'+(list.length?'':'<div class="empty">Нет партий по выбранным фильтрам.</div>');
   renderAudit();
+}
+
+
+function executiveMovements(){return logisticsState.movements||[]}
+function executiveTerminal(){return (terminalState.terminals||[])[0]||null}
+function executiveMovementTons(statuses){const set=new Set(statuses);return executiveMovements().filter(x=>set.has(x.status)).reduce((n,x)=>n+(+x.quantityTons||0),0)}
+function executiveCurrentTerminalStock(){return (terminalState.inventory||[]).filter(x=>x.status==='stored').reduce((n,x)=>n+(+x.quantityTons||0),0)}
+function executiveTerminalStats(){
+  const t=executiveTerminal(),ops=terminalState.operations||[],snaps=terminalState.stockSnapshots||[],closed=terminalState.completedLots||[];
+  const inbound=ops.filter(x=>x.type==='in').reduce((n,x)=>n+(+x.quantityTons||0),0),outbound=ops.filter(x=>x.type==='out').reduce((n,x)=>n+(+x.quantityTons||0),0);
+  const avgStock=snaps.length?snaps.reduce((n,x)=>n+(+x.stockTons||0),0)/snaps.length:0,current=executiveCurrentTerminalStock(),capacity=+t?.capacityTons||0;
+  const utilization=capacity?current/capacity*100:0,turnover=avgStock?outbound/avgStock:0;
+  const dwellWeight=closed.reduce((n,x)=>n+(+x.quantityTons||0),0),avgDwell=dwellWeight?closed.reduce((n,x)=>n+(+x.dwellDays||0)*(+x.quantityTons||0),0)/dwellWeight:0;
+  return {terminal:t,inbound,outbound,avgStock,current,capacity,utilization,turnover,avgDwell};
+}
+function executiveSignedDealRows(){
+  const signedIds=new Set(wfDocs.filter(x=>x.stage==='signed'&&x.dealId!=null).map(x=>x.dealId));
+  const universe=analyticsUniverse(),alloc=analyticsAllocationRows();
+  return deals.filter(d=>signedIds.has(d.id)).map(d=>{
+    const contracted=d.parts.reduce((n,p)=>n+(+p.qty||0),0),shipped=d.parts.reduce((n,p)=>n+(+p.shipped||0),0);
+    const shipmentIds=new Set(d.parts.map(p=>p.shipmentId));
+    const transit=executiveMovements().filter(m=>shipmentIds.has(m.shipmentId)&&['in_transit','delayed'].includes(m.status)).reduce((n,m)=>n+(+m.quantityTons||0),0);
+    const terminal=(terminalState.inventory||[]).filter(l=>shipmentIds.has(l.shipmentId)&&l.status==='stored').reduce((n,l)=>n+(+l.quantityTons||0),0);
+    const open=Math.max(contracted-shipped,0),execution=contracted?shipped/contracted*100:0,next=d.parts.filter(p=>p.qty>p.shipped).slice().sort((a,b)=>a.date.localeCompare(b.date))[0]||null;
+    const delayed=executiveMovements().some(m=>shipmentIds.has(m.shipmentId)&&m.status==='delayed');
+    const finRows=universe.filter(x=>x.d.id===d.id),ids=new Set(finRows.map(x=>x.p.shipmentId)),finAlloc=alloc.filter(a=>ids.has(a.shipmentId)),fa=analyticsAggregate(finRows,finAlloc);
+    const operatingMargin=fa.revenue?fa.operating/fa.revenue*100:0;
+    return {d,contracted,shipped,transit,terminal,open,execution,next,delayed,operatingMargin,financial:fa};
+  });
+}
+function executiveFinance(){
+  const list=analyticsUniverse(),alloc=analyticsAllocationRows(),agg=analyticsAggregate(list,alloc),margin=agg.revenue?agg.operating/agg.revenue*100:0;
+  const byMonth={};
+  for(const m of cashMovements){const month=m.date.slice(0,7);byMonth[month]??={in:0,out:0};byMonth[month][m.direction]+=+m.amount||0}
+  for(const sc of analyticsState.sharedCosts||[]){const month=sc.date.slice(0,7);byMonth[month]??={in:0,out:0};byMonth[month].out+=+sc.amount||0}
+  const months=Object.entries(byMonth).map(([month,v])=>({month,net:v.in-v.out,...v})).sort((a,b)=>a.month.localeCompare(b.month));
+  const worst=months.slice().sort((a,b)=>a.net-b.net)[0]||{month:'—',net:0};
+  return {agg,margin,months,worst};
+}
+function executiveRisks(){
+  const rows=[];
+  for(const x of integrityAllExceptions().filter(x=>x.severity==='critical').sort((a,b)=>(b.financialImpact||0)-(a.financialImpact||0)).slice(0,3)){
+    rows.push({severity:'critical',title:x.shipmentId+' · '+x.title,detail:x.details||'',meta:'Integrity · '+money(x.financialImpact||0)});
+  }
+  for(const m of executiveMovements().filter(x=>x.status==='delayed')){
+    rows.push({severity:'critical',title:m.shipmentId+' · задержка логистики',detail:(m.origin||'')+' → '+(m.destination||''),meta:'ETA '+String(m.eta||'—').replace('T',' ').slice(0,16)+' · '+fmt(m.quantityTons)+' т'});
+  }
+  for(const d of deals)for(let i=0;i<d.parts.length;i++){
+    const p=d.parts[i];if(p.qty<=p.shipped)continue;
+    const c=arCheck(arKey(d.id,i));if(!c.allow&&c.status!=='Отгружена')rows.push({severity:'warning',title:p.shipmentId+' · '+c.status,detail:c.reasons[0]||'Финансовый допуск не готов.',meta:'Shipment clearance'});
+  }
+  for(const m of marketMarks.filter(x=>x.status==='stale'))rows.push({severity:'warning',title:m.shipmentId+' · устаревшая котировка',detail:m.source||'',meta:'MTM требует актуального market mark'});
+  const term=executiveTerminalStats();if(term.utilization>=85)rows.push({severity:'warning',title:'Высокая загрузка терминала',detail:'Текущий stock близок к capacity.',meta:fmt(term.utilization)+'%'});
+  const fin=executiveFinance();if(fin.worst.net<0)rows.push({severity:'warning',title:'Кассовый разрыв · '+analyticsMonthName(fin.worst.month),detail:'Плановые cash-out превышают cash-in.',meta:money(fin.worst.net)});
+  return rows;
+}
+function renderExecutive(){
+  if(!$('#executive'))return;
+  const contracts=executiveSignedDealRows(),contracted=contracts.reduce((n,x)=>n+x.contracted,0),shipped=contracts.reduce((n,x)=>n+x.shipped,0),open=contracts.reduce((n,x)=>n+x.open,0);
+  const transit=executiveMovementTons(['in_transit','delayed']),terminal=executiveTerminalStats(),fin=executiveFinance(),risks=executiveRisks(),integrityCritical=integrityAllExceptions().filter(x=>x.severity==='critical').length;
+  const execution=contracted?shipped/contracted*100:0,criticalRiskCount=risks.filter(x=>x.severity==='critical').length;
+  $('#exec-kpis').innerHTML=[
+    ['Объём в пути',fmt(transit)+' т','in_transit + delayed',''],
+    ['Исполнение контрактов',fmt(execution)+'%','Факт / подписанный объём',''],
+    ['Operating Margin',fmt(fin.margin)+'%','После direct + shared costs',fin.margin<0?'critical':''],
+    ['Cash Gap',money(fin.worst.net),analyticsMonthName(fin.worst.month),fin.worst.net<0?'warning':''],
+    ['Unrealized MTM',money(fin.agg.mtm),'Открытая рыночная позиция',fin.agg.mtm<0?'warning':''],
+    ['Terminal Utilization',fmt(terminal.utilization)+'%','Stock / capacity',terminal.utilization>=85?'warning':''],
+    ['Критические Integrity',String(integrityCritical),'Физика / качество / invoice','critical'],
+    ['Executive Risks',String(risks.length),'Critical '+criticalRiskCount+' · total','warning']
+  ].map(([l,v,p,cls])=>'<article class="'+cls+'"><small>'+l+'</small><b>'+v+'</b><small>'+p+'</small></article>').join('');
+
+  $('#exec-position').innerHTML=[
+    ['Подписано',contracted,'Объём действующих signed Deal'],
+    ['Открытый остаток',open,'Ещё не отгружено'],
+    ['В пути',transit,'Физическое движение'],
+    ['На терминале',terminal.current,'Текущий stock'],
+    ['Отгружено',shipped,'shippedQty по signed Deal']
+  ].map(([l,v,p])=>'<article><small>'+l+'</small><b>'+fmt(v)+' т</b><small>'+p+'</small></article>').join('');
+
+  $('#exec-terminal').innerHTML='<div class="exec-terminal-grid">'+[
+    ['Текущий stock',fmt(terminal.current)+' т'],
+    ['Utilization',fmt(terminal.utilization)+'%'],
+    ['Inbound throughput',fmt(terminal.inbound)+' т'],
+    ['Outbound throughput',fmt(terminal.outbound)+' т'],
+    ['Средний stock',fmt(terminal.avgStock)+' т'],
+    ['Turnover',fmt(terminal.turnover)+'×'],
+    ['Avg dwell time',fmt(terminal.avgDwell)+' дн.'],
+    ['Capacity',fmt(terminal.capacity)+' т']
+  ].map(([l,v])=>'<article><small>'+l+'</small><b>'+v+'</b></article>').join('')+'</div><div class="exec-mini-bar"><span style="width:'+Math.min(100,terminal.utilization)+'%"></span></div>';
+
+  $('#exec-contracts').innerHTML='<table><thead><tr><th>Deal</th><th>Контрагент / товар</th><th>Контракт</th><th>В пути</th><th>Терминал</th><th>Исполнение</th><th>Operating Margin</th><th>Следующая партия</th></tr></thead><tbody>'+contracts.map(x=>
+    '<tr><td><button class="link" data-deal="'+x.d.id+'">'+x.d.sourceId+'</button></td><td>'+escapeHTML(x.d.client)+'<small>'+escapeHTML(x.d.product)+'</small></td><td>'+fmt(x.contracted)+' т<small>open '+fmt(x.open)+' т</small></td><td>'+fmt(x.transit)+' т</td><td>'+fmt(x.terminal)+' т</td><td>'+fmt(x.execution)+'%<div class="exec-mini-bar"><span style="width:'+Math.min(100,x.execution)+'%"></span></div></td><td class="'+(x.operatingMargin<0?'analytics-profit-negative':'analytics-profit-positive')+'"><b>'+fmt(x.operatingMargin)+'%</b><small>'+money(x.financial.operating)+'</small></td><td>'+(x.next?date(x.next.date)+' · '+fmt(x.next.qty-x.next.shipped)+' т':'—')+(x.delayed?'<small class="analytics-profit-negative">Есть задержка transit</small>':'')+'</td></tr>'
+  ).join('')+'</tbody></table>'+(contracts.length?'':'<div class="empty">Нет подписанных Deal.</div>');
+
+  $('#exec-risks').innerHTML=risks.length?risks.slice(0,10).map(r=>'<div class="exec-risk '+(r.severity==='critical'?'critical':'')+'"><b>'+escapeHTML(r.title)+'</b><p>'+escapeHTML(r.detail)+'</p><small>'+escapeHTML(r.meta)+'</small></div>').join(''):'<div class="empty">Критических управленческих исключений нет.</div>';
+
+  const statusName={planned:'Запланировано',in_transit:'В пути',arrived_terminal:'На терминале',delivered:'Доставлено',delayed:'Задержано'};
+  $('#exec-logistics').innerHTML='<table><thead><tr><th>Movement</th><th>Shipment</th><th>Маршрут</th><th>Объём</th><th>Статус</th><th>Departure</th><th>ETA / arrival</th><th>Transport</th></tr></thead><tbody>'+executiveMovements().map(m=>
+    '<tr><td><b>'+escapeHTML(m.movementId)+'</b></td><td><button class="link" data-financial="'+escapeHTML(m.shipmentId)+'">'+escapeHTML(m.shipmentId)+'</button></td><td>'+escapeHTML(m.origin)+'<small>→ '+escapeHTML(m.destination)+'</small></td><td>'+fmt(m.quantityTons)+' т</td><td><span class="exec-status '+(m.status==='delayed'?'delay':m.status==='in_transit'?'transit':'')+'">'+escapeHTML(statusName[m.status]||m.status)+'</span></td><td>'+escapeHTML(String(m.actualDeparture||m.plannedDeparture||'—').replace('T',' ').slice(0,16))+'</td><td>'+escapeHTML(String(m.eta||m.plannedArrival||'—').replace('T',' ').slice(0,16))+'</td><td>'+escapeHTML(m.transportRef||'—')+'</td></tr>'
+  ).join('')+'</tbody></table>';
 }
 
 function analyticsCostCenter(id){return (analyticsState.costCenters||[]).find(x=>x.id===id)||null}
