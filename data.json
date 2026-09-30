@@ -1,6 +1,6 @@
 {
   "meta": {
-    "schemaVersion": "0.10.0",
+    "schemaVersion": "0.11.0",
     "demoDate": "2026-09-30",
     "defaultCurrency": "MDL",
     "language": "ru-RU",
@@ -46,7 +46,8 @@
         "channels": [
           "telegram"
         ]
-      }
+      },
+      "partyId": "PTY-001"
     },
     {
       "id": "CL-002",
@@ -75,7 +76,8 @@
           "email",
           "whatsapp"
         ]
-      }
+      },
+      "partyId": "PTY-002"
     },
     {
       "id": "CL-003",
@@ -103,7 +105,8 @@
         "channels": [
           "telegram"
         ]
-      }
+      },
+      "partyId": "PTY-003"
     },
     {
       "id": "CL-004",
@@ -132,7 +135,8 @@
           "email",
           "whatsapp"
         ]
-      }
+      },
+      "partyId": "PTY-004"
     },
     {
       "id": "CL-005",
@@ -160,7 +164,8 @@
         "channels": [
           "telegram"
         ]
-      }
+      },
+      "partyId": "PTY-005"
     },
     {
       "id": "CL-006",
@@ -189,7 +194,8 @@
           "email",
           "whatsapp"
         ]
-      }
+      },
+      "partyId": "PTY-006"
     },
     {
       "id": "CL-007",
@@ -218,7 +224,8 @@
           "email",
           "telegram"
         ]
-      }
+      },
+      "partyId": "PTY-007"
     },
     {
       "id": "CL-008",
@@ -246,7 +253,8 @@
         "channels": [
           "whatsapp"
         ]
-      }
+      },
+      "partyId": "PTY-008"
     },
     {
       "id": "CL-009",
@@ -275,7 +283,8 @@
           "sms",
           "email"
         ]
-      }
+      },
+      "partyId": "PTY-009"
     },
     {
       "id": "CL-010",
@@ -304,7 +313,8 @@
           "telegram",
           "whatsapp"
         ]
-      }
+      },
+      "partyId": "PTY-010"
     }
   ],
   "deals": [
@@ -324,7 +334,8 @@
       "action": "Подтвердить обновлённую цену",
       "blocked": "",
       "agreed": "Товар: пшеница; объём 500 т; доставка в Бельцы в октябре.",
-      "openQuestions": "Клиент просит снизить цену и предоставить отсрочку оплаты."
+      "openQuestions": "Клиент просит снизить цену и предоставить отсрочку оплаты.",
+      "productId": "PRD-001"
     },
     {
       "id": "GR-002",
@@ -342,7 +353,8 @@
       "action": "Согласовать условия оплаты",
       "blocked": "",
       "agreed": "Объём 300 т; доставка в Оргеев до 20 октября.",
-      "openQuestions": "Осталось согласовать график оплаты и подписать контракт."
+      "openQuestions": "Осталось согласовать график оплаты и подписать контракт.",
+      "productId": "PRD-002"
     },
     {
       "id": "GR-003",
@@ -360,7 +372,8 @@
       "action": "Подтвердить транспорт",
       "blocked": "Не подтверждён транспорт",
       "agreed": "Контракт подписан; цена зафиксирована; поставки в октябре и ноябре.",
-      "openQuestions": "Нужно подтвердить транспорт для первой партии."
+      "openQuestions": "Нужно подтвердить транспорт для первой партии.",
+      "productId": "PRD-001"
     },
     {
       "id": "GR-004",
@@ -378,7 +391,8 @@
       "action": "Проверить поступление предоплаты",
       "blocked": "Ожидается предоплата",
       "agreed": "Подписан контракт на 120 т NPK с поставкой в ноябре.",
-      "openQuestions": "Ожидается предусмотренная договором предоплата."
+      "openQuestions": "Ожидается предусмотренная договором предоплата.",
+      "productId": "PRD-003"
     },
     {
       "id": "GR-005",
@@ -396,7 +410,8 @@
       "action": "Уточнить объём и график",
       "blocked": "",
       "agreed": "Клиент заинтересован в кукурузе; ориентир — ноябрь и декабрь.",
-      "openQuestions": "Нужно подтвердить объёмы партий и требования к качеству."
+      "openQuestions": "Нужно подтвердить объёмы партий и требования к качеству.",
+      "productId": "PRD-002"
     },
     {
       "id": "GR-006",
@@ -414,7 +429,8 @@
       "action": "Провести первый звонок",
       "blocked": "",
       "agreed": "Получен первичный запрос на удобрения NPK.",
-      "openQuestions": "Объём и дата пока ориентировочные; требуется первый разговор."
+      "openQuestions": "Объём и дата пока ориентировочные; требуется первый разговор.",
+      "productId": "PRD-003"
     }
   ],
   "shipments": [
@@ -915,6 +931,18 @@
       "source": "data.json",
       "oldValue": "0.9.0",
       "newValue": "0.10.0"
+    },
+    {
+      "id": "AUD-007",
+      "at": "2026-10-01T01:30:00+03:00",
+      "actor": "Система",
+      "role": "Система",
+      "action": "Инициализация Master Data & Field Ownership",
+      "entityType": "dataset",
+      "entityId": "0.11.0",
+      "source": "data.json",
+      "oldValue": "0.10.0",
+      "newValue": "0.11.0"
     }
   ],
   "market": {
@@ -1088,5 +1116,501 @@
         }
       }
     ]
+  },
+  "masterData": {
+    "parties": [
+      {
+        "partyId": "PTY-001",
+        "legalKey": "MD:1000000000001",
+        "jurisdiction": "MD",
+        "fiscalCode": "1000000000001",
+        "legalName": "Agro Nord Demo",
+        "displayName": "Agro Nord Demo",
+        "roles": [
+          "Buyer"
+        ],
+        "isDemo": true,
+        "status": "active"
+      },
+      {
+        "partyId": "PTY-002",
+        "legalKey": "MD:1000000000002",
+        "jurisdiction": "MD",
+        "fiscalCode": "1000000000002",
+        "legalName": "Câmp Verde Demo",
+        "displayName": "Câmp Verde Demo",
+        "roles": [
+          "Buyer"
+        ],
+        "isDemo": true,
+        "status": "active"
+      },
+      {
+        "partyId": "PTY-003",
+        "legalKey": "MD:1000000000003",
+        "jurisdiction": "MD",
+        "fiscalCode": "1000000000003",
+        "legalName": "Sud Cereale Demo",
+        "displayName": "Sud Cereale Demo",
+        "roles": [
+          "Buyer"
+        ],
+        "isDemo": true,
+        "status": "active"
+      },
+      {
+        "partyId": "PTY-004",
+        "legalKey": "MD:1000000000004",
+        "jurisdiction": "MD",
+        "fiscalCode": "1000000000004",
+        "legalName": "Terra Vest Demo",
+        "displayName": "Terra Vest Demo",
+        "roles": [
+          "Buyer"
+        ],
+        "isDemo": true,
+        "status": "active"
+      },
+      {
+        "partyId": "PTY-005",
+        "legalKey": "MD:1000000000005",
+        "jurisdiction": "MD",
+        "fiscalCode": "1000000000005",
+        "legalName": "Orhei Harvest Demo",
+        "displayName": "Orhei Harvest Demo",
+        "roles": [
+          "Buyer"
+        ],
+        "isDemo": true,
+        "status": "active"
+      },
+      {
+        "partyId": "PTY-006",
+        "legalKey": "MD:1000000000006",
+        "jurisdiction": "MD",
+        "fiscalCode": "1000000000006",
+        "legalName": "Nord Fertil Demo",
+        "displayName": "Nord Fertil Demo",
+        "roles": [
+          "Buyer"
+        ],
+        "isDemo": true,
+        "status": "active"
+      },
+      {
+        "partyId": "PTY-007",
+        "legalKey": "MD:1000000000007",
+        "jurisdiction": "MD",
+        "fiscalCode": "1000000000007",
+        "legalName": "Moara Bălți Demo",
+        "displayName": "Moara Bălți Demo",
+        "roles": [
+          "Buyer"
+        ],
+        "isDemo": true,
+        "status": "active"
+      },
+      {
+        "partyId": "PTY-008",
+        "legalKey": "MD:1000000000008",
+        "jurisdiction": "MD",
+        "fiscalCode": "1000000000008",
+        "legalName": "Avicola Centru Demo",
+        "displayName": "Avicola Centru Demo",
+        "roles": [
+          "Buyer"
+        ],
+        "isDemo": true,
+        "status": "active"
+      },
+      {
+        "partyId": "PTY-009",
+        "legalKey": "MD:1000000000009",
+        "jurisdiction": "MD",
+        "fiscalCode": "1000000000009",
+        "legalName": "Ferma Prut Demo",
+        "displayName": "Ferma Prut Demo",
+        "roles": [
+          "Buyer"
+        ],
+        "isDemo": true,
+        "status": "active"
+      },
+      {
+        "partyId": "PTY-010",
+        "legalKey": "MD:1000000000010",
+        "jurisdiction": "MD",
+        "fiscalCode": "1000000000010",
+        "legalName": "Moara Ungheni Demo",
+        "displayName": "Moara Ungheni Demo",
+        "roles": [
+          "Buyer"
+        ],
+        "isDemo": true,
+        "status": "active"
+      }
+    ],
+    "partyMappings": [
+      {
+        "partyId": "PTY-001",
+        "system": "CRM",
+        "externalId": "CL-001",
+        "status": "linked"
+      },
+      {
+        "partyId": "PTY-001",
+        "system": "GrainTrack",
+        "externalId": "GT-PTY-001",
+        "status": "linked"
+      },
+      {
+        "partyId": "PTY-001",
+        "system": "1C",
+        "externalId": "1C-PTY-001",
+        "status": "linked"
+      },
+      {
+        "partyId": "PTY-002",
+        "system": "CRM",
+        "externalId": "CL-002",
+        "status": "linked"
+      },
+      {
+        "partyId": "PTY-002",
+        "system": "GrainTrack",
+        "externalId": "GT-PTY-002",
+        "status": "linked"
+      },
+      {
+        "partyId": "PTY-002",
+        "system": "1C",
+        "externalId": "1C-PTY-002",
+        "status": "linked"
+      },
+      {
+        "partyId": "PTY-003",
+        "system": "CRM",
+        "externalId": "CL-003",
+        "status": "linked"
+      },
+      {
+        "partyId": "PTY-003",
+        "system": "GrainTrack",
+        "externalId": "GT-PTY-003",
+        "status": "linked"
+      },
+      {
+        "partyId": "PTY-003",
+        "system": "1C",
+        "externalId": "1C-PTY-003",
+        "status": "linked"
+      },
+      {
+        "partyId": "PTY-004",
+        "system": "CRM",
+        "externalId": "CL-004",
+        "status": "linked"
+      },
+      {
+        "partyId": "PTY-004",
+        "system": "GrainTrack",
+        "externalId": "GT-PTY-004",
+        "status": "linked"
+      },
+      {
+        "partyId": "PTY-004",
+        "system": "1C",
+        "externalId": "1C-PTY-004",
+        "status": "linked"
+      },
+      {
+        "partyId": "PTY-005",
+        "system": "CRM",
+        "externalId": "CL-005",
+        "status": "linked"
+      },
+      {
+        "partyId": "PTY-005",
+        "system": "GrainTrack",
+        "externalId": "GT-PTY-005",
+        "status": "linked"
+      },
+      {
+        "partyId": "PTY-005",
+        "system": "1C",
+        "externalId": "1C-PTY-005",
+        "status": "linked"
+      },
+      {
+        "partyId": "PTY-006",
+        "system": "CRM",
+        "externalId": "CL-006",
+        "status": "linked"
+      },
+      {
+        "partyId": "PTY-006",
+        "system": "GrainTrack",
+        "externalId": "GT-PTY-006",
+        "status": "linked"
+      },
+      {
+        "partyId": "PTY-006",
+        "system": "1C",
+        "externalId": "1C-PTY-006",
+        "status": "linked"
+      },
+      {
+        "partyId": "PTY-007",
+        "system": "CRM",
+        "externalId": "CL-007",
+        "status": "linked"
+      },
+      {
+        "partyId": "PTY-007",
+        "system": "GrainTrack",
+        "externalId": "GT-PTY-007",
+        "status": "linked"
+      },
+      {
+        "partyId": "PTY-007",
+        "system": "1C",
+        "externalId": "1C-PTY-007",
+        "status": "linked"
+      },
+      {
+        "partyId": "PTY-008",
+        "system": "CRM",
+        "externalId": "CL-008",
+        "status": "linked"
+      },
+      {
+        "partyId": "PTY-008",
+        "system": "GrainTrack",
+        "externalId": "GT-PTY-008",
+        "status": "linked"
+      },
+      {
+        "partyId": "PTY-008",
+        "system": "1C",
+        "externalId": "1C-PTY-008",
+        "status": "linked"
+      },
+      {
+        "partyId": "PTY-009",
+        "system": "CRM",
+        "externalId": "CL-009",
+        "status": "linked"
+      },
+      {
+        "partyId": "PTY-009",
+        "system": "GrainTrack",
+        "externalId": "GT-PTY-009",
+        "status": "linked"
+      },
+      {
+        "partyId": "PTY-009",
+        "system": "1C",
+        "externalId": "1C-PTY-009",
+        "status": "linked"
+      },
+      {
+        "partyId": "PTY-010",
+        "system": "CRM",
+        "externalId": "CL-010",
+        "status": "linked"
+      },
+      {
+        "partyId": "PTY-010",
+        "system": "GrainTrack",
+        "externalId": "GT-PTY-010",
+        "status": "linked"
+      },
+      {
+        "partyId": "PTY-010",
+        "system": "1C",
+        "externalId": "1C-PTY-010",
+        "status": "linked"
+      }
+    ],
+    "products": [
+      {
+        "id": "PRD-001",
+        "code": "WHEAT",
+        "category": "Grain",
+        "canonicalName": "Пшеница",
+        "unit": "т"
+      },
+      {
+        "id": "PRD-002",
+        "code": "CORN",
+        "category": "Grain",
+        "canonicalName": "Кукуруза",
+        "unit": "т"
+      },
+      {
+        "id": "PRD-003",
+        "code": "NPK",
+        "category": "Fertilizers",
+        "canonicalName": "Удобрения NPK",
+        "unit": "т"
+      }
+    ],
+    "productMappings": [
+      {
+        "productId": "PRD-001",
+        "system": "CRM",
+        "externalId": "CRM-WHEAT",
+        "status": "linked"
+      },
+      {
+        "productId": "PRD-001",
+        "system": "GrainTrack",
+        "externalId": "GT-PRD-001",
+        "status": "linked"
+      },
+      {
+        "productId": "PRD-001",
+        "system": "1C",
+        "externalId": "1C-PRD-001",
+        "status": "linked"
+      },
+      {
+        "productId": "PRD-002",
+        "system": "CRM",
+        "externalId": "CRM-CORN",
+        "status": "linked"
+      },
+      {
+        "productId": "PRD-002",
+        "system": "GrainTrack",
+        "externalId": "GT-PRD-002",
+        "status": "linked"
+      },
+      {
+        "productId": "PRD-002",
+        "system": "1C",
+        "externalId": "1C-PRD-002",
+        "status": "linked"
+      },
+      {
+        "productId": "PRD-003",
+        "system": "CRM",
+        "externalId": "CRM-NPK",
+        "status": "linked"
+      },
+      {
+        "productId": "PRD-003",
+        "system": "GrainTrack",
+        "externalId": "GT-PRD-003",
+        "status": "linked"
+      },
+      {
+        "productId": "PRD-003",
+        "system": "1C",
+        "externalId": "1C-PRD-003",
+        "status": "linked"
+      }
+    ],
+    "fieldOwnership": [
+      {
+        "entity": "Party",
+        "fieldGroup": "masterIdentity",
+        "owner": "MasterData",
+        "authoritativeSystem": "MasterData",
+        "fields": [
+          "partyId",
+          "legalKey",
+          "jurisdiction",
+          "fiscalCode",
+          "roles"
+        ]
+      },
+      {
+        "entity": "Party",
+        "fieldGroup": "legalAccounting",
+        "owner": "Finance",
+        "authoritativeSystem": "1C",
+        "fields": [
+          "legalName",
+          "legalAddress",
+          "bankAccounts",
+          "taxStatus"
+        ]
+      },
+      {
+        "entity": "Party",
+        "fieldGroup": "crmRelationship",
+        "owner": "Sales",
+        "authoritativeSystem": "CRM",
+        "fields": [
+          "displayName",
+          "relationshipStatus",
+          "manager",
+          "contacts",
+          "automation",
+          "crmNotes"
+        ]
+      },
+      {
+        "entity": "Trade",
+        "fieldGroup": "execution",
+        "owner": "Trading",
+        "authoritativeSystem": "GrainTrack",
+        "fields": [
+          "contracts",
+          "shipments",
+          "logistics",
+          "quality",
+          "marketMarks",
+          "mtm"
+        ]
+      },
+      {
+        "entity": "Finance",
+        "fieldGroup": "accounting",
+        "owner": "Finance",
+        "authoritativeSystem": "1C",
+        "fields": [
+          "receivables",
+          "payables",
+          "ledger",
+          "accountingDocuments",
+          "payments"
+        ]
+      },
+      {
+        "entity": "Product",
+        "fieldGroup": "masterIdentity",
+        "owner": "MasterData",
+        "authoritativeSystem": "MasterData",
+        "fields": [
+          "productId",
+          "code",
+          "canonicalName",
+          "category",
+          "unit"
+        ]
+      }
+    ],
+    "reconciliationRules": {
+      "partyUniqueBy": [
+        "legalKey"
+      ],
+      "productUniqueBy": [
+        "productId"
+      ],
+      "requiredPartyMappings": [
+        "CRM",
+        "GrainTrack",
+        "1C"
+      ],
+      "requiredProductMappings": [
+        "CRM",
+        "GrainTrack",
+        "1C"
+      ],
+      "exactDuplicateBlocking": true,
+      "fuzzyNameMatch": "warning_only"
+    }
   }
 }
