@@ -9,7 +9,7 @@
 - **Основной сценарий:** от первого запроса клиента и переговоров до договора, финансового допуска и фактической отгрузки партии.
 - **Основной пользователь прототипа:** менеджер продаж.
 - **Дополнительные роли в бизнес-процессе:** юрист, коммерческий директор, бухгалтерия.
-- **Текущая внутренняя версия / спецификация:** **v0.11.3**
+- **Текущая внутренняя версия / спецификация:** **v0.12.0**
 - **Текущая функциональная версия интерфейса:** **v0.11.3**
 - **Статус:** статичный интерактивный прототип.
 - **Основная ветка:** `main`.
@@ -1998,6 +1998,193 @@ Party имеет роли:
 
 ---
 
+
+## 8.21. v0.12.0 — Analytical Dashboard & Cost Centers
+
+v0.12.0 добавляет отдельный управленческий аналитический слой поверх операционных модулей Grain.
+
+Ключевое разделение:
+
+- **Финансы** — первичные финансовые данные и контроль конкретной Shipment;
+- **Аналитика** — агрегированная управленческая модель P&L, Cash Flow, Cost Centers, Deal Profitability и MTM.
+
+Раздел «Аналитика» не должен становиться вторым источником финансовых данных. Он читает уже существующие канонические Deal / Shipment / Finance / Cash Movement / Market Mark / Master Data и строит из них производные показатели.
+
+### 8.21.1. Аналитические измерения
+
+Общий набор dimensions:
+
+- Date;
+- Business Unit;
+- Business Line;
+- Region;
+- Product;
+- Counterparty / Master Party;
+- Manager;
+- Deal;
+- Shipment;
+- Cost Center.
+
+Фильтры аналитического dashboard должны использовать одни и те же dimensions для P&L, Cash Flow и Deal Profitability.
+
+### 8.21.2. Cost Centers
+
+В \`data.json → analytics.costCenters\` создаётся отдельный справочник центров затрат.
+
+Минимальный demo-набор:
+
+- Product / Procurement;
+- Logistics;
+- Giurgiulești Terminal;
+- Quality / Laboratory;
+- Commercial Moldova;
+- Risk / Insurance;
+- Other Direct.
+
+Cost Center **не заменяет Business Line**.
+
+Business Line отвечает «на каком направлении получен результат», а Cost Center — «где / каким процессом возник расход».
+
+### 8.21.3. Cost classification
+
+Каждая финансовая категория получает аналитическую классификацию:
+
+- COGS;
+- Direct Cost;
+- Shared / Overhead.
+
+Поля существующей Shipment finance row маппятся на cost centers:
+
+- unitCost / COGS → Product / Procurement;
+- logistics → Logistics;
+- loading / storage → Giurgiulești Terminal;
+- laboratory → Quality / Laboratory;
+- commission → Commercial Moldova;
+- insurance → Risk / Insurance;
+- otherDirect → Other Direct.
+
+Это аналитическая классификация. Она не меняет существующую формулу Contribution.
+
+### 8.21.4. Shared Cost Pools и allocation rules
+
+Для демонстрации полноценной управленческой модели добавляются shared cost pools.
+
+Shared cost не привязывается вручную к одной Shipment как будто это прямой расход.
+
+Он получает:
+
+- Cost Center;
+- period / date;
+- amount;
+- status;
+- allocation rule;
+- optional business scope.
+
+Поддерживаемые demo allocation drivers:
+
+- Revenue;
+- Planned / Open Tons.
+
+Результат allocation показывается только в Analytical P&L как отдельный слой после Contribution.
+
+Существующий Shipment P&L и контрольные Contribution не переписываются.
+
+### 8.21.5. Analytical P&L
+
+Dashboard рассчитывает:
+
+- Revenue;
+- COGS;
+- Direct Costs;
+- Contribution;
+- Contribution Margin %;
+- Allocated Shared Costs;
+- Analytical Operating Result;
+- Unrealized MTM;
+- Economic Result = Analytical Operating Result + Unrealized MTM.
+
+Forecast / Confirmed / Actual продолжают быть различимыми по valueStatus.
+
+Actual не должен включать неотгруженные тонны.
+
+### 8.21.6. Cash Flow по тем же dimensions
+
+\`finance.cashMovements\` расширяются аналитическими атрибутами.
+
+Для outbound движения агрегированный платёж разбивается на компоненты, чтобы каждый cash-out имел:
+
+- category;
+- categoryGroup;
+- costCenterId;
+- shipmentId;
+- date;
+- direction;
+- amount;
+- status;
+- source.
+
+Разбиение обязано сохранять существующие контрольные monthly totals Cash Flow.
+
+Customer cash-in остаётся отдельным inflow и не требует искусственного Cost Center.
+
+Cash Flow dashboard показывает:
+
+- Customer Cash In;
+- Supplier / Product Payments;
+- Logistics;
+- Terminal / Storage;
+- Quality / Laboratory;
+- Commission;
+- Insurance;
+- Other Direct;
+- Shared / Overhead cash-out;
+- Net Cash Flow.
+
+### 8.21.7. Deal / Shipment profitability
+
+В отдельной таблице dashboard показываются:
+
+- Deal;
+- Shipment;
+- Counterparty;
+- Product;
+- Revenue;
+- Contribution;
+- Contribution Margin %;
+- Allocated Shared Cost;
+- Analytical Operating Result;
+- MTM;
+- Economic Result.
+
+Drill-down должен вести к существующей Shipment financial card / данным Shipment, а не создавать отдельную копию первичных финансов.
+
+### 8.21.8. Analytical dashboard
+
+В левом меню после «Финансы» добавляется **«Аналитика»**.
+
+Экран содержит:
+
+1. глобальные filters;
+2. KPI row;
+3. P&L Structure;
+4. Cash Flow Timeline / period table;
+5. Cost Centers;
+6. Deal / Shipment Profitability;
+7. Analytics Exceptions / data quality note.
+
+### 8.21.9. Управленческая проблема из вопроса руководителя
+
+В «Ответы руководителю» добавляется отдельная карточка с дословным вопросом:
+
+> «Создание дашбордов для мониторинга операционной команды — это базовый уровень. Мне для управления коммерческим блоком нужна сложная аналитика: структуры PnL, модели кэш-флоу, классификация центров затрат, маржинальность по сделкам. Был ли у вас опыт проектирования моделей данных для полноценных BI-систем, или ваш инструментарий ограничивается внутренними отчетами Битрикс24?»
+
+Карточка должна разложить вопрос на управленческие проблемы и показывать, как v0.12.0 закрывает их непосредственно в Grain.
+
+Она **не является ответом для интервью**.
+
+
+---
+
 ## 9. Основные сущности данных
 
 Начиная с v0.7.0 все демонстрационные сущности должны иметь стабильные ID и связываться по ID, а не по совпадению названий.
@@ -2468,6 +2655,31 @@ Party имеет роли:
 ---
 
 # 16. Подробный журнал версий
+
+
+## v0.12.0 — 2026-10-01 — Analytical Dashboard & Cost Centers
+
+**Статус перед реализацией:** утверждён пользователем.
+
+### Цель
+
+Перейти от отдельных CRM/Finance widgets к единой управленческой аналитической модели.
+
+### Scope
+
+- отдельный раздел «Аналитика» после «Финансы»;
+- единые dimensions для P&L и Cash Flow;
+- Cost Centers;
+- cost category mapping;
+- shared cost pools;
+- allocation rules;
+- Analytical P&L;
+- Cash Flow по Cost Center / Deal / Product / Region / Business Line;
+- Deal / Shipment profitability;
+- новый раскрывающийся вопрос в «Ответы руководителю»;
+- сохранение существующих Finance / MTM / Integrity formulas без подмены источника истины.
+
+
 
 
 ## v0.11.3 — 2026-10-01 — Навигация Master Data
