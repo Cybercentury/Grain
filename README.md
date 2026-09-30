@@ -299,3 +299,67 @@ Shared costs не переписывают Shipment Contribution.
 - Economic Result 399 000 MDL.
 
 В «Ответы руководителю» добавлена отдельная раскрывающаяся карточка про переход от CRM-виджетов к полноценной аналитической модели.
+
+
+## Executive Trading Dashboard — v0.13
+
+Сразу после **«Обзора»** добавлен отдельный **«Дашборд руководителя»**.
+
+Его верхнеуровневые KPI ориентированы на трейдинг, а не на CRM-активность:
+
+- объём в пути;
+- исполнение подписанных контрактов;
+- Operating Margin;
+- Cash Gap;
+- Unrealized MTM;
+- загрузка терминала;
+- критические Integrity / Clearance / Logistics риски.
+
+### Logistics / Transit
+
+Добавлен `logistics.movements` с отдельными статусами planned / in_transit / arrived_terminal / delivered / delayed.
+
+Контрольный demo volume in transit: **300 т**.
+
+### Terminal Operations
+
+Добавлены capacity, current stock, inbound / outbound throughput, average stock, turnover и average dwell time.
+
+Demo:
+
+- capacity 1 500 т;
+- current stock 420 т;
+- utilization 28%;
+- inbound 1 610 т;
+- outbound 1 190 т;
+- turnover ≈ 1.95×;
+- average dwell time 1 день.
+
+### Маржинальность
+
+Executive Dashboard использует **Operating Margin** как управленческий показатель выгоды Deal / Shipment:
+
+```text
+Operating Margin =
+(Contribution - Allocated Shared Costs) / Revenue
+```
+
+Это не бухгалтерская чистая прибыль. Налоги, финансирование, FX и другие корпоративные статьи могут находиться вне этой модели.
+
+Контрольный portfolio Operating Margin demo: **≈ 5.28%**.
+
+### Contract Execution
+
+Для signed Deal показываются contracted volume, open remainder, transit, terminal stock, execution %, Operating Margin и следующая Shipment.
+
+Signed demo volume: **820 т**.
+
+### Executive Risk Board
+
+На одном экране объединяются Integrity Critical, Shipment clearance blocks, delayed logistics, stale MTM, cash gap и terminal utilization warning.
+
+CRM metrics вроде количества звонков, лидов и conversion остаются вторичными операционными показателями и не заменяют трейдинговые KPI.
+
+В разделе **«Ответы руководителю»** добавлена отдельная раскрывающаяся карточка с вопросом про метрики трейдингового dashboard.
+
+Также у раздела **«Аналитика»** заменена иконка на отдельный dashboard/grid icon.
