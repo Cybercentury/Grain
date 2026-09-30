@@ -1,6 +1,6 @@
 {
   "meta": {
-    "schemaVersion": "0.12.0",
+    "schemaVersion": "0.13.0",
     "demoDate": "2026-09-30",
     "defaultCurrency": "MDL",
     "language": "ru-RU",
@@ -1207,6 +1207,18 @@
       "source": "data.json",
       "oldValue": "0.11.0",
       "newValue": "0.12.0"
+    },
+    {
+      "id": "AUD-009",
+      "at": "2026-10-01T02:30:00+03:00",
+      "actor": "Система",
+      "role": "Система",
+      "action": "Инициализация Executive Trading Dashboard",
+      "entityType": "dataset",
+      "entityId": "0.13.0",
+      "source": "data.json",
+      "oldValue": "0.12.0",
+      "newValue": "0.13.0"
     }
   ],
   "market": {
@@ -2049,6 +2061,269 @@
       "Deal",
       "Shipment",
       "Cost Center"
+    ]
+  },
+  "logistics": {
+    "movements": [
+      {
+        "movementId": "LM-001",
+        "shipmentId": "SH-003",
+        "quantityTons": 180,
+        "mode": "truck",
+        "status": "in_transit",
+        "origin": "Cahul, MD",
+        "destination": "Giurgiulești Terminal, MD",
+        "plannedDeparture": "2026-09-30T09:00:00+03:00",
+        "actualDeparture": "2026-09-30T09:40:00+03:00",
+        "plannedArrival": "2026-09-30T15:00:00+03:00",
+        "eta": "2026-09-30T15:40:00+03:00",
+        "transportRef": "TRK-DEMO-031"
+      },
+      {
+        "movementId": "LM-002",
+        "shipmentId": "SH-003",
+        "quantityTons": 120,
+        "mode": "truck",
+        "status": "delayed",
+        "origin": "Cantemir, MD",
+        "destination": "Giurgiulești Terminal, MD",
+        "plannedDeparture": "2026-09-30T08:00:00+03:00",
+        "actualDeparture": "2026-09-30T08:20:00+03:00",
+        "plannedArrival": "2026-09-30T14:00:00+03:00",
+        "eta": "2026-09-30T17:30:00+03:00",
+        "transportRef": "TRK-DEMO-032"
+      },
+      {
+        "movementId": "LM-003",
+        "shipmentId": "SH-001",
+        "quantityTons": 220,
+        "mode": "truck",
+        "status": "planned",
+        "origin": "Bălți, MD",
+        "destination": "Client delivery point",
+        "plannedDeparture": "2026-10-14T06:00:00+03:00",
+        "actualDeparture": null,
+        "plannedArrival": "2026-10-15T12:00:00+03:00",
+        "eta": null,
+        "transportRef": "TRK-DEMO-041"
+      },
+      {
+        "movementId": "LM-004",
+        "shipmentId": "SH-005",
+        "quantityTons": 70,
+        "mode": "truck",
+        "status": "arrived_terminal",
+        "origin": "Giurgiulești Port, MD",
+        "destination": "Giurgiulești Terminal, MD",
+        "plannedDeparture": "2026-09-29T11:00:00+03:00",
+        "actualDeparture": "2026-09-29T11:15:00+03:00",
+        "plannedArrival": "2026-09-29T14:00:00+03:00",
+        "eta": "2026-09-29T13:55:00+03:00",
+        "transportRef": "TRK-DEMO-051"
+      },
+      {
+        "movementId": "LM-005",
+        "shipmentId": "SH-002",
+        "quantityTons": 140,
+        "mode": "truck",
+        "status": "delivered",
+        "origin": "Chișinău, MD",
+        "destination": "Client delivery point",
+        "plannedDeparture": "2026-09-28T07:30:00+03:00",
+        "actualDeparture": "2026-09-28T07:45:00+03:00",
+        "plannedArrival": "2026-09-28T14:00:00+03:00",
+        "eta": "2026-09-28T13:50:00+03:00",
+        "transportRef": "TRK-DEMO-021"
+      }
+    ]
+  },
+  "terminal": {
+    "terminals": [
+      {
+        "terminalId": "TERM-GIU-01",
+        "name": "Терминал Джурджулешты",
+        "location": "Giurgiulești, MD",
+        "capacityTons": 1500,
+        "status": "active"
+      }
+    ],
+    "inventory": [
+      {
+        "lotId": "TL-001",
+        "terminalId": "TERM-GIU-01",
+        "shipmentId": "SH-003",
+        "productId": "PRD-001",
+        "quantityTons": 260,
+        "arrivalDate": "2026-09-27",
+        "status": "stored"
+      },
+      {
+        "lotId": "TL-002",
+        "terminalId": "TERM-GIU-01",
+        "shipmentId": "SH-005",
+        "productId": "PRD-003",
+        "quantityTons": 70,
+        "arrivalDate": "2026-09-29",
+        "status": "stored"
+      },
+      {
+        "lotId": "TL-003",
+        "terminalId": "TERM-GIU-01",
+        "shipmentId": "SH-002",
+        "productId": "PRD-002",
+        "quantityTons": 90,
+        "arrivalDate": "2026-09-25",
+        "status": "stored"
+      }
+    ],
+    "operations": [
+      {
+        "operationId": "TOP-001",
+        "terminalId": "TERM-GIU-01",
+        "date": "2026-09-24",
+        "type": "in",
+        "quantityTons": 420,
+        "shipmentId": "SH-003",
+        "source": "Demo terminal log"
+      },
+      {
+        "operationId": "TOP-002",
+        "terminalId": "TERM-GIU-01",
+        "date": "2026-09-25",
+        "type": "out",
+        "quantityTons": 260,
+        "shipmentId": "SH-003",
+        "source": "Demo terminal log"
+      },
+      {
+        "operationId": "TOP-003",
+        "terminalId": "TERM-GIU-01",
+        "date": "2026-09-26",
+        "type": "in",
+        "quantityTons": 360,
+        "shipmentId": "SH-002",
+        "source": "Demo terminal log"
+      },
+      {
+        "operationId": "TOP-004",
+        "terminalId": "TERM-GIU-01",
+        "date": "2026-09-27",
+        "type": "out",
+        "quantityTons": 270,
+        "shipmentId": "SH-002",
+        "source": "Demo terminal log"
+      },
+      {
+        "operationId": "TOP-005",
+        "terminalId": "TERM-GIU-01",
+        "date": "2026-09-28",
+        "type": "in",
+        "quantityTons": 500,
+        "shipmentId": "SH-001",
+        "source": "Demo terminal log"
+      },
+      {
+        "operationId": "TOP-006",
+        "terminalId": "TERM-GIU-01",
+        "date": "2026-09-29",
+        "type": "out",
+        "quantityTons": 410,
+        "shipmentId": "SH-001",
+        "source": "Demo terminal log"
+      },
+      {
+        "operationId": "TOP-007",
+        "terminalId": "TERM-GIU-01",
+        "date": "2026-09-30",
+        "type": "in",
+        "quantityTons": 330,
+        "shipmentId": "SH-005",
+        "source": "Demo terminal log"
+      },
+      {
+        "operationId": "TOP-008",
+        "terminalId": "TERM-GIU-01",
+        "date": "2026-09-30",
+        "type": "out",
+        "quantityTons": 250,
+        "shipmentId": "SH-005",
+        "source": "Demo terminal log"
+      }
+    ],
+    "stockSnapshots": [
+      {
+        "terminalId": "TERM-GIU-01",
+        "date": "2026-09-24",
+        "stockTons": 520
+      },
+      {
+        "terminalId": "TERM-GIU-01",
+        "date": "2026-09-25",
+        "stockTons": 680
+      },
+      {
+        "terminalId": "TERM-GIU-01",
+        "date": "2026-09-26",
+        "stockTons": 770
+      },
+      {
+        "terminalId": "TERM-GIU-01",
+        "date": "2026-09-27",
+        "stockTons": 590
+      },
+      {
+        "terminalId": "TERM-GIU-01",
+        "date": "2026-09-28",
+        "stockTons": 680
+      },
+      {
+        "terminalId": "TERM-GIU-01",
+        "date": "2026-09-29",
+        "stockTons": 610
+      },
+      {
+        "terminalId": "TERM-GIU-01",
+        "date": "2026-09-30",
+        "stockTons": 420
+      }
+    ],
+    "completedLots": [
+      {
+        "lotId": "TLC-001",
+        "terminalId": "TERM-GIU-01",
+        "productId": "PRD-001",
+        "quantityTons": 260,
+        "arrivalDate": "2026-09-24",
+        "departureDate": "2026-09-25",
+        "dwellDays": 1
+      },
+      {
+        "lotId": "TLC-002",
+        "terminalId": "TERM-GIU-01",
+        "productId": "PRD-002",
+        "quantityTons": 270,
+        "arrivalDate": "2026-09-26",
+        "departureDate": "2026-09-27",
+        "dwellDays": 1
+      },
+      {
+        "lotId": "TLC-003",
+        "terminalId": "TERM-GIU-01",
+        "productId": "PRD-001",
+        "quantityTons": 410,
+        "arrivalDate": "2026-09-28",
+        "departureDate": "2026-09-29",
+        "dwellDays": 1
+      },
+      {
+        "lotId": "TLC-004",
+        "terminalId": "TERM-GIU-01",
+        "productId": "PRD-003",
+        "quantityTons": 250,
+        "arrivalDate": "2026-09-29",
+        "departureDate": "2026-09-30",
+        "dwellDays": 1
+      }
     ]
   }
 }
