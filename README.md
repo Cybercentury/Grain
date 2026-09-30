@@ -129,3 +129,54 @@ Critical Integrity Exception блокирует shipment clearance и Financial 
 - CRM связывает оба слоя, но не сводит их к одному статусу.
 
 Раздел информационный и не влияет на расчёты, данные или workflow.
+
+
+## Master Data & Field Ownership — v0.11
+
+Добавлен единый master-data слой для контрагентов и номенклатуры между CRM, GrainTrack и 1С.
+
+### Контрагенты
+
+Используются два идентификатора:
+
+- `partyId` — неизменяемый внутренний Master Party ID вида `PTY-001`;
+- `legalKey` — юридический dedup-key вида `MD:<IDNO>`.
+
+Локальные ID систем не заменяют master identity:
+
+```text
+PTY-001
+├─ CRM: CL-001
+├─ GrainTrack: GT-PTY-001
+└─ 1C: 1C-PTY-001
+```
+
+Синхронизация по названию запрещена как основной механизм.
+
+### Номенклатура
+
+Добавлены Master Products с `productId` и mappings на CRM / GrainTrack / 1С.
+
+### Field Ownership
+
+В data.json зафиксировано, какая система является источником истины для разных групп полей:
+
+- MasterData — master IDs / legal keys / roles;
+- CRM — отношения с клиентом, менеджер, контакты, automation;
+- GrainTrack / trading layer — contracts, Shipment, logistics, quality, MTM;
+- 1С / Finance — юридические бухгалтерские реквизиты, задолженность, платежи и проводки.
+
+### Интерфейс
+
+Добавлен раздел **Master Data**:
+
+- Master Parties;
+- Legal Key;
+- mappings CRM / GrainTrack / 1С;
+- Master Products;
+- Field Ownership;
+- Master Data Exceptions.
+
+В карточке клиента показывается связанный PTY-ID и legalKey.
+
+Все IDNO и внешние идентификаторы в текущем прототипе являются вымышленными демонстрационными данными.
