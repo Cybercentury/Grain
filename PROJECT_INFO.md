@@ -10,14 +10,14 @@
 - **Основной пользователь прототипа:** менеджер продаж.
 - **Дополнительные роли в бизнес-процессе:** юрист, коммерческий директор, бухгалтерия.
 - **Текущая внутренняя версия / спецификация:** **v0.10.0**
-- **Текущая функциональная версия интерфейса:** **v0.9.0**
+- **Текущая функциональная версия интерфейса:** **v0.10.0**
 - **Статус:** статичный интерактивный прототип.
 - **Основная ветка:** `main`.
 - **Публикация:** GitHub Pages из корня ветки `main`.
 - **Рабочий адрес прототипа:** https://cybercentury.github.io/Grain/
 - **Дата демонстрационных данных:** 30.09.2026.
 
-Версия **v0.10.0** — Integrity & Risk Control. Новый слой должен автоматически сверять физический товарный поток, финансовые записи, качество/ДВ и рыночные данные на уровне Shipment, создавать Exceptions и оценивать потенциальное денежное воздействие. v0.9.0 MTM остаётся отдельным слоем рыночной переоценки и используется Integrity Engine как один из источников контроля.
+Версия **v0.10.0** реализована как Integrity & Risk Control: система автоматически сверяет физический товарный поток, финансовые записи, качество/ДВ и рыночные данные на уровне Shipment, создаёт вычисляемые Exceptions, оценивает потенциальное денежное воздействие и выводит результат на обзор и в план отгрузок. v0.9.0 MTM сохранён как отдельный слой рыночной переоценки и используется Integrity Engine как один из источников контроля.
 
 ---
 
@@ -117,6 +117,11 @@ data.json
 │  └─ cashMovements
 ├─ market
 │  └─ marks
+├─ integrity
+│  ├─ ruleSettings
+│  ├─ weightRecords
+│  ├─ invoiceRecords
+│  └─ fertilizerQuality
 └─ auditSeed
 ```
 
@@ -1861,6 +1866,13 @@ Exceptions рассчитываются из исходных данных и н
 38. Рыночная котировка MTM обязана иметь источник и timestamp; изменение market mark записывается в Audit Trail с old/new snapshot.
 39. Forecast / Confirmed / Actual P&L являются разными состояниями и не должны молча суммироваться в «фактическую выручку».
 40. Для частично исполненной партии Actual P&L относится к отгруженному объёму, а открытый остаток продолжает существовать как confirmed/open exposure и участвует в MTM.
+41. Integrity Gate является отдельным контролем и не заменяет Financial Gate, shipment clearance или MTM.
+42. Exceptions вычисляются из исходных weight / invoice / quality / market данных и не хранятся как вручную подготовленные статусы.
+43. Критическое Integrity-отклонение может блокировать shipment clearance и финансовое закрытие партии.
+44. Физическое или качественное отклонение по возможности переводится в потенциальное финансовое воздействие в MDL.
+45. Потенциальное воздействие Integrity — управленческая оценка риска, а не признанный бухгалтерский убыток.
+46. Проверка ДВ использует централизованный расчёт количества действующего вещества из массы Shipment и процента компонента; вручную рассчитанный ДВ не является отдельным источником истины.
+47. Руководитель на обзоре должен видеть Exceptions по severity и финансовому воздействию, а не перечень всех нормальных операций.
 
 ---
 
@@ -1990,24 +2002,129 @@ Exceptions рассчитываются из исходных данных и н
 
 ## v0.10.0 — 2026-10-01 — Integrity & Risk Control
 
-**Статус перед реализацией:** утверждён пользователем.
+**Статус:** реализовано в текущем статичном прототипе.
 
-### Цель
+### Реализовано
 
-Добавить автоматическую проверку цепочки Shipment и выводить на обзор только значимые исключения с денежной оценкой риска.
+Добавлен отдельный Integrity Engine для цепочки:
 
-### Scope
+`Deal → Contract → Shipment → Weight / Logistics → Quality / DV → Invoice / Finance → Cash Flow → MTM`.
 
-- Integrity Gate на Shipment;
-- weight reconciliation;
-- invoice vs weight reconciliation;
-- Fertilizers / DV quality check;
-- stale MTM mark check;
-- Exception Engine;
-- financial impact;
-- dashboard руководителя на «Обзоре»;
-- детализация Exceptions из плана отгрузок;
-- Audit Trail для изменений исходных контрольных данных.
+Для каждой реальной Shipment рассчитывается независимый **Integrity Gate**:
+
+- Готово;
+- Предупреждение;
+- Критично.
+
+Critical / blocking Exception дополнительно блокирует shipment clearance и финансовое закрытие до устранения исходного расхождения.
+
+### Обзор руководителя
+
+На «Обзоре» добавлен блок **«Контроль целостности и рисков»**:
+
+- количество критических Exceptions;
+- количество предупреждений;
+- потенциальное финансовое воздействие;
+- количество проблемных Shipment;
+- список Exceptions с сортировкой по severity и сумме риска.
+
+Блок использует все реальные Shipment по выбранным товару / району и не скрывает критический риск только из-за фильтра месяца.
+
+### План отгрузок
+
+В таблицу партий добавлен отдельный **Integrity Gate**.
+
+Нажатие открывает карточку контроля с:
+
+- рассчитанными Exceptions;
+- потенциальным финансовым воздействием;
+- исходной весовой записью;
+- invoice;
+- market mark;
+- лабораторной таблицей ДВ для удобрений.
+
+### Weight / Invoice reconciliation
+
+В `data.json → integrity` добавлены demo weightRecords и invoiceRecords.
+
+Engine автоматически проверяет:
+
+- физическую согласованность gross / tare / net;
+- превышение net weight над планом Shipment;
+- расхождение invoice quantity и подтверждённого net weight;
+- tolerances из ruleSettings.
+
+### Fertilizers / DV
+
+Для `SH-005` добавлен лабораторный demo-кейс NPK 10-26-26.
+
+ДВ рассчитывается централизованно:
+
+`active substance tons = shipment tons × nutrient % / 100`.
+
+Система сравнивает contract % / lab % / tolerance и рассчитывает потенциальную стоимостную корректировку по заданному demo rule.
+
+### Market data control
+
+Integrity Engine проверяет наличие и возраст market mark.
+
+`SH-004` содержит специально устаревшую demo-котировку и создаёт Warning, не меняя саму формулу MTM.
+
+### Контрольные demo Exceptions
+
+1. **SH-001 — превышение net weight над планом**
+   - plan: 500 т;
+   - net weight: 512,4 т;
+   - difference: 12,4 т;
+   - potential impact: **44 640 MDL**.
+
+2. **SH-002 — invoice vs net weight**
+   - invoice: 300 т;
+   - net weight: 294,6 т;
+   - difference: 5,4 т;
+   - potential impact: **17 280 MDL**.
+
+3. **SH-005 — отклонение ДВ NPK**
+   - N: 10,0% contract → 9,5% lab;
+   - P₂O₅: 26,0% contract → 25,4% lab;
+   - рассчитанное demo potential impact: **10 174,5 MDL**.
+
+4. **SH-004 — stale MTM market mark**
+   - Warning;
+   - MTM exposure based on stale mark: **27 000 MDL**.
+
+### Итог контрольного dashboard
+
+- critical Exceptions: **3**;
+- warnings: **1**;
+- blocked / problematic Shipment: **3**;
+- суммарное потенциальное воздействие: **99 094,5 MDL**.
+
+Эта сумма является суммой управленческих Exception exposures, а не бухгалтерским убытком.
+
+### Регрессия
+
+Проверено:
+
+- JavaScript module script проходит синтаксическую проверку;
+- schema `data.json` = 0.10.0;
+- все ссылки Shipment → Finance / Cash / Market / Weight / Invoice / Quality валидны;
+- контрактные стадии по-прежнему имеют реальные signed documents;
+- MTM v0.9 продолжает работать;
+- датированный Cash Flow продолжает работать;
+- tooltip-словарь продолжает работать;
+- Integrity Gate выводится в плане отгрузок;
+- Integrity dashboard выводится на «Обзоре»;
+- critical Integrity блокирует shipment clearance;
+- critical Integrity блокирует Financial Lock.
+
+### Основные коммиты
+
+- `d56a59a` — спецификация v0.10 Integrity & Risk Control;
+- `3bd6303` — demo weight / invoice / quality operations;
+- `f10c486` — разделение weight-over-plan и invoice-vs-weight demo сценариев;
+- `8ddceef` — Integrity Engine, dashboard, Shipment Gate и блокировки;
+- `3955c41` — исправление синтаксиса Integrity / Financial Lock.
 
 
 
