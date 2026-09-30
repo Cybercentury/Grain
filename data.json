@@ -1034,9 +1034,9 @@
       {
         "id": "INV-DEMO-001",
         "shipmentId": "SH-001",
-        "qty": 500,
+        "qty": 512.4,
         "unitPrice": 3600,
-        "amount": 1800000,
+        "amount": 1844640,
         "status": "draft",
         "source": "Коммерческий документ (демо)"
       },
