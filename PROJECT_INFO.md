@@ -9,7 +9,7 @@
 - **Основной сценарий:** от первого запроса клиента и переговоров до договора, финансового допуска и фактической отгрузки партии.
 - **Основной пользователь прототипа:** менеджер продаж.
 - **Дополнительные роли в бизнес-процессе:** юрист, коммерческий директор, бухгалтерия.
-- **Текущая внутренняя версия / спецификация:** **v0.12.0**
+- **Текущая внутренняя версия / спецификация:** **v0.13.0**
 - **Текущая функциональная версия интерфейса:** **v0.12.0**
 - **Статус:** статичный интерактивный прототип.
 - **Основная ветка:** `main`.
@@ -2213,6 +2213,153 @@ Drill-down должен вести к существующей Shipment financia
 
 ---
 
+
+## 8.22. v0.13.0 — Executive Trading Dashboard
+
+v0.13.0 добавляет отдельный **«Дашборд руководителя»** сразу после «Обзора».
+
+Его назначение — отвечать на вопросы управления физическим товаром, исполнением контрактов, маржинальностью, денежным риском и терминальной инфраструктурой.
+
+Главный принцип:
+
+**executive dashboard не должен быть CRM activity dashboard.**
+
+Количество звонков, лидов и конверсия могут существовать как операционные показатели менеджера, но не являются верхнеуровневыми KPI трейдингового бизнеса.
+
+### 8.22.1. Верхнеуровневые KPI
+
+Dashboard показывает минимум:
+
+- Contracted / committed volume;
+- Open volume;
+- Volume in transit;
+- Volume at terminal;
+- Contract execution %;
+- Analytical Operating Margin;
+- Planned Net Cash Flow / Cash Gap;
+- Unrealized MTM;
+- Critical Integrity / Clearance risks;
+- Terminal utilization;
+- Terminal throughput;
+- Terminal turnover;
+- Average dwell time.
+
+### 8.22.2. Logistics / Transit layer
+
+В \`data.json → logistics.movements\` создаются отдельные записи физического перемещения.
+
+Поля:
+
+- movementId;
+- shipmentId;
+- quantityTons;
+- mode;
+- status;
+- origin;
+- destination;
+- plannedDeparture;
+- actualDeparture;
+- plannedArrival;
+- eta;
+- vehicle / transport reference.
+
+Базовые статусы:
+
+- planned;
+- in_transit;
+- arrived_terminal;
+- delivered;
+- delayed.
+
+**Volume in transit** считается только из движений со статусом \`in_transit\` / \`delayed\`, а не из общего plannedQty Shipment.
+
+### 8.22.3. Terminal Operations
+
+В \`data.json → terminal\` вводятся:
+
+- terminals;
+- inventory;
+- operations;
+- stockSnapshots.
+
+Для терминала рассчитываются:
+
+- current stock;
+- capacity utilization;
+- inbound throughput;
+- outbound throughput;
+- average stock;
+- turnover ratio = outbound throughput / average stock;
+- average dwell time по закрытым terminal lots / operations.
+
+Эти показатели являются операционными и не заменяют Cost Center терминала в Analytical P&L.
+
+### 8.22.4. Contract execution
+
+Контрактное исполнение строится из Deal / signed Document / Shipment.
+
+Для каждого договорного Deal dashboard показывает:
+
+- contracted volume;
+- shipped volume;
+- in-transit volume;
+- terminal volume;
+- open remainder;
+- execution %;
+- ближайшую Shipment;
+- риск / задержку.
+
+Подписанный документ сам по себе не означает, что обязательство исполнено.
+
+### 8.22.5. Executive risk board
+
+В одном списке объединяются наиболее важные исключения:
+
+- Integrity Critical;
+- shipment clearance blocked;
+- stale MTM mark;
+- delayed logistics movement;
+- contract / Shipment execution delay;
+- high terminal utilization;
+- negative analytical margin / Economic Result.
+
+Dashboard должен приоритизировать исключения, а не показывать только средние KPI.
+
+### 8.22.6. Навигация
+
+Порядок первых разделов:
+
+1. Обзор;
+2. Дашборд руководителя;
+3. Воронка продаж;
+4. План отгрузок;
+5. База клиентов;
+6. Финансы;
+7. Аналитика;
+8. Документооборот;
+9. Master Data;
+10. Ответы руководителю.
+
+### 8.22.7. Вопрос руководителя
+
+В «Ответы руководителю» добавляется карточка с дословным вопросом:
+
+> «Представьте, что мы внедряем трейдинговый дашборд. Какие метрики вы бы предложили мне на согласование в первую очередь?»
+
+Дополнительный комментарий пользователя о «сильном аналитике» используется только для понимания управленческой логики и не копируется как оценка кандидата.
+
+Карточка разбирает вопрос на требования к Grain:
+
+- физическая позиция товара;
+- исполнение контрактов;
+- маржинальность;
+- терминальная оборачиваемость;
+- риски / исключения;
+- вторичность CRM activity metrics.
+
+
+---
+
 ## 9. Основные сущности данных
 
 Начиная с v0.7.0 все демонстрационные сущности должны иметь стабильные ID и связываться по ID, а не по совпадению названий.
@@ -2683,6 +2830,25 @@ Drill-down должен вести к существующей Shipment financia
 ---
 
 # 16. Подробный журнал версий
+
+
+## v0.13.0 — 2026-10-01 — Executive Trading Dashboard
+
+**Статус перед реализацией:** утверждён пользователем.
+
+### Scope
+
+- отдельный «Дашборд руководителя» после «Обзора»;
+- Logistics / Transit model;
+- Terminal Operations model;
+- volume in transit;
+- contract execution;
+- margin / cash / MTM executive KPIs;
+- terminal utilization / throughput / turnover / dwell time;
+- executive risk board;
+- новая раскрывающаяся карточка в «Ответы руководителю».
+
+
 
 
 ## v0.12.0 — 2026-10-01 — Analytical Dashboard & Cost Centers
