@@ -204,6 +204,23 @@ dialog{background:#fffdf8}button:focus-visible,a:focus-visible,input:focus-visib
 .manager-qa-summary{margin-top:18px;padding:17px 18px;background:#eef3e9;border-left:4px solid var(--green);border-radius:8px;line-height:1.7;color:#354c3e}
 @media(max-width:760px){.manager-qa-impl{grid-template-columns:1fr}}
 
+
+/* v0.11.2 — accordion manager Q&A */
+.manager-qa-items{display:grid;gap:9px;margin-top:10px}
+.manager-qa-item{border:1px solid #e2d6bf;border-radius:8px;background:#fffefb;overflow:hidden}
+.manager-qa-item[open]{background:#fffaf0;border-color:#d7bf89}
+.manager-qa-item summary{display:flex;align-items:flex-start;gap:11px;cursor:pointer;padding:14px 16px;font-weight:650;line-height:1.45;list-style:none}
+.manager-qa-item summary::-webkit-details-marker{display:none}
+.manager-qa-item summary:before{content:'+';width:22px;height:22px;min-width:22px;border-radius:50%;display:grid;place-items:center;background:#ead8aa;color:#5d451d;font-weight:800}
+.manager-qa-item[open] summary:before{content:'−'}
+.manager-qa-item summary:hover{background:#fff7e7}
+.manager-qa-item-body{padding:0 16px 16px 49px;color:#46564b;line-height:1.68}
+.manager-qa-item-body p{font-size:12px;margin:0 0 8px}
+.manager-qa-item-body p:last-child{margin-bottom:0}
+.manager-qa-status.prototype{background:#dfe9f1;color:#39566c}
+.manager-qa-status.arch{background:#ebe3f1;color:#624777}
+.manager-qa-category{display:inline-block;margin-bottom:8px;color:#7b705d;font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase}
+
 </style></head><body>
 <aside><div class="brand"><svg class="brand-wheat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 22V5M12 5c-3-2-2-4 0-4 2 0 3 2 0 4ZM12 10C7 10 5 7 5 4c4 0 7 2 7 6ZM12 15c-5 0-7-3-7-6 4 0 7 2 7 6ZM12 20c-5 0-7-3-7-6 4 0 7 2 7 6ZM12 10c5 0 7-3 7-6-4 0-7 2-7 6ZM12 15c5 0 7-3 7-6-4 0-7 2-7 6ZM12 20c5 0 7-3 7-6-4 0-7 2-7 6Z"/></svg><span class="brand-name">grain<span>.</span></span></div><small>ТОРГОВЫЕ ОПЕРАЦИИ</small><nav aria-label="Основная навигация"><button class="active" data-view="overview"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg><span>Обзор</span></button><button data-view="pipeline"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 4h18l-7 8v6l-4 2v-8z"/></svg><span>Воронка продаж</span></button><button data-view="shipments"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 6h11v12H3zM14 10h4l3 4v4h-7"/><path d="M14 14h7"/><circle cx="7" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg><span>План отгрузок</span></button><button data-view="clients"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="9" cy="7" r="3"/><path d="M3 21v-3a6 6 0 0 1 12 0v3M16 4a3 3 0 0 1 0 6M18 14a5 5 0 0 1 3 4v3"/></svg><span>База клиентов</span></button><button data-view="masterdata"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v7c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12v7c0 1.7 3.6 3 8 3s8-1.3 8-3v-7"/></svg><span>Master Data</span></button><button data-view="finance"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/><path d="M3 7l6-4 6 6 6-5"/></svg><span>Финансы</span></button><button data-view="documents"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H5v20h14V7zM14 2v6h5M8 12h8M8 16h5"/></svg><span>Документооборот</span></button><button data-view="managerqa"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v7M12 17h.01"/></svg><span>Ответы руководителю</span></button></nav><footer>МОЛДОВА · B2B<br>Зерно и минеральные удобрения<br><br>Прототип / 01<br>Все компании и сделки вымышлены</footer></aside>
 <main><div class="top"><span>Рабочее пространство / Продажи по Молдове</span><span class="demo">Демонстрационные данные</span></div><button class="task-banner" id="task-banner" aria-haspopup="dialog" aria-controls="task-drawer"></button><div class="heading"><div><h1 id="page-title">Продажи в деталях.</h1><p id="subtitle">От первого запроса до последней отгруженной тонны.</p></div></div>
@@ -260,70 +277,524 @@ dialog{background:#fffdf8}button:focus-visible,a:focus-visible,input:focus-visib
 </section>
 <section id="managerqa" class="hidden">
 <div class="manager-qa">
+
   <article class="manager-qa-card">
     <div class="manager-qa-head">
       <span class="manager-qa-mark" aria-hidden="true">!</span>
       <div>
-        <small>ВОПРОС РУКОВОДИТЕЛЯ · АРХИТЕКТУРА СИСТЕМЫ</small>
-        <h2>Товарный поток против классической воронки продаж</h2>
-        <p>Почему эти два слоя нельзя свести к одному статусу сделки.</p>
+        <small>ВОПРОС РУКОВОДИТЕЛЯ · B2B-ВОРОНКА</small>
+        <h2>Проектирование B2B-воронки для региональной торговли</h2>
+        <p>Как совместить длинные переговоры, плавающую цену и прогноз физических тонн.</p>
       </div>
     </div>
     <div class="manager-qa-body">
-      <p style="margin-bottom:14px"><b>Вопрос:</b> чем архитектура товарных потоков принципиально отличается от классической воронки продаж?</p>
-      <div class="manager-qa-answer">Я бы не заменял товарный поток классической воронкой. Я бы разделил два слоя. Воронка отвечает за коммерческую возможность и вероятность продажи, а после формирования обязательства товар проходит через отдельную Shipment-centric модель. Сделка может породить несколько партий, каждая партия имеет собственную логистику, вес, качество, финансовый результат, MTM и контроль целостности. CRM должна связывать эти два слоя, но не смешивать их в один статус.</div>
-      <div class="manager-qa-principles">
-        <article><b>Коммерческий слой</b><p>Deal / воронка показывает вероятность продажи, переговоры и движение к контракту.</p></article>
-        <article><b>Товарный слой</b><p>Shipment показывает физическое исполнение: партии, логистику, вес, качество, финансы, MTM и Integrity.</p></article>
-        <article><b>Связь</b><p>Одна сделка может породить несколько Shipment с разными состояниями и сроками.</p></article>
-        <article><b>Главное правило</b><p>Физическое исполнение нельзя сводить к одному stage сделки — это независимый контур.</p></article>
+      <div class="manager-qa-quote"><small>ДОСЛОВНЫЙ ВОПРОС</small>«Торговля зерном или минеральными удобрениями на внутреннем рынке — это не разовая продажа, а длинные сделки с плавающими ценами. Как вы спроектируете воронку продаж в CRM, чтобы я видел не только статус переговоров, но и прогнозируемый объем отгрузки по Молдове?»</div>
+      <h3 class="manager-qa-subtitle">Какие проблемы и вопросы из этого следуют</h3>
+      <div class="manager-qa-items">
+        
+        <details class="manager-qa-item">
+          <summary>Как отделить стадию переговоров от физического прогноза тонн?</summary>
+          <div class="manager-qa-item-body">
+            <span class="manager-qa-status done">РЕАЛИЗОВАНО</span>
+            <p>В Grain коммерческая сущность <b>Deal</b> и физическая сущность <b>Shipment</b> разделены. Deal хранит стадию переговоров, цену, блокеры и следующий шаг, а Shipment — конкретную дату поставки, плановый объём, факт и остаток.</p><p>Из-за этого статус «Согласование условий» не пытается одновременно описывать, сколько тонн и в каком месяце реально поедет клиенту.</p>
+          </div>
+        </details>
+        <details class="manager-qa-item">
+          <summary>Как прогнозировать объём по сделкам, где контракт ещё не подписан?</summary>
+          <div class="manager-qa-item-body">
+            <span class="manager-qa-status done">РЕАЛИЗОВАНО</span>
+            <p>Для ранних стадий используется внутренний вес вероятности: 0%, 20%, 40% и 70%. Открытый объём такой сделки входит в forecast как объём × вероятность стадии.</p><p>Это даёт руководителю раннюю оценку будущих тонн, но система не выдаёт этот объём за гарантированный контракт.</p>
+          </div>
+        </details>
+        <details class="manager-qa-item">
+          <summary>Как не задвоить подписанный объём в forecast?</summary>
+          <div class="manager-qa-item-body">
+            <span class="manager-qa-status done">РЕАЛИЗОВАНО</span>
+            <p>После перехода в «Контракт подписан» или «Исполнение» открытый остаток учитывается как 100% контрактный объём. Он больше не добавляется второй раз как вероятностный forecast.</p><p>Поэтому одна и та же тонна не одновременно находится в «переговорах» и в «контрактном остатке».</p>
+          </div>
+        </details>
+        <details class="manager-qa-item">
+          <summary>Как учитывать несколько отгрузок одной сделки и разные месяцы?</summary>
+          <div class="manager-qa-item-body">
+            <span class="manager-qa-status done">РЕАЛИЗОВАНО</span>
+            <p>Одна Deal может породить несколько Shipment. Например, договор на 700 т может иметь Shipment 400 т в октябре и 300 т в ноябре, и каждая партия живёт со своей датой, фактом и остатком.</p><p>Фильтр месяца применяется к партиям и метрикам, а не скрывает саму коммерческую Deal из воронки.</p>
+          </div>
+        </details>
+        <details class="manager-qa-item">
+          <summary>Что происходит с плавающей ценой?</summary>
+          <div class="manager-qa-item-body">
+            <span class="manager-qa-status done">РЕАЛИЗОВАНО</span>
+            <p>Цена и тоннаж независимы. Цена может быть предварительной или фиксированной, иметь срок действия и изменяться в ходе переговоров.</p><p>Истечение предварительной цены создаёт риск/предупреждение, но автоматически не удаляет объём, не меняет Shipment и не двигает стадию сделки.</p>
+          </div>
+        </details>
+        <details class="manager-qa-item">
+          <summary>Как руководитель видит прогноз именно по Молдове?</summary>
+          <div class="manager-qa-item-body">
+            <span class="manager-qa-status done">РЕАЛИЗОВАНО</span>
+            <p>На «Обзоре» уже показываются факт, контрактный остаток, взвешенные переговоры и общий прогноз отгрузок. Отдельные фильтры товара и района позволяют смотреть нужную территорию и категорию.</p><p>При этом ранние Deal остаются видимыми в воронке независимо от месяца Shipment, чтобы менеджер не терял незакрытые переговоры.</p>
+          </div>
+        </details>
       </div>
+      <div class="manager-qa-summary"><b>Короткий ответ руководителю.</b><br>Я разделяю коммерческую стадию и физический прогноз. Ранние сделки дают взвешенный forecast по вероятности стадии, подписанные — 100% контрактный остаток, а реальные даты и объёмы живут в Shipment. Поэтому в одном интерфейсе видно и состояние переговоров, и прогноз тонн по Молдове без двойного счёта.</div>
     </div>
   </article>
+
+  <article class="manager-qa-card">
+    <div class="manager-qa-head">
+      <span class="manager-qa-mark" aria-hidden="true">!</span>
+      <div>
+        <small>ВОПРОС РУКОВОДИТЕЛЯ · КЛИЕНТСКИЕ ТРИГГЕРЫ</small>
+        <h2>Триггеры и роботы для статичной базы контрагентов</h2>
+        <p>Не искать бесконечно новые лиды, а автоматически поднимать повторный аграрный спрос.</p>
+      </div>
+    </div>
+    <div class="manager-qa-body">
+      <div class="manager-qa-quote"><small>ДОСЛОВНЫЙ ВОПРОС</small>«В вашем опыте есть автоматизация сбора лидов. В агросекторе база контрагентов (фермеров, переработчиков) часто статична. Какие триггеры и роботы вы настроите, чтобы система сама напоминала менеджеру связаться с клиентом перед началом сезона закупок?»</div>
+      <h3 class="manager-qa-subtitle">Какие проблемы и вопросы из этого следуют</h3>
+      <div class="manager-qa-items">
+        
+        <details class="manager-qa-item">
+          <summary>Если новых лидов мало, откуда CRM должна создавать работу менеджеру?</summary>
+          <div class="manager-qa-item-body">
+            <span class="manager-qa-status done">РЕАЛИЗОВАНО</span>
+            <p>В Grain работа генерируется не только из новых лидов, а из жизненного цикла существующего клиента: сезонности, последнего заказа, активного контракта, целевой цены и обещанной даты контакта.</p><p>Таким образом база может почти не расти, но CRM всё равно формирует актуальный ежедневный список действий.</p>
+          </div>
+        </details>
+        <details class="manager-qa-item">
+          <summary>Как учитывать сезонность закупок?</summary>
+          <div class="manager-qa-item-body">
+            <span class="manager-qa-status done">РЕАЛИЗОВАНО</span>
+            <p>Правило «Сезон» создаёт контакт заранее до ожидаемого периода закупки конкретного клиента. Менеджер получает задачу до начала спроса, а не после того, как клиент уже купил у другого поставщика.</p><p>Сезон хранится как правило клиента и может быть настроен отдельно для разных контрагентов.</p>
+          </div>
+        </details>
+        <details class="manager-qa-item">
+          <summary>Как автоматизировать повторный заказ?</summary>
+          <div class="manager-qa-item-body">
+            <span class="manager-qa-status done">РЕАЛИЗОВАНО</span>
+            <p>Правило «Повторный заказ» отсчитывает заданный интервал от прошлого заказа и создаёт новый повод для контакта. Это полезно для клиентов с повторяющимся зерновым или удобренческим циклом.</p><p>Запись результата разговора обновляет рабочую очередь, но сама по себе не меняет forecast.</p>
+          </div>
+        </details>
+        <details class="manager-qa-item">
+          <summary>Как заранее увидеть окончание действующего контракта?</summary>
+          <div class="manager-qa-item-body">
+            <span class="manager-qa-status done">РЕАЛИЗОВАНО</span>
+            <p>Правило «Продолжение контракта» смотрит на последнюю незавершённую Shipment и создаёт задачу до завершения текущего объёма. Это даёт менеджеру окно для обсуждения следующего периода поставки.</p><p>Так CRM работает не только с новыми сделками, но и с продлением существующего товарного потока.</p>
+          </div>
+        </details>
+        <details class="manager-qa-item">
+          <summary>Можно ли использовать целевую цену клиента как триггер?</summary>
+          <div class="manager-qa-item-body">
+            <span class="manager-qa-status done">РЕАЛИЗОВАНО</span>
+            <p>Да. Правило «Целевая цена» сравнивает действующее предложение с ценовым ориентиром клиента. Если условие достигнуто и предложение ещё актуально, система формирует повод связаться.</p><p>Цена остаётся отдельной бизнес-переменной и не превращается автоматически в новую сделку без действия менеджера.</p>
+          </div>
+        </details>
+        <details class="manager-qa-item">
+          <summary>Как не заспамить менеджера одинаковыми напоминаниями?</summary>
+          <div class="manager-qa-item-body">
+            <span class="manager-qa-status done">РЕАЛИЗОВАНО</span>
+            <p>Если по клиенту уже есть активная Deal, обычное reminder-правило не создаёт параллельную дублирующую задачу: используется следующий шаг существующей сделки.</p><p>Кроме того, повторная демонстрационная отправка одного события теми же каналами блокируется.</p>
+          </div>
+        </details>
+        <details class="manager-qa-item">
+          <summary>Где менеджер видит все эти действия?</summary>
+          <div class="manager-qa-item-body">
+            <span class="manager-qa-status done">РЕАЛИЗОВАНО</span>
+            <p>Рабочая очередь разделена на просрочено, сегодня, завтра и следующие 30 дней. В прототипе есть Email, SMS, Telegram и WhatsApp как демонстрационные каналы.</p><p>Реальная доставка уведомлений пока не подключена — это будет серверная интеграция.</p>
+          </div>
+        </details>
+      </div>
+      <div class="manager-qa-summary"><b>Короткий ответ руководителю.</b><br>В статичной аграрной базе я автоматизирую не только сбор новых лидов, а повторный спрос: сезон, повторный заказ, целевую цену, окончание контракта и обещанную дату. Grain уже собирает эти события в рабочую очередь и не создаёт дублирующее напоминание, если по клиенту уже идёт активная сделка.</div>
+    </div>
+  </article>
+
+  <article class="manager-qa-card">
+    <div class="manager-qa-head">
+      <span class="manager-qa-mark" aria-hidden="true">!</span>
+      <div>
+        <small>ВОПРОС РУКОВОДИТЕЛЯ · ДОКУМЕНТООБОРОТ</small>
+        <h2>Автоматизация документооборота и согласований</h2>
+        <p>Версионный workflow с ролями, SLA и прослеживаемой историей вместо решений в чатах.</p>
+      </div>
+    </div>
+    <div class="manager-qa-body">
+      <div class="manager-qa-quote"><small>ДОСЛОВНЫЙ ВОПРОС</small>«Вы занимались автоматизацией документооборота. Опишите, как вы настроите в системе маршрут согласования типового контракта на поставку или агентского договора, чтобы он автоматически проходил через юристов и коммерческого директора без задержек в мессенджерах?»</div>
+      <h3 class="manager-qa-subtitle">Какие проблемы и вопросы из этого следуют</h3>
+      <div class="manager-qa-items">
+        
+        <details class="manager-qa-item">
+          <summary>Какой маршрут должен проходить договор?</summary>
+          <div class="manager-qa-item-body">
+            <span class="manager-qa-status done">РЕАЛИЗОВАНО</span>
+            <p>В Grain уже реализован маршрут <b>Менеджер → Юрист → Коммерческий директор → Подписание → Подписан</b>. Каждому этапу соответствует собственная задача и роль.</p><p>Это исключает модель, где менеджер технически «сам себе» подтверждает юридическое или коммерческое согласование.</p>
+          </div>
+        </details>
+        <details class="manager-qa-item">
+          <summary>Как исключить согласование устаревшей версии?</summary>
+          <div class="manager-qa-item-body">
+            <span class="manager-qa-status done">РЕАЛИЗОВАНО</span>
+            <p>Изменение текста создаёт новую версию документа, а approvals относятся к конкретной версии. Если после согласования v2 появилась v3, старое решение не переносится на новую версию автоматически.</p><p>Тем самым система знает не просто «договор согласован», а <b>какая именно версия</b> была согласована.</p>
+          </div>
+        </details>
+        <details class="manager-qa-item">
+          <summary>Что происходит при возврате на доработку?</summary>
+          <div class="manager-qa-item-body">
+            <span class="manager-qa-status done">РЕАЛИЗОВАНО</span>
+            <p>Возврат требует обязательной причины. После исправления создаётся новая версия, и она снова проходит необходимые этапы согласования.</p><p>Причина и история переходов остаются в workflow, поэтому замечание не теряется в переписке.</p>
+          </div>
+        </details>
+        <details class="manager-qa-item">
+          <summary>Как контролировать задержки юриста и коммерческого директора?</summary>
+          <div class="manager-qa-item-body">
+            <span class="manager-qa-status done">РЕАЛИЗОВАНО</span>
+            <p>В демо установлены SLA: 2 часа для юриста и 4 часа для коммерческого директора. После истечения срока задача отмечается просроченной, а ещё через час моделируется эскалация.</p><p>В production это будет серверный scheduler, но сама логика SLA и ответственных уже заложена.</p>
+          </div>
+        </details>
+        <details class="manager-qa-item">
+          <summary>Почему не оставлять согласования в Telegram или WhatsApp?</summary>
+          <div class="manager-qa-item-body">
+            <span class="manager-qa-status done">РЕАЛИЗОВАН ПРИНЦИП</span>
+            <p>Решение должно храниться внутри workflow Grain и Audit Trail: кто согласовал, какую версию и когда. Обычная переписка не гарантирует версионность и не связывает решение с конкретным Document ID.</p><p>Мессенджер может стать внешним интерфейсом к этому workflow, но не источником истины.</p>
+          </div>
+        </details>
+      </div>
+      <div class="manager-qa-summary"><b>Короткий ответ руководителю.</b><br>Я строю version-specific workflow: текущая версия документа последовательно проходит юриста и коммерческого директора, у каждого есть SLA, возврат всегда содержит причину, а новая версия не наследует старое согласование. История решения остаётся в Grain, а не растворяется в мессенджерах.</div>
+    </div>
+  </article>
+
+  <article class="manager-qa-card">
+    <div class="manager-qa-head">
+      <span class="manager-qa-mark" aria-hidden="true">!</span>
+      <div>
+        <small>ВОПРОС РУКОВОДИТЕЛЯ · ДЕБИТОРСКАЯ ЗАДОЛЖЕННОСТЬ</small>
+        <h2>Запрет новой отгрузки при финансовом риске</h2>
+        <p>Clearance на уровне конкретной Shipment перед каждой фактической отгрузкой.</p>
+      </div>
+    </div>
+    <div class="manager-qa-body">
+      <div class="manager-qa-quote"><small>ДОСЛОВНЫЙ ВОПРОС</small>«Как вы реализуете контроль дебиторской задолженности на уровне CRM, чтобы менеджер по Молдове не мог отгрузить новую партию клиенту, который не закрыл прошлые платежи?»</div>
+      <h3 class="manager-qa-subtitle">Какие проблемы и вопросы из этого следуют</h3>
+      <div class="manager-qa-items">
+        
+        <details class="manager-qa-item">
+          <summary>На каком уровне должна блокироваться новая отгрузка?</summary>
+          <div class="manager-qa-item-body">
+            <span class="manager-qa-status done">РЕАЛИЗОВАНО</span>
+            <p>В Grain финансовый допуск относится к конкретной <b>Shipment</b>, а не просто к клиенту или сделке целиком. Это важно, потому что у одного договора может быть несколько партий с разными суммами, датами и условиями.</p><p>Менеджер не может считать разрешённой всю сделку только потому, что одна партия прошла проверку.</p>
+          </div>
+        </details>
+        <details class="manager-qa-item">
+          <summary>Что именно проверяет clearance?</summary>
+          <div class="manager-qa-item-body">
+            <span class="manager-qa-status done">РЕАЛИЗОВАНО</span>
+            <p>Проверяются подписанный договор, свежесть финансового snapshot, общий и просроченный долг, требуемая предоплата, кредитный лимит, резервы уже разрешённых партий и действующее исключение директора.</p><p>Эти проверки отвечают на отдельный вопрос: <b>можно ли физически отгружать именно эту партию этому клиенту сейчас</b>.</p>
+          </div>
+        </details>
+        <details class="manager-qa-item">
+          <summary>Откуда берётся информация о долге и платеже?</summary>
+          <div class="manager-qa-item-body">
+            <span class="manager-qa-status prototype">ДЕМО-ИНТЕГРАЦИЯ</span>
+            <p>Сейчас Grain моделирует импорт финансового snapshot из 1С. Импорт заменяет предыдущий снимок, повторный импорт не должен второй раз применять один и тот же платёж, а данные старше установленного окна требуют обновления.</p><p>В production источником станет финансовая система через API/события, а CRM будет использовать её authoritative данные.</p>
+          </div>
+        </details>
+        <details class="manager-qa-item">
+          <summary>Что происходит, если финансовая система недоступна?</summary>
+          <div class="manager-qa-item-body">
+            <span class="manager-qa-status done">РЕАЛИЗОВАНО ПРАВИЛО</span>
+            <p>Ошибка обмена не должна превращаться в автоматическое разрешение. Если свежесть данных нельзя подтвердить, система сохраняет риск и требует новую проверку.</p><p>Это fail-closed подход: технический сбой не становится основанием отдать товар клиенту.</p>
+          </div>
+        </details>
+        <details class="manager-qa-item">
+          <summary>Можно ли сделать срочное исключение?</summary>
+          <div class="manager-qa-item-body">
+            <span class="manager-qa-status done">РЕАЛИЗОВАНО</span>
+            <p>Менеджер может отправить запрос коммерческому директору на одну конкретную Shipment. Исключение ограничено суммой, действует 24 часа и связано с fingerprint текущих условий партии.</p><p>Оно не погашает задолженность, не подтверждает платёж и не заменяет отсутствие подписанного договора.</p>
+          </div>
+        </details>
+        <details class="manager-qa-item">
+          <summary>Проверяется ли допуск повторно перед фактической отгрузкой?</summary>
+          <div class="manager-qa-item-body">
+            <span class="manager-qa-status done">РЕАЛИЗОВАНО</span>
+            <p>Да. При попытке увеличить фактически отгруженный объём clearance пересчитывается. Если долг, лимит или условия партии изменились после первоначального разрешения, старая проверка не должна автоматически пропускать новую операцию.</p><p>Это защищает систему от разрыва между предварительным решением и реальным движением товара.</p>
+          </div>
+        </details>
+      </div>
+      <div class="manager-qa-summary"><b>Короткий ответ руководителю.</b><br>Я ставлю кредитный барьер на каждую Shipment. Перед отгрузкой CRM проверяет актуальный долг из финансовой системы, просрочку, предоплату, лимит, резервы и подписанный договор. Без допуска фактическая отгрузка блокируется; исключение директора возможно только на конкретную партию и не скрывает саму задолженность.</div>
+    </div>
+  </article>
+
+  <article class="manager-qa-card">
+    <div class="manager-qa-head">
+      <span class="manager-qa-mark" aria-hidden="true">!</span>
+      <div>
+        <small>ВОПРОС РУКОВОДИТЕЛЯ · P&L / CASH FLOW</small>
+        <h2>Обязательность финансовых данных</h2>
+        <p>Как не пропустить в управленческий учёт неполную цену, себестоимость или логистику.</p>
+      </div>
+    </div>
+    <div class="manager-qa-body">
+      <div class="manager-qa-quote"><small>ДОСЛОВНЫЙ ВОПРОС</small>«Мне необходимо сводить данные в общие структуры PnL и cash flow по всем подразделениям. Как вы обеспечите на стороне CRM обязательность заполнения финансовых полей (например, себестоимость, логистика, финальная цена), чтобы в финансовый блок уходили чистые данные без искажений?»</div>
+      <h3 class="manager-qa-subtitle">Какие проблемы и вопросы из этого следуют</h3>
+      <div class="manager-qa-items">
+        
+        <details class="manager-qa-item">
+          <summary>Какая сущность является минимальной единицей P&L и Cash Flow?</summary>
+          <div class="manager-qa-item-body">
+            <span class="manager-qa-status done">РЕАЛИЗОВАНО</span>
+            <p>В Grain минимальная финансовая единица — конкретная Shipment. Финальная цена, себестоимость, логистика и прямые расходы относятся к партии, потому что разные Shipment одной сделки могут иметь разную экономику.</p><p>Это не позволяет усреднить расходы на уровне клиента и затем потерять реальную маржинальность отдельных поставок.</p>
+          </div>
+        </details>
+        <details class="manager-qa-item">
+          <summary>Как обеспечить обязательность полей по мере продвижения сделки?</summary>
+          <div class="manager-qa-item-body">
+            <span class="manager-qa-status done">РЕАЛИЗОВАНО</span>
+            <p>Финансовые требования усиливаются по стадиям. На раннем этапе достаточно товара, объёма и ориентировочной цены; перед отгрузкой уже требуются подтверждённые себестоимость, логистика и обязательные прямые затраты.</p><p>Для финансового закрытия нужен полный фактический набор либо явно зарегистрированные незакрытые обязательства.</p>
+          </div>
+        </details>
+        <details class="manager-qa-item">
+          <summary>Как не позволить менеджеру вручную нарисовать прибыль или маржу?</summary>
+          <div class="manager-qa-item-body">
+            <span class="manager-qa-status done">РЕАЛИЗОВАНО</span>
+            <p>Contribution и Margin не являются редактируемыми первичными полями. Они рассчитываются из Revenue, COGS и Direct Costs.</p><p>Если результат неправильный, пользователь исправляет источник — цену, себестоимость или расход — и система пересчитывает результат с записью изменения в Audit Trail.</p>
+          </div>
+        </details>
+        <details class="manager-qa-item">
+          <summary>Как разделены план, подтверждение и факт?</summary>
+          <div class="manager-qa-item-body">
+            <span class="manager-qa-status done">РЕАЛИЗОВАНО</span>
+            <p>Ключевое финансовое значение имеет статус План / Подтверждено / Факт. Dashboard отдельно показывает Forecast P&L, Confirmed P&L и Actual P&L.</p><p>Это устраняет прежнюю опасность, когда плановые деньги могли визуально выглядеть как уже заработанная фактическая выручка.</p>
+          </div>
+        </details>
+        <details class="manager-qa-item">
+          <summary>Что происходит после финансового закрытия партии?</summary>
+          <div class="manager-qa-item-body">
+            <span class="manager-qa-status done">РЕАЛИЗОВАНО</span>
+            <p>Financial Lock запрещает прямое изменение закрытых финансово значимых данных. Корректировка проходит через Financial Log, где сохраняются old value, new value, причина, actor, роль и timestamp.</p><p>Так исправление не стирает исходную историю и не превращает audit в последний сохранённый снимок.</p>
+          </div>
+        </details>
+        <details class="manager-qa-item">
+          <summary>Как P&L и Cash Flow сводятся по подразделениям?</summary>
+          <div class="manager-qa-item-body">
+            <span class="manager-qa-status done">РЕАЛИЗОВАНО</span>
+            <p>Business line берётся из Deal как канонический источник. Финансовый dashboard агрегирует Grain, Fertilizers, Sales и Consolidated.</p><p>Cash Flow живёт отдельно как датированные cashMovements, поэтому месяц денежного поступления не обязан совпадать с месяцем Shipment или признания P&L.</p>
+          </div>
+        </details>
+        <details class="manager-qa-item">
+          <summary>Что не должно зависеть только от HTML required?</summary>
+          <div class="manager-qa-item-body">
+            <span class="manager-qa-status future">BACKEND-ПРАВИЛО</span>
+            <p>В прототипе проверки работают на клиентской стороне, но production-контроль обязательности должен повторяться на backend. Иначе пользователь или внешняя интеграция сможет обойти browser validation.</p><p>Поэтому Financial Gate рассматривается как бизнес-правило системы, а не как визуальный атрибут формы.</p>
+          </div>
+        </details>
+      </div>
+      <div class="manager-qa-summary"><b>Короткий ответ руководителю.</b><br>Я обеспечиваю чистые данные через Financial Gate на Shipment и поэтапную обязательность полей. Маржа считается системой, План / Подтверждено / Факт разделены, после закрытия действует Financial Lock, а корректировки журналируются. В сводный P&L и Cash Flow попадают одни и те же проверяемые первичные данные.</div>
+    </div>
+  </article>
+
+  <article class="manager-qa-card">
+    <div class="manager-qa-head">
+      <span class="manager-qa-mark" aria-hidden="true">!</span>
+      <div>
+        <small>ВОПРОС РУКОВОДИТЕЛЯ · ВНЕДРЕНИЕ</small>
+        <h2>Онбординг и сопротивление торговой команды</h2>
+        <p>Как сделать CRM рабочим инструментом менеджера, а не вторым отчётом для руководства.</p>
+      </div>
+    </div>
+    <div class="manager-qa-body">
+      <div class="manager-qa-quote"><small>ДОСЛОВНЫЙ ВОПРОС</small>«У вас есть опыт обучения сотрудников и создания регламентов. Торговые менеджеры часто сопротивляются CRM, считая ее инструментом слежки или лишней бюрократией. Как вы будете внедрять систему в отдел по Молдове, чтобы менеджеры увидели в ней помощника, а не обузу?»</div>
+      <h3 class="manager-qa-subtitle">Какие проблемы и вопросы из этого следуют</h3>
+      <div class="manager-qa-items">
+        
+        <details class="manager-qa-item">
+          <summary>Как не превратить CRM в дополнительную ручную отчётность?</summary>
+          <div class="manager-qa-item-body">
+            <span class="manager-qa-status done">ПРИНЦИП РЕАЛИЗОВАН</span>
+            <p>Менеджер вводит первичные данные, которые нужны ему самому для работы: следующий шаг, дату контакта, объём, цену и фактическое исполнение. Forecast, P&L, MTM, reminders и риск-индикаторы система рассчитывает сама.</p><p>Чем меньше пользователь вручную дублирует уже известную системе информацию, тем меньше ощущение «CRM ради отчёта начальнику».</p>
+          </div>
+        </details>
+        <details class="manager-qa-item">
+          <summary>Как дать менеджеру немедленную пользу каждый день?</summary>
+          <div class="manager-qa-item-body">
+            <span class="manager-qa-status done">РЕАЛИЗОВАНО</span>
+            <p>В Grain уже есть рабочая очередь контактов, следующий шаг сделки, план Shipment, финансовые и Integrity-проверки, подсказки терминов и связанные документы. После заполнения данных менеджер сразу получает результат: кого набрать, что заблокировано и где следующий риск.</p><p>Это меняет мотивацию: данные вводятся не только для аналитики руководства, а чтобы система помогла выполнить собственную работу.</p>
+          </div>
+        </details>
+        <details class="manager-qa-item">
+          <summary>Как уменьшить сложность интерфейса для нового сотрудника?</summary>
+          <div class="manager-qa-item-body">
+            <span class="manager-qa-status prototype">РЕАЛИЗОВАНО ЧАСТИЧНО</span>
+            <p>Интерфейс разделён по рабочим модулям, финансовые термины имеют hover/focus-подсказки, а массовый export/reset для обычного менеджера убран. Раздел «Ответы руководителю» и информационные блоки объясняют логику системы.</p><p>Отдельного полноценного onboarding-mode пока нет, поэтому обучение пользователей остаётся организационной частью внедрения.</p>
+          </div>
+        </details>
+        <details class="manager-qa-item">
+          <summary>Как бы вы организовали сам процесс внедрения?</summary>
+          <div class="manager-qa-item-body">
+            <span class="manager-qa-status future">ПОСЛЕ PILOT</span>
+            <p>Я бы начал с небольшой группы менеджеров и реальных сделок, а не с одновременного запуска для всех. После пилота фиксируются лишние поля, непонятные статусы и реальные точки отказа, затем обновляются короткие role-based регламенты.</p><p>Расширение на весь отдел происходит после того, как минимальный рабочий сценарий стабилен и менеджеры видят личную пользу.</p>
+          </div>
+        </details>
+        <details class="manager-qa-item">
+          <summary>Какие метрики показывают, что внедрение работает?</summary>
+          <div class="manager-qa-item-body">
+            <span class="manager-qa-status arch">АРХИТЕКТУРНО ПРЕДУСМОТРЕНО</span>
+            <p>В production полезно измерять долю Deal с заполненным next step, долю Shipment с готовыми Gate, просроченные задачи, время согласования документа и число ручных обходов процесса. Это измеряет качество процесса, а не количество кликов пользователя.</p><p>Цель — не максимизировать активность в CRM, а снизить потерянные контакты, ошибки и время ожидания.</p>
+          </div>
+        </details>
+        <details class="manager-qa-item">
+          <summary>Как объяснить Audit Trail, чтобы его не воспринимали как слежку?</summary>
+          <div class="manager-qa-item-body">
+            <span class="manager-qa-status done">ПОДХОД ЗАФИКСИРОВАН</span>
+            <p>Audit Trail нужен для восстановления причин финансовой или операционной ошибки: кто изменил поле, из какого источника и что было до изменения. Он также защищает самого менеджера в спорной ситуации, потому что история не перекладывается на память людей.</p><p>При внедрении это нужно объяснять как защиту процесса и пользователя, а не как скрытый мониторинг активности.</p>
+          </div>
+        </details>
+      </div>
+      <div class="manager-qa-summary"><b>Короткий ответ руководителю.</b><br>Я бы внедрял CRM через пользу для менеджера: система сама напоминает, считает forecast, собирает партии, проверяет допуски и показывает риски, а не заставляет вести второй отчёт. Запуск — пилотом, с короткими регламентами по ролям и обучением на реальных сделках; Audit Trail объясняется как защита процесса и сотрудника.</div>
+    </div>
+  </article>
+
+  <article class="manager-qa-card">
+    <div class="manager-qa-head">
+      <span class="manager-qa-mark" aria-hidden="true">!</span>
+      <div>
+        <small>ДОПОЛНИТЕЛЬНЫЙ АРХИТЕКТУРНЫЙ ВОПРОС · TELEGRAM / WHATSAPP</small>
+        <h2>Согласование из мессенджера без входа в CRM</h2>
+        <p>Мессенджер как внешний интерфейс к Grain Workflow, а не отдельный источник решений.</p>
+      </div>
+    </div>
+    <div class="manager-qa-body">
+      <div class="manager-qa-quote"><small>ДОСЛОВНЫЙ ВОПРОС</small>«Допустим в Телеграме он нажал одобрить, скажем юрист, да, и в системе это автоматически подтвердилось, чтобы ему не обязательно было заходить в систему.»</div>
+      <h3 class="manager-qa-subtitle">Какие проблемы и вопросы из этого следуют</h3>
+      <div class="manager-qa-items">
+        
+        <details class="manager-qa-item">
+          <summary>Можно ли технически согласовать документ из Telegram или WhatsApp?</summary>
+          <div class="manager-qa-item-body">
+            <span class="manager-qa-status arch">АРХИТЕКТУРА ГОТОВА</span>
+            <p>Да. Мессенджер может отображать назначенную Grain-задачу и отправлять действие «Согласовать» или «Вернуть». Но само бизнес-решение принимает и сохраняет backend Grain после проверки запроса.</p><p>То есть Telegram/WhatsApp — только внешний пользовательский интерфейс, а не вторая база документов.</p>
+          </div>
+        </details>
+        <details class="manager-qa-item">
+          <summary>Что должен проверить backend перед принятием нажатия?</summary>
+          <div class="manager-qa-item-body">
+            <span class="manager-qa-status future">ПОСЛЕ BACKEND</span>
+            <p>Нужно проверить идентичность пользователя, связь Telegram/WhatsApp account с Grain user, роль и право на действие, Document ID, актуальную версию, текущий workflow stage и срок действия action token.</p><p>Без этих проверок пересланное или старое сообщение могло бы изменить документ не тем пользователем или не на той версии.</p>
+          </div>
+        </details>
+        <details class="manager-qa-item">
+          <summary>Что произойдёт, если юрист нажмёт кнопку под старой версией?</summary>
+          <div class="manager-qa-item-body">
+            <span class="manager-qa-status done">ПРАВИЛО ЗАФИКСИРОВАНО</span>
+            <p>Backend сравнит version ID из action с текущей версией Grain и отклонит действие. Пользователь получит сообщение, что версия устарела и нужно открыть актуальную задачу.</p><p>Это сохраняет тот же version-specific принцип, который уже действует внутри документооборота.</p>
+          </div>
+        </details>
+        <details class="manager-qa-item">
+          <summary>Где будет храниться результат согласования?</summary>
+          <div class="manager-qa-item-body">
+            <span class="manager-qa-status future">ПОСЛЕ BACKEND</span>
+            <p>После успешной валидации Grain обновляет workflow и создаёт Audit Trail event с actor, ролью, Document ID, version ID и каналом Telegram/WhatsApp. Сообщение в мессенджере лишь отражает этот результат.</p><p>Таким образом история не зависит от сохранности чата.</p>
+          </div>
+        </details>
+        <details class="manager-qa-item">
+          <summary>Что реально работает в текущем статичном прототипе?</summary>
+          <div class="manager-qa-item-body">
+            <span class="manager-qa-status prototype">ТОЛЬКО АРХИТЕКТУРА</span>
+            <p>Сейчас реализованы внутренний workflow, версии, SLA, Audit Trail и информационное описание будущей интеграции. Реального webhook, защищённого API и bot approval нет.</p><p>Это сознательно отложено до появления backend, постоянной базы, авторизации и RBAC.</p>
+          </div>
+        </details>
+      </div>
+      <div class="manager-qa-summary"><b>Короткий ответ руководителю.</b><br>Да, юрист сможет согласовать из Telegram или WhatsApp, но кнопка должна обращаться к защищённому Grain API. Backend проверяет пользователя, права и актуальную версию, после чего изменяет workflow и пишет Audit Trail. Мессенджер остаётся каналом действия, Grain — источником истины.</div>
+    </div>
+  </article>
+
   <article class="manager-qa-card">
     <div class="manager-qa-head">
       <span class="manager-qa-mark" aria-hidden="true">!</span>
       <div>
         <small>ВОПРОС РУКОВОДИТЕЛЯ · MASTER DATA</small>
-        <h2>Общие контрагенты и номенклатура между CRM, Grain Track и финансовым учётом</h2>
-        <p>Декомпозиция рисков и то, как каждый из них закрывается архитектурой Grain.</p>
+        <h2>Общие контрагенты и номенклатура между системами</h2>
+        <p>Одна master-сущность, локальные mappings и понятный владелец каждого поля.</p>
       </div>
     </div>
     <div class="manager-qa-body">
-      <div class="manager-qa-quote"><small>ДОСЛОВНЫЙ ВОПРОС РУКОВОДИТЕЛЯ</small>«Вы проектировали структуры для 5 направлений бизнеса. Как при этом была организована работа с мастер-данными? Если наша региональная торговля (ПМР и Молдова), закупки удобрений и терминалы используют общих контрагентов и номенклатуру, как вы технически исключите дублирование и рассинхронизацию справочников между CRM, Grain Track и финансовым учетом?»</div>
-
+      <div class="manager-qa-quote"><small>ДОСЛОВНЫЙ ВОПРОС</small>«Вы проектировали структуры для 5 направлений бизнеса. Как при этом была организована работа с мастер-данными? Если наша региональная торговля (ПМР и Молдова), закупки удобрений и терминалы используют общих контрагентов и номенклатуру, как вы технически исключите дублирование и рассинхронизацию справочников между CRM, Grain Track и финансовым учетом?»</div>
       <h3 class="manager-qa-subtitle">Какие проблемы и вопросы из этого следуют</h3>
-      <ol class="manager-qa-breakdown">
-        <li>Как гарантировать, что один реальный контрагент не станет разными карточками в CRM, Grain Track и 1С?</li>
-        <li>Как исключить дубли из-за разных написаний одного названия и разных локальных ID?</li>
-        <li>Как учитывать ПМР и Молдову, чтобы одинаковые регистрационные номера из разных реестров не конфликтовали?</li>
-        <li>Как не создавать разные юридические карточки, если одна компания одновременно Buyer, Supplier, Carrier или Terminal?</li>
-        <li>Как решить ту же проблему для номенклатуры: Пшеница / Wheat / «Пшеница продовольственная», NPK и другие варианты названий?</li>
-        <li>Какая система является источником истины для юридических реквизитов, CRM-полей, торгового исполнения и финансов?</li>
-        <li>Как изменение authoritative-поля в одной системе должно попадать в остальные системы без ручного повторного ввода?</li>
-        <li>Как обнаруживать отсутствующие mappings, конфликты ID и рассинхронизацию справочников?</li>
-        <li>Как объединить уже созданные дубли, не потеряв договоры, Shipment, документы и Audit Trail?</li>
-      </ol>
-
-      <h3 class="manager-qa-subtitle">Как это реализовано в Grain</h3>
-      <div class="manager-qa-implementation">
-        <div class="manager-qa-impl"><div><b>1. Единая идентичность</b><span class="manager-qa-status done">РЕАЛИЗОВАНО</span></div><p>Одна юридическая сущность получает неизменяемый <b>Master Party ID</b> вида <span class="master-key">PTY-001</span>. Все бизнес-ссылки ведут к этой master-сущности.</p></div>
-        <div class="manager-qa-impl"><div><b>2. Duplicate Prevention</b><span class="manager-qa-status done">РЕАЛИЗОВАНО</span></div><p>Exact duplicate определяется по <b>legalKey</b>, а не по названию. Для Молдовы: <span class="master-key">MD:&lt;IDNO&gt;</span>. Fuzzy-match названия используется только как предупреждение.</p></div>
-        <div class="manager-qa-impl"><div><b>3. ПМР / Молдова</b><span class="manager-qa-status done">АРХИТЕКТУРА ГОТОВА</span></div><p>Legal key включает <b>jurisdiction + registration/fiscal code</b>. Поэтому номера из разных реестров не сталкиваются. Конкретный authoritative code берётся из реестра юридической регистрации контрагента.</p></div>
-        <div class="manager-qa-impl"><div><b>4. Локальные ID систем</b><span class="manager-qa-status done">РЕАЛИЗОВАНО</span></div><p><span class="master-key">partyMappings</span> связывает один PTY-ID с CRM ID, Grain Track ID и 1С ID. Интеграция не ищет компанию по строке названия.</p></div>
-        <div class="manager-qa-impl"><div><b>5. Роли контрагента</b><span class="manager-qa-status done">РЕАЛИЗОВАНО МОДЕЛЬЮ</span></div><p>Buyer, Supplier, Carrier, Terminal, Broker и другие функции — это <b>roles одной Party</b>, а не новые юридические карточки.</p></div>
-        <div class="manager-qa-impl"><div><b>6. Номенклатура</b><span class="manager-qa-status done">РЕАЛИЗОВАНО</span></div><p>Товары имеют <b>Master Product ID</b> и <span class="master-key">productMappings</span> на CRM / Grain Track / 1С. Название товара не является ключом синхронизации.</p></div>
-        <div class="manager-qa-impl"><div><b>7. Field Ownership</b><span class="manager-qa-status done">РЕАЛИЗОВАНО</span></div><p>MasterData владеет identity; CRM — relationship/manager/automation; trading layer — contracts/Shipment/logistics/MTM; 1С/Finance — бухгалтерскими реквизитами, задолженностью и платежами.</p></div>
-        <div class="manager-qa-impl"><div><b>8. API / Event Sync</b><span class="manager-qa-status future">ПОСЛЕ BACKEND</span></div><p>Owner-system публикует изменение по <span class="master-key">partyId/productId</span>. Остальные системы обновляют свои read-models. Повторное создание контрагента не требуется.</p></div>
-        <div class="manager-qa-impl"><div><b>9. Reconciliation</b><span class="manager-qa-status done">ПРОТОТИП РЕАЛИЗОВАН</span></div><p>Master Data Engine уже ищет duplicate legalKey, duplicate external ID, missing Party mappings и missing Product mappings. На backend эта проверка станет регулярной задачей.</p></div>
-        <div class="manager-qa-impl"><div><b>10. Merge дублей</b><span class="manager-qa-status future">ПРАВИЛО ЗАФИКСИРОВАНО</span></div><p>Выбирается canonical PTY-ID; mappings и ссылки Deal/Shipment/Document переносятся на него. Старый master record остаётся alias/redirect для сохранения истории и Audit Trail. Server-side merge ещё не реализован.</p></div>
+      <div class="manager-qa-items">
+        
+        <details class="manager-qa-item">
+          <summary>Как гарантировать, что один реальный контрагент не станет разными карточками в CRM, Grain Track и 1С?</summary>
+          <div class="manager-qa-item-body">
+            <span class="manager-qa-status done">РЕАЛИЗОВАНО</span>
+            <p>Одна юридическая сущность получает неизменяемый <b>Master Party ID</b>, например <span class="master-key">PTY-001</span>. Этот ID становится постоянной точкой идентичности: CRM-карточка, внешние mappings и будущие интеграционные события ссылаются на одну master-сущность.</p><p>Если компания сменила отображаемое название или в 1С поменялся локальный GUID, это не создаёт нового контрагента — меняется атрибут или mapping вокруг того же PTY-ID.</p>
+          </div>
+        </details>
+        <details class="manager-qa-item">
+          <summary>Как исключить дубли из-за разных написаний одного названия?</summary>
+          <div class="manager-qa-item-body">
+            <span class="manager-qa-status done">РЕАЛИЗОВАНО</span>
+            <p>Название не используется как primary key. Для молдавской юридической сущности Grain хранит <span class="master-key">legalKey = MD:&lt;IDNO&gt;</span>, и exact совпадение такого ключа означает, что master record уже существует.</p><p>Fuzzy-поиск по названию может подсказать оператору «возможно, это дубль», но система не объединяет компании автоматически только из-за похожей строки.</p>
+          </div>
+        </details>
+        <details class="manager-qa-item">
+          <summary>Как учитывать ПМР и Молдову, чтобы регистрационные номера не конфликтовали?</summary>
+          <div class="manager-qa-item-body">
+            <span class="manager-qa-status arch">АРХИТЕКТУРА ГОТОВА</span>
+            <p>Legal key состоит из <b>юрисдикции + authoritative registration/fiscal code</b>. Поэтому одинаковый числовой код из разных регистрационных пространств не является одним и тем же ключом.</p><p>Для MD используется молдавский IDNO; для другой юридической юрисдикции выбирается её официальный registration key и собственный prefix.</p>
+          </div>
+        </details>
+        <details class="manager-qa-item">
+          <summary>Как связать разные локальные ID CRM, Grain Track и 1С с одной компанией?</summary>
+          <div class="manager-qa-item-body">
+            <span class="manager-qa-status done">РЕАЛИЗОВАНО</span>
+            <p>Таблица <span class="master-key">partyMappings</span> хранит соответствие одного PTY-ID локальным ID каждой системы. Локальный идентификатор нужен конкретной системе для её внутренней работы, но не определяет общую юридическую сущность.</p><p>Интеграция поэтому передаёт стабильный master context, а не пытается найти компанию строкой названия при каждом обмене.</p>
+          </div>
+        </details>
+        <details class="manager-qa-item">
+          <summary>Почему Buyer, Supplier, Carrier или Terminal не должны становиться отдельными контрагентами?</summary>
+          <div class="manager-qa-item-body">
+            <span class="manager-qa-status done">РЕАЛИЗОВАНО МОДЕЛЬЮ</span>
+            <p>Это <b>roles одной Party</b>. Одна и та же компания может одновременно покупать зерно, поставлять удобрения или оказывать транспортную услугу, не переставая быть одной юридической сущностью.</p><p>Если создавать отдельный record на каждую роль, задолженность, история договоров и аналитика распадутся между искусственными дублями.</p>
+          </div>
+        </details>
+        <details class="manager-qa-item">
+          <summary>Как решается та же проблема с номенклатурой?</summary>
+          <div class="manager-qa-item-body">
+            <span class="manager-qa-status done">РЕАЛИЗОВАНО</span>
+            <p>Для товара используется <b>Master Product ID</b>, например PRD-001, и отдельные productMappings на CRM / Grain Track / 1С. Локальные названия «Пшеница», «Wheat» или другое представление могут ссылаться на один и тот же master product.</p><p>Таким образом формулы, Shipment и финансовые расчёты не зависят от точного текста названия в каждой системе.</p>
+          </div>
+        </details>
+        <details class="manager-qa-item">
+          <summary>Какая система имеет право изменять конкретное поле?</summary>
+          <div class="manager-qa-item-body">
+            <span class="manager-qa-status done">РЕАЛИЗОВАНО</span>
+            <p><b>Field Ownership</b> задаёт authoritative system по группам данных. MasterData владеет identity, CRM — relationship/manager/contacts/automation, trading layer — contracts/Shipment/logistics/quality/MTM, а 1С/Finance — бухгалтерскими и платёжными данными.</p><p>Система, не являющаяся owner, может показывать значение, но не должна молча становиться новым источником истины.</p>
+          </div>
+        </details>
+        <details class="manager-qa-item">
+          <summary>Как изменение authoritative-поля будет попадать в остальные системы?</summary>
+          <div class="manager-qa-item-body">
+            <span class="manager-qa-status future">ПОСЛЕ BACKEND</span>
+            <p>После появления backend owner-system публикует изменение с partyId/productId, а остальные системы обновляют свои read-models через API/events. Они не создают новую сущность только потому, что изменилось название, адрес или другой реквизит.</p><p>Так повторный ручной ввод заменяется синхронизацией по стабильной master identity.</p>
+          </div>
+        </details>
+        <details class="manager-qa-item">
+          <summary>Как обнаруживать missing mappings и рассинхронизацию?</summary>
+          <div class="manager-qa-item-body">
+            <span class="manager-qa-status prototype">ПРОТОТИП РЕАЛИЗОВАН</span>
+            <p>Master Data Engine уже проверяет duplicate legalKey, duplicate external ID, missing Party mappings и missing Product mappings. Эти проверки позволяют увидеть, что PTY-ID существует, но, например, ещё не связан с записью 1С.</p><p>В production это станет регулярной reconciliation-задачей с серверным журналом исключений и ответственными за исправление.</p>
+          </div>
+        </details>
+        <details class="manager-qa-item">
+          <summary>Как объединять уже созданные дубли без потери истории?</summary>
+          <div class="manager-qa-item-body">
+            <span class="manager-qa-status future">ПРАВИЛО ЗАФИКСИРОВАНО</span>
+            <p>Server-side merge ещё не реализован. Правило такое: выбирается canonical PTY-ID, на него переводятся external mappings и ссылки Deal/Shipment/Document, а старый master record не удаляется физически, а становится alias/redirect.</p><p>За счёт этого старые ссылки и Audit Trail остаются объяснимыми, а новая работа идёт уже через одну canonical master-сущность.</p>
+          </div>
+        </details>
       </div>
-
-      <div class="manager-qa-summary"><b>Короткий ответ руководителю.</b><br>Одна реальная компания и один товар существуют как одна master-сущность. CRM, Grain Track и 1С могут иметь собственные локальные ID, но они маппятся на единый Master Party ID / Master Product ID. Для Молдовы MD:IDNO используется для exact duplicate check. Field Ownership определяет источник истины по полям; изменения между системами должны распространяться через API/events, а reconciliation регулярно выявляет пропавшие mappings и конфликты. Уже созданные дубли объединяются через canonical master ID с сохранением истории и ссылок.</div>
+      <div class="manager-qa-summary"><b>Короткий ответ руководителю.</b><br>Одна реальная компания и один товар существуют как одна master-сущность. CRM, Grain Track и 1С могут иметь свои локальные ID, но они маппятся на единый Master Party ID / Master Product ID. Legal key предотвращает дубли, Field Ownership задаёт источник истины по полям, API/events распространяют изменения, а reconciliation выявляет конфликты и пропавшие mappings.</div>
     </div>
   </article>
 </div>
-<p class="note">Раздел используется как внутренняя база вопросов руководителя и архитектурных ответов. Он не изменяет расчёты CRM.</p>
+<p class="note">Каждый под-вопрос раскрывается отдельно. Раздел является внутренней архитектурной базой знаний и не изменяет бизнес-расчёты CRM.</p>
 </section>
 <section id="clients" class="hidden">
 <div class="client-summary" id="client-stats"></div>
