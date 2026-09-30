@@ -31,8 +31,51 @@ nav{flex-wrap:wrap}button,input,select,textarea{touch-action:manipulation}
 #client-detail .dialog-body,#contact-result .dialog-body{padding:22px}
 #client-detail .summary{font-size:12px}.queue-card .warn{white-space:normal}
 @media(max-width:650px){.client-summary{grid-template-columns:1fr 1fr 1fr;gap:6px}.client-summary article{padding:10px;font-size:11px}.client-summary b{font-size:23px}.queue-toggle{top:auto;bottom:20px;padding:10px 8px}.queue-toggle span{display:none}nav button{font-size:12px;padding:9px 7px}#clients .client-toolbar>*{width:100%}.queue-body{padding:16px}.actions{flex-wrap:wrap}}
+
+/* Forest green, wheat gold and warm earth */
+:root{--ink:#263b30;--muted:#756f60;--green:#215b40;--line:#e3dac7;--paper:#f8f4eb;--gold:#c69b48;--brown:#795936}
+body{background:var(--paper)}
+aside{background:linear-gradient(165deg,#173d2d 0%,#1e4935 65%,#293f2c 100%);border-right:1px solid #b68b4266}
+.brand{display:flex;align-items:center;gap:10px}
+.brand .brand-name{color:#fff9eb}.brand .brand-name>span{color:#d9b66c}
+.brand-wheat{width:31px;height:39px;color:#dfbd75;flex-shrink:0;stroke-width:1.25}
+aside small,aside footer{color:#c2c6aa}
+aside footer{border-top:1px solid #bd9e6255;padding-top:20px}
+nav button{display:flex;align-items:center;gap:12px;color:#e2e4d4;transition:background .15s,color .15s}
+.nav-icon{width:21px;height:21px;flex:0 0 21px;color:#d6b16b}
+nav button:hover{background:#ffffff0b}
+nav button.active{background:#e2c17c;color:#24392c;box-shadow:inset 3px 0 #fff0c9}
+nav button.active .nav-icon{color:#624a29}
+nav button span{line-height:1.45}
+.top{border-bottom-color:#dbc79b}.demo,.demo-strip{background:#efe1bd;color:#70532c}
+h1{color:#2b4232}.heading h1:after{content:"";display:block;width:48px;height:3px;background:var(--gold);margin-top:13px;border-radius:4px}
+.panel,.metric,.client-summary article{background:#fffdf8;border-color:var(--line)}
+.panel-head{background:#fffaf0;border-bottom-color:#eadfc9}
+.metric{border-top:3px solid #c6a669}
+.metric.hero{background:linear-gradient(125deg,#20573d,#163f2e);border:1px solid #af8c49;border-top:3px solid #dcb968}
+.metric.hero .value{color:#efcf88}.hero p{color:#e4dbbd}
+.metric:nth-child(3){background:#f4e7c9;border-color:#dbc18a}.metric:nth-child(3) .value{color:#79572c}
+.metric .label,.metric p{line-height:1.5}
+th{background:#f4ecdc;color:#756044}td{border-color:#eee5d5}
+.risk{background:#fffdf8;border-bottom-color:#eee5d5}.risk:hover,.deal:hover{background:#f7efdF}
+.badge{background:#e8ede0;color:#405d3a}.warn{background:#f3ddb0;color:#795023}
+.column{background:#efe7d6;border:1px solid #e0d2b8}.column h3{color:#654e30}
+.deal{background:#fffdf9;border-color:#e0d5c0}
+.track{background:#eee6d7}.fact{background:#244e3c}.contract{background:#94ad86}.forecast{background:#c99e4d}
+.legend{color:#706650}.btn{background:#fffcf6;border-color:#d9ccb4}.btn:hover{border-color:#b78a40;background:#f7efdE}
+.btn.primary{background:#215b40;color:#fff9e8;border-color:#215b40}.btn.primary:hover{background:#174a33}
+.help{border-color:#bfa676;color:#7c5d2e}.hero .help{color:#efcf88;border-color:#b79b61}
+input,select,textarea{border-color:#d9cdb7;background:#fffefb}
+.summary,.rule-settings,.message-text{background:#f4ecdc}.summary{border-left:3px solid #c69b48}
+#work-queue{background:#f8f4eb}#work-queue .panel-head{background:#f3e7ca}
+.queue-card{background:#fffdf8;border-color:#e2d6bf;border-left:3px solid #c69b48}
+.queue-toggle{background:#d9b46a;color:#24392c;border:1px solid #bf954a;border-right:0}
+.queue-toggle b{background:#284f37;color:#fff2d0}
+.client-summary article:nth-child(2){background:#f2e3bf}.client-summary article:nth-child(2) b{color:#79572c}
+dialog{background:#fffdf8}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #a87928;outline-offset:3px}
+@media(max-width:650px){nav{display:grid;grid-template-columns:1fr 1fr;gap:6px}nav button{gap:9px;padding:10px}.nav-icon{width:19px;height:19px;flex-basis:19px}.brand-wheat{width:25px;height:32px}}
 </style></head><body>
-<aside><div class="brand">grain<span>.</span></div><small>ТОРГОВЫЕ ОПЕРАЦИИ</small><nav aria-label="Основная навигация"><button class="active" data-view="overview">◫ &nbsp; Обзор</button><button data-view="pipeline">▥ &nbsp; Воронка продаж</button><button data-view="shipments">▤ &nbsp; План отгрузок</button><button data-view="clients">♧ &nbsp; База клиентов</button></nav><footer>МОЛДОВА · B2B<br>Зерно и минеральные удобрения<br><br>Прототип / 01<br>Все компании и сделки вымышлены</footer></aside>
+<aside><div class="brand"><svg class="brand-wheat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 22V5M12 5c-3-2-2-4 0-4 2 0 3 2 0 4ZM12 10C7 10 5 7 5 4c4 0 7 2 7 6ZM12 15c-5 0-7-3-7-6 4 0 7 2 7 6ZM12 20c-5 0-7-3-7-6 4 0 7 2 7 6ZM12 10c5 0 7-3 7-6-4 0-7 2-7 6ZM12 15c5 0 7-3 7-6-4 0-7 2-7 6ZM12 20c5 0 7-3 7-6-4 0-7 2-7 6Z"/></svg><span class="brand-name">grain<span>.</span></span></div><small>ТОРГОВЫЕ ОПЕРАЦИИ</small><nav aria-label="Основная навигация"><button class="active" data-view="overview"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg><span>Обзор</span></button><button data-view="pipeline"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 4h18l-7 8v6l-4 2v-8z"/></svg><span>Воронка продаж</span></button><button data-view="shipments"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 6h11v12H3zM14 10h4l3 4v4h-7"/><path d="M14 14h7"/><circle cx="7" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg><span>План отгрузок</span></button><button data-view="clients"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="9" cy="7" r="3"/><path d="M3 21v-3a6 6 0 0 1 12 0v3M16 4a3 3 0 0 1 0 6M18 14a5 5 0 0 1 3 4v3"/></svg><span>База клиентов</span></button></nav><footer>МОЛДОВА · B2B<br>Зерно и минеральные удобрения<br><br>Прототип / 01<br>Все компании и сделки вымышлены</footer></aside>
 <main><div class="top"><span>Рабочее пространство / Продажи по Молдове</span><span class="demo">Демонстрационные данные</span></div><div class="heading"><div><h1 id="page-title">Продажи в деталях.</h1><p id="subtitle">От первого запроса до последней отгруженной тонны.</p></div><div class="actions"><button class="btn" id="reset">Сбросить пример</button><button class="btn primary" id="export">↓ CSV</button></div></div>
 <div class="filters"><label>Период отгрузки<select id="month"><option value="2026-10">Октябрь 2026</option><option value="2026-11">Ноябрь 2026</option><option value="2026-12">Декабрь 2026</option><option value="all">IV квартал 2026</option></select></label><label>Товар<select id="product"><option value="all">Все товары</option><option>Пшеница</option><option>Кукуруза</option><option>Удобрения NPK</option></select></label><label>Район<select id="region"><option value="all">Вся Молдова</option><option>Бельцы</option><option>Оргеев</option><option>Кагул</option><option>Унгены</option></select></label><span class="scope">Дата примера: 30 сентября 2026 <button class="help" data-help="date" aria-label="О дате примера">?</button></span></div>
 <section id="overview"><div class="metrics" id="metrics"></div><div class="grid"><section class="panel"><div class="panel-head"><h2>Горизонт отгрузок <button class="help" data-help="chart" aria-label="О горизонте отгрузок">?</button></h2><small>IV квартал · тонны</small></div><div class="chart" id="chart"></div></section><section class="panel"><div class="panel-head"><h2>Требуют внимания <button class="help" data-help="risks" aria-label="О рисках">?</button></h2><small id="risk-count"></small></div><div id="risks"></div></section></div><section class="panel lower"><div class="panel-head"><h2>Сделки выбранного периода</h2><small>Нажмите на клиента, чтобы открыть сделку</small></div><div class="table-wrap" id="deals-table"></div></section></section>
