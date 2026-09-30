@@ -186,6 +186,24 @@ dialog{background:#fffdf8}button:focus-visible,a:focus-visible,input:focus-visib
 .master-readonly{background:#f4ecdc;border-left:3px solid var(--gold);padding:13px 15px;border-radius:7px;margin:14px 0;font-size:12px;line-height:1.7}
 @media(max-width:900px){.master-summary{grid-template-columns:repeat(2,1fr)}}@media(max-width:600px){.master-summary{grid-template-columns:1fr}}
 
+
+/* v0.11.1 — structured manager Q&A */
+.manager-qa-quote{background:#f3dfaa;border:1px solid #d5b666;border-left:5px solid #b7862e;border-radius:9px;padding:18px 20px;color:#4b3a20;line-height:1.75;margin-bottom:20px}
+.manager-qa-quote small{display:block;color:#765b2d;font-weight:700;margin-bottom:8px;letter-spacing:.03em}
+.manager-qa-breakdown{margin:0;padding:0;display:grid;gap:9px;counter-reset:qa}
+.manager-qa-breakdown li{list-style:none;counter-increment:qa;position:relative;padding:12px 14px 12px 46px;border:1px solid #e4d9c4;background:#fffefb;border-radius:8px;line-height:1.55;color:#4c5b50}
+.manager-qa-breakdown li:before{content:counter(qa);position:absolute;left:14px;top:11px;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;background:#e8d7aa;color:#58421f;font-weight:700;font-size:11px}
+.manager-qa-subtitle{font-size:14px;margin:22px 0 11px;color:#334b3c}
+.manager-qa-implementation{display:grid;gap:10px}
+.manager-qa-impl{display:grid;grid-template-columns:minmax(190px,.9fr) minmax(260px,2fr);gap:14px;border:1px solid #e2d6bf;border-radius:8px;padding:14px 16px;background:#fffdf8}
+.manager-qa-impl b{display:block;margin-bottom:5px}
+.manager-qa-impl p{font-size:12px}
+.manager-qa-status{display:inline-block;margin-top:7px;padding:4px 7px;border-radius:4px;font-size:10px;font-weight:700}
+.manager-qa-status.done{background:#e5efe2;color:#315c3b}
+.manager-qa-status.future{background:#f4e4bc;color:#78591e}
+.manager-qa-summary{margin-top:18px;padding:17px 18px;background:#eef3e9;border-left:4px solid var(--green);border-radius:8px;line-height:1.7;color:#354c3e}
+@media(max-width:760px){.manager-qa-impl{grid-template-columns:1fr}}
+
 </style></head><body>
 <aside><div class="brand"><svg class="brand-wheat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 22V5M12 5c-3-2-2-4 0-4 2 0 3 2 0 4ZM12 10C7 10 5 7 5 4c4 0 7 2 7 6ZM12 15c-5 0-7-3-7-6 4 0 7 2 7 6ZM12 20c-5 0-7-3-7-6 4 0 7 2 7 6ZM12 10c5 0 7-3 7-6-4 0-7 2-7 6ZM12 15c5 0 7-3 7-6-4 0-7 2-7 6ZM12 20c5 0 7-3 7-6-4 0-7 2-7 6Z"/></svg><span class="brand-name">grain<span>.</span></span></div><small>ТОРГОВЫЕ ОПЕРАЦИИ</small><nav aria-label="Основная навигация"><button class="active" data-view="overview"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg><span>Обзор</span></button><button data-view="pipeline"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 4h18l-7 8v6l-4 2v-8z"/></svg><span>Воронка продаж</span></button><button data-view="shipments"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 6h11v12H3zM14 10h4l3 4v4h-7"/><path d="M14 14h7"/><circle cx="7" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg><span>План отгрузок</span></button><button data-view="clients"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="9" cy="7" r="3"/><path d="M3 21v-3a6 6 0 0 1 12 0v3M16 4a3 3 0 0 1 0 6M18 14a5 5 0 0 1 3 4v3"/></svg><span>База клиентов</span></button><button data-view="masterdata"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v7c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12v7c0 1.7 3.6 3 8 3s8-1.3 8-3v-7"/></svg><span>Master Data</span></button><button data-view="finance"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/><path d="M3 7l6-4 6 6 6-5"/></svg><span>Финансы</span></button><button data-view="documents"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H5v20h14V7zM14 2v6h5M8 12h8M8 16h5"/></svg><span>Документооборот</span></button><button data-view="managerqa"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v7M12 17h.01"/></svg><span>Ответы руководителю</span></button></nav><footer>МОЛДОВА · B2B<br>Зерно и минеральные удобрения<br><br>Прототип / 01<br>Все компании и сделки вымышлены</footer></aside>
 <main><div class="top"><span>Рабочее пространство / Продажи по Молдове</span><span class="demo">Демонстрационные данные</span></div><button class="task-banner" id="task-banner" aria-haspopup="dialog" aria-controls="task-drawer"></button><div class="heading"><div><h1 id="page-title">Продажи в деталях.</h1><p id="subtitle">От первого запроса до последней отгруженной тонны.</p></div></div>
@@ -267,18 +285,41 @@ dialog{background:#fffdf8}button:focus-visible,a:focus-visible,input:focus-visib
       <span class="manager-qa-mark" aria-hidden="true">!</span>
       <div>
         <small>ВОПРОС РУКОВОДИТЕЛЯ · MASTER DATA</small>
-        <h2>Как исключить дубли контрагентов и номенклатуры между CRM, GrainTrack и 1С?</h2>
-        <p>Одна master-сущность, внешние mappings и чёткий владелец каждого поля.</p>
+        <h2>Общие контрагенты и номенклатура между CRM, Grain Track и финансовым учётом</h2>
+        <p>Декомпозиция рисков и то, как каждый из них закрывается архитектурой Grain.</p>
       </div>
     </div>
     <div class="manager-qa-body">
-      <div class="manager-qa-answer">Я бы не синхронизировал системы по названию. Для каждой юридической сущности создаётся неизменяемый Master Party ID, а MD:IDNO используется как юридический ключ дедупликации. CRM, GrainTrack и 1С хранят свои локальные ID только как mappings этой master-сущности. Field Ownership определяет, какая система является источником истины для конкретного класса полей.</div>
-      <div class="manager-qa-principles">
-        <article><b>PTY-ID</b><p>Неизменяемая внутренняя идентичность контрагента.</p></article>
-        <article><b>MD:IDNO</b><p>Юридический ключ для exact duplicate check в Молдове.</p></article>
-        <article><b>Mappings</b><p>CL-xxx / GrainTrack ID / 1C ID привязаны к одному PTY-ID.</p></article>
-        <article><b>Field Ownership</b><p>CRM, trading и finance не могут молча переписывать чужие authoritative fields.</p></article>
+      <div class="manager-qa-quote"><small>ДОСЛОВНЫЙ ВОПРОС РУКОВОДИТЕЛЯ</small>«Вы проектировали структуры для 5 направлений бизнеса. Как при этом была организована работа с мастер-данными? Если наша региональная торговля (ПМР и Молдова), закупки удобрений и терминалы используют общих контрагентов и номенклатуру, как вы технически исключите дублирование и рассинхронизацию справочников между CRM, Grain Track и финансовым учетом?»</div>
+
+      <h3 class="manager-qa-subtitle">Какие проблемы и вопросы из этого следуют</h3>
+      <ol class="manager-qa-breakdown">
+        <li>Как гарантировать, что один реальный контрагент не станет разными карточками в CRM, Grain Track и 1С?</li>
+        <li>Как исключить дубли из-за разных написаний одного названия и разных локальных ID?</li>
+        <li>Как учитывать ПМР и Молдову, чтобы одинаковые регистрационные номера из разных реестров не конфликтовали?</li>
+        <li>Как не создавать разные юридические карточки, если одна компания одновременно Buyer, Supplier, Carrier или Terminal?</li>
+        <li>Как решить ту же проблему для номенклатуры: Пшеница / Wheat / «Пшеница продовольственная», NPK и другие варианты названий?</li>
+        <li>Какая система является источником истины для юридических реквизитов, CRM-полей, торгового исполнения и финансов?</li>
+        <li>Как изменение authoritative-поля в одной системе должно попадать в остальные системы без ручного повторного ввода?</li>
+        <li>Как обнаруживать отсутствующие mappings, конфликты ID и рассинхронизацию справочников?</li>
+        <li>Как объединить уже созданные дубли, не потеряв договоры, Shipment, документы и Audit Trail?</li>
+      </ol>
+
+      <h3 class="manager-qa-subtitle">Как это реализовано в Grain</h3>
+      <div class="manager-qa-implementation">
+        <div class="manager-qa-impl"><div><b>1. Единая идентичность</b><span class="manager-qa-status done">РЕАЛИЗОВАНО</span></div><p>Одна юридическая сущность получает неизменяемый <b>Master Party ID</b> вида <span class="master-key">PTY-001</span>. Все бизнес-ссылки ведут к этой master-сущности.</p></div>
+        <div class="manager-qa-impl"><div><b>2. Duplicate Prevention</b><span class="manager-qa-status done">РЕАЛИЗОВАНО</span></div><p>Exact duplicate определяется по <b>legalKey</b>, а не по названию. Для Молдовы: <span class="master-key">MD:&lt;IDNO&gt;</span>. Fuzzy-match названия используется только как предупреждение.</p></div>
+        <div class="manager-qa-impl"><div><b>3. ПМР / Молдова</b><span class="manager-qa-status done">АРХИТЕКТУРА ГОТОВА</span></div><p>Legal key включает <b>jurisdiction + registration/fiscal code</b>. Поэтому номера из разных реестров не сталкиваются. Конкретный authoritative code берётся из реестра юридической регистрации контрагента.</p></div>
+        <div class="manager-qa-impl"><div><b>4. Локальные ID систем</b><span class="manager-qa-status done">РЕАЛИЗОВАНО</span></div><p><span class="master-key">partyMappings</span> связывает один PTY-ID с CRM ID, Grain Track ID и 1С ID. Интеграция не ищет компанию по строке названия.</p></div>
+        <div class="manager-qa-impl"><div><b>5. Роли контрагента</b><span class="manager-qa-status done">РЕАЛИЗОВАНО МОДЕЛЬЮ</span></div><p>Buyer, Supplier, Carrier, Terminal, Broker и другие функции — это <b>roles одной Party</b>, а не новые юридические карточки.</p></div>
+        <div class="manager-qa-impl"><div><b>6. Номенклатура</b><span class="manager-qa-status done">РЕАЛИЗОВАНО</span></div><p>Товары имеют <b>Master Product ID</b> и <span class="master-key">productMappings</span> на CRM / Grain Track / 1С. Название товара не является ключом синхронизации.</p></div>
+        <div class="manager-qa-impl"><div><b>7. Field Ownership</b><span class="manager-qa-status done">РЕАЛИЗОВАНО</span></div><p>MasterData владеет identity; CRM — relationship/manager/automation; trading layer — contracts/Shipment/logistics/MTM; 1С/Finance — бухгалтерскими реквизитами, задолженностью и платежами.</p></div>
+        <div class="manager-qa-impl"><div><b>8. API / Event Sync</b><span class="manager-qa-status future">ПОСЛЕ BACKEND</span></div><p>Owner-system публикует изменение по <span class="master-key">partyId/productId</span>. Остальные системы обновляют свои read-models. Повторное создание контрагента не требуется.</p></div>
+        <div class="manager-qa-impl"><div><b>9. Reconciliation</b><span class="manager-qa-status done">ПРОТОТИП РЕАЛИЗОВАН</span></div><p>Master Data Engine уже ищет duplicate legalKey, duplicate external ID, missing Party mappings и missing Product mappings. На backend эта проверка станет регулярной задачей.</p></div>
+        <div class="manager-qa-impl"><div><b>10. Merge дублей</b><span class="manager-qa-status future">ПРАВИЛО ЗАФИКСИРОВАНО</span></div><p>Выбирается canonical PTY-ID; mappings и ссылки Deal/Shipment/Document переносятся на него. Старый master record остаётся alias/redirect для сохранения истории и Audit Trail. Server-side merge ещё не реализован.</p></div>
       </div>
+
+      <div class="manager-qa-summary"><b>Короткий ответ руководителю.</b><br>Одна реальная компания и один товар существуют как одна master-сущность. CRM, Grain Track и 1С могут иметь собственные локальные ID, но они маппятся на единый Master Party ID / Master Product ID. Для Молдовы MD:IDNO используется для exact duplicate check. Field Ownership определяет источник истины по полям; изменения между системами должны распространяться через API/events, а reconciliation регулярно выявляет пропавшие mappings и конфликты. Уже созданные дубли объединяются через canonical master ID с сохранением истории и ссылок.</div>
     </div>
   </article>
 </div>
