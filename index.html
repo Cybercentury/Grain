@@ -221,8 +221,28 @@ dialog{background:#fffdf8}button:focus-visible,a:focus-visible,input:focus-visib
 .manager-qa-status.arch{background:#ebe3f1;color:#624777}
 .manager-qa-category{display:inline-block;margin-bottom:8px;color:#7b705d;font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase}
 
+
+/* v0.12 — Analytical Dashboard & Cost Centers */
+.analytics-toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+.analytics-toolbar label{min-width:145px}
+.analytics-note{margin:-6px 0 18px;color:var(--muted);font-size:11px;line-height:1.55}
+.analytics-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:18px;margin-bottom:18px}
+.analytics-kpi-note{font-size:10px;color:var(--muted)}
+.analytics-cost-list{padding:14px 18px 18px}
+.analytics-cost-row{display:grid;grid-template-columns:minmax(150px,1.2fr) 2fr 120px;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid #eee5d5}
+.analytics-cost-row:last-child{border-bottom:0}
+.analytics-bar{height:9px;background:#eee5d5;border-radius:999px;overflow:hidden}
+.analytics-bar>span{display:block;height:100%;background:var(--gold);border-radius:999px}
+.analytics-quality{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:18px}
+.analytics-quality article{border:1px solid #e2d6bf;background:#fffdf8;border-radius:8px;padding:13px}
+.analytics-quality b{display:block;font-size:20px;margin-top:5px}
+.analytics-profit-negative{color:#91392d}
+.analytics-profit-positive{color:#315c3b}
+@media(max-width:1000px){.analytics-grid{grid-template-columns:1fr}.analytics-quality{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:620px){.analytics-quality{grid-template-columns:1fr}.analytics-cost-row{grid-template-columns:1fr}.analytics-toolbar label{min-width:100%}}
+
 </style></head><body>
-<aside><div class="brand"><svg class="brand-wheat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 22V5M12 5c-3-2-2-4 0-4 2 0 3 2 0 4ZM12 10C7 10 5 7 5 4c4 0 7 2 7 6ZM12 15c-5 0-7-3-7-6 4 0 7 2 7 6ZM12 20c-5 0-7-3-7-6 4 0 7 2 7 6ZM12 10c5 0 7-3 7-6-4 0-7 2-7 6ZM12 15c5 0 7-3 7-6-4 0-7 2-7 6ZM12 20c5 0 7-3 7-6-4 0-7 2-7 6Z"/></svg><span class="brand-name">grain<span>.</span></span></div><small>ТОРГОВЫЕ ОПЕРАЦИИ</small><nav aria-label="Основная навигация"><button class="active" data-view="overview"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg><span>Обзор</span></button><button data-view="pipeline"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 4h18l-7 8v6l-4 2v-8z"/></svg><span>Воронка продаж</span></button><button data-view="shipments"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 6h11v12H3zM14 10h4l3 4v4h-7"/><path d="M14 14h7"/><circle cx="7" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg><span>План отгрузок</span></button><button data-view="clients"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="9" cy="7" r="3"/><path d="M3 21v-3a6 6 0 0 1 12 0v3M16 4a3 3 0 0 1 0 6M18 14a5 5 0 0 1 3 4v3"/></svg><span>База клиентов</span></button><button data-view="finance"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/><path d="M3 7l6-4 6 6 6-5"/></svg><span>Финансы</span></button><button data-view="documents"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H5v20h14V7zM14 2v6h5M8 12h8M8 16h5"/></svg><span>Документооборот</span></button><button data-view="masterdata"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v7c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12v7c0 1.7 3.6 3 8 3s8-1.3 8-3v-7"/></svg><span>Master Data</span></button><button data-view="managerqa"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v7M12 17h.01"/></svg><span>Ответы руководителю</span></button></nav><footer>МОЛДОВА · B2B<br>Зерно и минеральные удобрения<br><br>Прототип / 01<br>Все компании и сделки вымышлены</footer></aside>
+<aside><div class="brand"><svg class="brand-wheat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 22V5M12 5c-3-2-2-4 0-4 2 0 3 2 0 4ZM12 10C7 10 5 7 5 4c4 0 7 2 7 6ZM12 15c-5 0-7-3-7-6 4 0 7 2 7 6ZM12 20c-5 0-7-3-7-6 4 0 7 2 7 6ZM12 10c5 0 7-3 7-6-4 0-7 2-7 6ZM12 15c5 0 7-3 7-6-4 0-7 2-7 6ZM12 20c5 0 7-3 7-6-4 0-7 2-7 6Z"/></svg><span class="brand-name">grain<span>.</span></span></div><small>ТОРГОВЫЕ ОПЕРАЦИИ</small><nav aria-label="Основная навигация"><button class="active" data-view="overview"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg><span>Обзор</span></button><button data-view="pipeline"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 4h18l-7 8v6l-4 2v-8z"/></svg><span>Воронка продаж</span></button><button data-view="shipments"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 6h11v12H3zM14 10h4l3 4v4h-7"/><path d="M14 14h7"/><circle cx="7" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg><span>План отгрузок</span></button><button data-view="clients"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="9" cy="7" r="3"/><path d="M3 21v-3a6 6 0 0 1 12 0v3M16 4a3 3 0 0 1 0 6M18 14a5 5 0 0 1 3 4v3"/></svg><span>База клиентов</span></button><button data-view="finance"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/><path d="M3 7l6-4 6 6 6-5"/></svg><span>Финансы</span></button><button data-view="analytics"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19V9M10 19V5M16 19v-7M22 19H2"/><path d="M3 6l6-3 6 5 6-4"/></svg><span>Аналитика</span></button><button data-view="documents"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H5v20h14V7zM14 2v6h5M8 12h8M8 16h5"/></svg><span>Документооборот</span></button><button data-view="masterdata"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v7c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12v7c0 1.7 3.6 3 8 3s8-1.3 8-3v-7"/></svg><span>Master Data</span></button><button data-view="managerqa"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v7M12 17h.01"/></svg><span>Ответы руководителю</span></button></nav><footer>МОЛДОВА · B2B<br>Зерно и минеральные удобрения<br><br>Прототип / 01<br>Все компании и сделки вымышлены</footer></aside>
 <main><div class="top"><span>Рабочее пространство / Продажи по Молдове</span><span class="demo">Демонстрационные данные</span></div><button class="task-banner" id="task-banner" aria-haspopup="dialog" aria-controls="task-drawer"></button><div class="heading"><div><h1 id="page-title">Продажи в деталях.</h1><p id="subtitle">От первого запроса до последней отгруженной тонны.</p></div></div>
 <div class="filters"><label>Период отгрузки<select id="month"><option value="2026-10">Октябрь 2026</option><option value="2026-11">Ноябрь 2026</option><option value="2026-12">Декабрь 2026</option><option value="all">IV квартал 2026</option></select></label><label>Товар<select id="product"><option value="all">Все товары</option><option>Пшеница</option><option>Кукуруза</option><option>Удобрения NPK</option></select></label><label>Район<select id="region"><option value="all">Вся Молдова</option><option>Бельцы</option><option>Оргеев</option><option>Кагул</option><option>Унгены</option></select></label><span class="scope">Дата примера: 30 сентября 2026 <button class="help" data-help="date" aria-label="О дате примера">?</button></span></div>
 <section id="overview"><div class="metrics" id="metrics"></div><div class="grid"><section class="panel"><div class="panel-head"><h2>Горизонт отгрузок <button class="help" data-help="chart" aria-label="О горизонте отгрузок">?</button></h2><small>IV квартал · тонны</small></div><div class="chart" id="chart"></div></section><section class="panel"><div class="panel-head"><h2>Требуют внимания <button class="help" data-help="risks" aria-label="О рисках">?</button></h2><small id="risk-count"></small></div><div id="risks"></div></section></div><section class="panel lower integrity-overview"><div class="panel-head"><h2>Контроль целостности и рисков <button class="help" data-help="integrity" aria-label="О контроле целостности">?</button></h2><small>Автоматические сверки Shipment · вес · качество · финансы · MTM</small></div><div class="integrity-summary" id="integrity-summary"></div><div id="integrity-exceptions"></div></section><section class="panel lower"><div class="panel-head"><h2>Сделки выбранного периода</h2><small>Нажмите на клиента, чтобы открыть сделку</small></div><div class="table-wrap" id="deals-table"></div></section></section>
@@ -246,6 +266,32 @@ dialog{background:#fffdf8}button:focus-visible,a:focus-visible,input:focus-visib
   <section class="panel"><div class="panel-head"><h2>Партии и финансовый статус</h2><small>Открыть финансовую карточку партии</small></div><div class="table-wrap" id="fin-table"></div></section>
   <section class="panel lower"><div class="panel-head"><h2>Журнал действий</h2><small>Журнал аудита (<span class="term" tabindex="0" data-term="audit">Audit Trail</span>) · текущая сессия</small></div><div class="fin-log" id="audit-table"></div></section>
   <p class="note">Демонстрационный финансовый контур. Изменения и журнал текущей сессии не сохраняются после перезагрузки без backend.</p>
+</section>
+
+<section id="analytics" class="hidden">
+  <div class="analytics-toolbar">
+    <label>Период<select id="an-period"><option value="all">Все периоды</option><option value="2026-10">Октябрь 2026</option><option value="2026-11">Ноябрь 2026</option><option value="2026-12">Декабрь 2026</option></select></label>
+    <label>Business Unit<select id="an-unit"><option value="all">Все units</option></select></label>
+    <label>Business Line<select id="an-line"><option value="all">Все направления</option><option value="Grain">Grain</option><option value="Fertilizers">Fertilizers</option></select></label>
+    <label>Район<select id="an-region"><option value="all">Все районы</option></select></label>
+    <label>Товар<select id="an-product"><option value="all">Все товары</option></select></label>
+    <label>Контрагент<select id="an-party"><option value="all">Все контрагенты</option></select></label>
+    <label>Менеджер<select id="an-manager"><option value="all">Все менеджеры</option></select></label>
+    <label>Сделка<select id="an-deal"><option value="all">Все сделки</option></select></label>
+    <label>Cost Center<select id="an-costcenter"><option value="all">Все центры затрат</option></select></label>
+  </div>
+  <p class="analytics-note">P&L использует дату Shipment; Cash Flow — дату денежного движения. Shared costs распределяются по заранее заданному driver и не переписывают первичный Shipment P&L.</p>
+  <div class="fin-summary" id="an-summary"></div>
+  <div class="analytics-grid">
+    <section class="panel"><div class="panel-head"><h2>P&L Structure</h2><small>Current analytical view · Contribution → shared costs → operating result</small></div><div class="table-wrap" id="an-pnl"></div></section>
+    <section class="panel"><div class="panel-head"><h2>Cash Flow Timeline</h2><small>Те же dimensions · отдельная временная ось денег</small></div><div class="table-wrap" id="an-cash"></div></section>
+  </div>
+  <div class="analytics-grid">
+    <section class="panel"><div class="panel-head"><h2>Cost Centers</h2><small>Direct costs + allocated shared costs</small></div><div class="analytics-cost-list" id="an-cost-centers"></div></section>
+    <section class="panel"><div class="panel-head"><h2>Качество аналитической модели</h2><small>Проверки полноты фактов и mappings</small></div><div class="analytics-quality" id="an-quality"></div></section>
+  </div>
+  <section class="panel"><div class="panel-head"><h2>Маржинальность Deal / Shipment</h2><small>Drill-down к исходной финансовой карточке партии</small></div><div class="table-wrap" id="an-profitability"></div></section>
+  <p class="note">Analytical Dashboard — производное представление. Источниками истины остаются Deal, Shipment, Finance, Cash Movements, Market Marks и Master Data.</p>
 </section>
 
 <section id="documents" class="hidden">
@@ -709,6 +755,31 @@ dialog{background:#fffdf8}button:focus-visible,a:focus-visible,input:focus-visib
     <div class="manager-qa-head">
       <span class="manager-qa-mark" aria-hidden="true">!</span>
       <div>
+        <small>ВОПРОС РУКОВОДИТЕЛЯ · BI / АНАЛИТИКА</small>
+        <h2>От CRM-виджетов к P&L, Cash Flow и Cost Centers</h2>
+        <p>Не отдельные красивые отчёты, а единая аналитическая модель поверх первичных операций.</p>
+      </div>
+    </div>
+    <div class="manager-qa-body">
+      <div class="manager-qa-quote"><small>ДОСЛОВНЫЙ ВОПРОС</small>«Создание дашбордов для мониторинга операционной команды — это базовый уровень. Мне для управления коммерческим блоком нужна сложная аналитика: структуры PnL, модели кэш-флоу, классификация центров затрат, маржинальность по сделкам. Был ли у вас опыт проектирования моделей данных для полноценных BI-систем, или ваш инструментарий ограничивается внутренними отчетами Битрикс24?»</div>
+      <h3 class="manager-qa-subtitle">Какие управленческие проблемы из этого следуют</h3>
+      <div class="manager-qa-items">
+        <details class="manager-qa-item"><summary>Как перейти от CRM-виджетов к единой финансовой модели?</summary><div class="manager-qa-item-body"><span class="manager-qa-status done">РЕАЛИЗОВАНО v0.12</span><p>В Grain появился отдельный Analytical Dashboard, который не хранит собственные первичные цифры, а читает Deal, Shipment, Finance, Cash Movements, MTM и Master Data. Это означает, что новые аналитические разрезы строятся поверх общей модели, а не через новый независимый отчёт с копией данных.</p><p>Общими dimensions стали Date, Business Unit, Business Line, Region, Product, Counterparty, Manager, Deal, Shipment и Cost Center.</p></div></details>
+        <details class="manager-qa-item"><summary>Как строится P&L по коммерческому блоку?</summary><div class="manager-qa-item-body"><span class="manager-qa-status done">РЕАЛИЗОВАНО</span><p>Shipment остаётся минимальной единицей экономики: Revenue, COGS и Direct Costs формируют Contribution. Новый аналитический слой добавляет Allocated Shared Costs, после чего рассчитывает Analytical Operating Result.</p><p>MTM остаётся отдельным нереализованным слоем, поэтому Economic Result не смешивает его с прямым Contribution без явного отображения.</p></div></details>
+        <details class="manager-qa-item"><summary>Как P&L и Cash Flow используют одинаковые аналитические измерения, но разные даты?</summary><div class="manager-qa-item-body"><span class="manager-qa-status done">РЕАЛИЗОВАНО</span><p>P&L фильтруется по Shipment и её экономическому контексту, а Cash Flow — по дате конкретного денежного движения. При этом оба слоя используют одну связь с Business Line, Product, Party, Deal, Shipment и Cost Center.</p><p>Поэтому прибыльная октябрьская Shipment может иметь ноябрьский cash-in и одновременно создавать октябрьский кассовый разрыв.</p></div></details>
+        <details class="manager-qa-item"><summary>Как классифицируются центры затрат?</summary><div class="manager-qa-item-body"><span class="manager-qa-status done">РЕАЛИЗОВАНО</span><p>Добавлен справочник Cost Centers: товар/закупка, логистика, терминал Джурджулешты, качество/лаборатория, коммерческий отдел, риск/страхование и прочие прямые расходы.</p><p>Cost Center не заменяет Business Line: Business Line показывает, на каком направлении получен результат, а Cost Center — где и каким процессом возник расход.</p></div></details>
+        <details class="manager-qa-item"><summary>Как учитывать общие расходы, которые нельзя честно привязать к одной Shipment?</summary><div class="manager-qa-item-body"><span class="manager-qa-status done">DEMO ALLOCATION</span><p>Shared costs хранятся отдельными cost pools и не маскируются под direct cost конкретной партии. Для них задаётся allocation driver — в демо по доле Revenue или planned tons.</p><p>Распределённая сумма показывается только в Analytical P&L после Contribution, поэтому исходная экономика Shipment не переписывается задним числом.</p></div></details>
+        <details class="manager-qa-item"><summary>Как увидеть маржинальность конкретной сделки или партии?</summary><div class="manager-qa-item-body"><span class="manager-qa-status done">РЕАЛИЗОВАНО</span><p>В dashboard есть таблица Deal / Shipment Profitability: Revenue, Contribution, Margin %, allocated shared cost, Operating Result, MTM и Economic Result. Строка ведёт обратно к существующей финансовой карточке Shipment.</p><p>Это сохраняет drill-down от агрегата к первичной операции вместо создания отдельной «BI-копии» финансовых данных.</p></div></details>
+        <details class="manager-qa-item"><summary>Как контролировать качество данных для такой аналитики?</summary><div class="manager-qa-item-body"><span class="manager-qa-status done">РЕАЛИЗОВАН ПРОТОТИП</span><p>Analytics показывает неполный Financial Gate, cash-out без Cost Center, shared pool без allocation и Master Data Exceptions. Это превращает проблему качества данных в видимый управленческий exception.</p><p>Production BI всё равно потребует backend / DWH / reconciliation с 1С, но аналитическая модель и контрольные связи уже заданы.</p></div></details>
+      </div>
+      <div class="manager-qa-summary"><b>Краткий архитектурный вывод.</b><br>Grain теперь отделяет операционные финансовые данные от аналитического представления: одни и те же Shipment, Cash Movements, Master Parties и Products используются для P&L, Cash Flow, Cost Centers и маржинальности. Shared costs распределяются отдельным правилом, а drill-down возвращает к исходной операции, поэтому аналитика строится как модель данных, а не набор независимых CRM-виджетов.</div>
+    </div>
+  </article>
+
+  <article class="manager-qa-card">
+    <div class="manager-qa-head">
+      <span class="manager-qa-mark" aria-hidden="true">!</span>
+      <div>
         <small>ВОПРОС РУКОВОДИТЕЛЯ · MASTER DATA</small>
         <h2>Общие контрагенты и номенклатура между системами</h2>
         <p>Одна master-сущность, локальные mappings и понятный владелец каждого поля.</p>
@@ -825,7 +896,7 @@ try{
   if(main)main.innerHTML='<section class="panel" style="padding:24px"><h1>Не удалось загрузить данные Grain</h1><p>Интерфейс использует data.json как мини-базу данных. Откройте проект через GitHub Pages или локальный HTTP-сервер и проверьте доступность data.json.</p></section>';
   throw error;
 }
-let financeState=structuredClone(DB.finance.shipmentFinancials||[]),cashMovements=structuredClone(DB.finance.cashMovements||[]),marketMarks=structuredClone(DB.market?.marks||[]),integrityState=structuredClone(DB.integrity||{}),masterData=structuredClone(DB.masterData||{}),auditTrail=structuredClone(DB.auditSeed||[]);
+let financeState=structuredClone(DB.finance.shipmentFinancials||[]),cashMovements=structuredClone(DB.finance.cashMovements||[]),marketMarks=structuredClone(DB.market?.marks||[]),integrityState=structuredClone(DB.integrity||{}),masterData=structuredClone(DB.masterData||{}),analyticsState=structuredClone(DB.analytics||{}),auditTrail=structuredClone(DB.auditSeed||[]);
 const stages=['Новый запрос','Потребность уточнена','Предложение отправлено','Согласование условий','Контракт подписан','Исполнение'];
 const probability=[0,.2,.4,.7,1,1], today='2026-09-30';
 const sourceClients=Object.fromEntries(DB.clients.map(c=>[c.id,c]));
@@ -836,7 +907,7 @@ const seed=DB.deals.map(d=>{
     shipmentId:p.id,date:p.plannedDate,qty:p.plannedQty,shipped:p.shippedQty,status:p.status
   }));
   return {
-    id:d.no,sourceId:d.id,clientId:d.clientId,client:c.name,product:d.product,businessLine:d.businessLine,
+    id:d.no,sourceId:d.id,clientId:d.clientId,client:c.name,product:d.product,productId:d.productId,businessUnitId:d.businessUnitId||'BU-MD-SALES',businessLine:d.businessLine,
     region:c.region,manager:c.manager,stage:d.stage,expectedVolume:d.expectedVolume,desiredPeriod:d.desiredPeriod,
     price:d.price,fixed:d.fixed,expires:d.expires,next:d.next,action:d.action,blocked:d.blocked,
     agreed:d.agreed,openQuestions:d.openQuestions,parts:dealShipments
@@ -878,7 +949,7 @@ const form=$('#edit');function draft(){const f=new FormData(form);return {...d,s
 function update(){const x=draft(),r=remaining(x,'all'),displayVolume=x.parts.length?r:(x.expectedVolume||0);$('#deal-summary').innerHTML=`<b>${x.parts.length?'Весь оставшийся объём':'Ориентировочная потребность'}: ${fmt(displayVolume)} т</b><br>${x.stage>=4?'По контракту':'Взвешенный ориентир'}: ${fmt(displayVolume*probability[x.stage])} т<br>Оценка объёма ${qhelp('revenue')}: <b>${fmt(displayVolume*x.price)} MDL</b><br><span style="font-size:12px">${x.fixed?'Сумма по фиксированной цене':'Предварительная сумма'} · без взвешивания по вероятности</span>`}
 form.addEventListener('input',update);form.addEventListener('change',update);form.onsubmit=e=>{e.preventDefault();const x=draft();if(x.parts.some(p=>p.shipped>p.qty)){$('#form-error').textContent='Фактическая отгрузка не может превышать план партии.';return}if(x.parts.some(p=>p.shipped>0)&&x.stage<4){$('#form-error').textContent='В этой модели факт отгрузки доступен только для подписанных сделок.';return}if(x.parts.some(p=>p.shipped>0&&p.date>today)){$('#form-error').textContent='Нельзя отметить будущую партию отгруженной. Дата примера: 30.09.2026.';return}auditDiff('Сделка',d.sourceId,d,x,d.manager,'Менеджер продаж');auditShipmentChanges(d,x);deals[deals.findIndex(y=>y.id===id)]=x;$('#detail').close();render();toast('Сделка обновлена. Прогноз пересчитан.')};update();$('#detail').showModal()}
 function toast(s){$('#toast').textContent=s;$('#toast').classList.remove('hidden');clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>$('#toast').classList.add('hidden'),3200)}
-document.addEventListener('click',e=>{const h=e.target.closest('[data-help]');if(h){const [title,body]=help[h.dataset.help];$('#tip-title').textContent=title;$('#tip-text').textContent=body;$('#tip').showModal();return}const d=e.target.closest('[data-deal]');if(d){detail(+d.dataset.deal);return}if(e.target.closest('.close,.close-detail'))e.target.closest('dialog').close();const n=e.target.closest('[data-view]');if(n){currentView=n.dataset.view;if(currentView==='masterdata')renderMasterData();for(const id of ['overview','pipeline','shipments','finance','clients','documents','masterdata','managerqa'])$('#'+id).classList.toggle('hidden',id!==currentView);document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b===n));$('#page-title').textContent={overview:'Продажи в деталях.',pipeline:'От запроса к контракту.',shipments:'Каждая тонна — по плану.',finance:'Финансы продаж.',clients:'Клиенты и новые закупки.',documents:'Договоры в движении.',masterdata:'Master Data и синхронизация.',managerqa:'Ответы на вопросы руководителя.'}[currentView];$('#subtitle').textContent={overview:'От первого запроса до последней отгруженной тонны.',pipeline:'Этапы переговоров и объёмы будущих поставок.',shipments:'График отгрузок по клиентам и партиям.',finance:'P&L, Cash Flow и контроль финансовых данных по реальным партиям.',clients:'История отношений, поводы для контакта и напоминания менеджеру.',documents:'От подготовки договора до согласования и подписания.',masterdata:'Единые контрагенты, номенклатура, mappings и владельцы полей.',managerqa:'Вопросы, которые формируют архитектуру Grain, и зафиксированные ответы на них.'}[currentView];$('.filters').classList.toggle('hidden',['finance','clients','documents','masterdata','managerqa'].includes(currentView));$('#month').closest('label').classList.toggle('hidden',currentView==='pipeline')}});
+document.addEventListener('click',e=>{const h=e.target.closest('[data-help]');if(h){const [title,body]=help[h.dataset.help];$('#tip-title').textContent=title;$('#tip-text').textContent=body;$('#tip').showModal();return}const d=e.target.closest('[data-deal]');if(d){detail(+d.dataset.deal);return}if(e.target.closest('.close,.close-detail'))e.target.closest('dialog').close();const n=e.target.closest('[data-view]');if(n){currentView=n.dataset.view;if(currentView==='masterdata')renderMasterData();if(currentView==='analytics')renderAnalytics();for(const id of ['overview','pipeline','shipments','finance','analytics','clients','documents','masterdata','managerqa'])$('#'+id).classList.toggle('hidden',id!==currentView);document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b===n));$('#page-title').textContent={overview:'Продажи в деталях.',pipeline:'От запроса к контракту.',shipments:'Каждая тонна — по плану.',finance:'Финансы продаж.',analytics:'Управленческая аналитика.',clients:'Клиенты и новые закупки.',documents:'Договоры в движении.',masterdata:'Master Data и синхронизация.',managerqa:'Ответы на вопросы руководителя.'}[currentView];$('#subtitle').textContent={overview:'От первого запроса до последней отгруженной тонны.',pipeline:'Этапы переговоров и объёмы будущих поставок.',shipments:'График отгрузок по клиентам и партиям.',finance:'P&L, Cash Flow и контроль финансовых данных по реальным партиям.',analytics:'P&L, Cash Flow, центры затрат и маржинальность по единой модели данных.',clients:'История отношений, поводы для контакта и напоминания менеджеру.',documents:'От подготовки договора до согласования и подписания.',masterdata:'Единые контрагенты, номенклатура, mappings и владельцы полей.',managerqa:'Вопросы, которые формируют архитектуру Grain, и зафиксированные ответы на них.'}[currentView];$('.filters').classList.toggle('hidden',['finance','analytics','clients','documents','masterdata','managerqa'].includes(currentView));$('#month').closest('label').classList.toggle('hidden',currentView==='pipeline')}});
 for(const dlg of document.querySelectorAll('dialog'))dlg.addEventListener('click',e=>{if(e.target===dlg){const r=dlg.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dlg.close()}});
 for(const s of document.querySelectorAll('.filters select'))s.onchange=render;
 
@@ -1256,6 +1327,31 @@ function isShipmentFinanciallyLocked(shipmentId){return !!financeState.find(x=>x
 function marketMark(shipmentId){return marketMarks.find(x=>x.shipmentId===shipmentId)||null}
 function shipmentCash(shipmentId){return cashMovements.filter(x=>x.shipmentId===shipmentId)}
 function plannedCashInMovement(shipmentId){return shipmentCash(shipmentId).find(x=>x.direction==='in'&&x.status==='planned')}
+function analyticsCostMapping(field){return (analyticsState.costCategoryMappings||[]).find(x=>x.financeField===field)||null}
+function syncPlannedCashOutComponents(shipmentId,row,ctx,actor=ctx.d.manager){
+  const qty=+ctx.p.qty||0,fields=['unitCost',...finCostFields],existing=cashMovements.filter(m=>m.shipmentId===shipmentId&&m.direction==='out'&&m.status==='planned'&&m.source==='Финансовый план · аналитический компонент');
+  for(const field of fields){
+    const map=analyticsCostMapping(field);if(!map)continue;
+    const amount=qty*(+row[field]||0),m=existing.find(x=>x.financeField===field);
+    if(amount>0){
+      if(m){
+        if(m.amount!==amount){const old=m.amount;m.amount=amount;auditAdd({actor,role:'Менеджер продаж',action:'Синхронизация компонента Cash Flow',entityType:'Партия',entityId:shipmentId,field:m.id,oldValue:old,newValue:amount,source:'Финансовый план'})}
+        m.category=map.category;m.categoryGroup=map.categoryGroup;m.costCenterId=map.costCenterId;
+      }else{
+        const created={id:'CF-RC-'+shipmentId+'-'+field,shipmentId,date:ctx.p.date,direction:'out',category:map.category,categoryGroup:map.categoryGroup,costCenterId:map.costCenterId,financeField:field,amount,status:'planned',source:'Финансовый план · аналитический компонент'};
+        cashMovements.push(created);auditAdd({actor,role:'Менеджер продаж',action:'Добавлен компонент Cash Flow',entityType:'Партия',entityId:shipmentId,field:created.id,newValue:created,source:'Финансовый план'});
+      }
+    }else if(m){
+      cashMovements.splice(cashMovements.indexOf(m),1);auditAdd({actor,role:'Менеджер продаж',action:'Удалён нулевой компонент Cash Flow',entityType:'Партия',entityId:shipmentId,field:m.id,oldValue:m.amount,newValue:0,source:'Финансовый план'});
+    }
+  }
+}
+function syncPlannedCashBase(shipmentId,row,ctx,actor=ctx.d.manager){
+  const baseIn=shipmentCash(shipmentId).find(m=>m.direction==='in'&&m.status==='planned'&&m.source==='Коммерческие условия');
+  const plannedRevenue=(+ctx.p.qty||0)*(+row.finalPrice||0);
+  if(baseIn&&baseIn.amount!==plannedRevenue){const old=baseIn.amount;baseIn.amount=plannedRevenue;auditAdd({actor,role:'Менеджер продаж',action:'Синхронизация планового Cash Flow',entityType:'Партия',entityId:shipmentId,field:baseIn.id,oldValue:old,newValue:plannedRevenue,source:'Коммерческие условия'})}
+  syncPlannedCashOutComponents(shipmentId,row,ctx,actor);
+}
 function money(n){return fmt(n||0)+' MDL'}
 const finCostFields=['logistics','loading','storage','laboratory','commission','insurance','otherDirect'];
 const finLabels={finalPrice:'Финальная цена',unitCost:'Себестоимость/т',logistics:'Транспорт/т',loading:'Погрузка/т',storage:'Хранение/т',laboratory:'Лаборатория/т',commission:'Комиссия/т',insurance:'Страхование/т',otherDirect:'Прочие прямые/т',paymentTermsDays:'Срок оплаты, дней',valueStatus:'Статус значения',outstandingObligationsRegistered:'Незакрытые обязательства',outstandingObligationsNote:'Комментарий обязательств'};
@@ -1373,6 +1469,140 @@ function renderFinance(){
     }).join('')+'</tbody></table>'+(list.length?'':'<div class="empty">Нет партий по выбранным фильтрам.</div>');
   renderAudit();
 }
+
+function analyticsCostCenter(id){return (analyticsState.costCenters||[]).find(x=>x.id===id)||null}
+function analyticsScenario(x){
+  const parts=[x.calc.forecast,x.calc.confirmed,x.calc.actual];
+  return parts.reduce((a,p)=>({revenue:a.revenue+p.revenue,cogs:a.cogs+p.cogs,direct:a.direct+p.direct,contribution:a.contribution+p.contribution}),{revenue:0,cogs:0,direct:0,contribution:0});
+}
+function analyticsUniverse(){
+  return financeContexts().map(x=>({...x,scenario:analyticsScenario(x),businessUnitId:x.d.businessUnitId||'BU-MD-SALES',partyId:x.c?.partyId||null,productId:x.d.productId||null}));
+}
+function analyticsAllocationRows(){
+  const universe=analyticsUniverse(),rules=Object.fromEntries((analyticsState.allocationRules||[]).map(r=>[r.id,r])),rows=[];
+  for(const sc of analyticsState.sharedCosts||[]){
+    const month=sc.date.slice(0,7),eligible=universe.filter(x=>x.p.date.startsWith(month)&&(!sc.businessUnitId||x.businessUnitId===sc.businessUnitId)),rule=rules[sc.allocationRuleId];
+    const weight=x=>rule?.driver==='plannedQty'?(+x.p.qty||0):(+x.scenario.revenue||0),denom=eligible.reduce((n,x)=>n+weight(x),0);
+    if(!(denom>0))continue;
+    for(const x of eligible)rows.push({sharedCostId:sc.id,shipmentId:x.p.shipmentId,date:sc.date,costCenterId:sc.costCenterId,category:sc.category,status:sc.status,amount:sc.amount*weight(x)/denom,allocationRuleId:sc.allocationRuleId,ctx:x});
+  }
+  return rows;
+}
+function analyticsSelection(){
+  return {
+    period:$('#an-period')?.value||'all',unit:$('#an-unit')?.value||'all',line:$('#an-line')?.value||'all',
+    region:$('#an-region')?.value||'all',product:$('#an-product')?.value||'all',party:$('#an-party')?.value||'all',
+    manager:$('#an-manager')?.value||'all',deal:$('#an-deal')?.value||'all',costCenter:$('#an-costcenter')?.value||'all'
+  };
+}
+function analyticsBaseMatch(x,sel){
+  return (sel.unit==='all'||x.businessUnitId===sel.unit)&&(sel.line==='all'||x.d.businessLine===sel.line)&&(sel.region==='all'||x.d.region===sel.region)&&
+    (sel.product==='all'||x.d.product===sel.product)&&(sel.party==='all'||x.partyId===sel.party)&&(sel.manager==='all'||x.d.manager===sel.manager)&&(sel.deal==='all'||x.d.sourceId===sel.deal);
+}
+function analyticsDirectCenterAmount(x,centerId){
+  return (analyticsState.costCategoryMappings||[]).filter(m=>m.costCenterId===centerId).reduce((n,m)=>n+(+x.row[m.financeField]||0)*(+x.p.qty||0),0);
+}
+function analyticsFilteredContexts(){
+  const sel=analyticsSelection(),alloc=analyticsAllocationRows();
+  return analyticsUniverse().filter(x=>analyticsBaseMatch(x,sel)&&(sel.period==='all'||x.p.date.startsWith(sel.period))&&(sel.costCenter==='all'||analyticsDirectCenterAmount(x,sel.costCenter)>0||alloc.some(a=>a.shipmentId===x.p.shipmentId&&a.costCenterId===sel.costCenter&&a.amount>0)));
+}
+function analyticsFilteredAllocations(list=analyticsFilteredContexts()){
+  const sel=analyticsSelection(),ids=new Set(list.map(x=>x.p.shipmentId));
+  return analyticsAllocationRows().filter(a=>ids.has(a.shipmentId)&&(sel.period==='all'||a.date.startsWith(sel.period))&&(sel.costCenter==='all'||a.costCenterId===sel.costCenter));
+}
+function analyticsAggregate(list,allocations){
+  const a={revenue:0,cogs:0,direct:0,contribution:0,shared:0,operating:0,mtm:0,economic:0,shipments:list.length};
+  for(const x of list){a.revenue+=x.scenario.revenue;a.cogs+=x.scenario.cogs;a.direct+=x.scenario.direct;a.contribution+=x.scenario.contribution;a.mtm+=x.calc.mtm}
+  a.shared=allocations.reduce((n,x)=>n+(+x.amount||0),0);a.operating=a.contribution-a.shared;a.economic=a.operating+a.mtm;return a;
+}
+function analyticsDirectCashRows(){
+  const sel=analyticsSelection();
+  return cashMovements.map(m=>{const ctx=financeContext(m.shipmentId);return ctx?{m,ctx:{...ctx,businessUnitId:ctx.d.businessUnitId||'BU-MD-SALES',partyId:ctx.c?.partyId||null}}:null}).filter(Boolean).filter(x=>{
+    const c=x.ctx,proxy={...c,businessUnitId:c.businessUnitId,partyId:c.partyId};
+    if(!analyticsBaseMatch(proxy,sel))return false;
+    if(sel.period!=='all'&&!x.m.date.startsWith(sel.period))return false;
+    if(sel.costCenter!=='all'){
+      if(x.m.direction==='in')return false;
+      if(x.m.costCenterId!==sel.costCenter)return false;
+    }
+    return true;
+  });
+}
+function analyticsSharedCashRows(){
+  const sel=analyticsSelection();
+  return analyticsAllocationRows().filter(a=>analyticsBaseMatch(a.ctx,sel)&&(sel.period==='all'||a.date.startsWith(sel.period))&&(sel.costCenter==='all'||a.costCenterId===sel.costCenter)).map(a=>({m:{date:a.date,direction:'out',amount:a.amount,status:a.status,category:a.category,categoryGroup:'Shared / Overhead',costCenterId:a.costCenterId},ctx:a.ctx,shared:true}));
+}
+function analyticsCashAggregate(){
+  const rows=[...analyticsDirectCashRows(),...analyticsSharedCashRows()],a={plannedIn:0,plannedOut:0,actualIn:0,actualOut:0};
+  for(const x of rows){const key=x.m.status==='actual'?'actual':'planned',amt=+x.m.amount||0;if(x.m.direction==='in')a[key+'In']+=amt;else a[key+'Out']+=amt}
+  a.plannedNet=a.plannedIn-a.plannedOut;a.actualNet=a.actualIn-a.actualOut;return {rows,a};
+}
+function analyticsByLine(list,alloc,line){
+  const rows=line==='Consolidated'?list:list.filter(x=>x.d.businessLine===line),ids=new Set(rows.map(x=>x.p.shipmentId));
+  return analyticsAggregate(rows,alloc.filter(a=>ids.has(a.shipmentId)));
+}
+function analyticsMonthName(month){return {'2026-10':'Октябрь 2026','2026-11':'Ноябрь 2026','2026-12':'Декабрь 2026'}[month]||month}
+function renderAnalytics(){
+  if(!$('#analytics'))return;
+  const list=analyticsFilteredContexts(),alloc=analyticsFilteredAllocations(list),agg=analyticsAggregate(list,alloc),cash=analyticsCashAggregate(),margin=agg.revenue?agg.contribution/agg.revenue*100:0;
+  $('#an-summary').innerHTML=[
+    ['Revenue',money(agg.revenue),'Текущая аналитическая оценка выбранных Shipment'],
+    ['Contribution',money(agg.contribution),'До распределения shared costs'],
+    ['Contribution Margin',fmt(margin)+'%','Contribution / Revenue'],
+    ['Shared Costs',money(agg.shared),'Распределены только в аналитическом слое'],
+    ['Operating Result',money(agg.operating),'Contribution − allocated shared costs'],
+    ['Плановый Net Cash Flow',money(cash.a.plannedNet),'Включая allocated shared cash-out'],
+    ['Unrealized MTM',money(agg.mtm),'Открытая рыночная позиция'],
+    ['Economic Result',money(agg.economic),'Operating Result + Unrealized MTM']
+  ].map(([l,v,p])=>'<article class="fin-card"><small>'+l+'</small><b>'+v+'</b><p>'+p+'</p></article>').join('');
+
+  const lineKeys=analyticsSelection().line==='all'?['Grain','Fertilizers','Consolidated']:[analyticsSelection().line];
+  $('#an-pnl').innerHTML='<table><thead><tr><th>Уровень</th><th class="fin-number">Revenue</th><th class="fin-number">COGS</th><th class="fin-number">Direct</th><th class="fin-number">Contribution</th><th class="fin-number">Shared</th><th class="fin-number">Operating</th><th class="fin-number">MTM</th><th class="fin-number">Economic</th></tr></thead><tbody>'+lineKeys.map(line=>{
+    const x=analyticsByLine(list,alloc,line),label=line==='Consolidated'?'Consolidated':line;
+    return '<tr><td><b>'+label+'</b><small>'+x.shipments+' Shipment</small></td><td class="fin-number">'+money(x.revenue)+'</td><td class="fin-number">'+money(x.cogs)+'</td><td class="fin-number">'+money(x.direct)+'</td><td class="fin-number">'+money(x.contribution)+'</td><td class="fin-number">'+money(x.shared)+'</td><td class="fin-number">'+money(x.operating)+'</td><td class="fin-number '+mtmClass(x.mtm)+'">'+money(x.mtm)+'</td><td class="fin-number '+(x.economic<0?'analytics-profit-negative':'analytics-profit-positive')+'"><b>'+money(x.economic)+'</b></td></tr>';
+  }).join('')+'</tbody></table>';
+
+  const cashRows=[...analyticsDirectCashRows(),...analyticsSharedCashRows()],months=[...new Set(cashRows.map(x=>x.m.date.slice(0,7)))].sort();
+  $('#an-cash').innerHTML='<table><thead><tr><th>Период</th><th class="fin-number">Customer In</th><th class="fin-number">Product</th><th class="fin-number">Logistics</th><th class="fin-number">Terminal</th><th class="fin-number">Quality</th><th class="fin-number">Other direct</th><th class="fin-number">Shared</th><th class="fin-number">Net</th></tr></thead><tbody>'+months.map(month=>{
+    const rows=cashRows.filter(x=>x.m.date.startsWith(month)),v={in:0,product:0,logistics:0,terminal:0,quality:0,other:0,shared:0};
+    for(const x of rows){const amt=+x.m.amount||0;if(x.m.direction==='in'){v.in+=amt;continue}if(x.shared){v.shared+=amt;continue}if(x.m.costCenterId==='CC-100')v.product+=amt;else if(x.m.costCenterId==='CC-200')v.logistics+=amt;else if(x.m.costCenterId==='CC-300')v.terminal+=amt;else if(x.m.costCenterId==='CC-400')v.quality+=amt;else v.other+=amt}
+    const net=v.in-v.product-v.logistics-v.terminal-v.quality-v.other-v.shared;
+    return '<tr><td><b>'+analyticsMonthName(month)+'</b></td><td class="fin-number">'+money(v.in)+'</td><td class="fin-number">'+money(v.product)+'</td><td class="fin-number">'+money(v.logistics)+'</td><td class="fin-number">'+money(v.terminal)+'</td><td class="fin-number">'+money(v.quality)+'</td><td class="fin-number">'+money(v.other)+'</td><td class="fin-number">'+money(v.shared)+'</td><td class="fin-number '+(net<0?'analytics-profit-negative':'analytics-profit-positive')+'"><b>'+money(net)+'</b></td></tr>';
+  }).join('')+'</tbody></table>'+(months.length?'':'<div class="empty">Нет денежных движений по выбранным dimensions.</div>');
+
+  const sel=analyticsSelection(),centers=(analyticsState.costCenters||[]).filter(cc=>sel.costCenter==='all'||cc.id===sel.costCenter),maxCost=Math.max(1,...centers.map(cc=>{
+    const direct=list.reduce((n,x)=>n+analyticsDirectCenterAmount(x,cc.id),0),shared=alloc.filter(a=>a.costCenterId===cc.id).reduce((n,a)=>n+a.amount,0);return direct+shared;
+  }));
+  $('#an-cost-centers').innerHTML=centers.map(cc=>{
+    const direct=list.reduce((n,x)=>n+analyticsDirectCenterAmount(x,cc.id),0),shared=alloc.filter(a=>a.costCenterId===cc.id).reduce((n,a)=>n+a.amount,0),total=direct+shared,pct=total/maxCost*100;
+    return '<div class="analytics-cost-row"><div><b>'+escapeHTML(cc.name)+'</b><small>'+escapeHTML(cc.id)+' · '+escapeHTML(cc.classification)+'</small></div><div><div class="analytics-bar"><span style="width:'+Math.max(0,Math.min(100,pct))+'%"></span></div><small>Direct '+money(direct)+' · Shared '+money(shared)+'</small></div><b class="fin-number">'+money(total)+'</b></div>';
+  }).join('');
+
+  const cashWithoutCenter=cashMovements.filter(m=>m.direction==='out'&&!m.costCenterId).length,unresolvedShared=(analyticsState.sharedCosts||[]).filter(sc=>!analyticsAllocationRows().some(a=>a.sharedCostId===sc.id)).length,incomplete=list.filter(x=>!x.gate.ready&&!x.row.locked).length,masterIssues=typeof masterDataExceptions==='function'?masterDataExceptions().length:0;
+  $('#an-quality').innerHTML=[
+    ['Неполный Financial Gate',incomplete,'Shipment в выбранном срезе'],
+    ['Cash-out без Cost Center',cashWithoutCenter,'Нужна классификация'],
+    ['Shared pool без allocation',unresolvedShared,'Нет подходящего driver/base'],
+    ['Master Data Exceptions',masterIssues,'Контрагенты / товары / mappings']
+  ].map(([l,v,p])=>'<article><small>'+l+'</small><b>'+v+'</b><small>'+p+'</small></article>').join('');
+
+  $('#an-profitability').innerHTML='<table><thead><tr><th>Deal / Shipment</th><th>Контрагент / товар</th><th>Статус</th><th class="fin-number">Revenue</th><th class="fin-number">Contribution</th><th class="fin-number">Margin</th><th class="fin-number">Shared</th><th class="fin-number">Operating</th><th class="fin-number">MTM</th><th class="fin-number">Economic</th></tr></thead><tbody>'+list.map(x=>{
+    const shared=alloc.filter(a=>a.shipmentId===x.p.shipmentId).reduce((n,a)=>n+a.amount,0),operating=x.scenario.contribution-shared,economic=operating+x.calc.mtm,m=x.scenario.revenue?x.scenario.contribution/x.scenario.revenue*100:0;
+    return '<tr><td><button class="link" data-financial="'+x.p.shipmentId+'">'+x.d.sourceId+' · '+x.p.shipmentId+'</button></td><td>'+escapeHTML(x.c?.name||'')+'<small>'+escapeHTML(x.d.product)+' · '+escapeHTML(x.d.region)+'</small></td><td>'+escapeHTML(x.row.valueStatus)+'</td><td class="fin-number">'+money(x.scenario.revenue)+'</td><td class="fin-number">'+money(x.scenario.contribution)+'</td><td class="fin-number">'+fmt(m)+'%</td><td class="fin-number">'+money(shared)+'</td><td class="fin-number">'+money(operating)+'</td><td class="fin-number '+mtmClass(x.calc.mtm)+'">'+money(x.calc.mtm)+'</td><td class="fin-number '+(economic<0?'analytics-profit-negative':'analytics-profit-positive')+'"><b>'+money(economic)+'</b></td></tr>';
+  }).join('')+'</tbody></table>'+(list.length?'':'<div class="empty">Нет Shipment по выбранным dimensions.</div>');
+}
+function initAnalyticsFilters(){
+  const add=(id,rows,value,label)=>{const el=$(id);if(!el||el.dataset.ready)return;for(const r of rows)el.insertAdjacentHTML('beforeend','<option value="'+escapeHTML(value(r))+'">'+escapeHTML(label(r))+'</option>');el.dataset.ready='1';el.onchange=renderAnalytics};
+  add('#an-unit',analyticsState.businessUnits||[],x=>x.id,x=>x.name);
+  add('#an-region',[...new Set(deals.map(d=>d.region))].sort(),x=>x,x=>x);
+  add('#an-product',[...new Set(deals.map(d=>d.product))].sort(),x=>x,x=>x);
+  add('#an-party',clients.slice().sort((a,b)=>a.name.localeCompare(b.name)),x=>x.partyId,x=>x.name+' · '+x.partyId);
+  add('#an-manager',[...new Set(deals.map(d=>d.manager))].sort(),x=>x,x=>x);
+  add('#an-deal',deals.slice().sort((a,b)=>a.sourceId.localeCompare(b.sourceId)),x=>x.sourceId,x=>x.sourceId+' · '+x.client);
+  add('#an-costcenter',analyticsState.costCenters||[],x=>x.id,x=>x.id+' · '+x.name);
+  for(const id of ['#an-period','#an-line']){const el=$(id);if(el&&!el.dataset.ready){el.dataset.ready='1';el.onchange=renderAnalytics}}
+}
+
 function financeFieldInput(row,key,label,type='number'){
   const disabled=row.locked?' disabled':'',step=type==='number'?' step="0.01" min="0"':'';
   return '<label>'+label+'<input name="'+key+'" type="'+type+'"'+step+disabled+' value="'+escapeHTML(row[key]??'')+'"></label>';
@@ -1403,34 +1633,30 @@ function openFinancial(shipmentId){
     row.valueStatus=fd.get('valueStatus');
     for(const k of ['finalPrice','unitCost','logistics','loading','storage','laboratory','commission','insurance','otherDirect','paymentTermsDays'])row[k]=+fd.get(k)||0;
     row.outstandingObligationsRegistered=fd.get('outstanding')==='true';row.outstandingObligationsNote=String(fd.get('outstandingNote')||'').trim();
-    const baseIn=shipmentCash(shipmentId).find(m=>m.direction==='in'&&m.status==='planned'&&m.source==='Коммерческие условия');
-    const baseOut=shipmentCash(shipmentId).find(m=>m.direction==='out'&&m.status==='planned'&&m.source==='Финансовый план');
-    const plannedRevenue=(+ctx.p.qty||0)*(+row.finalPrice||0),plannedOut=(+ctx.p.qty||0)*((+row.unitCost||0)+finCostFields.reduce((n,k)=>n+(+row[k]||0),0));
-    if(baseIn&&baseIn.amount!==plannedRevenue){const old=baseIn.amount;baseIn.amount=plannedRevenue;auditAdd({actor:ctx.d.manager,role:'Менеджер продаж',action:'Синхронизация планового Cash Flow',entityType:'Партия',entityId:shipmentId,field:baseIn.id,oldValue:old,newValue:plannedRevenue,source:'Коммерческие условия'})}
-    if(baseOut&&baseOut.amount!==plannedOut){const old=baseOut.amount;baseOut.amount=plannedOut;auditAdd({actor:ctx.d.manager,role:'Менеджер продаж',action:'Синхронизация планового Cash Flow',entityType:'Партия',entityId:shipmentId,field:baseOut.id,oldValue:old,newValue:plannedOut,source:'Финансовый план'})}
+    syncPlannedCashBase(shipmentId,row,ctx);
     const g=financeGate(row,ctx);row.financialStatus=g.ready?'Расчёт готов':'Расчёт неполный';
     for(const k of Object.keys(row))if(JSON.stringify(before[k])!==JSON.stringify(row[k]))auditAdd({actor:ctx.d.manager,role:'Менеджер продаж',action:'Изменение финансовых данных',entityType:'Партия',entityId:shipmentId,field:finLabels[k]||k,oldValue:before[k],newValue:row[k],source:'Интерфейс'});
-    toast('Финансовые данные партии сохранены.');renderFinance();finRefresh();openFinancial(shipmentId);
+    toast('Финансовые данные партии сохранены.');renderFinance();renderAnalytics();finRefresh();openFinancial(shipmentId);
   };
   const lock=$('#finance-lock');if(lock)lock.onclick=()=>{
     const state=canFinanciallyLock(row,ctx);if(!state.ok){$('#finance-error').textContent='Партия пока не соответствует условиям финансового закрытия.';return}
     row.locked=true;row.financialStatus='Закрыт';row.lockedAt=auditTime();row.lockedBy=ctx.d.manager;
     auditAdd({actor:ctx.d.manager,role:'Менеджер продаж',action:'Финансовая блокировка · партия финансово закрыта',entityType:'Партия',entityId:shipmentId,source:'Интерфейс',newValue:'Закрыт',reason:row.outstandingObligationsRegistered?row.outstandingObligationsNote:''});
-    toast('Партия финансово закрыта. Изменения первичных данных — только через Финансовый журнал.');renderFinance();finRefresh();openFinancial(shipmentId);
+    toast('Партия финансово закрыта. Изменения первичных данных — только через Финансовый журнал.');renderFinance();renderAnalytics();finRefresh();openFinancial(shipmentId);
   };
   const corr=$('#corr-save');if(corr)corr.onclick=()=>{
     const key=$('#corr-field').value,raw=$('#corr-value').value.trim(),reason=$('#corr-reason').value.trim();if(!raw||!reason){$('#corr-error').textContent='Укажите новое значение и причину.';return}
     const value=+raw;if(!Number.isFinite(value)||value<0){$('#corr-error').textContent='Укажите корректное неотрицательное числовое значение.';return}
     const old=row[key],candidate={...row,[key]:value},correctedGate=financeGate(candidate,ctx);if(!correctedGate.ready){$('#corr-error').textContent='Корректировка нарушает обязательные финансовые данные: '+correctedGate.missing.join(', ');return}
-    row[key]=value;auditAdd({actor:'Финансовый контролёр (демо)',role:'Финансовый контролёр',action:'Корректировка Финансового журнала',entityType:'Партия',entityId:shipmentId,field:finLabels[key]||key,oldValue:old,newValue:value,source:'Финансовый журнал',reason});
-    toast('Корректировка записана в Финансовый журнал.');renderFinance();finRefresh();openFinancial(shipmentId);
+    row[key]=value;auditAdd({actor:'Финансовый контролёр (демо)',role:'Финансовый контролёр',action:'Корректировка Финансового журнала',entityType:'Партия',entityId:shipmentId,field:finLabels[key]||key,oldValue:old,newValue:value,source:'Финансовый журнал',reason});syncPlannedCashBase(shipmentId,row,ctx,'Финансовый контролёр (демо)');
+    toast('Корректировка записана в Финансовый журнал.');renderFinance();renderAnalytics();finRefresh();openFinancial(shipmentId);
   };
   const cashAdd=$('#cash-add');if(cashAdd)cashAdd.onclick=()=>{
     const dt=$('#cash-date').value,dir=$('#cash-direction').value,status=$('#cash-status').value,amount=+$('#cash-amount').value,category=$('#cash-category').value.trim();
     if(!dt||!(amount>0)||!category){$('#cash-error').textContent='Укажите дату, сумму и категорию движения.';return}
-    const m={id:'CF-R'+String(cashMovements.length+1).padStart(3,'0'),shipmentId,date:dt,direction:dir,category,amount,status,source:'Ручной ввод (демо)'};
+    const m={id:'CF-R'+String(cashMovements.length+1).padStart(3,'0'),shipmentId,date:dt,direction:dir,category,categoryGroup:'Manual',costCenterId:null,amount,status,source:'Ручной ввод (демо)'};
     cashMovements.push(m);auditAdd({actor:ctx.d.manager,role:'Менеджер продаж',action:'Добавлено движение Cash Flow',entityType:'Партия',entityId:shipmentId,field:m.id,newValue:m,source:'Интерфейс'});
-    toast('Движение Cash Flow добавлено.');renderFinance();openFinancial(shipmentId);
+    toast('Движение Cash Flow добавлено.');renderFinance();renderAnalytics();openFinancial(shipmentId);
   };
   const marketSave=$('#market-save');if(marketSave)marketSave.onclick=()=>{
     const price=+$('#market-price').value,source=$('#market-source').value.trim(),localTime=$('#market-time').value,reason=$('#market-reason').value.trim();
@@ -1441,7 +1667,7 @@ function openFinancial(shipmentId){
     else{marketMarks.push({id:'MK-R'+String(marketMarks.length+1).padStart(3,'0'),shipmentId,product:ctx.d.product,region:ctx.d.region,basis:'Доставка клиенту',deliveryPeriod:ctx.p.date.slice(0,7),price,currency:'MDL',unit:'т',source,observedAt:localTime,status:'current'})}
     const updated=marketMark(shipmentId);
     auditAdd({actor:ctx.d.manager,role:'Менеджер продаж',action:'Обновлена рыночная котировка MTM',entityType:'Market Mark',entityId:updated.id,field:'marketMark',oldValue:old||'',newValue:structuredClone(updated),source:updated.source,reason:reason||'Создание котировки'});
-    toast('Рыночная котировка обновлена. MTM пересчитан.');renderFinance();finRefresh();openFinancial(shipmentId);
+    toast('Рыночная котировка обновлена. MTM пересчитан.');renderFinance();renderAnalytics();finRefresh();openFinancial(shipmentId);
   };
   if(!$('#financial-detail').open)$('#financial-detail').showModal();
 }
@@ -1479,7 +1705,7 @@ for(const id of ['fin-period','fin-line','fin-product','fin-client','fin-manager
 for(const v of [...new Set(deals.map(d=>d.product))])$('#fin-product').add(new Option(v,v));
 for(const c of clients)$('#fin-client').add(new Option(c.name,c.sourceId));
 for(const v of [...new Set(deals.map(d=>d.manager))])$('#fin-manager').add(new Option(v,v));
-renderFinance();
+initAnalyticsFilters();renderFinance();renderAnalytics();
 
 /* v0.10 — Integrity & Risk Control */
 Object.assign(help,{
