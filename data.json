@@ -918,7 +918,7 @@
         "currency": "MDL",
         "unit": "т",
         "source": "Демо-рынок Grain",
-        "observedAt": "2026-10-01T09:00:00+03:00",
+        "observedAt": "2026-09-30T15:00:00+03:00",
         "status": "current"
       },
       {
@@ -932,7 +932,7 @@
         "currency": "MDL",
         "unit": "т",
         "source": "Демо-рынок Grain",
-        "observedAt": "2026-10-01T09:00:00+03:00",
+        "observedAt": "2026-09-30T15:00:00+03:00",
         "status": "current"
       },
       {
@@ -946,7 +946,7 @@
         "currency": "MDL",
         "unit": "т",
         "source": "Демо-рынок Grain",
-        "observedAt": "2026-10-01T09:00:00+03:00",
+        "observedAt": "2026-09-30T15:00:00+03:00",
         "status": "current"
       },
       {
@@ -960,7 +960,7 @@
         "currency": "MDL",
         "unit": "т",
         "source": "Демо-рынок Grain",
-        "observedAt": "2026-10-01T09:00:00+03:00",
+        "observedAt": "2026-09-30T15:00:00+03:00",
         "status": "current"
       },
       {
@@ -974,7 +974,7 @@
         "currency": "MDL",
         "unit": "т",
         "source": "Демо-рынок Grain",
-        "observedAt": "2026-10-01T09:00:00+03:00",
+        "observedAt": "2026-09-30T15:00:00+03:00",
         "status": "current"
       }
     ]
