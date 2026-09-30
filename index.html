@@ -731,6 +731,11 @@ function openFinancial(shipmentId){
     row.valueStatus=fd.get('valueStatus');
     for(const k of ['finalPrice','unitCost','logistics','loading','storage','laboratory','commission','insurance','otherDirect','paymentTermsDays'])row[k]=+fd.get(k)||0;
     row.outstandingObligationsRegistered=fd.get('outstanding')==='true';row.outstandingObligationsNote=String(fd.get('outstandingNote')||'').trim();
+    const baseIn=shipmentCash(shipmentId).find(m=>m.direction==='in'&&m.status==='planned'&&m.source==='Коммерческие условия');
+    const baseOut=shipmentCash(shipmentId).find(m=>m.direction==='out'&&m.status==='planned'&&m.source==='Финансовый план');
+    const plannedRevenue=(+ctx.p.qty||0)*(+row.finalPrice||0),plannedOut=(+ctx.p.qty||0)*((+row.unitCost||0)+finCostFields.reduce((n,k)=>n+(+row[k]||0),0));
+    if(baseIn&&baseIn.amount!==plannedRevenue){const old=baseIn.amount;baseIn.amount=plannedRevenue;auditAdd({actor:ctx.d.manager,role:'Менеджер продаж',action:'Синхронизация планового Cash Flow',entityType:'Партия',entityId:shipmentId,field:baseIn.id,oldValue:old,newValue:plannedRevenue,source:'Коммерческие условия'})}
+    if(baseOut&&baseOut.amount!==plannedOut){const old=baseOut.amount;baseOut.amount=plannedOut;auditAdd({actor:ctx.d.manager,role:'Менеджер продаж',action:'Синхронизация планового Cash Flow',entityType:'Партия',entityId:shipmentId,field:baseOut.id,oldValue:old,newValue:plannedOut,source:'Финансовый план'})}
     const g=financeGate(row,ctx);row.financialStatus=g.ready?'Расчёт готов':'Расчёт неполный';
     for(const k of Object.keys(row))if(JSON.stringify(before[k])!==JSON.stringify(row[k]))auditAdd({actor:ctx.d.manager,role:'Менеджер продаж',action:'Изменение финансовых данных',entityType:'Партия',entityId:shipmentId,field:finLabels[k]||k,oldValue:before[k],newValue:row[k],source:'Интерфейс'});
     toast('Финансовые данные партии сохранены.');renderFinance();finRefresh();openFinancial(shipmentId);
@@ -763,7 +768,7 @@ function openFinancial(shipmentId){
     if(mark){mark.price=price;mark.source=source;mark.observedAt=localTime;mark.status='current'}
     else{marketMarks.push({id:'MK-R'+String(marketMarks.length+1).padStart(3,'0'),shipmentId,product:ctx.d.product,region:ctx.d.region,basis:'Доставка клиенту',deliveryPeriod:ctx.p.date.slice(0,7),price,currency:'MDL',unit:'т',source,observedAt:localTime,status:'current'})}
     const updated=marketMark(shipmentId);
-    auditAdd({actor:ctx.d.manager,role:'Менеджер продаж',action:'Обновлена рыночная котировка MTM',entityType:'Market Mark',entityId:updated.id,field:'price',oldValue:old?.price??'',newValue:updated.price,source:updated.source,reason:reason||'Создание котировки'});
+    auditAdd({actor:ctx.d.manager,role:'Менеджер продаж',action:'Обновлена рыночная котировка MTM',entityType:'Market Mark',entityId:updated.id,field:'marketMark',oldValue:old||'',newValue:structuredClone(updated),source:updated.source,reason:reason||'Создание котировки'});
     toast('Рыночная котировка обновлена. MTM пересчитан.');renderFinance();finRefresh();openFinancial(shipmentId);
   };
   if(!$('#financial-detail').open)$('#financial-detail').showModal();
