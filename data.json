@@ -1,6 +1,6 @@
 {
   "meta": {
-    "schemaVersion": "0.8.0",
+    "schemaVersion": "0.8.1",
     "demoDate": "2026-09-30",
     "defaultCurrency": "MDL",
     "language": "ru-RU",
@@ -516,6 +516,32 @@
       "body": "Предмет: поиск поставщиков пшеницы по поручению принципала.\nВознаграждение: 1% стоимости исполненных поставок.\nОснование начисления: согласованный отчёт агента.\nПолномочия на подписание договоров от имени принципала не предоставляются.",
       "dueMinutes": 240,
       "remark": ""
+    },
+    {
+      "id": "DOC-011",
+      "no": 11,
+      "clientId": "CL-003",
+      "dealId": "GR-003",
+      "type": "Поставка",
+      "stage": "signed",
+      "version": 1,
+      "title": "Контракт поставки 700 т пшеницы",
+      "body": "Товар: пшеница. Общий объём: 700 тонн.\nПартии: 400 т — октябрь 2026; 300 т — ноябрь 2026.\nЦена: 3 550 MDL/т без НДС.\nКонтракт подписан обеими сторонами (демонстрационные данные).",
+      "dueMinutes": null,
+      "remark": ""
+    },
+    {
+      "id": "DOC-012",
+      "no": 12,
+      "clientId": "CL-004",
+      "dealId": "GR-004",
+      "type": "Поставка",
+      "stage": "signed",
+      "version": 1,
+      "title": "Контракт поставки 120 т удобрений NPK",
+      "body": "Товар: удобрения NPK. Объём: 120 тонн.\nПлановая поставка: ноябрь 2026.\nЦена: 10 400 MDL/т без НДС.\nУсловие: предоплата до отгрузки.\nКонтракт подписан обеими сторонами (демонстрационные данные).",
+      "dueMinutes": null,
+      "remark": ""
     }
   ],
   "finance": {
@@ -624,7 +650,6 @@
     "shipmentFinancials": [
       {
         "shipmentId": "SH-001",
-        "businessLine": "Grain",
         "valueStatus": "План",
         "finalPrice": 3600,
         "unitCost": 3150,
@@ -637,14 +662,13 @@
         "otherDirect": 0,
         "paymentTermsDays": 30,
         "plannedCashIn": "2026-11-14",
-        "actualCashIn": 0,
-        "actualCashOut": 0,
         "financialStatus": "Расчёт неполный",
-        "locked": false
+        "locked": false,
+        "outstandingObligationsRegistered": false,
+        "outstandingObligationsNote": ""
       },
       {
         "shipmentId": "SH-002",
-        "businessLine": "Grain",
         "valueStatus": "План",
         "finalPrice": 3200,
         "unitCost": 2780,
@@ -657,14 +681,13 @@
         "otherDirect": 0,
         "paymentTermsDays": 30,
         "plannedCashIn": "2026-11-19",
-        "actualCashIn": 0,
-        "actualCashOut": 0,
         "financialStatus": "Расчёт неполный",
-        "locked": false
+        "locked": false,
+        "outstandingObligationsRegistered": false,
+        "outstandingObligationsNote": ""
       },
       {
         "shipmentId": "SH-003",
-        "businessLine": "Grain",
         "valueStatus": "Подтверждено",
         "finalPrice": 3550,
         "unitCost": 3090,
@@ -677,14 +700,13 @@
         "otherDirect": 5,
         "paymentTermsDays": 20,
         "plannedCashIn": "2026-10-25",
-        "actualCashIn": 0,
-        "actualCashOut": 0,
         "financialStatus": "Расчёт готов",
-        "locked": false
+        "locked": false,
+        "outstandingObligationsRegistered": false,
+        "outstandingObligationsNote": ""
       },
       {
         "shipmentId": "SH-004",
-        "businessLine": "Grain",
         "valueStatus": "Подтверждено",
         "finalPrice": 3550,
         "unitCost": 3090,
@@ -697,14 +719,13 @@
         "otherDirect": 5,
         "paymentTermsDays": 20,
         "plannedCashIn": "2026-11-25",
-        "actualCashIn": 0,
-        "actualCashOut": 0,
         "financialStatus": "Расчёт готов",
-        "locked": false
+        "locked": false,
+        "outstandingObligationsRegistered": false,
+        "outstandingObligationsNote": ""
       },
       {
         "shipmentId": "SH-005",
-        "businessLine": "Fertilizers",
         "valueStatus": "Подтверждено",
         "finalPrice": 10400,
         "unitCost": 9300,
@@ -717,13 +738,65 @@
         "otherDirect": 80,
         "paymentTermsDays": 0,
         "plannedCashIn": "2026-11-10",
-        "actualCashIn": 0,
-        "actualCashOut": 0,
         "financialStatus": "Расчёт готов",
-        "locked": false
+        "locked": false,
+        "outstandingObligationsRegistered": false,
+        "outstandingObligationsNote": ""
       }
     ],
-    "clearanceRequests": []
+    "clearanceRequests": [],
+    "cashMovements": [
+      {
+        "id": "CF-001",
+        "shipmentId": "SH-001",
+        "date": "2026-11-14",
+        "direction": "in",
+        "category": "Оплата клиента",
+        "amount": 1800000,
+        "status": "planned",
+        "source": "Коммерческие условия"
+      },
+      {
+        "id": "CF-002",
+        "shipmentId": "SH-002",
+        "date": "2026-11-19",
+        "direction": "in",
+        "category": "Оплата клиента",
+        "amount": 960000,
+        "status": "planned",
+        "source": "Коммерческие условия"
+      },
+      {
+        "id": "CF-003",
+        "shipmentId": "SH-003",
+        "date": "2026-10-25",
+        "direction": "in",
+        "category": "Оплата клиента",
+        "amount": 1420000,
+        "status": "planned",
+        "source": "Коммерческие условия"
+      },
+      {
+        "id": "CF-004",
+        "shipmentId": "SH-004",
+        "date": "2026-11-25",
+        "direction": "in",
+        "category": "Оплата клиента",
+        "amount": 1065000,
+        "status": "planned",
+        "source": "Коммерческие условия"
+      },
+      {
+        "id": "CF-005",
+        "shipmentId": "SH-005",
+        "date": "2026-11-10",
+        "direction": "in",
+        "category": "Оплата клиента",
+        "amount": 1248000,
+        "status": "planned",
+        "source": "Коммерческие условия"
+      }
+    ]
   },
   "auditSeed": [
     {
@@ -749,6 +822,18 @@
       "source": "data.json",
       "oldValue": "0.7.0",
       "newValue": "0.8.0"
+    },
+    {
+      "id": "AUD-003",
+      "at": "2026-10-01T09:00:00Z",
+      "actor": "Система",
+      "role": "Система",
+      "action": "Инициализация Financial Integrity Patch",
+      "entityType": "dataset",
+      "entityId": "0.8.1",
+      "source": "data.json",
+      "oldValue": "0.8.0",
+      "newValue": "0.8.1"
     }
   ]
 }
