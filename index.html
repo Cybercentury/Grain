@@ -130,11 +130,38 @@ dialog{background:#fffdf8}button:focus-visible,a:focus-visible,input:focus-visib
 .cash-row:first-child{border-top:0}
 @media(max-width:800px){.fin-market-grid{grid-template-columns:1fr}.cash-row{grid-template-columns:1fr 1fr}.cash-row>*:nth-child(3){grid-column:1/-1}}
 
+
+/* v0.10 — Integrity & Risk Control */
+.integrity-summary{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:18px 20px}
+.integrity-kpi{border:1px solid #e2d6bf;background:#fffdf8;border-radius:9px;padding:15px}
+.integrity-kpi small{display:block;color:var(--muted);font-size:11px}
+.integrity-kpi b{display:block;font-size:24px;margin-top:8px}
+.integrity-list{padding:0 20px 20px}
+.integrity-exception{width:100%;display:grid;grid-template-columns:120px minmax(180px,1.4fr) minmax(220px,2fr) 150px;gap:12px;align-items:center;text-align:left;border:1px solid #e2d6bf;background:#fffdf8;border-radius:9px;padding:14px 16px;margin-top:10px;color:var(--ink)}
+.integrity-exception:hover{background:#f8f0df}
+.integrity-exception.critical{border-left:4px solid #a63b30;background:#fff5f2}
+.integrity-exception.warning{border-left:4px solid #c28a2f;background:#fff9ea}
+.integrity-exception small{display:block;color:var(--muted);margin-top:4px;line-height:1.45}
+.integrity-impact{font-weight:700;text-align:right}
+.integrity-gate{display:inline-block;padding:6px 9px;border-radius:5px;font-size:11px;font-weight:600}
+.integrity-gate.ready{background:#e5efe2;color:#315c3b}
+.integrity-gate.warning{background:#f7e5bd;color:#7e5b20}
+.integrity-gate.critical{background:#f7ddd6;color:#91392d}
+#integrity-detail{width:860px;max-width:96vw}
+.integrity-source-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:16px 0}
+.integrity-source{border:1px solid #e2d6bf;background:#fffdf8;border-radius:8px;padding:14px;line-height:1.6}
+.integrity-source h3{font-size:12px;margin:0 0 8px}
+.integrity-source p{font-size:11px}
+.dv-table{margin-top:10px}
+.dv-table td,.dv-table th{padding:9px 10px}
+@media(max-width:900px){.integrity-summary{grid-template-columns:repeat(2,1fr)}.integrity-exception{grid-template-columns:1fr 1fr}.integrity-exception>span:nth-child(3){grid-column:1/-1}.integrity-source-grid{grid-template-columns:1fr}}
+@media(max-width:600px){.integrity-summary{grid-template-columns:1fr 1fr}.integrity-exception{grid-template-columns:1fr}.integrity-impact{text-align:left}}
+
 </style></head><body>
 <aside><div class="brand"><svg class="brand-wheat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 22V5M12 5c-3-2-2-4 0-4 2 0 3 2 0 4ZM12 10C7 10 5 7 5 4c4 0 7 2 7 6ZM12 15c-5 0-7-3-7-6 4 0 7 2 7 6ZM12 20c-5 0-7-3-7-6 4 0 7 2 7 6ZM12 10c5 0 7-3 7-6-4 0-7 2-7 6ZM12 15c5 0 7-3 7-6-4 0-7 2-7 6ZM12 20c5 0 7-3 7-6-4 0-7 2-7 6Z"/></svg><span class="brand-name">grain<span>.</span></span></div><small>ТОРГОВЫЕ ОПЕРАЦИИ</small><nav aria-label="Основная навигация"><button class="active" data-view="overview"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg><span>Обзор</span></button><button data-view="pipeline"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 4h18l-7 8v6l-4 2v-8z"/></svg><span>Воронка продаж</span></button><button data-view="shipments"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 6h11v12H3zM14 10h4l3 4v4h-7"/><path d="M14 14h7"/><circle cx="7" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg><span>План отгрузок</span></button><button data-view="clients"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="9" cy="7" r="3"/><path d="M3 21v-3a6 6 0 0 1 12 0v3M16 4a3 3 0 0 1 0 6M18 14a5 5 0 0 1 3 4v3"/></svg><span>База клиентов</span></button><button data-view="finance"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/><path d="M3 7l6-4 6 6 6-5"/></svg><span>Финансы</span></button><button data-view="documents"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H5v20h14V7zM14 2v6h5M8 12h8M8 16h5"/></svg><span>Документооборот</span></button></nav><footer>МОЛДОВА · B2B<br>Зерно и минеральные удобрения<br><br>Прототип / 01<br>Все компании и сделки вымышлены</footer></aside>
 <main><div class="top"><span>Рабочее пространство / Продажи по Молдове</span><span class="demo">Демонстрационные данные</span></div><button class="task-banner" id="task-banner" aria-haspopup="dialog" aria-controls="task-drawer"></button><div class="heading"><div><h1 id="page-title">Продажи в деталях.</h1><p id="subtitle">От первого запроса до последней отгруженной тонны.</p></div></div>
 <div class="filters"><label>Период отгрузки<select id="month"><option value="2026-10">Октябрь 2026</option><option value="2026-11">Ноябрь 2026</option><option value="2026-12">Декабрь 2026</option><option value="all">IV квартал 2026</option></select></label><label>Товар<select id="product"><option value="all">Все товары</option><option>Пшеница</option><option>Кукуруза</option><option>Удобрения NPK</option></select></label><label>Район<select id="region"><option value="all">Вся Молдова</option><option>Бельцы</option><option>Оргеев</option><option>Кагул</option><option>Унгены</option></select></label><span class="scope">Дата примера: 30 сентября 2026 <button class="help" data-help="date" aria-label="О дате примера">?</button></span></div>
-<section id="overview"><div class="metrics" id="metrics"></div><div class="grid"><section class="panel"><div class="panel-head"><h2>Горизонт отгрузок <button class="help" data-help="chart" aria-label="О горизонте отгрузок">?</button></h2><small>IV квартал · тонны</small></div><div class="chart" id="chart"></div></section><section class="panel"><div class="panel-head"><h2>Требуют внимания <button class="help" data-help="risks" aria-label="О рисках">?</button></h2><small id="risk-count"></small></div><div id="risks"></div></section></div><section class="panel lower"><div class="panel-head"><h2>Сделки выбранного периода</h2><small>Нажмите на клиента, чтобы открыть сделку</small></div><div class="table-wrap" id="deals-table"></div></section></section>
+<section id="overview"><div class="metrics" id="metrics"></div><div class="grid"><section class="panel"><div class="panel-head"><h2>Горизонт отгрузок <button class="help" data-help="chart" aria-label="О горизонте отгрузок">?</button></h2><small>IV квартал · тонны</small></div><div class="chart" id="chart"></div></section><section class="panel"><div class="panel-head"><h2>Требуют внимания <button class="help" data-help="risks" aria-label="О рисках">?</button></h2><small id="risk-count"></small></div><div id="risks"></div></section></div><section class="panel lower integrity-overview"><div class="panel-head"><h2>Контроль целостности и рисков <button class="help" data-help="integrity" aria-label="О контроле целостности">?</button></h2><small>Автоматические сверки Shipment · вес · качество · финансы · MTM</small></div><div class="integrity-summary" id="integrity-summary"></div><div id="integrity-exceptions"></div></section><section class="panel lower"><div class="panel-head"><h2>Сделки выбранного периода</h2><small>Нажмите на клиента, чтобы открыть сделку</small></div><div class="table-wrap" id="deals-table"></div></section></section>
 <section id="pipeline" class="hidden"><div class="board" id="board"></div><p class="note">Все активные сделки по выбранным товару и району, независимо от месяца. Тонны — весь оставшийся объём. Этап меняется в карточке сделки.</p></section>
 <section id="shipments" class="hidden"><section class="panel"><div class="panel-head"><h2>График партий <button class="help" data-help="schedule" aria-label="О графике партий">?</button></h2><small>Факт и остаток по каждой партии</small></div><div class="table-wrap" id="shipment-table"></div></section></section>
 
@@ -194,7 +221,7 @@ dialog{background:#fffdf8}button:focus-visible,a:focus-visible,input:focus-visib
 <dialog id="client-detail" aria-labelledby="client-title"></dialog>
 <dialog id="contact-result" aria-labelledby="result-title"></dialog>
 <dialog id="message-preview" aria-labelledby="message-title"></dialog>
-<dialog id="task-drawer" aria-labelledby="task-title"><div class="panel-head"><div><small>ЗАДАЧИ И СОГЛАСОВАНИЯ</small><h2 id="task-title">Мои действия и ожидаемые решения</h2></div><button class="close" aria-label="Закрыть задачи">↑</button></div><div id="wf-tasks" class="wf-task-grid"></div></dialog><dialog id="document-detail" aria-labelledby="document-title"></dialog><dialog id="clearance-detail" aria-labelledby="clearance-title"></dialog><dialog id="financial-detail" aria-labelledby="financial-title"></dialog><div id="term-tooltip" role="tooltip" hidden></div><script type="module">
+<dialog id="task-drawer" aria-labelledby="task-title"><div class="panel-head"><div><small>ЗАДАЧИ И СОГЛАСОВАНИЯ</small><h2 id="task-title">Мои действия и ожидаемые решения</h2></div><button class="close" aria-label="Закрыть задачи">↑</button></div><div id="wf-tasks" class="wf-task-grid"></div></dialog><dialog id="document-detail" aria-labelledby="document-title"></dialog><dialog id="clearance-detail" aria-labelledby="clearance-title"></dialog><dialog id="financial-detail" aria-labelledby="financial-title"></dialog><dialog id="integrity-detail" aria-labelledby="integrity-title"></dialog><div id="term-tooltip" role="tooltip" hidden></div><script type="module">
 let DB;
 try{
   const response=await fetch('./data.json',{cache:'no-store'});
@@ -205,7 +232,7 @@ try{
   if(main)main.innerHTML='<section class="panel" style="padding:24px"><h1>Не удалось загрузить данные Grain</h1><p>Интерфейс использует data.json как мини-базу данных. Откройте проект через GitHub Pages или локальный HTTP-сервер и проверьте доступность data.json.</p></section>';
   throw error;
 }
-let financeState=structuredClone(DB.finance.shipmentFinancials||[]),cashMovements=structuredClone(DB.finance.cashMovements||[]),marketMarks=structuredClone(DB.market?.marks||[]),auditTrail=structuredClone(DB.auditSeed||[]);
+let financeState=structuredClone(DB.finance.shipmentFinancials||[]),cashMovements=structuredClone(DB.finance.cashMovements||[]),marketMarks=structuredClone(DB.market?.marks||[]),integrityState=structuredClone(DB.integrity||{}),auditTrail=structuredClone(DB.auditSeed||[]);
 const stages=['Новый запрос','Потребность уточнена','Предложение отправлено','Согласование условий','Контракт подписан','Исполнение'];
 const probability=[0,.2,.4,.7,1,1], today='2026-09-30';
 const sourceClients=Object.fromEntries(DB.clients.map(c=>[c.id,c]));
@@ -720,7 +747,7 @@ function openFinancial(shipmentId){
   '<form id="finance-form"><h2>Первичные финансовые данные</h2><p class="client-meta">Business line берётся из сделки: <b>'+escapeHTML(ctx.d.businessLine)+'</b>.</p><div class="fin-form-grid"><label>Статус значения<select name="valueStatus"'+disabled+'>'+['План','Подтверждено','Факт'].map(v=>'<option '+(row.valueStatus===v?'selected':'')+'>'+v+'</option>').join('')+'</select></label>'+
   financeFieldInput(row,'finalPrice','Финальная цена, MDL/т')+financeFieldInput(row,'unitCost','Себестоимость, MDL/т')+financeFieldInput(row,'logistics','Транспорт, MDL/т')+financeFieldInput(row,'loading','Погрузка/разгрузка, MDL/т')+financeFieldInput(row,'storage','Хранение, MDL/т')+financeFieldInput(row,'laboratory','Лаборатория, MDL/т')+financeFieldInput(row,'commission','Комиссия, MDL/т')+financeFieldInput(row,'insurance','Страхование, MDL/т')+financeFieldInput(row,'otherDirect','Прочие прямые, MDL/т')+financeFieldInput(row,'paymentTermsDays','Срок оплаты, дней')+
   '<label>Есть незакрытые обязательства<select name="outstanding"'+disabled+'><option value="false" '+(!row.outstandingObligationsRegistered?'selected':'')+'>Нет</option><option value="true" '+(row.outstandingObligationsRegistered?'selected':'')+'>Да</option></select></label><label style="grid-column:span 2">Комментарий по незакрытым обязательствам<input name="outstandingNote" type="text" maxlength="500"'+disabled+' value="'+escapeHTML(row.outstandingObligationsNote||'')+'"></label></div>'+
-  (row.locked?'':'<div class="wf-buttons"><button class="btn primary" type="submit">Сохранить финансовые данные</button><button class="btn" type="button" id="finance-lock" '+(!lockState.ok?'disabled':'')+'>Финансово закрыть партию</button></div><p class="note">Закрытие: статус «Факт» + готовая проверка + полная отгрузка либо зарегистрированные незакрытые обязательства.</p>')+'<p id="finance-error" role="alert" class="wf-error"></p></form>'+
+  (row.locked?'':'<div class="wf-buttons"><button class="btn primary" type="submit">Сохранить финансовые данные</button><button class="btn" type="button" id="finance-lock" '+(!lockState.ok?'disabled':'')+'>Финансово закрыть партию</button></div><p class="note">Закрытие: статус «Факт» + готовая проверка + полная отгрузка либо зарегистрированные незакрытые обязательства.</p>+(lockState.integrity?.blocking?'<p class="wf-error">Integrity Gate блокирует финансовое закрытие: '+escapeHTML(lockState.integrity.exceptions.filter(x=>x.blocking).map(x=>x.title).join('; '))+'</p>':'')')+'<p id="finance-error" role="alert" class="wf-error"></p></form>'+
   '<h2 style="margin-top:22px">'+termMarkup('cashflow','Cash Flow')+' партии</h2>'+renderCashRows(shipmentId)+'<div class="fin-form-grid"><label>Дата<input id="cash-date" type="date"></label><label>Направление<select id="cash-direction"><option value="in">Поступление</option><option value="out">Платёж</option></select></label><label>Статус<select id="cash-status"><option value="planned">План</option><option value="actual">Факт</option></select></label><label>Сумма, MDL<input id="cash-amount" type="number" min="0" step="0.01"></label><label style="grid-column:span 2">Категория<input id="cash-category" type="text" maxlength="150" placeholder="Например: оплата клиента"></label></div><button class="btn" id="cash-add" type="button">Добавить движение</button><p id="cash-error" class="wf-error"></p>'+
   (row.locked?'<div class="fin-correction"><h2>Корректировка через '+termMarkup('finlog','Финансовый журнал')+'</h2><div class="fin-form-grid"><label>Поле<select id="corr-field">'+Object.entries(finLabels).filter(([k])=>!['valueStatus','outstandingObligationsRegistered','outstandingObligationsNote'].includes(k)).map(([k,v])=>'<option value="'+k+'">'+v+'</option>').join('')+'</select></label><label>Новое значение<input id="corr-value" type="text"></label><label>Причина<input id="corr-reason" type="text" maxlength="500" placeholder="Обоснование корректировки"></label></div><button class="btn primary" id="corr-save" type="button">Записать корректировку в журнал</button><p id="corr-error" role="alert" class="wf-error"></p></div>':'')+
   '<h2 style="margin-top:22px">История партии</h2><div class="fin-log">'+(logs.length?logs.map(x=>'<div class="fin-log-entry"><b>'+escapeHTML(x.action)+'</b>'+(x.field?' · '+escapeHTML(x.field):'')+'<small>'+escapeHTML(x.at||'')+' · '+escapeHTML(x.actor||'')+'</small>'+(x.oldValue!==''||x.newValue!==''?'<span>'+escapeHTML(String(x.oldValue??''))+' → '+escapeHTML(String(x.newValue??''))+'</span>':'')+(x.reason?'<small>Причина: '+escapeHTML(x.reason)+'</small>':'')+'</div>').join(''):'<div class="empty">Изменений пока нет.</div>')+'</div></div>';
@@ -809,6 +836,185 @@ for(const c of clients)$('#fin-client').add(new Option(c.name,c.sourceId));
 for(const v of [...new Set(deals.map(d=>d.manager))])$('#fin-manager').add(new Option(v,v));
 renderFinance();
 
+/* v0.10 — Integrity & Risk Control */
+Object.assign(help,{
+  integrity:['Контроль целостности и рисков','Integrity Gate автоматически сверяет связанные данные партии: плановый объём, весовую запись, количество в счёте, показатели качества/ДВ и актуальность рыночной котировки. Критическое расхождение может блокировать отгрузку или финансовое закрытие. Сумма риска — оценка потенциального воздействия, а не признанный бухгалтерский убыток.']
+});
+function integrityRules(){return integrityState.ruleSettings||{weightToleranceTons:.5,invoiceWeightToleranceTons:.5,marketMarkMaxAgeHours:48,demoNow:today+'T18:00:00+03:00'}}
+function latestByDate(rows,key='observedAt'){return rows.slice().sort((a,b)=>String(b[key]||'').localeCompare(String(a[key]||'')))[0]||null}
+function weightRecord(shipmentId){return latestByDate((integrityState.weightRecords||[]).filter(x=>x.shipmentId===shipmentId&&x.status!=='cancelled'))}
+function invoiceRecord(shipmentId){return (integrityState.invoiceRecords||[]).find(x=>x.shipmentId===shipmentId&&x.status!=='cancelled')||null}
+function fertilizerQualityRecord(shipmentId){return (integrityState.fertilizerQuality||[]).find(x=>x.shipmentId===shipmentId)||null}
+function integrityException({shipmentId,category,severity,title,details,difference=0,financialImpact=0,sourceIds=[],blocking=false,extra=null}){
+  return {id:'EX-'+shipmentId+'-'+category,shipmentId,category,severity,title,details,difference,financialImpact,sourceIds,blocking,detectedAt:integrityRules().demoNow,extra};
+}
+function integrityExceptionsFor(shipmentId){
+  const ctx=financeContext(shipmentId);if(!ctx)return [];
+  const row=financeRow(shipmentId),rules=integrityRules(),price=+row?.finalPrice||+ctx.d.price||0,exceptions=[];
+  const weight=weightRecord(shipmentId),invoice=invoiceRecord(shipmentId),quality=fertilizerQualityRecord(shipmentId),mark=marketMark(shipmentId);
+
+  if(weight){
+    const gross=+weight.grossKg||0,tare=+weight.tareKg||0,net=+weight.netKg||0,netT=net/1000;
+    if(gross<=0||tare<0||net<=0||tare>=gross||Math.abs((gross-tare)-net)>5){
+      exceptions.push(integrityException({
+        shipmentId,category:'weight_invalid',severity:'critical',title:'Некорректная весовая запись',
+        details:'Gross / tare / net содержат физически невозможное или несогласованное значение.',
+        financialImpact:Math.abs(netT)*price,sourceIds:[weight.id],blocking:true
+      }));
+    }else{
+      const over=netT-(+ctx.p.qty||0);
+      if(over>rules.weightToleranceTons){
+        exceptions.push(integrityException({
+          shipmentId,category:'weight_over_plan',severity:'critical',title:'Вес выше плана партии',
+          details:'Net weight '+fmt(netT)+' т превышает план '+fmt(ctx.p.qty)+' т на '+fmt(over)+' т.',
+          difference:over,financialImpact:over*price,sourceIds:[weight.id],blocking:true,
+          extra:{netT,plannedQty:+ctx.p.qty||0}
+        }));
+      }
+    }
+  }
+
+  if(weight&&invoice){
+    const netT=(+weight.netKg||0)/1000,diff=(+invoice.qty||0)-netT,abs=Math.abs(diff);
+    if(abs>rules.invoiceWeightToleranceTons){
+      exceptions.push(integrityException({
+        shipmentId,category:'invoice_vs_weight',severity:'critical',title:'Счёт не совпадает с фактическим весом',
+        details:'Invoice '+fmt(invoice.qty)+' т, подтверждённый net weight '+fmt(netT)+' т. Расхождение '+fmt(abs)+' т.',
+        difference:diff,financialImpact:abs*(+invoice.unitPrice||price),sourceIds:[weight.id,invoice.id],blocking:true,
+        extra:{invoiceQty:+invoice.qty||0,netT}
+      }));
+    }
+  }
+
+  if(quality){
+    const components=[],qty=(weight?.netKg?weight.netKg/1000:(+ctx.p.qty||0)),contract=quality.contractPercent||{},lab=quality.labPercent||{},tol=quality.tolerancePctPoint||{},penalty=quality.penaltyMdlPerPctPointPerTon||{};
+    for(const nutrient of Object.keys(contract)){
+      const deficit=(+contract[nutrient]||0)-(+lab[nutrient]||0),allowed=+tol[nutrient]||0;
+      if(deficit>allowed){
+        const chargeable=Math.max(deficit-allowed,0),deficitTons=qty*deficit/100,impact=chargeable*qty*(+penalty[nutrient]||0);
+        components.push({nutrient,contract:+contract[nutrient],lab:+lab[nutrient],tolerance:allowed,deficit,deficitTons,impact});
+      }
+    }
+    if(components.length){
+      const impact=components.reduce((n,x)=>n+x.impact,0),detail=components.map(x=>x.nutrient+': '+fmt(x.contract)+'% → '+fmt(x.lab)+'%').join('; ');
+      exceptions.push(integrityException({
+        shipmentId,category:'fertilizer_dv',severity:'critical',title:'Отклонение действующего вещества удобрения',
+        details:quality.grade+' · '+detail+'.',
+        financialImpact:impact,sourceIds:[quality.id],blocking:true,
+        extra:{grade:quality.grade,qty,components}
+      }));
+    }
+  }
+
+  if(!mark){
+    exceptions.push(integrityException({
+      shipmentId,category:'market_mark_missing',severity:'warning',title:'Нет рыночной котировки для MTM',
+      details:'Открытая позиция не имеет актуального market mark.',financialImpact:0,blocking:false
+    }));
+  }else{
+    const ageHours=(Date.parse(rules.demoNow)-Date.parse(mark.observedAt))/3600000;
+    if(mark.status==='stale'||ageHours>rules.marketMarkMaxAgeHours){
+      const calc=financeCalc(row,ctx);
+      exceptions.push(integrityException({
+        shipmentId,category:'market_mark_stale',severity:'warning',title:'MTM основан на устаревшей котировке',
+        details:'Котировка '+date(mark.observedAt.slice(0,10))+' старше допустимого окна '+rules.marketMarkMaxAgeHours+' ч.',
+        financialImpact:Math.abs(calc.mtm),sourceIds:[mark.id],blocking:false,extra:{ageHours,mtm:calc.mtm}
+      }));
+    }
+  }
+  return exceptions;
+}
+function integrityGate(shipmentId){
+  const exceptions=integrityExceptionsFor(shipmentId),critical=exceptions.filter(x=>x.severity==='critical'),warnings=exceptions.filter(x=>x.severity==='warning');
+  return {
+    status:critical.length?'Критично':warnings.length?'Предупреждение':'Готово',
+    severity:critical.length?'critical':warnings.length?'warning':'ready',
+    count:exceptions.length,
+    critical:critical.length,warnings:warnings.length,
+    blocking:exceptions.some(x=>x.blocking),
+    financialImpact:exceptions.reduce((n,x)=>n+(+x.financialImpact||0),0),
+    exceptions
+  };
+}
+function integrityShipmentIdsForOverview(){
+  return [...new Set(base().flatMap(d=>d.parts.map(p=>p.shipmentId)).filter(Boolean))];
+}
+function integrityAllExceptions(ids=integrityShipmentIdsForOverview()){
+  const sev={critical:0,warning:1};
+  return ids.flatMap(id=>integrityExceptionsFor(id)).sort((a,b)=>(sev[a.severity]-sev[b.severity])||(b.financialImpact-a.financialImpact));
+}
+function renderIntegrityOverview(){
+  const sum=$('#integrity-summary'),list=$('#integrity-exceptions');if(!sum||!list)return;
+  const ids=integrityShipmentIdsForOverview(),exceptions=integrityAllExceptions(ids),critical=exceptions.filter(x=>x.severity==='critical'),warnings=exceptions.filter(x=>x.severity==='warning'),blocked=new Set(exceptions.filter(x=>x.blocking).map(x=>x.shipmentId));
+  const impact=exceptions.reduce((n,x)=>n+(+x.financialImpact||0),0);
+  sum.innerHTML=[
+    ['Критические отклонения',critical.length,'Требуют решения до исполнения'],
+    ['Предупреждения',warnings.length,'Контроль данных / актуальности'],
+    ['Потенциальное воздействие',money(impact),'Оценка риска, не признанный убыток'],
+    ['Проблемные партии',blocked.size,'Integrity Gate блокирует критическое действие']
+  ].map(([l,v,p])=>'<article class="integrity-kpi"><small>'+l+'</small><b>'+v+'</b><small>'+p+'</small></article>').join('');
+  list.innerHTML='<div class="integrity-list">'+(exceptions.length?exceptions.map(ex=>{
+    const ctx=financeContext(ex.shipmentId);
+    return '<button class="integrity-exception '+ex.severity+'" data-integrity="'+ex.shipmentId+'"><span><span class="integrity-gate '+ex.severity+'">'+(ex.severity==='critical'?'Критично':'Предупреждение')+'</span><small>'+ex.shipmentId+'</small></span><span><b>'+escapeHTML(ctx?.c?.name||'')+'</b><small>'+escapeHTML(ctx?.d?.product||'')+' · '+escapeHTML(ctx?.d?.businessLine||'')+'</small></span><span><b>'+escapeHTML(ex.title)+'</b><small>'+escapeHTML(ex.details)+'</small></span><span class="integrity-impact">'+money(ex.financialImpact)+'<small>потенциальное воздействие</small></span></button>';
+  }).join(''):'<div class="empty">Критических расхождений по активным Shipment не обнаружено.</div>')+'</div>';
+}
+function integritySourceHtml(shipmentId){
+  const ctx=financeContext(shipmentId),weight=weightRecord(shipmentId),invoice=invoiceRecord(shipmentId),quality=fertilizerQualityRecord(shipmentId),mark=marketMark(shipmentId);
+  const weightHtml=weight?'<section class="integrity-source"><h3>Весовая запись · '+escapeHTML(weight.id)+'</h3><p>Gross: '+fmt(weight.grossKg/1000)+' т<br>Tare: '+fmt(weight.tareKg/1000)+' т<br><b>Net: '+fmt(weight.netKg/1000)+' т</b><br>'+escapeHTML(weight.source)+' · '+escapeHTML(weight.observedAt.replace('T',' ').slice(0,16))+'</p></section>':'<section class="integrity-source"><h3>Весовая запись</h3><p>Нет данных.</p></section>';
+  const invoiceHtml=invoice?'<section class="integrity-source"><h3>Invoice · '+escapeHTML(invoice.id)+'</h3><p>Количество: <b>'+fmt(invoice.qty)+' т</b><br>Цена: '+money(invoice.unitPrice)+'/т<br>Сумма: '+money(invoice.amount)+'<br>'+escapeHTML(invoice.source)+'</p></section>':'<section class="integrity-source"><h3>Invoice</h3><p>Нет данных.</p></section>';
+  const marketHtml=mark?'<section class="integrity-source"><h3>Market Mark · '+escapeHTML(mark.id)+'</h3><p>Цена: <b>'+money(mark.price)+'/т</b><br>Статус: '+escapeHTML(mark.status)+'<br>'+escapeHTML(mark.source)+'<br>'+escapeHTML(mark.observedAt.replace('T',' ').slice(0,16))+'</p></section>':'<section class="integrity-source"><h3>Market Mark</h3><p>Нет данных.</p></section>';
+  let qualityHtml='<section class="integrity-source"><h3>Качество / ДВ</h3><p>Для этой партии лабораторный контроль ДВ не задан.</p></section>';
+  if(quality){
+    const qty=weight?.netKg?weight.netKg/1000:(+ctx.p.qty||0),keys=Object.keys(quality.contractPercent||{});
+    qualityHtml='<section class="integrity-source" style="grid-column:1/-1"><h3>Качество / ДВ · '+escapeHTML(quality.grade)+'</h3><div class="table-wrap"><table class="dv-table"><thead><tr><th>Компонент</th><th>Контракт, %</th><th>Лаборатория, %</th><th>Контрактное ДВ, т</th><th>Фактическое ДВ, т</th></tr></thead><tbody>'+keys.map(k=>'<tr><td><b>'+escapeHTML(k)+'</b></td><td>'+fmt(quality.contractPercent[k])+'%</td><td>'+fmt(quality.labPercent[k])+'%</td><td>'+fmt(qty*quality.contractPercent[k]/100)+'</td><td>'+fmt(qty*quality.labPercent[k]/100)+'</td></tr>').join('')+'</tbody></table></div><p>'+escapeHTML(quality.source)+' · масса для расчёта '+fmt(qty)+' т</p></section>';
+  }
+  return '<div class="integrity-source-grid">'+weightHtml+invoiceHtml+marketHtml+qualityHtml+'</div>';
+}
+function openIntegrity(shipmentId){
+  const ctx=financeContext(shipmentId);if(!ctx)return;
+  const gate=integrityGate(shipmentId);
+  $('#integrity-detail').innerHTML='<div class="panel-head"><div><small>INTEGRITY GATE · '+shipmentId+'</small><h2 id="integrity-title">'+escapeHTML(ctx.c?.name||'')+' · '+escapeHTML(ctx.d.product)+'</h2><p class="client-meta">Сделка '+ctx.d.sourceId+' · план '+fmt(ctx.p.qty)+' т · отгружено '+fmt(ctx.p.shipped)+' т</p></div><button class="close" aria-label="Закрыть">×</button></div><div class="dialog-body"><div class="wf-assignment '+(gate.severity==='critical'?'wf-late':'')+'"><b>Контроль целостности: '+gate.status+'</b><p>Найдено: '+gate.critical+' критических · '+gate.warnings+' предупреждений · потенциальное воздействие '+money(gate.financialImpact)+'.</p><p>Это оценка риска, а не признанный бухгалтерский убыток.</p></div><h2>Обнаруженные отклонения</h2>'+(gate.exceptions.length?gate.exceptions.map(ex=>'<div class="integrity-exception '+ex.severity+'" style="display:block"><span class="integrity-gate '+ex.severity+'">'+(ex.severity==='critical'?'Критично':'Предупреждение')+'</span><b style="display:block;margin-top:9px">'+escapeHTML(ex.title)+'</b><small>'+escapeHTML(ex.details)+'</small><p style="margin-top:8px"><b>Потенциальное воздействие: '+money(ex.financialImpact)+'</b></p><small>Источники: '+escapeHTML(ex.sourceIds.join(', ')||'системная проверка')+'</small></div>').join(''):'<div class="empty">Отклонений не обнаружено.</div>')+'<h2 style="margin-top:22px">Исходные данные проверки</h2>'+integritySourceHtml(shipmentId)+'</div>';
+  if(!$('#integrity-detail').open)$('#integrity-detail').showModal();
+}
+function enhanceShipmentIntegrity(){
+  const table=$('#shipment-table table');if(!table)return;
+  const head=table.querySelector('thead tr');
+  if(head&&!head.querySelector('.integrity-col'))head.insertAdjacentHTML('beforeend','<th class="integrity-col">Integrity Gate</th>');
+  const rows=selected().flatMap(d=>parts(d).map(p=>({d,p}))).sort((a,b)=>a.p.date.localeCompare(b.p.date));
+  [...table.querySelectorAll('tbody tr')].forEach((tr,n)=>{
+    const x=rows[n];if(!x||tr.querySelector('.integrity-col'))return;
+    const g=integrityGate(x.p.shipmentId);
+    tr.insertAdjacentHTML('beforeend','<td class="integrity-col"><button class="integrity-gate '+g.severity+'" data-integrity="'+x.p.shipmentId+'">'+g.status+(g.count?' · '+g.count:'')+'</button><small>'+money(g.financialImpact)+'</small></td>');
+  });
+}
+
+// Integrity is an additional hard gate for critical/blocking discrepancies.
+const integrityBaseArCheck=arCheck;
+arCheck=function(key){
+  const baseResult=integrityBaseArCheck(key),g=integrityGate(key);
+  if(g.blocking&&baseResult.status!=='Отгружена'){
+    return {...baseResult,status:'Заблокирована · Integrity',allow:false,reasons:[...baseResult.reasons,...g.exceptions.filter(x=>x.blocking).map(x=>'Integrity: '+x.title+' · '+x.details)],integrity:g};
+  }
+  return {...baseResult,integrity:g};
+};
+const integrityBaseCanFinanciallyLock=canFinanciallyLock;
+canFinanciallyLock=function(row,ctx){
+  const state=integrityBaseCanFinanciallyLock(row,ctx),g=integrityGate(ctx.p.shipmentId);
+  return {...state,integrity:g,ok:state.ok&&!g.blocking};
+};
+
+const integrityBaseArRender=arRender;
+arRender=function(){integrityBaseArRender();enhanceShipmentIntegrity()};
+
+const integrityBaseRenderSales=renderSales;
+renderSales=function(){integrityBaseRenderSales();renderIntegrityOverview()};
+
+document.addEventListener('click',e=>{
+  const b=e.target.closest('[data-integrity]');if(b){openIntegrity(b.dataset.integrity);return}
+});
+
+// Explain Integrity block and refresh every affected surface.
+render();
 arRefresh();
 </script></body></html>
 
