@@ -1,6 +1,742 @@
 {
   "meta": {
     "schemaVersion": "0.7.0",
-    "language": "ru-RU"
-  }
+    "demoDate": "2026-09-30",
+    "defaultCurrency": "MDL",
+    "language": "ru-RU",
+    "company": "Moldova",
+    "salesDivision": "Продажи",
+    "businessLines": [
+      {
+        "id": "BL-GRAIN",
+        "code": "Grain",
+        "name": "Зерновые"
+      },
+      {
+        "id": "BL-FERT",
+        "code": "Fertilizers",
+        "name": "Удобрения"
+      }
+    ]
+  },
+  "clients": [
+    {
+      "id": "CL-001",
+      "no": 1,
+      "name": "Agro Nord Demo",
+      "type": "Зерновой трейдер",
+      "region": "Бельцы",
+      "manager": "Елена Русу",
+      "relationshipStatus": "Действующий",
+      "primaryProduct": "Пшеница",
+      "lastContact": "2026-09-25",
+      "lastOrder": "2026-09-01",
+      "automation": {
+        "enabled": true,
+        "rule": "repeat",
+        "season": "2026-11-01",
+        "lead": 7,
+        "interval": 30,
+        "promise": "2026-10-01",
+        "target": 3700,
+        "offer": 3650,
+        "quoteDate": "2026-09-30",
+        "quoteUntil": "2026-10-05",
+        "action": "Подтвердить обновлённую цену",
+        "channels": [
+          "telegram"
+        ]
+      }
+    },
+    {
+      "id": "CL-002",
+      "no": 2,
+      "name": "Câmp Verde Demo",
+      "type": "Комбикормовый завод",
+      "region": "Оргеев",
+      "manager": "Андрей Морару",
+      "relationshipStatus": "Действующий",
+      "primaryProduct": "Кукуруза",
+      "lastContact": "2026-09-25",
+      "lastOrder": "2026-09-01",
+      "automation": {
+        "enabled": true,
+        "rule": "repeat",
+        "season": "2026-11-01",
+        "lead": 7,
+        "interval": 30,
+        "promise": "2026-10-02",
+        "target": 3700,
+        "offer": 3650,
+        "quoteDate": "2026-09-30",
+        "quoteUntil": "2026-10-05",
+        "action": "Согласовать условия оплаты",
+        "channels": [
+          "email",
+          "whatsapp"
+        ]
+      }
+    },
+    {
+      "id": "CL-003",
+      "no": 3,
+      "name": "Sud Cereale Demo",
+      "type": "Региональный дистрибьютор",
+      "region": "Кагул",
+      "manager": "Елена Русу",
+      "relationshipStatus": "Действующий",
+      "primaryProduct": "Пшеница",
+      "lastContact": "2026-09-25",
+      "lastOrder": "2026-09-01",
+      "automation": {
+        "enabled": true,
+        "rule": "repeat",
+        "season": "2026-11-01",
+        "lead": 7,
+        "interval": 30,
+        "promise": "2026-10-01",
+        "target": 3700,
+        "offer": 3650,
+        "quoteDate": "2026-09-30",
+        "quoteUntil": "2026-10-05",
+        "action": "Подтвердить транспорт",
+        "channels": [
+          "telegram"
+        ]
+      }
+    },
+    {
+      "id": "CL-004",
+      "no": 4,
+      "name": "Terra Vest Demo",
+      "type": "Агрохозяйство",
+      "region": "Унгены",
+      "manager": "Андрей Морару",
+      "relationshipStatus": "Действующий",
+      "primaryProduct": "Удобрения NPK",
+      "lastContact": "2026-09-25",
+      "lastOrder": "2026-09-01",
+      "automation": {
+        "enabled": true,
+        "rule": "season",
+        "season": "2026-11-01",
+        "lead": 7,
+        "interval": 30,
+        "promise": "2026-10-05",
+        "target": 3700,
+        "offer": 3650,
+        "quoteDate": "2026-09-30",
+        "quoteUntil": "2026-10-05",
+        "action": "Проверить поступление предоплаты",
+        "channels": [
+          "email",
+          "whatsapp"
+        ]
+      }
+    },
+    {
+      "id": "CL-005",
+      "no": 5,
+      "name": "Orhei Harvest Demo",
+      "type": "Зерновой трейдер",
+      "region": "Оргеев",
+      "manager": "Елена Русу",
+      "relationshipStatus": "Действующий",
+      "primaryProduct": "Кукуруза",
+      "lastContact": "2026-09-25",
+      "lastOrder": "2026-09-01",
+      "automation": {
+        "enabled": true,
+        "rule": "repeat",
+        "season": "2026-11-01",
+        "lead": 7,
+        "interval": 30,
+        "promise": "2026-10-03",
+        "target": 3700,
+        "offer": 3650,
+        "quoteDate": "2026-09-30",
+        "quoteUntil": "2026-10-05",
+        "action": "Уточнить объём и график",
+        "channels": [
+          "telegram"
+        ]
+      }
+    },
+    {
+      "id": "CL-006",
+      "no": 6,
+      "name": "Nord Fertil Demo",
+      "type": "Дистрибьютор удобрений",
+      "region": "Бельцы",
+      "manager": "Андрей Морару",
+      "relationshipStatus": "Потенциальный",
+      "primaryProduct": "Удобрения NPK",
+      "lastContact": "2026-09-25",
+      "lastOrder": "2026-09-01",
+      "automation": {
+        "enabled": true,
+        "rule": "repeat",
+        "season": "2026-11-01",
+        "lead": 7,
+        "interval": 30,
+        "promise": "2026-10-02",
+        "target": 3700,
+        "offer": 3650,
+        "quoteDate": "2026-09-30",
+        "quoteUntil": "2026-10-05",
+        "action": "Провести первый звонок",
+        "channels": [
+          "email",
+          "whatsapp"
+        ]
+      }
+    },
+    {
+      "id": "CL-007",
+      "no": 7,
+      "name": "Moara Bălți Demo",
+      "type": "Мукомольный завод",
+      "region": "Бельцы",
+      "manager": "Елена Русу",
+      "relationshipStatus": "Действующий",
+      "primaryProduct": "Пшеница",
+      "lastContact": "2026-09-15",
+      "lastOrder": "2026-09-07",
+      "automation": {
+        "enabled": true,
+        "rule": "repeat",
+        "season": "2026-11-01",
+        "lead": 7,
+        "interval": 30,
+        "promise": "2026-09-30",
+        "target": 3800,
+        "offer": 3750,
+        "quoteDate": "2026-09-30",
+        "quoteUntil": "2026-10-05",
+        "action": "Уточнить потребность в пшенице и согласовать следующую партию.",
+        "channels": [
+          "email",
+          "telegram"
+        ]
+      }
+    },
+    {
+      "id": "CL-008",
+      "no": 8,
+      "name": "Avicola Centru Demo",
+      "type": "Птицефабрика",
+      "region": "Оргеев",
+      "manager": "Андрей Морару",
+      "relationshipStatus": "Действующий",
+      "primaryProduct": "Кукуруза",
+      "lastContact": "2026-09-20",
+      "lastOrder": "2026-09-08",
+      "automation": {
+        "enabled": true,
+        "rule": "promise",
+        "season": "2026-11-01",
+        "lead": 7,
+        "interval": 30,
+        "promise": "2026-10-01",
+        "target": 3300,
+        "offer": 3250,
+        "quoteDate": "2026-09-30",
+        "quoteUntil": "2026-10-05",
+        "action": "Позвонить закупщику: уточнить объём кукурузы на октябрь.",
+        "channels": [
+          "whatsapp"
+        ]
+      }
+    },
+    {
+      "id": "CL-009",
+      "no": 9,
+      "name": "Ferma Prut Demo",
+      "type": "Фермерское хозяйство",
+      "region": "Унгены",
+      "manager": "Елена Русу",
+      "relationshipStatus": "Действующий",
+      "primaryProduct": "Удобрения NPK",
+      "lastContact": "2026-09-10",
+      "lastOrder": "2026-03-15",
+      "automation": {
+        "enabled": true,
+        "rule": "season",
+        "season": "2026-11-02",
+        "lead": 30,
+        "interval": 180,
+        "promise": "2026-10-03",
+        "target": 10500,
+        "offer": 10400,
+        "quoteDate": "2026-09-30",
+        "quoteUntil": "2026-10-05",
+        "action": "Уточнить виды удобрений, объём и желаемые сроки поставки.",
+        "channels": [
+          "sms",
+          "email"
+        ]
+      }
+    },
+    {
+      "id": "CL-010",
+      "no": 10,
+      "name": "Moara Ungheni Demo",
+      "type": "Мукомольный завод",
+      "region": "Унгены",
+      "manager": "Андрей Морару",
+      "relationshipStatus": "Неактивный",
+      "primaryProduct": "Пшеница",
+      "lastContact": "2026-08-20",
+      "lastOrder": "2026-07-15",
+      "automation": {
+        "enabled": true,
+        "rule": "price",
+        "season": "2026-11-01",
+        "lead": 7,
+        "interval": 30,
+        "promise": "2026-10-05",
+        "target": 3800,
+        "offer": 3750,
+        "quoteDate": "2026-09-30",
+        "quoteUntil": "2026-10-05",
+        "action": "Предложить пшеницу по согласованному ценовому ориентиру и уточнить объём.",
+        "channels": [
+          "telegram",
+          "whatsapp"
+        ]
+      }
+    }
+  ],
+  "deals": [
+    {
+      "id": "GR-001",
+      "no": 1,
+      "clientId": "CL-001",
+      "businessLine": "Grain",
+      "product": "Пшеница",
+      "stage": 2,
+      "expectedVolume": 500,
+      "desiredPeriod": "Октябрь 2026",
+      "price": 3600,
+      "fixed": false,
+      "expires": "2026-09-28",
+      "next": "2026-10-01",
+      "action": "Подтвердить обновлённую цену",
+      "blocked": "",
+      "agreed": "Товар: пшеница; объём 500 т; доставка в Бельцы в октябре.",
+      "openQuestions": "Клиент просит снизить цену и предоставить отсрочку оплаты."
+    },
+    {
+      "id": "GR-002",
+      "no": 2,
+      "clientId": "CL-002",
+      "businessLine": "Grain",
+      "product": "Кукуруза",
+      "stage": 3,
+      "expectedVolume": 300,
+      "desiredPeriod": "Октябрь 2026",
+      "price": 3200,
+      "fixed": false,
+      "expires": "2026-10-03",
+      "next": "2026-10-02",
+      "action": "Согласовать условия оплаты",
+      "blocked": "",
+      "agreed": "Объём 300 т; доставка в Оргеев до 20 октября.",
+      "openQuestions": "Осталось согласовать график оплаты и подписать контракт."
+    },
+    {
+      "id": "GR-003",
+      "no": 3,
+      "clientId": "CL-003",
+      "businessLine": "Grain",
+      "product": "Пшеница",
+      "stage": 5,
+      "expectedVolume": 700,
+      "desiredPeriod": "Октябрь–ноябрь 2026",
+      "price": 3550,
+      "fixed": true,
+      "expires": "2026-10-10",
+      "next": "2026-10-01",
+      "action": "Подтвердить транспорт",
+      "blocked": "Не подтверждён транспорт",
+      "agreed": "Контракт подписан; цена зафиксирована; поставки в октябре и ноябре.",
+      "openQuestions": "Нужно подтвердить транспорт для первой партии."
+    },
+    {
+      "id": "GR-004",
+      "no": 4,
+      "clientId": "CL-004",
+      "businessLine": "Fertilizers",
+      "product": "Удобрения NPK",
+      "stage": 4,
+      "expectedVolume": 120,
+      "desiredPeriod": "Ноябрь 2026",
+      "price": 10400,
+      "fixed": true,
+      "expires": "2026-10-12",
+      "next": "2026-10-05",
+      "action": "Проверить поступление предоплаты",
+      "blocked": "Ожидается предоплата",
+      "agreed": "Подписан контракт на 120 т NPK с поставкой в ноябре.",
+      "openQuestions": "Ожидается предусмотренная договором предоплата."
+    },
+    {
+      "id": "GR-005",
+      "no": 5,
+      "clientId": "CL-005",
+      "businessLine": "Grain",
+      "product": "Кукуруза",
+      "stage": 1,
+      "expectedVolume": 650,
+      "desiredPeriod": "Ноябрь–декабрь 2026",
+      "price": 3150,
+      "fixed": false,
+      "expires": "2026-10-15",
+      "next": "2026-10-03",
+      "action": "Уточнить объём и график",
+      "blocked": "",
+      "agreed": "Клиент заинтересован в кукурузе; ориентир — ноябрь и декабрь.",
+      "openQuestions": "Нужно подтвердить объёмы партий и требования к качеству."
+    },
+    {
+      "id": "GR-006",
+      "no": 6,
+      "clientId": "CL-006",
+      "businessLine": "Fertilizers",
+      "product": "Удобрения NPK",
+      "stage": 0,
+      "expectedVolume": 80,
+      "desiredPeriod": "Декабрь 2026",
+      "price": 10200,
+      "fixed": false,
+      "expires": "2026-10-10",
+      "next": "2026-10-02",
+      "action": "Провести первый звонок",
+      "blocked": "",
+      "agreed": "Получен первичный запрос на удобрения NPK.",
+      "openQuestions": "Объём и дата пока ориентировочные; требуется первый разговор."
+    }
+  ],
+  "shipments": [
+    {
+      "id": "SH-001",
+      "dealId": "GR-001",
+      "clientId": "CL-001",
+      "plannedDate": "2026-10-15",
+      "plannedQty": 500,
+      "shippedQty": 0,
+      "status": "Планируется"
+    },
+    {
+      "id": "SH-002",
+      "dealId": "GR-002",
+      "clientId": "CL-002",
+      "plannedDate": "2026-10-20",
+      "plannedQty": 300,
+      "shippedQty": 0,
+      "status": "Планируется"
+    },
+    {
+      "id": "SH-003",
+      "dealId": "GR-003",
+      "clientId": "CL-003",
+      "plannedDate": "2026-10-05",
+      "plannedQty": 400,
+      "shippedQty": 0,
+      "status": "К исполнению"
+    },
+    {
+      "id": "SH-004",
+      "dealId": "GR-003",
+      "clientId": "CL-003",
+      "plannedDate": "2026-11-05",
+      "plannedQty": 300,
+      "shippedQty": 0,
+      "status": "К исполнению"
+    },
+    {
+      "id": "SH-005",
+      "dealId": "GR-004",
+      "clientId": "CL-004",
+      "plannedDate": "2026-11-10",
+      "plannedQty": 120,
+      "shippedQty": 0,
+      "status": "По контракту"
+    }
+  ],
+  "documents": [
+    {
+      "id": "DOC-007",
+      "no": 7,
+      "clientId": "CL-001",
+      "dealId": "GR-001",
+      "type": "Поставка",
+      "stage": "legal",
+      "version": 2,
+      "title": "Поставка 500 т пшеницы",
+      "body": "Товар: пшеница. Объём: 500 тонн.\nМесто поставки: Бельцы. Плановая дата: 15.10.2026.\nЦена: 3 600 MDL/т без НДС, предварительная.\nУсловия оплаты и окончательная цена требуют согласования.\nПриложение: спецификация и график поставки.",
+      "dueMinutes": 120,
+      "remark": ""
+    },
+    {
+      "id": "DOC-008",
+      "no": 8,
+      "clientId": "CL-002",
+      "dealId": "GR-002",
+      "type": "Поставка",
+      "stage": "draft",
+      "version": 1,
+      "title": "Поставка 300 т кукурузы",
+      "body": "Товар: кукуруза. Объём: 300 тонн.\nМесто поставки: Оргеев. Плановая дата: 20.10.2026.\nЦена: 3 200 MDL/т без НДС, предварительная.\nПодготовить условия оплаты и спецификацию.",
+      "dueMinutes": null,
+      "remark": ""
+    },
+    {
+      "id": "DOC-009",
+      "no": 9,
+      "clientId": "CL-009",
+      "dealId": null,
+      "type": "Поставка",
+      "stage": "rework",
+      "version": 1,
+      "title": "Сезонная поставка удобрений NPK",
+      "body": "Предмет: поставка удобрений NPK.\nОбъём и график уточняются сторонами.\nМесто поставки: Унгены.\nУсловия предоплаты подлежат согласованию.",
+      "dueMinutes": null,
+      "remark": "Укажите срок предоплаты и порядок приёмки товара."
+    },
+    {
+      "id": "DOC-010",
+      "no": 10,
+      "clientId": "CL-010",
+      "dealId": null,
+      "type": "Агентский",
+      "stage": "director",
+      "version": 1,
+      "title": "Агентское сопровождение закупки пшеницы",
+      "body": "Предмет: поиск поставщиков пшеницы по поручению принципала.\nВознаграждение: 1% стоимости исполненных поставок.\nОснование начисления: согласованный отчёт агента.\nПолномочия на подписание договоров от имени принципала не предоставляются.",
+      "dueMinutes": 240,
+      "remark": ""
+    }
+  ],
+  "finance": {
+    "accounts": [
+      {
+        "clientId": "CL-001",
+        "balance": 350000,
+        "overdue": 120000,
+        "limit": 3000000,
+        "prepaid": 99999999,
+        "requiresPrepay": false,
+        "synced": null,
+        "failed": false
+      },
+      {
+        "clientId": "CL-002",
+        "balance": 0,
+        "overdue": 0,
+        "limit": 3000000,
+        "prepaid": 99999999,
+        "requiresPrepay": false,
+        "synced": null,
+        "failed": false
+      },
+      {
+        "clientId": "CL-003",
+        "balance": 80000,
+        "overdue": 0,
+        "limit": 3000000,
+        "prepaid": 99999999,
+        "requiresPrepay": false,
+        "synced": null,
+        "failed": false
+      },
+      {
+        "clientId": "CL-004",
+        "balance": 0,
+        "overdue": 0,
+        "limit": 3000000,
+        "prepaid": 0,
+        "requiresPrepay": true,
+        "synced": null,
+        "failed": false
+      },
+      {
+        "clientId": "CL-005",
+        "balance": 0,
+        "overdue": 0,
+        "limit": 3000000,
+        "prepaid": 99999999,
+        "requiresPrepay": false,
+        "synced": null,
+        "failed": false
+      },
+      {
+        "clientId": "CL-006",
+        "balance": 0,
+        "overdue": 0,
+        "limit": 3000000,
+        "prepaid": 99999999,
+        "requiresPrepay": false,
+        "synced": null,
+        "failed": false
+      },
+      {
+        "clientId": "CL-007",
+        "balance": 0,
+        "overdue": 0,
+        "limit": 3000000,
+        "prepaid": 99999999,
+        "requiresPrepay": false,
+        "synced": null,
+        "failed": false
+      },
+      {
+        "clientId": "CL-008",
+        "balance": 0,
+        "overdue": 0,
+        "limit": 3000000,
+        "prepaid": 99999999,
+        "requiresPrepay": false,
+        "synced": null,
+        "failed": false
+      },
+      {
+        "clientId": "CL-009",
+        "balance": 0,
+        "overdue": 0,
+        "limit": 3000000,
+        "prepaid": 99999999,
+        "requiresPrepay": false,
+        "synced": null,
+        "failed": false
+      },
+      {
+        "clientId": "CL-010",
+        "balance": 0,
+        "overdue": 0,
+        "limit": 3000000,
+        "prepaid": 99999999,
+        "requiresPrepay": false,
+        "synced": null,
+        "failed": false
+      }
+    ],
+    "shipmentFinancials": [
+      {
+        "shipmentId": "SH-001",
+        "businessLine": "Grain",
+        "valueStatus": "План",
+        "finalPrice": 3600,
+        "unitCost": 3150,
+        "logistics": 180,
+        "loading": 12,
+        "storage": 0,
+        "laboratory": 8,
+        "commission": 0,
+        "insurance": 0,
+        "otherDirect": 0,
+        "paymentTermsDays": 30,
+        "plannedCashIn": "2026-11-14",
+        "actualCashIn": 0,
+        "actualCashOut": 0,
+        "financialStatus": "Расчёт неполный",
+        "locked": false
+      },
+      {
+        "shipmentId": "SH-002",
+        "businessLine": "Grain",
+        "valueStatus": "План",
+        "finalPrice": 3200,
+        "unitCost": 2780,
+        "logistics": 160,
+        "loading": 10,
+        "storage": 0,
+        "laboratory": 7,
+        "commission": 0,
+        "insurance": 0,
+        "otherDirect": 0,
+        "paymentTermsDays": 30,
+        "plannedCashIn": "2026-11-19",
+        "actualCashIn": 0,
+        "actualCashOut": 0,
+        "financialStatus": "Расчёт неполный",
+        "locked": false
+      },
+      {
+        "shipmentId": "SH-003",
+        "businessLine": "Grain",
+        "valueStatus": "Подтверждено",
+        "finalPrice": 3550,
+        "unitCost": 3090,
+        "logistics": 190,
+        "loading": 12,
+        "storage": 0,
+        "laboratory": 8,
+        "commission": 0,
+        "insurance": 0,
+        "otherDirect": 5,
+        "paymentTermsDays": 20,
+        "plannedCashIn": "2026-10-25",
+        "actualCashIn": 0,
+        "actualCashOut": 0,
+        "financialStatus": "Расчёт готов",
+        "locked": false
+      },
+      {
+        "shipmentId": "SH-004",
+        "businessLine": "Grain",
+        "valueStatus": "Подтверждено",
+        "finalPrice": 3550,
+        "unitCost": 3090,
+        "logistics": 210,
+        "loading": 12,
+        "storage": 0,
+        "laboratory": 8,
+        "commission": 0,
+        "insurance": 0,
+        "otherDirect": 5,
+        "paymentTermsDays": 20,
+        "plannedCashIn": "2026-11-25",
+        "actualCashIn": 0,
+        "actualCashOut": 0,
+        "financialStatus": "Расчёт готов",
+        "locked": false
+      },
+      {
+        "shipmentId": "SH-005",
+        "businessLine": "Fertilizers",
+        "valueStatus": "Подтверждено",
+        "finalPrice": 10400,
+        "unitCost": 9300,
+        "logistics": 420,
+        "loading": 20,
+        "storage": 0,
+        "laboratory": 0,
+        "commission": 0,
+        "insurance": 0,
+        "otherDirect": 80,
+        "paymentTermsDays": 0,
+        "plannedCashIn": "2026-11-10",
+        "actualCashIn": 0,
+        "actualCashOut": 0,
+        "financialStatus": "Расчёт готов",
+        "locked": false
+      }
+    ],
+    "clearanceRequests": []
+  },
+  "auditSeed": [
+    {
+      "id": "AUD-001",
+      "at": "2026-09-30T10:00:00Z",
+      "actor": "Система",
+      "role": "Система",
+      "action": "Инициализация демо-данных",
+      "entityType": "dataset",
+      "entityId": "0.7.0",
+      "source": "data.json",
+      "oldValue": null,
+      "newValue": "Загружена единая мини-база Grain v0.7.0"
+    }
+  ]
 }
