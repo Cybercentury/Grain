@@ -12,10 +12,6 @@ nav{flex-wrap:wrap}button,input,select,textarea{touch-action:manipulation}
 .client-summary b{font-size:26px;display:block;margin-top:8px}
 .client-reason{white-space:normal;min-width:220px;max-width:300px;line-height:1.5}
 .client-meta{font-size:12px;line-height:1.7;color:var(--muted)}
-.queue-toggle{position:fixed;right:0;top:46%;border:0;background:#215f45;color:#fff;border-radius:12px 0 0 12px;padding:16px 11px;z-index:5;box-shadow:0 4px 18px #173e3033;display:grid;gap:7px}
-.queue-toggle b{border-radius:50%;background:#e8d5a8;color:#173e30;min-width:24px;padding:4px}
-#work-queue{position:fixed;inset:0 0 0 auto;margin:0;width:min(480px,100%);max-width:100%;height:100dvh;max-height:100dvh;border:0;border-radius:14px 0 0 14px;padding:0;background:#f6f7f1}
-#work-queue[open]{animation:queue-enter .22s ease-out}@keyframes queue-enter{from{transform:translateX(100%)}to{transform:translateX(0)}}@media(prefers-reduced-motion:reduce){#work-queue[open]{animation:none}}#work-queue .panel-head{position:sticky;top:0;background:#fff;z-index:1}
 .queue-body{padding:20px}.queue-date{margin-bottom:16px}.queue-date input{width:100%}
 .queue-group{margin:25px 0}.queue-group h3{font-size:13px;letter-spacing:.03em;margin:0 0 12px}
 .queue-card{background:white;border:1px solid var(--line);border-radius:10px;padding:17px;margin:10px 0}
@@ -30,7 +26,7 @@ nav{flex-wrap:wrap}button,input,select,textarea{touch-action:manipulation}
 .message-text{white-space:pre-wrap;line-height:1.8;background:#f1f5ec;padding:16px;border-radius:8px}
 #client-detail .dialog-body,#contact-result .dialog-body{padding:22px}
 #client-detail .summary{font-size:12px}.queue-card .warn{white-space:normal}
-@media(max-width:650px){.client-summary{grid-template-columns:1fr 1fr 1fr;gap:6px}.client-summary article{padding:10px;font-size:11px}.client-summary b{font-size:23px}.queue-toggle{top:auto;bottom:20px;padding:10px 8px}.queue-toggle span{display:none}nav button{font-size:12px;padding:9px 7px}#clients .client-toolbar>*{width:100%}.queue-body{padding:16px}.actions{flex-wrap:wrap}}
+@media(max-width:650px){.client-summary{grid-template-columns:1fr 1fr 1fr;gap:6px}.client-summary article{padding:10px;font-size:11px}.client-summary b{font-size:23px}nav button{font-size:12px;padding:9px 7px}#clients .client-toolbar>*{width:100%}.queue-body{padding:16px}.actions{flex-wrap:wrap}}
 
 /* Forest green, wheat gold and warm earth */
 :root{--ink:#263b30;--muted:#756f60;--green:#215b40;--line:#e3dac7;--paper:#f8f4eb;--gold:#c69b48;--brown:#795936}
@@ -67,10 +63,7 @@ th{background:#f4ecdc;color:#756044}td{border-color:#eee5d5}
 .help{border-color:#bfa676;color:#7c5d2e}.hero .help{color:#efcf88;border-color:#b79b61}
 input,select,textarea{border-color:#d9cdb7;background:#fffefb}
 .summary,.rule-settings,.message-text{background:#f4ecdc}.summary{border-left:3px solid #c69b48}
-#work-queue{background:#f8f4eb}#work-queue .panel-head{background:#f3e7ca}
 .queue-card{background:#fffdf8;border-color:#e2d6bf;border-left:3px solid #c69b48}
-.queue-toggle{background:#d9b46a;color:#24392c;border:1px solid #bf954a;border-right:0}
-.queue-toggle b{background:#284f37;color:#fff2d0}
 .client-summary article:nth-child(2){background:#f2e3bf}.client-summary article:nth-child(2) b{color:#79572c}
 dialog{background:#fffdf8}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #a87928;outline-offset:3px}
 @media(max-width:650px){nav{display:grid;grid-template-columns:1fr 1fr;gap:6px}nav button{gap:9px;padding:10px}.nav-icon{width:19px;height:19px;flex-basis:19px}.brand-wheat{width:25px;height:32px}}
@@ -303,6 +296,10 @@ aside .brand-subtitle{max-width:182px;margin:7px 0 18px;color:#c7c8ad;font-size:
 
 
 /* v0.14 — Operational Overview */
+
+.metric.attention{border-top-color:#b76443;background:#fff7f0}
+.metric.attention .value{color:#8d4832}
+
 .overview-primary-grid{align-items:start}
 #overview-upcoming table{min-width:760px}
 .overview-contact-panel .panel-head{align-items:center}
@@ -1100,7 +1097,7 @@ function escapeHTML(value){return String(value).replace(/[&<>"']/g,c=>({'&':'&am
 function openButton(d){return `<button class="link" data-deal="${d.id}">${d.client}</button>`}
 function overviewPeriodName(value=$('#month').value){return ({'2026-10':'Октябрь 2026','2026-11':'Ноябрь 2026','2026-12':'Декабрь 2026','all':'IV квартал 2026'})[value]||value}
 function overviewShipmentControl(d,p){
-  const i=d.parts.indexOf(p),key=arKey(d.id,i);
+  const i=d.parts.indexOf(p),key=p.shipmentId||('UNSCHEDULED-'+d.id+'-'+i);
   let clearance={status:'Проверка…',allow:false},integrity={status:'Проверка…',severity:'warning',count:0,blocking:false};
   try{clearance=arCheck(key)}catch(_){}
   try{integrity=integrityGate(p.shipmentId)}catch(_){}
