@@ -10,14 +10,14 @@
 - **Основной пользователь прототипа:** менеджер продаж.
 - **Дополнительные роли в бизнес-процессе:** юрист, коммерческий директор, бухгалтерия.
 - **Текущая внутренняя версия / спецификация:** **v0.13.0**
-- **Текущая функциональная версия интерфейса:** **v0.12.0**
+- **Текущая функциональная версия интерфейса:** **v0.13.0**
 - **Статус:** статичный интерактивный прототип.
 - **Основная ветка:** `main`.
 - **Публикация:** GitHub Pages из корня ветки `main`.
 - **Рабочий адрес прототипа:** https://cybercentury.github.io/Grain/
 - **Дата демонстрационных данных:** 30.09.2026.
 
-Версия **v0.12.0** реализована как отдельный Analytical Dashboard поверх существующих Deal / Shipment / Finance / Cash Flow / MTM / Master Data. Добавлены Cost Centers, аналитические dimensions, shared-cost allocation, Deal / Shipment profitability и управленческий P&L без подмены первичных финансовых источников.
+Версия **v0.13.0** добавляет отдельный Executive Trading Dashboard поверх существующих Overview / Finance / Analytics. Руководитель видит физическую позицию товара, исполнение подписанных контрактов, Operating Margin, Cash Gap, MTM, риски и операционные показатели терминала.
 
 ---
 
@@ -120,6 +120,14 @@ data.json
 │  ├─ allocationRules
 │  ├─ sharedCosts
 │  └─ dimensions
+├─ logistics
+│  └─ movements
+├─ terminal
+│  ├─ terminals
+│  ├─ inventory
+│  ├─ operations
+│  ├─ stockSnapshots
+│  └─ completedLots
 ├─ clients
 ├─ deals
 ├─ shipments
@@ -180,6 +188,39 @@ data.json
 - `dimensions`.
 
 Shared costs не записываются обратно в Shipment financials. Они распределяются только в Analytical P&L по явно заданному driver.
+
+
+#### `logistics`
+
+Операционный слой физических перемещений товара.
+
+`movements` содержит:
+
+- movementId;
+- shipmentId;
+- quantityTons;
+- mode;
+- status;
+- origin / destination;
+- planned / actual departure;
+- planned arrival / ETA;
+- transport reference.
+
+Объём «в пути» считается только по статусам `in_transit` / `delayed`.
+
+#### `terminal`
+
+Операционный слой терминала.
+
+Содержит:
+
+- terminals — capacity и master data терминала;
+- inventory — текущий stock по lots;
+- operations — inbound / outbound throughput;
+- stockSnapshots — база для average stock и turnover;
+- completedLots — база для average dwell time.
+
+Terminal Operations не заменяет финансовый Cost Center терминала.
 
 #### `clients`
 
@@ -2834,19 +2875,141 @@ Dashboard должен приоритизировать исключения, а
 
 ## v0.13.0 — 2026-10-01 — Executive Trading Dashboard
 
-**Статус перед реализацией:** утверждён пользователем.
+**Статус:** реализовано.
 
-### Scope
+### Интерфейс
 
-- отдельный «Дашборд руководителя» после «Обзора»;
-- Logistics / Transit model;
-- Terminal Operations model;
-- volume in transit;
-- contract execution;
-- margin / cash / MTM executive KPIs;
-- terminal utilization / throughput / turnover / dwell time;
-- executive risk board;
-- новая раскрывающаяся карточка в «Ответы руководителю».
+В левом меню сразу после **«Обзора»** добавлен **«Дашборд руководителя»**.
+
+Порядок первых разделов:
+
+1. Обзор;
+2. Дашборд руководителя;
+3. Воронка продаж;
+4. План отгрузок;
+5. База клиентов;
+6. Финансы;
+7. Аналитика.
+
+Для **«Аналитики»** изменена иконка на отдельный dashboard/grid icon, чтобы она визуально не дублировала финансовый график.
+
+### Executive KPI
+
+Dashboard показывает:
+
+- Volume in Transit;
+- Contract Execution;
+- Operating Margin;
+- Cash Gap;
+- Unrealized MTM;
+- Terminal Utilization;
+- Critical Integrity;
+- Executive Risks.
+
+Важно: **Operating Margin не равен бухгалтерской чистой прибыли**.
+
+В текущей модели:
+
+- Contribution Margin = результат после COGS и direct costs;
+- Operating Margin = результат после COGS, direct costs и allocated shared costs;
+- налоги, финансирование, FX и прочие корпоративные статьи могут находиться за пределами этой модели.
+
+Operating Margin используется как управленческий показатель реальной экономической выгоды Deal / Shipment.
+
+### Logistics / Transit
+
+Добавлен `logistics.movements`.
+
+Контрольный demo-срез:
+
+- volume in transit + delayed: **300 т**;
+- одна logistics movement имеет status `delayed`;
+- planned / transit / terminal / delivered состояния хранятся отдельно от Deal stage.
+
+### Terminal Operations
+
+Добавлен `terminal` layer.
+
+Контрольные значения demo:
+
+- capacity: **1 500 т**;
+- current stock: **420 т**;
+- utilization: **28%**;
+- inbound throughput: **1 610 т**;
+- outbound throughput: **1 190 т**;
+- average stock: **610 т**;
+- turnover: **1.95×**;
+- weighted average dwell time: **1 день**.
+
+### Contract execution
+
+Для signed Deal dashboard показывает:
+
+- contracted volume;
+- open remainder;
+- in-transit volume;
+- terminal volume;
+- execution %;
+- Operating Margin;
+- Analytical Operating Result;
+- следующую Shipment;
+- наличие transit delay.
+
+Контрольный signed volume: **820 т**.
+
+### Financial executive view
+
+Для текущего demo-портфеля:
+
+- Analytical Operating Result: **343 000 MDL**;
+- Operating Margin: **5.28%**;
+- worst planned Cash Gap: **October 2026 = −2 504 100 MDL** с учётом shared costs.
+
+### Executive Risk Board
+
+Объединяются:
+
+- Integrity Critical;
+- Shipment clearance blocks;
+- delayed logistics;
+- stale MTM mark;
+- negative cash gap;
+- terminal utilization warning.
+
+CRM activity metrics — звонки, число лидов и conversion — намеренно не являются верхнеуровневыми KPI этого dashboard.
+
+### «Ответы руководителю»
+
+Добавлена новая раскрывающаяся карточка с дословным вопросом:
+
+> «Представьте, что мы внедряем трейдинговый дашборд. Какие метрики вы бы предложили мне на согласование в первую очередь?»
+
+Карточка связывает вопрос с фактически реализованными Physical Position, Contract Execution, Operating Margin, Terminal Operations и Executive Risk Board.
+
+### Регрессия
+
+Проверено:
+
+- JavaScript module script синтаксически корректен;
+- schema `data.json` = 0.13.0;
+- navigation order корректен;
+- Executive Dashboard находится сразу после Overview;
+- Master Data остаётся после Documents;
+- новая иконка Analytics присутствует;
+- signed volume = 820 т;
+- transit = 300 т;
+- terminal stock = 420 т;
+- terminal utilization = 28%;
+- turnover ≈ 1.95×;
+- Operating Margin ≈ 5.28%;
+- October worst Cash Gap = −2 504 100 MDL;
+- Q&A теперь содержит 10 карточек и 65 accordion-пунктов.
+
+### Основные коммиты
+
+- `b1f74fe` — спецификация v0.13;
+- `f0f5e1c` — Logistics / Transit и Terminal Operations demo-data;
+- `ed62be2` — Executive Dashboard, новая Analytics icon и новая Q&A-карточка.
 
 
 
