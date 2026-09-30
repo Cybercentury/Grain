@@ -515,7 +515,7 @@ for(const el of document.querySelectorAll('.filters select'))el.onchange=arRefre
 $('#wf-search').oninput=arRefresh;$('#wf-filter').onchange=arRefresh;
 
 
-/* v0.8 — P&L, Cash Flow, Financial Gate/Lock/Log и Audit Trail */
+/* v0.8.2 / v0.9 — Financial Integrity, Cash Movements, MTM and Audit */
 function auditTime(){try{return new Date(wfNow).toISOString()}catch{return new Date().toISOString()}}
 function shortValue(v){if(v===undefined)return '—';if(v===null)return 'null';if(typeof v==='object')return JSON.stringify(v).slice(0,240);return String(v)}
 function auditAdd({actor='Система',role='Система',action,entityType,entityId,field='',oldValue='',newValue='',source='Интерфейс',reason=''}) {
@@ -524,24 +524,83 @@ function auditAdd({actor='Система',role='Система',action,entityTyp
 }
 function auditDiff(entityType,entityId,before,after,actor,role){
   const keys=new Set([...Object.keys(before||{}),...Object.keys(after||{})]);
-  for(const key of keys){const a=before?.[key],b=after?.[key];if(JSON.stringify(a)!==JSON.stringify(b))auditAdd({actor,role,action:'Изменение данных',entityType,entityId,field:key,oldValue:a,newValue:b,source:'Интерфейс'})}
+  for(const key of keys){
+    if(entityType==='Сделка'&&key==='parts')continue;
+    const a=before?.[key],b=after?.[key];
+    if(JSON.stringify(a)!==JSON.stringify(b))auditAdd({actor,role,action:'Изменение данных',entityType,entityId,field:key,oldValue:a,newValue:b,source:'Интерфейс'});
+  }
 }
+function auditShipmentChanges(beforeDeal,afterDeal){
+  beforeDeal.parts.forEach((oldP,i)=>{
+    const newP=afterDeal.parts[i];if(!newP||!oldP.shipmentId)return;
+    for(const key of ['date','qty','shipped','status']){
+      if(JSON.stringify(oldP[key])!==JSON.stringify(newP[key]))auditAdd({
+        actor:beforeDeal.manager,role:'Менеджер продаж',action:'Изменение партии',entityType:'Партия',entityId:oldP.shipmentId,
+        field:{date:'plannedDate',qty:'plannedQty',shipped:'shippedQty',status:'status'}[key],oldValue:oldP[key],newValue:newP[key],source:'Карточка сделки'
+      });
+    }
+  });
+}
+
+const terminology={
+  mtm:{title:'MTM · Mark-to-Market',text:'Рыночная переоценка открытой позиции. Показывает нереализованную прибыль или убыток относительно текущей сопоставимой рыночной цены.'},
+  pnl:{title:'P&L · Profit & Loss',text:'Прибыли и убытки. В Grain отдельно показываются прогнозный, подтверждённый и фактический результат.'},
+  cashflow:{title:'Cash Flow',text:'Движение денежных средств. Период определяется датой конкретного поступления или платежа, а не датой отгрузки.'},
+  cogs:{title:'COGS',text:'Себестоимость реализованного товара. Рассчитывается из объёма и себестоимости на тонну.'},
+  contribution:{title:'Contribution',text:'Маржинальный доход после себестоимости товара и прямых расходов партии.'},
+  gate:{title:'Финансовая проверка',text:'Контроль полноты управленческих данных партии перед подтверждением и финансовым закрытием.'},
+  lock:{title:'Финансовая блокировка',text:'После финансового закрытия первичные финансовые данные и финансово значимые параметры партии нельзя переписывать напрямую.'},
+  finlog:{title:'Финансовый журнал',text:'Контролируемая история корректировок закрытой партии со старым и новым значением, причиной и автором.'},
+  audit:{title:'Audit Trail',text:'Журнал действий: кто, когда, что изменил и из какого источника пришло изменение.'}
+};
+function termMarkup(key,label){return '<span class="term" tabindex="0" data-term="'+key+'">'+escapeHTML(label)+'</span>'}
+function showTermTip(el){
+  const t=terminology[el.dataset.term];if(!t)return;
+  const tip=$('#term-tooltip');tip.innerHTML='<b>'+escapeHTML(t.title)+'</b><br>'+escapeHTML(t.text);tip.hidden=false;
+  const r=el.getBoundingClientRect(),w=tip.offsetWidth,h=tip.offsetHeight;
+  tip.style.left=Math.max(8,Math.min(innerWidth-w-8,r.left+r.width/2-w/2))+'px';
+  tip.style.top=Math.max(8,r.top-h-10)+'px';
+}
+function hideTermTip(){const tip=$('#term-tooltip');if(tip)tip.hidden=true}
+document.addEventListener('pointerover',e=>{const el=e.target.closest?.('[data-term]');if(el)showTermTip(el)});
+document.addEventListener('pointerout',e=>{if(e.target.closest?.('[data-term]'))hideTermTip()});
+document.addEventListener('focusin',e=>{const el=e.target.closest?.('[data-term]');if(el)showTermTip(el)});
+document.addEventListener('focusout',e=>{if(e.target.closest?.('[data-term]'))hideTermTip()});
+
 function financeContext(shipmentId){
   for(const d of deals){const p=d.parts.find(x=>x.shipmentId===shipmentId);if(p){const c=clients.find(x=>x.sourceId===d.clientId);return {d,p,c}}}
   return null;
 }
 function financeRow(shipmentId){
   let row=financeState.find(x=>x.shipmentId===shipmentId);
-  if(!row){const ctx=financeContext(shipmentId);if(!ctx)return null;row={shipmentId,businessLine:ctx.d.businessLine,valueStatus:'План',finalPrice:ctx.d.price||0,unitCost:0,logistics:0,loading:0,storage:0,laboratory:0,commission:0,insurance:0,otherDirect:0,paymentTermsDays:0,plannedCashIn:'',actualCashIn:0,actualCashOut:0,financialStatus:'Расчёт неполный',locked:false};financeState.push(row)}
+  if(!row){
+    const ctx=financeContext(shipmentId);if(!ctx)return null;
+    row={shipmentId,valueStatus:'План',finalPrice:ctx.d.price||0,unitCost:0,logistics:0,loading:0,storage:0,laboratory:0,commission:0,insurance:0,otherDirect:0,paymentTermsDays:0,financialStatus:'Расчёт неполный',locked:false,outstandingObligationsRegistered:false,outstandingObligationsNote:''};
+    financeState.push(row);
+  }
   return row;
 }
+function isShipmentFinanciallyLocked(shipmentId){return !!financeState.find(x=>x.shipmentId===shipmentId)?.locked}
+function marketMark(shipmentId){return marketMarks.find(x=>x.shipmentId===shipmentId)||null}
+function shipmentCash(shipmentId){return cashMovements.filter(x=>x.shipmentId===shipmentId)}
+function plannedCashInMovement(shipmentId){return shipmentCash(shipmentId).find(x=>x.direction==='in'&&x.status==='planned')}
+function money(n){return fmt(n||0)+' MDL'}
 const finCostFields=['logistics','loading','storage','laboratory','commission','insurance','otherDirect'];
-const finLabels={finalPrice:'Финальная цена',unitCost:'Себестоимость/т',logistics:'Транспорт/т',loading:'Погрузка/т',storage:'Хранение/т',laboratory:'Лаборатория/т',commission:'Комиссия/т',insurance:'Страхование/т',otherDirect:'Прочие прямые/т',paymentTermsDays:'Срок оплаты, дней',plannedCashIn:'Плановая дата cash-in',actualCashIn:'Фактический cash-in',actualCashOut:'Фактический cash-out',valueStatus:'Статус значения'};
-function financeCalc(row,ctx){
-  const qty=ctx.p.shipped>0?ctx.p.shipped:ctx.p.qty;
+const finLabels={finalPrice:'Финальная цена',unitCost:'Себестоимость/т',logistics:'Транспорт/т',loading:'Погрузка/т',storage:'Хранение/т',laboratory:'Лаборатория/т',commission:'Комиссия/т',insurance:'Страхование/т',otherDirect:'Прочие прямые/т',paymentTermsDays:'Срок оплаты, дней',valueStatus:'Статус значения',outstandingObligationsRegistered:'Незакрытые обязательства',outstandingObligationsNote:'Комментарий обязательств'};
+function unitEconomics(row){
   const directUnit=finCostFields.reduce((n,k)=>n+(+row[k]||0),0);
-  const revenue=qty*(+row.finalPrice||0),cogs=qty*(+row.unitCost||0),direct=qty*directUnit,contribution=revenue-cogs-direct;
-  return {qty,revenue,cogs,direct,contribution,margin:revenue?contribution/revenue*100:0,plannedCashIn:revenue,actualCashIn:+row.actualCashIn||0,actualCashOut:+row.actualCashOut||0,receivable:Math.max(0,revenue-(+row.actualCashIn||0)),netCash:(+row.actualCashIn||0)-(+row.actualCashOut||0)};
+  return {revenue:+row.finalPrice||0,cogs:+row.unitCost||0,direct:directUnit,contribution:(+row.finalPrice||0)-(+row.unitCost||0)-directUnit};
+}
+function financeCalc(row,ctx){
+  const plannedQty=+ctx.p.qty||0,actualQty=Math.min(+ctx.p.shipped||0,plannedQty),openQty=Math.max(plannedQty-actualQty,0),u=unitEconomics(row);
+  const planQty=row.valueStatus==='План'?plannedQty:0;
+  const confirmedQty=row.valueStatus==='План'?0:(row.valueStatus==='Факт'?openQty:plannedQty);
+  const actualPnlQty=row.valueStatus==='Факт'?actualQty:0;
+  const mul=q=>({revenue:q*u.revenue,cogs:q*u.cogs,direct:q*u.direct,contribution:q*u.contribution});
+  const forecast=mul(planQty),confirmed=mul(confirmedQty),actual=mul(actualPnlQty),openEconomics=mul(openQty);
+  const mark=marketMark(ctx.p.shipmentId),marketPrice=mark?.price??null;
+  const mtm=marketPrice==null?0:(u.revenue-marketPrice)*openQty;
+  return {plannedQty,actualQty,openQty,u,forecast,confirmed,actual,openEconomics,mark,marketPrice,mtm,totalEconomic:actual.contribution+mtm};
 }
 function financeGate(row,ctx){
   const missing=[];
@@ -550,81 +609,193 @@ function financeGate(row,ctx){
     if(!(row.finalPrice>0))missing.push('Финальная цена');
     if(!(row.unitCost>0))missing.push('Себестоимость');
     if(row.logistics===''||row.logistics==null||Number.isNaN(+row.logistics))missing.push('Логистика');
-    if(!/^\\d{4}-\\d{2}-\\d{2}$/.test(row.plannedCashIn||''))missing.push('Плановая дата cash-in');
-    if(!['Grain','Fertilizers'].includes(row.businessLine||ctx?.d.businessLine))missing.push('Подразделение');
+    if(!plannedCashInMovement(ctx.p.shipmentId))missing.push('Плановое поступление Cash Flow');
+    if(!['Grain','Fertilizers'].includes(ctx.d.businessLine))missing.push('Подразделение');
     if(row.valueStatus==='План')missing.push('Подтверждение финансовых значений');
+    if((+ctx.p.shipped||0)>0&&row.valueStatus!=='Факт')missing.push('Фактические финансовые значения по отгруженному объёму');
   }
   return {ready:missing.length===0,status:row?.locked?'Закрыто':missing.length?'Неполные данные':'Готово',missing};
 }
-function money(n){return fmt(n)+' MDL'}
+function canFinanciallyLock(row,ctx){
+  const gate=financeGate(row,ctx),fullyShipped=(+ctx.p.shipped||0)>=(+ctx.p.qty||0);
+  const obligations=!!row.outstandingObligationsRegistered&&String(row.outstandingObligationsNote||'').trim().length>=5;
+  return {ok:gate.ready&&row.valueStatus==='Факт'&&(fullyShipped||obligations),gate,fullyShipped,obligations};
+}
 function finStatusClass(g){return g.status==='Закрыто'?'fin-locked':g.ready?'fin-ready':'fin-missing'}
 function financeContexts(){
   const out=[];
-  for(const d of deals)for(const p of d.parts){const c=clients.find(x=>x.sourceId===d.clientId),row=financeRow(p.shipmentId);out.push({d,p,c,row,calc:financeCalc(row,{d,p,c}),gate:financeGate(row,{d,p,c})})}
+  for(const d of deals)for(const p of d.parts){
+    const c=clients.find(x=>x.sourceId===d.clientId),row=financeRow(p.shipmentId);
+    if(row)out.push({d,p,c,row,calc:financeCalc(row,{d,p,c}),gate:financeGate(row,{d,p,c})});
+  }
   return out;
 }
+function financeDimensionsMatch(x){
+  const line=$('#fin-line')?.value||'all',product=$('#fin-product')?.value||'all',client=$('#fin-client')?.value||'all',manager=$('#fin-manager')?.value||'all';
+  return (line==='all'||x.d.businessLine===line)&&(product==='all'||x.d.product===product)&&(client==='all'||x.c?.sourceId===client)&&(manager==='all'||x.d.manager===manager);
+}
 function filteredFinance(){
-  const period=$('#fin-period')?.value||'all',line=$('#fin-line')?.value||'all',product=$('#fin-product')?.value||'all',client=$('#fin-client')?.value||'all',manager=$('#fin-manager')?.value||'all';
-  return financeContexts().filter(x=>(period==='all'||x.p.date.startsWith(period))&&(line==='all'||x.d.businessLine===line)&&(product==='all'||x.d.product===product)&&(client==='all'||x.c?.sourceId===client)&&(manager==='all'||x.d.manager===manager));
+  const period=$('#fin-period')?.value||'all';
+  return financeContexts().filter(x=>financeDimensionsMatch(x)&&(period==='all'||x.p.date.startsWith(period)));
 }
-function aggregateFinance(list){
-  return list.reduce((a,x)=>{for(const k of ['revenue','cogs','direct','contribution','plannedCashIn','actualCashIn','actualCashOut','netCash'])a[k]+=x.calc[k];a.parties++;if(!x.gate.ready&&!x.row.locked)a.incomplete++;return a},{revenue:0,cogs:0,direct:0,contribution:0,plannedCashIn:0,actualCashIn:0,actualCashOut:0,netCash:0,parties:0,incomplete:0});
+function movementContext(m){const ctx=financeContext(m.shipmentId);return ctx?{...ctx,m}:null}
+function filteredCashMovements(){
+  const period=$('#fin-period')?.value||'all';
+  return cashMovements.map(movementContext).filter(Boolean).filter(x=>financeDimensionsMatch(x)&&(period==='all'||x.m.date.startsWith(period)));
 }
-function financeLineRows(base){
-  const line=n=>n==='Sales'||n==='Consolidated'?base:base.filter(x=>x.d.businessLine===n);
-  return [['Grain','Grain · Зерновые'],['Fertilizers','Fertilizers · Удобрения'],['Sales','Sales'],['Consolidated','Consolidated']].map(([key,label])=>({key,label,a:aggregateFinance(line(key))}));
+function aggregatePnl(list){
+  return list.reduce((a,x)=>{
+    a.forecast+=x.calc.forecast.contribution;a.confirmed+=x.calc.confirmed.contribution;a.actual+=x.calc.actual.contribution;
+    a.forecastRevenue+=x.calc.forecast.revenue;a.confirmedRevenue+=x.calc.confirmed.revenue;a.actualRevenue+=x.calc.actual.revenue;
+    a.mtm+=x.calc.mtm;a.openQty+=x.calc.openQty;a.totalEconomic+=x.calc.totalEconomic;a.parties++;
+    if(!x.gate.ready&&!x.row.locked)a.incomplete++;
+    return a;
+  },{forecast:0,confirmed:0,actual:0,forecastRevenue:0,confirmedRevenue:0,actualRevenue:0,mtm:0,openQty:0,totalEconomic:0,parties:0,incomplete:0});
+}
+function aggregateCash(list){
+  const a={plannedIn:0,plannedOut:0,actualIn:0,actualOut:0,plannedNet:0,actualNet:0};
+  for(const x of list){
+    const amount=+x.m.amount||0,key=x.m.status==='actual'?'actual':'planned';
+    if(x.m.direction==='in')a[key+'In']+=amount;else a[key+'Out']+=amount;
+  }
+  a.plannedNet=a.plannedIn-a.plannedOut;a.actualNet=a.actualIn-a.actualOut;return a;
+}
+function byBusinessLine(list,line){return line==='Sales'||line==='Consolidated'?list:list.filter(x=>x.d.businessLine===line)}
+function financeLineRows(base,cashBase){
+  return [['Grain','Grain · Зерновые'],['Fertilizers','Fertilizers · Удобрения'],['Sales','Sales'],['Consolidated','Consolidated']].map(([key,label])=>({
+    key,label,pnl:aggregatePnl(byBusinessLine(base,key)),cash:aggregateCash(byBusinessLine(cashBase,key))
+  }));
 }
 function renderAudit(){
   const el=$('#audit-table');if(!el)return;
-  const rows=auditTrail.slice().reverse().slice(0,80);
+  const rows=auditTrail.slice().reverse().slice(0,100);
   el.innerHTML=rows.length?rows.map(x=>'<div class="fin-log-entry"><b>'+escapeHTML(x.action||'Событие')+'</b> · '+escapeHTML(x.entityType||'')+' '+escapeHTML(x.entityId||'')+(x.field?' · '+escapeHTML(x.field):'')+'<small>'+escapeHTML((x.at||'').replace('T',' ').replace('Z',' UTC'))+' · '+escapeHTML(x.actor||'Система')+' · '+escapeHTML(x.role||'')+' · '+escapeHTML(x.source||'')+'</small>'+(x.oldValue!==''||x.newValue!==''?'<span>'+escapeHTML(String(x.oldValue??''))+' → '+escapeHTML(String(x.newValue??''))+'</span>':'')+(x.reason?'<small>Причина: '+escapeHTML(x.reason)+'</small>':'')+'</div>').join(''):'<div class="empty">Событий пока нет.</div>';
 }
+function mtmClass(v){return v>0?'mtm-positive':v<0?'mtm-negative':'mtm-neutral'}
 function renderFinance(){
   if(!$('#finance'))return;
-  const list=filteredFinance(),a=aggregateFinance(list),margin=a.revenue?a.contribution/a.revenue*100:0;
+  const list=filteredFinance(),cashList=filteredCashMovements(),a=aggregatePnl(list),cash=aggregateCash(cashList),lines=financeLineRows(list,cashList);
   $('#fin-summary').innerHTML=[
-    ['Выручка',money(a.revenue),'P&L выбранных партий'],
-    ['Маржинальный доход',money(a.contribution),'Маржа '+fmt(margin)+'%'],
-    ['Плановый cash-in',money(a.plannedCashIn),'По коммерческим условиям'],
-    ['Фактический net cash flow',money(a.netCash),'Cash-in − cash-out'],
-    ['Себестоимость',money(a.cogs),'COGS'],
-    ['Прямые расходы',money(a.direct),'Логистика и прочие прямые'],
-    ['Партии',fmt(a.parties),'Реальные Shipment'],
-    ['Неполные данные',fmt(a.incomplete),'Требуют Financial Gate']
+    ['Открытая позиция',fmt(a.openQty)+' т','Неисполненный объём Shipment'],
+    ['Нереализованный '+termMarkup('mtm','MTM'),money(a.mtm),'Рыночная переоценка открытого остатка'],
+    ['Фактический '+termMarkup('pnl','P&L'),money(a.actual),'Только статус «Факт» и отгруженный объём'],
+    ['Total Economic P&L',money(a.totalEconomic),'Actual P&L + Unrealized MTM'],
+    ['Forecast P&L',money(a.forecast),'Финансовые значения со статусом «План»'],
+    ['Confirmed P&L',money(a.confirmed),'Подтверждённая экономика будущего объёма'],
+    ['Плановый Cash Flow',money(cash.plannedNet),'По датам плановых движений'],
+    ['Фактический Cash Flow',money(cash.actualNet),'По датам фактических движений']
   ].map(([l,v,p])=>'<article class="fin-card"><small>'+l+'</small><b>'+v+'</b><p>'+p+'</p></article>').join('');
-  const lines=financeLineRows(list);
-  $('#fin-lines').innerHTML='<table><thead><tr><th>Уровень</th><th class="fin-number">Выручка</th><th class="fin-number">COGS</th><th class="fin-number">Прямые</th><th class="fin-number">Contribution</th><th class="fin-number">Маржа</th></tr></thead><tbody>'+lines.map(x=>'<tr><td><b>'+x.label+'</b><small>'+x.a.parties+' партий</small></td><td class="fin-number">'+money(x.a.revenue)+'</td><td class="fin-number">'+money(x.a.cogs)+'</td><td class="fin-number">'+money(x.a.direct)+'</td><td class="fin-number '+(x.a.contribution<0?'fin-negative':'fin-positive')+'">'+money(x.a.contribution)+'</td><td class="fin-number">'+fmt(x.a.revenue?x.a.contribution/x.a.revenue*100:0)+'%</td></tr>').join('')+'</tbody></table>';
-  $('#fin-cash').innerHTML='<table><thead><tr><th>Уровень</th><th class="fin-number">План cash-in</th><th class="fin-number">Факт cash-in</th><th class="fin-number">Факт cash-out</th><th class="fin-number">Net cash</th></tr></thead><tbody>'+lines.map(x=>'<tr><td>'+x.label+'</td><td class="fin-number">'+money(x.a.plannedCashIn)+'</td><td class="fin-number">'+money(x.a.actualCashIn)+'</td><td class="fin-number">'+money(x.a.actualCashOut)+'</td><td class="fin-number '+(x.a.netCash<0?'fin-negative':'fin-positive')+'">'+money(x.a.netCash)+'</td></tr>').join('')+'</tbody></table>';
-  $('#fin-table').innerHTML='<table><thead><tr><th>Партия</th><th>Клиент / товар</th><th>Подразделение</th><th>Дата / объём</th><th>P&L</th><th>Cash Flow</th><th>Financial Gate</th></tr></thead><tbody>'+list.map(x=>'<tr><td><button class="link" data-financial="'+x.p.shipmentId+'">'+x.p.shipmentId+'</button><small>'+x.d.sourceId+'</small></td><td>'+escapeHTML(x.c?.name||'')+'<small>'+escapeHTML(x.d.product)+'</small></td><td>'+escapeHTML(x.d.businessLine)+'</td><td>'+date(x.p.date)+'<small>'+fmt(x.calc.qty)+' т</small></td><td><b>'+money(x.calc.contribution)+'</b><small>маржа '+fmt(x.calc.margin)+'%</small></td><td>'+money(x.calc.netCash)+'<small>план cash-in '+money(x.calc.plannedCashIn)+'</small></td><td><button class="btn '+finStatusClass(x.gate)+'" data-financial="'+x.p.shipmentId+'">'+x.gate.status+'</button></td></tr>').join('')+'</tbody></table>'+(list.length?'':'<div class="empty">Нет партий по выбранным фильтрам.</div>');
+
+  $('#fin-lines').innerHTML='<table class="fin-state-table"><thead><tr><th>Уровень</th><th class="fin-number">Forecast P&L</th><th class="fin-number">Confirmed P&L</th><th class="fin-number">Actual P&L</th><th class="fin-number">Unrealized MTM</th><th class="fin-number">Total Economic</th></tr></thead><tbody>'+
+    lines.map(x=>'<tr><td><b>'+x.label+'</b><small>'+x.pnl.parties+' партий · open '+fmt(x.pnl.openQty)+' т</small></td><td class="fin-number">'+money(x.pnl.forecast)+'</td><td class="fin-number">'+money(x.pnl.confirmed)+'</td><td class="fin-number">'+money(x.pnl.actual)+'</td><td class="fin-number '+mtmClass(x.pnl.mtm)+'">'+money(x.pnl.mtm)+'</td><td class="fin-number '+mtmClass(x.pnl.totalEconomic)+'">'+money(x.pnl.totalEconomic)+'</td></tr>').join('')+
+    '</tbody></table>';
+
+  $('#fin-cash').innerHTML='<table><thead><tr><th>Уровень</th><th class="fin-number">План вход</th><th class="fin-number">План выход</th><th class="fin-number">План net</th><th class="fin-number">Факт вход</th><th class="fin-number">Факт выход</th><th class="fin-number">Факт net</th></tr></thead><tbody>'+
+    lines.map(x=>'<tr><td>'+x.label+'</td><td class="fin-number">'+money(x.cash.plannedIn)+'</td><td class="fin-number">'+money(x.cash.plannedOut)+'</td><td class="fin-number">'+money(x.cash.plannedNet)+'</td><td class="fin-number">'+money(x.cash.actualIn)+'</td><td class="fin-number">'+money(x.cash.actualOut)+'</td><td class="fin-number">'+money(x.cash.actualNet)+'</td></tr>').join('')+
+    '</tbody></table>';
+
+  $('#fin-table').innerHTML='<table><thead><tr><th>Партия</th><th>Клиент / товар</th><th>Открыто</th><th>Статус P&L</th><th>Contribution</th><th>Рынок</th><th>'+termMarkup('mtm','MTM')+'</th><th>Финансовая проверка</th></tr></thead><tbody>'+
+    list.map(x=>{
+      const scenario=x.row.valueStatus==='План'?x.calc.forecast:x.row.valueStatus==='Подтверждено'?x.calc.confirmed:x.calc.actual;
+      return '<tr><td><button class="link" data-financial="'+x.p.shipmentId+'">'+x.p.shipmentId+'</button><small>'+x.d.sourceId+'</small></td><td>'+escapeHTML(x.c?.name||'')+'<small>'+escapeHTML(x.d.product)+' · '+escapeHTML(x.d.businessLine)+'</small></td><td>'+fmt(x.calc.openQty)+' т<small>из '+fmt(x.calc.plannedQty)+' т</small></td><td>'+escapeHTML(x.row.valueStatus)+'</td><td>'+money(scenario.contribution)+'</td><td>'+(x.calc.mark?money(x.calc.marketPrice)+'/т<small>'+escapeHTML(x.calc.mark.source)+' · '+escapeHTML(x.calc.mark.status==='current'?'актуальна':'устарела')+'</small>':'—')+'</td><td class="'+mtmClass(x.calc.mtm)+'"><b>'+money(x.calc.mtm)+'</b></td><td><button class="btn '+finStatusClass(x.gate)+'" data-financial="'+x.p.shipmentId+'">'+x.gate.status+'</button></td></tr>';
+    }).join('')+'</tbody></table>'+(list.length?'':'<div class="empty">Нет партий по выбранным фильтрам.</div>');
   renderAudit();
 }
 function financeFieldInput(row,key,label,type='number'){
   const disabled=row.locked?' disabled':'',step=type==='number'?' step="0.01" min="0"':'';
   return '<label>'+label+'<input name="'+key+'" type="'+type+'"'+step+disabled+' value="'+escapeHTML(row[key]??'')+'"></label>';
 }
+function renderCashRows(shipmentId){
+  const rows=shipmentCash(shipmentId).slice().sort((a,b)=>a.date.localeCompare(b.date));
+  return rows.length?'<div class="cash-list">'+rows.map(m=>'<div class="cash-row"><b>'+date(m.date)+'</b><span>'+(m.direction==='in'?'Поступление':'Платёж')+'</span><span>'+escapeHTML(m.category)+'</span><b>'+money(m.amount)+'</b><span>'+escapeHTML(m.status==='actual'?'Факт':'План')+'</span></div>').join('')+'</div>':'<p class="client-meta">Движений денежных средств пока нет.</p>';
+}
 function openFinancial(shipmentId){
   const ctx=financeContext(shipmentId),row=financeRow(shipmentId);if(!ctx||!row)return;
-  const calc=financeCalc(row,ctx),gate=financeGate(row,ctx),logs=auditTrail.filter(x=>x.entityId===shipmentId).slice().reverse().slice(0,12);
-  const disabled=row.locked?' disabled':'';
-  $('#financial-detail').innerHTML='<div class="panel-head"><div><small>ПАРТИЯ '+shipmentId+' · '+escapeHTML(ctx.d.businessLine)+'</small><h2 id="financial-title">'+escapeHTML(ctx.c?.name||'')+' · '+escapeHTML(ctx.d.product)+'</h2><p class="client-meta">'+date(ctx.p.date)+' · '+fmt(ctx.p.qty)+' т · сделка '+ctx.d.sourceId+'</p></div><button class="close" aria-label="Закрыть">×</button></div><div class="dialog-body"><div class="fin-gate '+(row.locked?'locked':gate.ready?'ready':'')+'"><b>Финансовая проверка: '+gate.status+'</b>'+(gate.missing.length?'<p>Не заполнено: '+escapeHTML(gate.missing.join(', '))+'</p>':'<p>Обязательные управленческие данные заполнены.</p>')+(row.locked?'<p>Финансовая блокировка активна. Прямое редактирование запрещено.</p>':'')+'</div><div class="fin-kpis"><div>Выручка<b>'+money(calc.revenue)+'</b></div><div>Себестоимость<b>'+money(calc.cogs)+'</b></div><div>Прямые расходы<b>'+money(calc.direct)+'</b></div><div>Маржинальный доход<b>'+money(calc.contribution)+' · '+fmt(calc.margin)+'%</b></div><div>План cash-in<b>'+money(calc.plannedCashIn)+'</b></div><div>Факт cash-in<b>'+money(calc.actualCashIn)+'</b></div><div>Факт cash-out<b>'+money(calc.actualCashOut)+'</b></div><div>Net cash<b>'+money(calc.netCash)+'</b></div></div><form id="finance-form"><h2>Первичные финансовые данные</h2><p class="client-meta">Подразделение: <b>'+escapeHTML(ctx.d.businessLine)+'</b>. Денежные расходы ниже указаны в MDL/т, cash-in/out — общей суммой по партии.</p><div class="fin-form-grid"><label>Статус значения<select name="valueStatus"'+disabled+'>'+['План','Подтверждено','Факт'].map(v=>'<option '+(row.valueStatus===v?'selected':'')+'>'+v+'</option>').join('')+'</select></label>'+financeFieldInput(row,'finalPrice','Финальная цена, MDL/т')+financeFieldInput(row,'unitCost','Себестоимость, MDL/т')+financeFieldInput(row,'logistics','Транспорт, MDL/т')+financeFieldInput(row,'loading','Погрузка/разгрузка, MDL/т')+financeFieldInput(row,'storage','Хранение, MDL/т')+financeFieldInput(row,'laboratory','Лаборатория, MDL/т')+financeFieldInput(row,'commission','Комиссия, MDL/т')+financeFieldInput(row,'insurance','Страхование, MDL/т')+financeFieldInput(row,'otherDirect','Прочие прямые, MDL/т')+financeFieldInput(row,'paymentTermsDays','Срок оплаты, дней')+financeFieldInput(row,'plannedCashIn','Плановая дата cash-in','date')+financeFieldInput(row,'actualCashIn','Фактический cash-in, MDL')+financeFieldInput(row,'actualCashOut','Фактический cash-out, MDL')+'</div>'+(row.locked?'':'<div class="wf-buttons"><button class="btn primary" type="submit">Сохранить финансовые данные</button><button class="btn" type="button" id="finance-lock" '+(!gate.ready||row.valueStatus!=='Факт'?'disabled':'')+'>Финансово закрыть партию</button></div><p class="note">Для финансового закрытия нужны заполненные данные и статус «Факт».</p>')+'<p id="finance-error" role="alert" class="wf-error"></p></form>'+(row.locked?'<div class="fin-correction"><h2>Корректировка через Финансовый журнал</h2><div class="fin-form-grid"><label>Поле<select id="corr-field">'+Object.entries(finLabels).filter(([k])=>k!=='valueStatus').map(([k,v])=>'<option value="'+k+'">'+v+'</option>').join('')+'</select></label><label>Новое значение<input id="corr-value" type="text"></label><label>Причина<input id="corr-reason" type="text" maxlength="500" placeholder="Обоснование корректировки"></label></div><button class="btn primary" id="corr-save" type="button">Записать корректировку в журнал</button><p id="corr-error" role="alert" class="wf-error"></p></div>':'')+'<h2 style="margin-top:22px">История партии</h2><div class="fin-log">'+(logs.length?logs.map(x=>'<div class="fin-log-entry"><b>'+escapeHTML(x.action)+'</b>'+(x.field?' · '+escapeHTML(x.field):'')+'<small>'+escapeHTML(x.at||'')+' · '+escapeHTML(x.actor||'')+'</small>'+(x.oldValue!==''||x.newValue!==''?'<span>'+escapeHTML(String(x.oldValue??''))+' → '+escapeHTML(String(x.newValue??''))+'</span>':'')+(x.reason?'<small>Причина: '+escapeHTML(x.reason)+'</small>':'')+'</div>').join(''):'<div class="empty">Изменений пока нет.</div>')+'</div></div>';
+  const calc=financeCalc(row,ctx),gate=financeGate(row,ctx),lockState=canFinanciallyLock(row,ctx),mark=calc.mark,logs=auditTrail.filter(x=>x.entityId===shipmentId||x.entityId===mark?.id).slice().reverse().slice(0,16),disabled=row.locked?' disabled':'';
+  $('#financial-detail').innerHTML=
+  '<div class="panel-head"><div><small>ПАРТИЯ '+shipmentId+' · '+escapeHTML(ctx.d.businessLine)+'</small><h2 id="financial-title">'+escapeHTML(ctx.c?.name||'')+' · '+escapeHTML(ctx.d.product)+'</h2><p class="client-meta">'+date(ctx.p.date)+' · план '+fmt(ctx.p.qty)+' т · отгружено '+fmt(ctx.p.shipped)+' т · открыто '+fmt(calc.openQty)+' т · сделка '+ctx.d.sourceId+'</p></div><button class="close" aria-label="Закрыть">×</button></div>'+
+  '<div class="dialog-body"><div class="fin-gate '+(row.locked?'locked':gate.ready?'ready':'')+'"><b>'+termMarkup('gate','Финансовая проверка')+': '+gate.status+'</b>'+(gate.missing.length?'<p>Не заполнено / не подтверждено: '+escapeHTML(gate.missing.join(', '))+'</p>':'<p>Обязательные управленческие данные заполнены.</p>')+(row.locked?'<p>'+termMarkup('lock','Финансовая блокировка')+' активна. Прямое редактирование запрещено.</p>':'')+'</div>'+
+  '<div class="fin-kpis"><div>Forecast P&L<b>'+money(calc.forecast.contribution)+'</b></div><div>Confirmed P&L<b>'+money(calc.confirmed.contribution)+'</b></div><div>Actual P&L<b>'+money(calc.actual.contribution)+'</b></div><div>'+termMarkup('mtm','Unrealized MTM')+'<b class="'+mtmClass(calc.mtm)+'">'+money(calc.mtm)+'</b></div><div>Open Exposure<b>'+fmt(calc.openQty)+' т</b></div><div>Total Economic<b>'+money(calc.totalEconomic)+'</b></div><div>Цена сделки<b>'+money(row.finalPrice)+'/т</b></div><div>Рынок<b>'+(mark?money(mark.price)+'/т':'—')+'</b></div></div>'+
+  '<div class="fin-market"><h2>'+termMarkup('mtm','MTM / рыночная переоценка')+'</h2><p class="client-meta">Для продажи: (цена сделки − рыночная цена) × открытый объём.</p><div class="fin-market-grid"><label>Рыночная цена, MDL/т<input id="market-price" type="number" min="0" step="0.01" value="'+escapeHTML(mark?.price??'')+'"></label><label>Источник<input id="market-source" type="text" maxlength="150" value="'+escapeHTML(mark?.source??'')+'"></label><label>Дата и время котировки<input id="market-time" type="datetime-local" value="'+escapeHTML((mark?.observedAt||'').slice(0,16))+'"></label></div><label style="margin-top:12px">Причина ручного изменения<input id="market-reason" type="text" maxlength="300" placeholder="Обязательно при изменении существующей котировки"></label><button class="btn" type="button" id="market-save" style="margin-top:12px">Обновить рыночную котировку</button><p id="market-error" class="wf-error"></p></div>'+
+  '<form id="finance-form"><h2>Первичные финансовые данные</h2><p class="client-meta">Business line берётся из сделки: <b>'+escapeHTML(ctx.d.businessLine)+'</b>.</p><div class="fin-form-grid"><label>Статус значения<select name="valueStatus"'+disabled+'>'+['План','Подтверждено','Факт'].map(v=>'<option '+(row.valueStatus===v?'selected':'')+'>'+v+'</option>').join('')+'</select></label>'+
+  financeFieldInput(row,'finalPrice','Финальная цена, MDL/т')+financeFieldInput(row,'unitCost','Себестоимость, MDL/т')+financeFieldInput(row,'logistics','Транспорт, MDL/т')+financeFieldInput(row,'loading','Погрузка/разгрузка, MDL/т')+financeFieldInput(row,'storage','Хранение, MDL/т')+financeFieldInput(row,'laboratory','Лаборатория, MDL/т')+financeFieldInput(row,'commission','Комиссия, MDL/т')+financeFieldInput(row,'insurance','Страхование, MDL/т')+financeFieldInput(row,'otherDirect','Прочие прямые, MDL/т')+financeFieldInput(row,'paymentTermsDays','Срок оплаты, дней')+
+  '<label>Есть незакрытые обязательства<select name="outstanding"'+disabled+'><option value="false" '+(!row.outstandingObligationsRegistered?'selected':'')+'>Нет</option><option value="true" '+(row.outstandingObligationsRegistered?'selected':'')+'>Да</option></select></label><label style="grid-column:span 2">Комментарий по незакрытым обязательствам<input name="outstandingNote" type="text" maxlength="500"'+disabled+' value="'+escapeHTML(row.outstandingObligationsNote||'')+'"></label></div>'+
+  (row.locked?'':'<div class="wf-buttons"><button class="btn primary" type="submit">Сохранить финансовые данные</button><button class="btn" type="button" id="finance-lock" '+(!lockState.ok?'disabled':'')+'>Финансово закрыть партию</button></div><p class="note">Закрытие: статус «Факт» + готовая проверка + полная отгрузка либо зарегистрированные незакрытые обязательства.</p>')+'<p id="finance-error" role="alert" class="wf-error"></p></form>'+
+  '<h2 style="margin-top:22px">'+termMarkup('cashflow','Cash Flow')+' партии</h2>'+renderCashRows(shipmentId)+'<div class="fin-form-grid"><label>Дата<input id="cash-date" type="date"></label><label>Направление<select id="cash-direction"><option value="in">Поступление</option><option value="out">Платёж</option></select></label><label>Статус<select id="cash-status"><option value="planned">План</option><option value="actual">Факт</option></select></label><label>Сумма, MDL<input id="cash-amount" type="number" min="0" step="0.01"></label><label style="grid-column:span 2">Категория<input id="cash-category" type="text" maxlength="150" placeholder="Например: оплата клиента"></label></div><button class="btn" id="cash-add" type="button">Добавить движение</button><p id="cash-error" class="wf-error"></p>'+
+  (row.locked?'<div class="fin-correction"><h2>Корректировка через '+termMarkup('finlog','Финансовый журнал')+'</h2><div class="fin-form-grid"><label>Поле<select id="corr-field">'+Object.entries(finLabels).filter(([k])=>!['valueStatus','outstandingObligationsRegistered','outstandingObligationsNote'].includes(k)).map(([k,v])=>'<option value="'+k+'">'+v+'</option>').join('')+'</select></label><label>Новое значение<input id="corr-value" type="text"></label><label>Причина<input id="corr-reason" type="text" maxlength="500" placeholder="Обоснование корректировки"></label></div><button class="btn primary" id="corr-save" type="button">Записать корректировку в журнал</button><p id="corr-error" role="alert" class="wf-error"></p></div>':'')+
+  '<h2 style="margin-top:22px">История партии</h2><div class="fin-log">'+(logs.length?logs.map(x=>'<div class="fin-log-entry"><b>'+escapeHTML(x.action)+'</b>'+(x.field?' · '+escapeHTML(x.field):'')+'<small>'+escapeHTML(x.at||'')+' · '+escapeHTML(x.actor||'')+'</small>'+(x.oldValue!==''||x.newValue!==''?'<span>'+escapeHTML(String(x.oldValue??''))+' → '+escapeHTML(String(x.newValue??''))+'</span>':'')+(x.reason?'<small>Причина: '+escapeHTML(x.reason)+'</small>':'')+'</div>').join(''):'<div class="empty">Изменений пока нет.</div>')+'</div></div>';
+
   const form=$('#finance-form');
-  if(!row.locked)form.onsubmit=e=>{e.preventDefault();const fd=new FormData(form),before=structuredClone(row);row.valueStatus=fd.get('valueStatus');for(const k of ['finalPrice','unitCost','logistics','loading','storage','laboratory','commission','insurance','otherDirect','paymentTermsDays','actualCashIn','actualCashOut'])row[k]=+fd.get(k)||0;row.plannedCashIn=fd.get('plannedCashIn');row.businessLine=ctx.d.businessLine;const g=financeGate(row,ctx);row.financialStatus=g.ready?'Расчёт готов':'Расчёт неполный';for(const k of Object.keys(row)){if(JSON.stringify(before[k])!==JSON.stringify(row[k]))auditAdd({actor:ctx.d.manager,role:'Менеджер продаж',action:'Изменение финансовых данных',entityType:'Партия',entityId:shipmentId,field:finLabels[k]||k,oldValue:before[k],newValue:row[k],source:'Интерфейс'})}toast('Финансовые данные партии сохранены.');renderFinance();finRefresh();openFinancial(shipmentId)};
-  const lock=$('#finance-lock');if(lock)lock.onclick=()=>{const g=financeGate(row,ctx);if(!g.ready||row.valueStatus!=='Факт')return;row.locked=true;row.financialStatus='Закрыт';row.lockedAt=auditTime();row.lockedBy=ctx.d.manager;auditAdd({actor:ctx.d.manager,role:'Менеджер продаж',action:'Финансовая блокировка · партия финансово закрыта',entityType:'Партия',entityId:shipmentId,source:'Интерфейс',newValue:'Закрыт'});toast('Партия финансово закрыта. Дальше — только через Финансовый журнал.');renderFinance();finRefresh();openFinancial(shipmentId)};
-  const corr=$('#corr-save');if(corr)corr.onclick=()=>{const key=$('#corr-field').value,raw=$('#corr-value').value.trim(),reason=$('#corr-reason').value.trim();if(!raw||!reason){$('#corr-error').textContent='Укажите новое значение и причину.';return}let value=key==='plannedCashIn'?raw:+raw;if(key!=='plannedCashIn'&&!Number.isFinite(value)){ $('#corr-error').textContent='Укажите корректное числовое значение.';return}if(key==='plannedCashIn'&&!/^\\d{4}-\\d{2}-\\d{2}$/.test(value)){ $('#corr-error').textContent='Дата должна быть в формате ГГГГ-ММ-ДД.';return}const old=row[key],candidate={...row,[key]:value};const correctedGate=financeGate(candidate,ctx);if(!correctedGate.ready){$('#corr-error').textContent='Корректировка нарушает обязательные финансовые данные: '+correctedGate.missing.join(', ');return}row[key]=value;auditAdd({actor:'Финансовый контролёр (демо)',role:'Финансовый контролёр',action:'Корректировка Финансового журнала',entityType:'Партия',entityId:shipmentId,field:finLabels[key]||key,oldValue:old,newValue:value,source:'Финансовый журнал',reason});toast('Корректировка записана в Financial Log.');renderFinance();finRefresh();openFinancial(shipmentId)};
+  if(!row.locked)form.onsubmit=e=>{
+    e.preventDefault();const fd=new FormData(form),before=structuredClone(row);
+    row.valueStatus=fd.get('valueStatus');
+    for(const k of ['finalPrice','unitCost','logistics','loading','storage','laboratory','commission','insurance','otherDirect','paymentTermsDays'])row[k]=+fd.get(k)||0;
+    row.outstandingObligationsRegistered=fd.get('outstanding')==='true';row.outstandingObligationsNote=String(fd.get('outstandingNote')||'').trim();
+    const g=financeGate(row,ctx);row.financialStatus=g.ready?'Расчёт готов':'Расчёт неполный';
+    for(const k of Object.keys(row))if(JSON.stringify(before[k])!==JSON.stringify(row[k]))auditAdd({actor:ctx.d.manager,role:'Менеджер продаж',action:'Изменение финансовых данных',entityType:'Партия',entityId:shipmentId,field:finLabels[k]||k,oldValue:before[k],newValue:row[k],source:'Интерфейс'});
+    toast('Финансовые данные партии сохранены.');renderFinance();finRefresh();openFinancial(shipmentId);
+  };
+  const lock=$('#finance-lock');if(lock)lock.onclick=()=>{
+    const state=canFinanciallyLock(row,ctx);if(!state.ok){$('#finance-error').textContent='Партия пока не соответствует условиям финансового закрытия.';return}
+    row.locked=true;row.financialStatus='Закрыт';row.lockedAt=auditTime();row.lockedBy=ctx.d.manager;
+    auditAdd({actor:ctx.d.manager,role:'Менеджер продаж',action:'Финансовая блокировка · партия финансово закрыта',entityType:'Партия',entityId:shipmentId,source:'Интерфейс',newValue:'Закрыт',reason:row.outstandingObligationsRegistered?row.outstandingObligationsNote:''});
+    toast('Партия финансово закрыта. Изменения первичных данных — только через Финансовый журнал.');renderFinance();finRefresh();openFinancial(shipmentId);
+  };
+  const corr=$('#corr-save');if(corr)corr.onclick=()=>{
+    const key=$('#corr-field').value,raw=$('#corr-value').value.trim(),reason=$('#corr-reason').value.trim();if(!raw||!reason){$('#corr-error').textContent='Укажите новое значение и причину.';return}
+    const value=+raw;if(!Number.isFinite(value)||value<0){$('#corr-error').textContent='Укажите корректное неотрицательное числовое значение.';return}
+    const old=row[key],candidate={...row,[key]:value},correctedGate=financeGate(candidate,ctx);if(!correctedGate.ready){$('#corr-error').textContent='Корректировка нарушает обязательные финансовые данные: '+correctedGate.missing.join(', ');return}
+    row[key]=value;auditAdd({actor:'Финансовый контролёр (демо)',role:'Финансовый контролёр',action:'Корректировка Финансового журнала',entityType:'Партия',entityId:shipmentId,field:finLabels[key]||key,oldValue:old,newValue:value,source:'Финансовый журнал',reason});
+    toast('Корректировка записана в Финансовый журнал.');renderFinance();finRefresh();openFinancial(shipmentId);
+  };
+  const cashAdd=$('#cash-add');if(cashAdd)cashAdd.onclick=()=>{
+    const dt=$('#cash-date').value,dir=$('#cash-direction').value,status=$('#cash-status').value,amount=+$('#cash-amount').value,category=$('#cash-category').value.trim();
+    if(!dt||!(amount>0)||!category){$('#cash-error').textContent='Укажите дату, сумму и категорию движения.';return}
+    const m={id:'CF-R'+String(cashMovements.length+1).padStart(3,'0'),shipmentId,date:dt,direction:dir,category,amount,status,source:'Ручной ввод (демо)'};
+    cashMovements.push(m);auditAdd({actor:ctx.d.manager,role:'Менеджер продаж',action:'Добавлено движение Cash Flow',entityType:'Партия',entityId:shipmentId,field:m.id,newValue:m,source:'Интерфейс'});
+    toast('Движение Cash Flow добавлено.');renderFinance();openFinancial(shipmentId);
+  };
+  const marketSave=$('#market-save');if(marketSave)marketSave.onclick=()=>{
+    const price=+$('#market-price').value,source=$('#market-source').value.trim(),localTime=$('#market-time').value,reason=$('#market-reason').value.trim();
+    if(!(price>0)||!source||!localTime){$('#market-error').textContent='Укажите цену, источник и дату котировки.';return}
+    if(mark&&!reason){$('#market-error').textContent='Для изменения существующей котировки укажите причину.';return}
+    const old=mark?structuredClone(mark):null;
+    if(mark){mark.price=price;mark.source=source;mark.observedAt=localTime;mark.status='current'}
+    else{marketMarks.push({id:'MK-R'+String(marketMarks.length+1).padStart(3,'0'),shipmentId,product:ctx.d.product,region:ctx.d.region,basis:'Доставка клиенту',deliveryPeriod:ctx.p.date.slice(0,7),price,currency:'MDL',unit:'т',source,observedAt:localTime,status:'current'})}
+    const updated=marketMark(shipmentId);
+    auditAdd({actor:ctx.d.manager,role:'Менеджер продаж',action:'Обновлена рыночная котировка MTM',entityType:'Market Mark',entityId:updated.id,field:'price',oldValue:old?.price??'',newValue:updated.price,source:updated.source,reason:reason||'Создание котировки'});
+    toast('Рыночная котировка обновлена. MTM пересчитан.');renderFinance();finRefresh();openFinancial(shipmentId);
+  };
   if(!$('#financial-detail').open)$('#financial-detail').showModal();
 }
 function enhanceShipmentFinance(){
   const table=$('#shipment-table table');if(!table)return;
-  const head=table.querySelector('thead tr');if(head&&!head.querySelector('.fin-col'))head.insertAdjacentHTML('beforeend','<th class="fin-col">Управленческий P&L</th>');
+  const head=table.querySelector('thead tr');
+  if(head&&!head.querySelector('.fin-col'))head.insertAdjacentHTML('beforeend','<th class="fin-col">Управленческий P&L</th><th class="fin-col">Рыночная цена</th><th class="fin-col">'+termMarkup('mtm','MTM')+'</th>');
   const rows=selected().flatMap(d=>parts(d).map(p=>({d,p}))).sort((a,b)=>a.p.date.localeCompare(b.p.date));
-  [...table.querySelectorAll('tbody tr')].forEach((tr,n)=>{const x=rows[n];if(!x||tr.querySelector('.fin-col'))return;const row=financeRow(x.p.shipmentId),gate=financeGate(row,{d:x.d,p:x.p,c:clients.find(c=>c.sourceId===x.d.clientId)}),calc=financeCalc(row,{d:x.d,p:x.p});tr.insertAdjacentHTML('beforeend','<td class="fin-col"><button class="btn '+finStatusClass(gate)+'" data-financial="'+x.p.shipmentId+'">'+gate.status+'</button><small>Contribution '+money(calc.contribution)+'</small></td>')});
+  [...table.querySelectorAll('tbody tr')].forEach((tr,n)=>{
+    const x=rows[n];if(!x||tr.querySelector('.fin-col'))return;
+    const row=financeRow(x.p.shipmentId),ctx={d:x.d,p:x.p,c:clients.find(c=>c.sourceId===x.d.clientId)},gate=financeGate(row,ctx),calc=financeCalc(row,ctx);
+    const scenario=row.valueStatus==='План'?calc.forecast:row.valueStatus==='Подтверждено'?calc.confirmed:calc.actual;
+    tr.insertAdjacentHTML('beforeend','<td class="fin-col"><button class="btn '+finStatusClass(gate)+'" data-financial="'+x.p.shipmentId+'">'+gate.status+'</button><small>'+escapeHTML(row.valueStatus)+' · '+money(scenario.contribution)+'</small></td><td class="fin-col">'+(calc.mark?money(calc.marketPrice)+'/т<small>'+escapeHTML(calc.mark.status==='current'?'актуальна':'устарела')+'</small>':'—')+'</td><td class="fin-col"><button class="link '+mtmClass(calc.mtm)+'" data-financial="'+x.p.shipmentId+'">'+money(calc.mtm)+'</button><small>open '+fmt(calc.openQty)+' т</small></td>');
+  });
 }
 const finOriginalArRender=arRender;
 arRender=function(){finOriginalArRender();enhanceShipmentFinance()};
 const finOriginalDetail=detail;
-detail=function(id){finOriginalDetail(id);const d=deals.find(x=>x.id===id),box=$('#detail .dialog-body');if(box)box.insertAdjacentHTML('beforeend','<section class="wf-links"><h3>Управленческие финансы партий</h3>'+(d.parts.length?d.parts.map(p=>{const row=financeRow(p.shipmentId),g=financeGate(row,{d,p});return '<button type="button" class="link" data-financial="'+p.shipmentId+'">'+p.shipmentId+' · '+date(p.date)+'<small>'+g.status+'</small></button>'}).join(''):'<p class="client-meta">Реальных партий пока нет — P&L не создаётся для ориентировочной потребности.</p>')+'</section>')};
+detail=function(id){
+  finOriginalDetail(id);
+  const d=deals.find(x=>x.id===id),box=$('#detail .dialog-body');if(!box)return;
+  const entries=d.parts.map(p=>{const row=financeRow(p.shipmentId),ctx={d,p,c:clients.find(c=>c.sourceId===d.clientId)},calc=financeCalc(row,ctx),g=financeGate(row,ctx);return {p,row,calc,g}});
+  const totalOpen=entries.reduce((n,x)=>n+x.calc.openQty,0),totalMtm=entries.reduce((n,x)=>n+x.calc.mtm,0);
+  box.insertAdjacentHTML('beforeend','<section class="wf-links"><h3>'+termMarkup('mtm','Рыночная переоценка MTM')+'</h3>'+(entries.length?'<p class="client-meta">Открытая позиция сделки: <b>'+fmt(totalOpen)+' т</b> · общий MTM: <b class="'+mtmClass(totalMtm)+'">'+money(totalMtm)+'</b></p>'+entries.map(x=>'<button type="button" class="link" data-financial="'+x.p.shipmentId+'">'+x.p.shipmentId+' · '+date(x.p.date)+' · open '+fmt(x.calc.openQty)+' т<small>цена сделки '+money(x.row.finalPrice)+'/т · рынок '+(x.calc.marketPrice==null?'—':money(x.calc.marketPrice)+'/т')+' · MTM '+money(x.calc.mtm)+'</small></button>').join(''):'<p class="client-meta">Реальных партий пока нет — официальный MTM не рассчитывается.</p>')+'</section><section class="wf-links"><h3>Управленческие финансы партий</h3>'+(entries.length?entries.map(x=>'<button type="button" class="link" data-financial="'+x.p.shipmentId+'">'+x.p.shipmentId+' · '+date(x.p.date)+'<small>'+x.g.status+' · '+escapeHTML(x.row.valueStatus)+'</small></button>').join(''):'<p class="client-meta">P&L партии появится после создания реального Shipment.</p>')+'</section>');
+};
 const finOriginalClient=clientDialog;
-clientDialog=function(id){finOriginalClient(id);const c=clients.find(x=>x.id===id),ds=deals.filter(d=>d.clientId===c.sourceId),ship=ds.flatMap(d=>d.parts.map(p=>({d,p}))),box=$('#client-detail .dialog-body');if(box)box.insertAdjacentHTML('beforeend','<section class="wf-links"><h3>Финансовые партии клиента</h3>'+(ship.length?ship.map(x=>'<button type="button" class="link" data-financial="'+x.p.shipmentId+'">'+x.p.shipmentId+' · '+x.d.product+' · '+date(x.p.date)+'</button>').join(''):'<p class="client-meta">Реальных партий пока нет.</p>')+'</section>')};
+clientDialog=function(id){
+  finOriginalClient(id);
+  const c=clients.find(x=>x.id===id),ds=deals.filter(d=>d.clientId===c.sourceId),ship=ds.flatMap(d=>d.parts.map(p=>({d,p}))),box=$('#client-detail .dialog-body');
+  if(box)box.insertAdjacentHTML('beforeend','<section class="wf-links"><h3>Финансовые партии клиента</h3>'+(ship.length?ship.map(x=>{const calc=financeCalc(financeRow(x.p.shipmentId),{d:x.d,p:x.p,c});return '<button type="button" class="link" data-financial="'+x.p.shipmentId+'">'+x.p.shipmentId+' · '+x.d.product+' · '+date(x.p.date)+'<small>MTM '+money(calc.mtm)+' · open '+fmt(calc.openQty)+' т</small></button>'}).join(''):'<p class="client-meta">Реальных партий пока нет.</p>')+'</section>');
+};
 function finRefresh(){enhanceShipmentFinance();if(currentView==='finance')renderFinance()}
 document.addEventListener('click',e=>{const b=e.target.closest('[data-financial]');if(b){openFinancial(b.dataset.financial);return}const nav=e.target.closest('[data-view="finance"]');if(nav)renderFinance()});
 for(const id of ['fin-period','fin-line','fin-product','fin-client','fin-manager']){const el=$('#'+id);if(el)el.onchange=renderFinance}
