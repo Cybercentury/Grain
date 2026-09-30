@@ -1,6 +1,6 @@
 {
   "meta": {
-    "schemaVersion": "0.8.2",
+    "schemaVersion": "0.9.0",
     "demoDate": "2026-09-30",
     "defaultCurrency": "MDL",
     "language": "ru-RU",
@@ -891,6 +891,92 @@
       "source": "data.json",
       "oldValue": "0.8.1",
       "newValue": "0.8.2"
+    },
+    {
+      "id": "AUD-005",
+      "at": "2026-10-01T09:45:00+03:00",
+      "actor": "Система",
+      "role": "Система",
+      "action": "Инициализация MTM / Mark-to-Market",
+      "entityType": "dataset",
+      "entityId": "0.9.0",
+      "source": "data.json",
+      "oldValue": "0.8.2",
+      "newValue": "0.9.0"
     }
-  ]
+  ],
+  "market": {
+    "marks": [
+      {
+        "id": "MK-001",
+        "shipmentId": "SH-001",
+        "product": "Пшеница",
+        "region": "Бельцы",
+        "basis": "Доставка клиенту",
+        "deliveryPeriod": "2026-10",
+        "price": 3520,
+        "currency": "MDL",
+        "unit": "т",
+        "source": "Демо-рынок Grain",
+        "observedAt": "2026-10-01T09:00:00+03:00",
+        "status": "current"
+      },
+      {
+        "id": "MK-002",
+        "shipmentId": "SH-002",
+        "product": "Кукуруза",
+        "region": "Оргеев",
+        "basis": "Доставка клиенту",
+        "deliveryPeriod": "2026-10",
+        "price": 3250,
+        "currency": "MDL",
+        "unit": "т",
+        "source": "Демо-рынок Grain",
+        "observedAt": "2026-10-01T09:00:00+03:00",
+        "status": "current"
+      },
+      {
+        "id": "MK-003",
+        "shipmentId": "SH-003",
+        "product": "Пшеница",
+        "region": "Кагул",
+        "basis": "Доставка клиенту",
+        "deliveryPeriod": "2026-10",
+        "price": 3480,
+        "currency": "MDL",
+        "unit": "т",
+        "source": "Демо-рынок Grain",
+        "observedAt": "2026-10-01T09:00:00+03:00",
+        "status": "current"
+      },
+      {
+        "id": "MK-004",
+        "shipmentId": "SH-004",
+        "product": "Пшеница",
+        "region": "Кагул",
+        "basis": "Доставка клиенту",
+        "deliveryPeriod": "2026-11",
+        "price": 3460,
+        "currency": "MDL",
+        "unit": "т",
+        "source": "Демо-рынок Grain",
+        "observedAt": "2026-10-01T09:00:00+03:00",
+        "status": "current"
+      },
+      {
+        "id": "MK-005",
+        "shipmentId": "SH-005",
+        "product": "Удобрения NPK",
+        "region": "Унгены",
+        "basis": "Доставка клиенту",
+        "deliveryPeriod": "2026-11",
+        "price": 10600,
+        "currency": "MDL",
+        "unit": "т",
+        "source": "Демо-рынок Grain",
+        "observedAt": "2026-10-01T09:00:00+03:00",
+        "status": "current"
+      }
+    ]
+  }
 }
