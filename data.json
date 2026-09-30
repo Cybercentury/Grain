@@ -1,6 +1,6 @@
 {
   "meta": {
-    "schemaVersion": "0.8.1",
+    "schemaVersion": "0.8.2",
     "demoDate": "2026-09-30",
     "defaultCurrency": "MDL",
     "language": "ru-RU",
@@ -661,7 +661,6 @@
         "insurance": 0,
         "otherDirect": 0,
         "paymentTermsDays": 30,
-        "plannedCashIn": "2026-11-14",
         "financialStatus": "Расчёт неполный",
         "locked": false,
         "outstandingObligationsRegistered": false,
@@ -680,7 +679,6 @@
         "insurance": 0,
         "otherDirect": 0,
         "paymentTermsDays": 30,
-        "plannedCashIn": "2026-11-19",
         "financialStatus": "Расчёт неполный",
         "locked": false,
         "outstandingObligationsRegistered": false,
@@ -699,7 +697,6 @@
         "insurance": 0,
         "otherDirect": 5,
         "paymentTermsDays": 20,
-        "plannedCashIn": "2026-10-25",
         "financialStatus": "Расчёт готов",
         "locked": false,
         "outstandingObligationsRegistered": false,
@@ -718,7 +715,6 @@
         "insurance": 0,
         "otherDirect": 5,
         "paymentTermsDays": 20,
-        "plannedCashIn": "2026-11-25",
         "financialStatus": "Расчёт готов",
         "locked": false,
         "outstandingObligationsRegistered": false,
@@ -737,7 +733,6 @@
         "insurance": 0,
         "otherDirect": 80,
         "paymentTermsDays": 0,
-        "plannedCashIn": "2026-11-10",
         "financialStatus": "Расчёт готов",
         "locked": false,
         "outstandingObligationsRegistered": false,
@@ -795,6 +790,56 @@
         "amount": 1248000,
         "status": "planned",
         "source": "Коммерческие условия"
+      },
+      {
+        "id": "CF-OUT-001",
+        "shipmentId": "SH-001",
+        "date": "2026-10-15",
+        "direction": "out",
+        "category": "Оплата поставщику и прямые расходы",
+        "amount": 1675000,
+        "status": "planned",
+        "source": "Финансовый план"
+      },
+      {
+        "id": "CF-OUT-002",
+        "shipmentId": "SH-002",
+        "date": "2026-10-20",
+        "direction": "out",
+        "category": "Оплата поставщику и прямые расходы",
+        "amount": 887100,
+        "status": "planned",
+        "source": "Финансовый план"
+      },
+      {
+        "id": "CF-OUT-003",
+        "shipmentId": "SH-003",
+        "date": "2026-10-05",
+        "direction": "out",
+        "category": "Оплата поставщику и прямые расходы",
+        "amount": 1322000,
+        "status": "planned",
+        "source": "Финансовый план"
+      },
+      {
+        "id": "CF-OUT-004",
+        "shipmentId": "SH-004",
+        "date": "2026-11-05",
+        "direction": "out",
+        "category": "Оплата поставщику и прямые расходы",
+        "amount": 997500,
+        "status": "planned",
+        "source": "Финансовый план"
+      },
+      {
+        "id": "CF-OUT-005",
+        "shipmentId": "SH-005",
+        "date": "2026-11-10",
+        "direction": "out",
+        "category": "Оплата поставщику и прямые расходы",
+        "amount": 1178400,
+        "status": "planned",
+        "source": "Финансовый план"
       }
     ]
   },
@@ -834,6 +879,18 @@
       "source": "data.json",
       "oldValue": "0.8.0",
       "newValue": "0.8.1"
+    },
+    {
+      "id": "AUD-004",
+      "at": "2026-10-01T09:30:00Z",
+      "actor": "Система",
+      "role": "Система",
+      "action": "Инициализация Stabilization Patch",
+      "entityType": "dataset",
+      "entityId": "0.8.2",
+      "source": "data.json",
+      "oldValue": "0.8.1",
+      "newValue": "0.8.2"
     }
   ]
 }
