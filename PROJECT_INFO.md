@@ -10,14 +10,14 @@
 - **Основной пользователь прототипа:** менеджер продаж.
 - **Дополнительные роли в бизнес-процессе:** юрист, коммерческий директор, бухгалтерия.
 - **Текущая внутренняя версия / спецификация:** **v0.11.0**
-- **Текущая функциональная версия интерфейса:** **v0.10.1**
+- **Текущая функциональная версия интерфейса:** **v0.11.0**
 - **Статус:** статичный интерактивный прототип.
 - **Основная ветка:** `main`.
 - **Публикация:** GitHub Pages из корня ветки `main`.
 - **Рабочий адрес прототипа:** https://cybercentury.github.io/Grain/
 - **Дата демонстрационных данных:** 30.09.2026.
 
-Версия **v0.10.0** реализована как Integrity & Risk Control: система автоматически сверяет физический товарный поток, финансовые записи, качество/ДВ и рыночные данные на уровне Shipment, создаёт вычисляемые Exceptions, оценивает потенциальное денежное воздействие и выводит результат на обзор и в план отгрузок. v0.9.0 MTM сохранён как отдельный слой рыночной переоценки и используется Integrity Engine как один из источников контроля.
+Версия **v0.11.0** реализована как Master Data & Field Ownership поверх существующих CRM / Shipment / Finance / MTM / Integrity модулей. Контрагенты и номенклатура получили единые master ID, legalKey для дедупликации, external mappings на CRM / GrainTrack / 1С и правила владения полями.
 
 ---
 
@@ -106,6 +106,13 @@ Grain должен стать рабочей CRM для компаний, кот
 ```text
 data.json
 ├─ meta
+├─ masterData
+│  ├─ parties
+│  ├─ partyMappings
+│  ├─ products
+│  ├─ productMappings
+│  ├─ fieldOwnership
+│  └─ reconciliationRules
 ├─ clients
 ├─ deals
 ├─ shipments
@@ -136,13 +143,29 @@ data.json
 - список business line;
 - при необходимости справочники для демо.
 
+#### `masterData`
+
+Канонический слой общих справочников между CRM, GrainTrack и финансовым учётом.
+
+Содержит:
+
+- `parties` — юридические сущности с immutable `partyId` и `legalKey`;
+- `partyMappings` — локальные ID CRM / GrainTrack / 1С;
+- `products` — master-номенклатуру с `productId`;
+- `productMappings` — локальные product ID разных систем;
+- `fieldOwnership` — правила authoritative owner по группам полей;
+- `reconciliationRules` — правила duplicate prevention и обязательных mappings.
+
+Для Молдовы demo `legalKey` имеет форму `MD:<13-digit fiscal code>`.
+
 #### `clients`
 
-Одна запись на контрагента.
+CRM-представление контрагента для работы менеджера.
 
 Обязательные ключи:
 
-- `id` — стабильный ID вида `CL-001`;
+- `id` — локальный CRM ID вида `CL-001`;
+- `partyId` — ссылка на `masterData.parties`;
 - `name`;
 - `type`;
 - `region`;
@@ -150,7 +173,9 @@ data.json
 - `relationshipStatus`;
 - настройки контактов и повторной работы.
 
-Товар не используется как идентификатор клиента. Один клиент в будущем может иметь несколько сделок по разным товарам.
+`clients` больше не считается самостоятельным master-справочником юридических лиц.
+
+Товар не используется как идентификатор клиента. Один клиент может иметь несколько сделок по разным товарам.
 
 #### `deals`
 
@@ -2179,23 +2204,107 @@ Party имеет роли:
 
 ## v0.11.0 — 2026-10-01 — Master Data & Field Ownership
 
-**Статус перед реализацией:** утверждён пользователем.
+**Статус:** реализовано.
 
-### Цель
+### Реализовано
 
-Исключить создание параллельных справочников контрагентов и номенклатуры в CRM / GrainTrack / 1С.
+Добавлен канонический слой `masterData`.
 
-### Scope
+#### Master Parties
 
-- immutable Master Party ID;
-- legalKey `jurisdiction:fiscalCode`;
-- Party roles;
-- External ID Mapping;
+- 10 demo Party;
+- immutable ID вида `PTY-001`;
+- legalKey вида `MD:<13-digit fiscal code>`;
+- роли Party;
+- demo-флаг у вымышленных реквизитов.
+
+Текущие `CL-xxx` сохранены как локальные CRM-ID и связаны с Party через `client.partyId`.
+
+#### External ID Mapping
+
+Для каждой demo Party созданы mappings:
+
+- CRM;
+- GrainTrack;
+- 1С.
+
+CRM / GrainTrack / 1С могут использовать собственные локальные ID, но общая логическая идентичность остаётся `PTY-xxx`.
+
+#### Master Products
+
+Созданы:
+
+- PRD-001 — Пшеница;
+- PRD-002 — Кукуруза;
+- PRD-003 — Удобрения NPK.
+
+Все Deal получили `productId`, а продукты — mappings на CRM / GrainTrack / 1С.
+
+#### Field Ownership
+
+В `masterData.fieldOwnership` зафиксированы authoritative owners:
+
+- master identity — MasterData;
+- юридические / бухгалтерские реквизиты — 1С / Finance;
+- relationship / manager / contacts / automation — CRM;
+- contracts / Shipment / logistics / quality / MTM — GrainTrack / trading layer;
+- accounting balances / payments / ledger — 1С.
+
+В клиентской карточке master identity показана как read-only для CRM.
+
+#### Master Data Engine
+
+В UI реализованы проверки:
+
+- duplicate `legalKey`;
+- duplicate external ID;
+- missing Party mappings;
+- missing Product mappings.
+
+Fuzzy name match зафиксирован только как warning-подход; автоматический merge по названию запрещён.
+
+### Интерфейс
+
+Добавлен отдельный раздел **Master Data**:
+
+- summary;
+- Master Parties;
 - Master Products;
 - Field Ownership;
-- Duplicate Prevention;
-- Master Data reconciliation UI;
-- второй архитектурный ответ в разделе «Ответы руководителю».
+- Master Data Exceptions.
+
+В карточке клиента отображаются:
+
+- Master Party ID;
+- Legal Key;
+- юридическое имя;
+- CRM / GrainTrack / 1С mappings.
+
+В «Ответы руководителю» добавлен второй вопрос про синхронизацию контрагентов и номенклатуры.
+
+### Контрольная регрессия
+
+Проверено:
+
+- JavaScript module script синтаксически корректен;
+- schema `data.json` = 0.11.0;
+- 10 Master Parties;
+- 3 Master Products;
+- все `legalKey` имеют формат `MD:<13 digits>`;
+- duplicate legalKey: 0;
+- missing Party mappings: 0;
+- missing Product mappings: 0;
+- duplicate external IDs: 0;
+- все CRM clients имеют валидный `partyId`;
+- все Deal имеют валидный `productId`;
+- MTM, Integrity и датированный Cash Flow продолжают присутствовать в UI.
+
+### Основные коммиты
+
+- `758a11b` — спецификация v0.11 и второй архитектурный ответ;
+- `47c21d1` — master parties/products/mappings/field ownership в data.json;
+- `cfd8605` — Master Data Engine и UI;
+- `dfee386` — исправление синтаксиса карточки клиента.
 
 
 
