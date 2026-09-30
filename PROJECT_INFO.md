@@ -10,14 +10,14 @@
 - **Основной пользователь прототипа:** менеджер продаж.
 - **Дополнительные роли в бизнес-процессе:** юрист, коммерческий директор, бухгалтерия.
 - **Текущая внутренняя версия / спецификация:** **v0.12.0**
-- **Текущая функциональная версия интерфейса:** **v0.11.3**
+- **Текущая функциональная версия интерфейса:** **v0.12.0**
 - **Статус:** статичный интерактивный прототип.
 - **Основная ветка:** `main`.
 - **Публикация:** GitHub Pages из корня ветки `main`.
 - **Рабочий адрес прототипа:** https://cybercentury.github.io/Grain/
 - **Дата демонстрационных данных:** 30.09.2026.
 
-Версия **v0.11.0** реализована как Master Data & Field Ownership поверх существующих CRM / Shipment / Finance / MTM / Integrity модулей. Контрагенты и номенклатура получили единые master ID, legalKey для дедупликации, external mappings на CRM / GrainTrack / 1С и правила владения полями.
+Версия **v0.12.0** реализована как отдельный Analytical Dashboard поверх существующих Deal / Shipment / Finance / Cash Flow / MTM / Master Data. Добавлены Cost Centers, аналитические dimensions, shared-cost allocation, Deal / Shipment profitability и управленческий P&L без подмены первичных финансовых источников.
 
 ---
 
@@ -113,6 +113,13 @@ data.json
 │  ├─ productMappings
 │  ├─ fieldOwnership
 │  └─ reconciliationRules
+├─ analytics
+│  ├─ businessUnits
+│  ├─ costCenters
+│  ├─ costCategoryMappings
+│  ├─ allocationRules
+│  ├─ sharedCosts
+│  └─ dimensions
 ├─ clients
 ├─ deals
 ├─ shipments
@@ -157,6 +164,22 @@ data.json
 - `reconciliationRules` — правила duplicate prevention и обязательных mappings.
 
 Для Молдовы demo `legalKey` имеет форму `MD:<13-digit fiscal code>`.
+
+
+#### `analytics`
+
+Управленческий аналитический слой, который не является вторым источником первичных финансовых данных.
+
+Содержит:
+
+- `businessUnits`;
+- `costCenters`;
+- `costCategoryMappings`;
+- `allocationRules`;
+- `sharedCosts`;
+- `dimensions`.
+
+Shared costs не записываются обратно в Shipment financials. Они распределяются только в Analytical P&L по явно заданному driver.
 
 #### `clients`
 
@@ -277,13 +300,18 @@ Cash Flow хранится как отдельные датированные д
 - `date`;
 - `direction`: `in` / `out`;
 - `category`;
+- `categoryGroup`;
+- `costCenterId`, если движение относится к расходному центру;
+- `financeField` для базовых компонентных cash-out;
 - `amount`;
 - `status`: `planned` / `actual`;
 - `source`.
 
 Фильтр периода Cash Flow применяется по `cashMovements.date`, а не по дате Shipment.
 
-Базовые плановые движения коммерческих условий и финансового плана синхронизируются с изменением цены, себестоимости и прямых расходов партии.
+Начиная с v0.12.0 базовый planned cash-out хранится не одной агрегированной строкой, а аналитическими компонентами COGS / logistics / terminal / laboratory / other direct. Их сумма обязана совпадать с исходным финансовым планом Shipment.
+
+Изменение цены, себестоимости или прямых расходов синхронизирует соответствующие planned cash components.
 
 #### `market.marks`
 
@@ -2659,25 +2687,136 @@ Drill-down должен вести к существующей Shipment financia
 
 ## v0.12.0 — 2026-10-01 — Analytical Dashboard & Cost Centers
 
-**Статус перед реализацией:** утверждён пользователем.
+**Статус:** реализовано.
 
-### Цель
+### Архитектура
 
-Перейти от отдельных CRM/Finance widgets к единой управленческой аналитической модели.
+Добавлен отдельный раздел **«Аналитика»** сразу после «Финансы».
 
-### Scope
+Раздел не хранит собственные первичные финансовые значения. Он строится из:
 
-- отдельный раздел «Аналитика» после «Финансы»;
-- единые dimensions для P&L и Cash Flow;
+- Deal;
+- Shipment;
+- Finance;
+- Cash Movements;
+- Market Marks / MTM;
+- Master Party / Product;
+- analytics cost centers / allocation rules.
+
+### Dimensions
+
+Единая модель использует:
+
+- Date;
+- Business Unit;
+- Business Line;
+- Region;
+- Product;
+- Counterparty;
+- Manager;
+- Deal;
+- Shipment;
+- Cost Center.
+
+Фильтры Analytical Dashboard позволяют менять эти срезы без создания отдельных отчётов под каждый вопрос.
+
+### Cost Centers
+
+Создано 7 demo Cost Centers:
+
+- CC-100 — Товар / закупка;
+- CC-200 — Логистика;
+- CC-300 — Терминал Джурджулешты;
+- CC-400 — Качество / лаборатория;
+- CC-500 — Коммерческий отдел Молдова;
+- CC-600 — Риск / страхование;
+- CC-900 — Прочие прямые.
+
+Cost Center не заменяет Business Line.
+
+### Компонентный Cash Flow
+
+Пять прежних агрегированных planned cash-out заменены аналитическими компонентами.
+
+Контрольные суммы сохранены:
+
+- Oct 2026 direct cash-in: **1 420 000 MDL**;
+- Oct 2026 direct cash-out: **3 884 100 MDL**;
+- Nov 2026 direct cash-in: **5 073 000 MDL**;
+- Nov 2026 direct cash-out: **2 175 900 MDL**.
+
+По каждой Shipment сумма компонентных cash-out полностью совпадает с прежним агрегированным финансовым планом.
+
+Финансовая карточка теперь синхронизирует соответствующий cash component при изменении себестоимости / logistics / direct cost.
+
+### Shared costs и allocation
+
+Добавлены 3 demo shared-cost pools:
+
+- October Commercial Overhead: 40 000 MDL;
+- November Commercial Overhead: 30 000 MDL;
+- November Terminal Fixed Costs: 20 000 MDL.
+
+Всего shared costs: **90 000 MDL**.
+
+Allocation rules:
+
+- по доле Revenue;
+- по planned tons.
+
+Shared costs не меняют Shipment Contribution и существуют только в Analytical P&L.
+
+### Analytical dashboard
+
+Реализованы:
+
+- KPI row;
+- P&L Structure;
+- Cash Flow Timeline;
 - Cost Centers;
-- cost category mapping;
-- shared cost pools;
-- allocation rules;
-- Analytical P&L;
-- Cash Flow по Cost Center / Deal / Product / Region / Business Line;
-- Deal / Shipment profitability;
-- новый раскрывающийся вопрос в «Ответы руководителю»;
-- сохранение существующих Finance / MTM / Integrity formulas без подмены источника истины.
+- quality / reconciliation widgets;
+- Deal / Shipment Profitability;
+- drill-down к существующей финансовой карточке Shipment.
+
+Контрольный consolidated analytical result текущего demo-набора:
+
+- Revenue: **6 493 000 MDL**;
+- COGS: **5 688 000 MDL**;
+- Direct Costs: **372 000 MDL**;
+- Contribution: **433 000 MDL**;
+- Shared Costs: **90 000 MDL**;
+- Analytical Operating Result: **343 000 MDL**;
+- Unrealized MTM: **56 000 MDL**;
+- Economic Result: **399 000 MDL**.
+
+### «Ответы руководителю»
+
+Добавлена новая раскрывающаяся карточка с дословным вопросом о переходе от CRM widgets к полноценным P&L / Cash Flow / Cost Center / deal profitability моделям.
+
+Карточка объясняет только архитектуру и реализацию Grain и не используется как подготовка ответа на интервью.
+
+### Регрессия
+
+Проверено:
+
+- JavaScript module script синтаксически корректен;
+- schema `data.json` = 0.12.0;
+- 27 cash movements после аналитической декомпозиции;
+- 7 cost centers;
+- 3 shared-cost pools;
+- 2 allocation rules;
+- все cash / cost mappings ссылаются на существующие Cost Center;
+- каждый shared pool распределяется ровно на исходную сумму;
+- прямые monthly Cash Flow totals не изменились;
+- Finance, MTM, Integrity и Master Data продолжают присутствовать;
+- «Аналитика» находится после «Финансы»;
+- Master Data остаётся после «Документооборот».
+
+### Основные коммиты
+
+- `0ffeb39` — спецификация v0.12;
+- `b172fd3` — Cost Centers, allocations и компонентный Cash Flow в data.json;
+- `e9c1e14` — Analytical Dashboard, синхронизация cash components и новая Q&A-карточка.
 
 
 
@@ -2766,7 +2905,7 @@ Drill-down должен вести к существующей Shipment financia
 - декомпозиция на конкретные риски / вопросы;
 - краткая реализация каждого вопроса в Grain;
 - явное разделение «реализовано / предусмотрено backend / не реализовано»;
-- короткий итоговый ответ для интервью.
+- краткий архитектурный вывод.
 
 Карточка Master Data перестроена полностью.
 
@@ -2777,7 +2916,7 @@ Drill-down должен вести к существующей Shipment financia
 - 9 выведенных архитектурных вопросов / рисков;
 - 10 кратких пунктов реализации Grain;
 - отдельные статусы «РЕАЛИЗОВАНО», «ПОСЛЕ BACKEND», «ПРАВИЛО ЗАФИКСИРОВАНО»;
-- отдельный короткий устный ответ руководителю.
+- отдельный краткий архитектурный вывод.
 
 В разбор включены:
 
