@@ -1,6 +1,6 @@
 {
   "meta": {
-    "schemaVersion": "0.7.0",
+    "schemaVersion": "0.8.0",
     "demoDate": "2026-09-30",
     "defaultCurrency": "MDL",
     "language": "ru-RU",
@@ -737,6 +737,18 @@
       "source": "data.json",
       "oldValue": null,
       "newValue": "Загружена единая мини-база Grain v0.7.0"
+    },
+    {
+      "id": "AUD-002",
+      "at": "2026-10-01T08:00:00Z",
+      "actor": "Система",
+      "role": "Система",
+      "action": "Инициализация финансового интерфейса v0.8.0",
+      "entityType": "dataset",
+      "entityId": "0.8.0",
+      "source": "data.json",
+      "oldValue": "0.7.0",
+      "newValue": "0.8.0"
     }
   ]
 }
