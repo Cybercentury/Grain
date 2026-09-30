@@ -262,6 +262,15 @@ dialog{background:#fffdf8}button:focus-visible,a:focus-visible,input:focus-visib
 @media(max-width:1000px){.exec-grid{grid-template-columns:1fr}.exec-kpis{grid-template-columns:repeat(2,1fr)}.exec-position{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:620px){.exec-kpis,.exec-position,.exec-terminal-grid{grid-template-columns:1fr}}
 
+
+/* v0.13.1 — Manager Q&A viewport scroll */
+#managerqa{max-height:calc(100vh - 235px);overflow-y:auto;overscroll-behavior:contain;scrollbar-gutter:stable;padding-right:10px}
+#managerqa::-webkit-scrollbar{width:10px}
+#managerqa::-webkit-scrollbar-track{background:#ebe9df;border-radius:999px}
+#managerqa::-webkit-scrollbar-thumb{background:#a9b3aa;border-radius:999px;border:2px solid #ebe9df}
+#managerqa::-webkit-scrollbar-thumb:hover{background:#87958a}
+@media(max-width:760px){#managerqa{max-height:none;overflow:visible;padding-right:0;scrollbar-gutter:auto}}
+
 </style></head><body>
 <aside><div class="brand"><svg class="brand-wheat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 22V5M12 5c-3-2-2-4 0-4 2 0 3 2 0 4ZM12 10C7 10 5 7 5 4c4 0 7 2 7 6ZM12 15c-5 0-7-3-7-6 4 0 7 2 7 6ZM12 20c-5 0-7-3-7-6 4 0 7 2 7 6ZM12 10c5 0 7-3 7-6-4 0-7 2-7 6ZM12 15c5 0 7-3 7-6-4 0-7 2-7 6ZM12 20c5 0 7-3 7-6-4 0-7 2-7 6Z"/></svg><span class="brand-name">grain<span>.</span></span></div><small>ТОРГОВЫЕ ОПЕРАЦИИ</small><nav aria-label="Основная навигация"><button class="active" data-view="overview"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg><span>Обзор</span></button><button data-view="executive"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20h18M5 17V9h4v8M11 17V5h4v12M17 17v-4h4v4"/><path d="M4 6l5-3 4 4 7-5"/></svg><span>Дашборд руководителя</span></button><button data-view="pipeline"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 4h18l-7 8v6l-4 2v-8z"/></svg><span>Воронка продаж</span></button><button data-view="shipments"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 6h11v12H3zM14 10h4l3 4v4h-7"/><path d="M14 14h7"/><circle cx="7" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg><span>План отгрузок</span></button><button data-view="clients"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="9" cy="7" r="3"/><path d="M3 21v-3a6 6 0 0 1 12 0v3M16 4a3 3 0 0 1 0 6M18 14a5 5 0 0 1 3 4v3"/></svg><span>База клиентов</span></button><button data-view="finance"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/><path d="M3 7l6-4 6 6 6-5"/></svg><span>Финансы</span></button><button data-view="analytics"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="8" height="6" rx="1.3"/><rect x="13" y="3" width="8" height="10" rx="1.3"/><rect x="3" y="11" width="8" height="10" rx="1.3"/><rect x="13" y="15" width="8" height="6" rx="1.3"/></svg><span>Аналитика</span></button><button data-view="documents"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H5v20h14V7zM14 2v6h5M8 12h8M8 16h5"/></svg><span>Документооборот</span></button><button data-view="masterdata"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v7c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12v7c0 1.7 3.6 3 8 3s8-1.3 8-3v-7"/></svg><span>Master Data</span></button><button data-view="managerqa"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v7M12 17h.01"/></svg><span>Ответы руководителю</span></button></nav><footer>МОЛДОВА · B2B<br>Зерно и минеральные удобрения<br><br>Прототип / 01<br>Все компании и сделки вымышлены</footer></aside>
 <main><div class="top"><span>Рабочее пространство / Продажи по Молдове</span><span class="demo">Демонстрационные данные</span></div><button class="task-banner" id="task-banner" aria-haspopup="dialog" aria-controls="task-drawer"></button><div class="heading"><div><h1 id="page-title">Продажи в деталях.</h1><p id="subtitle">От первого запроса до последней отгруженной тонны.</p></div></div>
@@ -415,7 +424,7 @@ dialog{background:#fffdf8}button:focus-visible,a:focus-visible,input:focus-visib
           </div>
         </details>
       </div>
-      <div class="manager-qa-summary"><b>Краткий архитектурный вывод.</b><br>Я разделяю коммерческую стадию и физический прогноз. Ранние сделки дают взвешенный forecast по вероятности стадии, подписанные — 100% контрактный остаток, а реальные даты и объёмы живут в Shipment. Поэтому в одном интерфейсе видно и состояние переговоров, и прогноз тонн по Молдове без двойного счёта.</div>
+      <div class="manager-qa-summary"><b>Краткий архитектурный вывод.</b><br>Grain разделяет коммерческую стадию и физический прогноз. Ранние сделки дают взвешенный forecast по вероятности стадии, подписанные — 100% контрактный остаток, а реальные даты и объёмы живут в Shipment. Поэтому в одном интерфейсе видно и состояние переговоров, и прогноз тонн по Молдове без двойного счёта.</div>
     </div>
   </article>
 
@@ -483,7 +492,7 @@ dialog{background:#fffdf8}button:focus-visible,a:focus-visible,input:focus-visib
           </div>
         </details>
       </div>
-      <div class="manager-qa-summary"><b>Краткий архитектурный вывод.</b><br>В статичной аграрной базе я автоматизирую не только сбор новых лидов, а повторный спрос: сезон, повторный заказ, целевую цену, окончание контракта и обещанную дату. Grain уже собирает эти события в рабочую очередь и не создаёт дублирующее напоминание, если по клиенту уже идёт активная сделка.</div>
+      <div class="manager-qa-summary"><b>Краткий архитектурный вывод.</b><br>В статичной аграрной базе Grain автоматизирует не только сбор новых лидов, а повторный спрос: сезон, повторный заказ, целевую цену, окончание контракта и обещанную дату. Grain уже собирает эти события в рабочую очередь и не создаёт дублирующее напоминание, если по клиенту уже идёт активная сделка.</div>
     </div>
   </article>
 
@@ -537,7 +546,7 @@ dialog{background:#fffdf8}button:focus-visible,a:focus-visible,input:focus-visib
           </div>
         </details>
       </div>
-      <div class="manager-qa-summary"><b>Краткий архитектурный вывод.</b><br>Я строю version-specific workflow: текущая версия документа последовательно проходит юриста и коммерческого директора, у каждого есть SLA, возврат всегда содержит причину, а новая версия не наследует старое согласование. История решения остаётся в Grain, а не растворяется в мессенджерах.</div>
+      <div class="manager-qa-summary"><b>Краткий архитектурный вывод.</b><br>Grain использует version-specific workflow: текущая версия документа последовательно проходит юриста и коммерческого директора, у каждого есть SLA, возврат всегда содержит причину, а новая версия не наследует старое согласование. История решения остаётся в Grain, а не растворяется в мессенджерах.</div>
     </div>
   </article>
 
@@ -598,7 +607,7 @@ dialog{background:#fffdf8}button:focus-visible,a:focus-visible,input:focus-visib
           </div>
         </details>
       </div>
-      <div class="manager-qa-summary"><b>Краткий архитектурный вывод.</b><br>Я ставлю кредитный барьер на каждую Shipment. Перед отгрузкой CRM проверяет актуальный долг из финансовой системы, просрочку, предоплату, лимит, резервы и подписанный договор. Без допуска фактическая отгрузка блокируется; исключение директора возможно только на конкретную партию и не скрывает саму задолженность.</div>
+      <div class="manager-qa-summary"><b>Краткий архитектурный вывод.</b><br>Grain использует кредитный барьер на каждую Shipment. Перед отгрузкой CRM проверяет актуальный долг из финансовой системы, просрочку, предоплату, лимит, резервы и подписанный договор. Без допуска фактическая отгрузка блокируется; исключение директора возможно только на конкретную партию и не скрывает саму задолженность.</div>
     </div>
   </article>
 
@@ -666,7 +675,7 @@ dialog{background:#fffdf8}button:focus-visible,a:focus-visible,input:focus-visib
           </div>
         </details>
       </div>
-      <div class="manager-qa-summary"><b>Краткий архитектурный вывод.</b><br>Я обеспечиваю чистые данные через Financial Gate на Shipment и поэтапную обязательность полей. Маржа считается системой, План / Подтверждено / Факт разделены, после закрытия действует Financial Lock, а корректировки журналируются. В сводный P&L и Cash Flow попадают одни и те же проверяемые первичные данные.</div>
+      <div class="manager-qa-summary"><b>Краткий архитектурный вывод.</b><br>Grain обеспечивает чистые данные через Financial Gate на Shipment и поэтапную обязательность полей. Маржа считается системой, План / Подтверждено / Факт разделены, после закрытия действует Financial Lock, а корректировки журналируются. В сводный P&L и Cash Flow попадают одни и те же проверяемые первичные данные.</div>
     </div>
   </article>
 
@@ -727,7 +736,7 @@ dialog{background:#fffdf8}button:focus-visible,a:focus-visible,input:focus-visib
           </div>
         </details>
       </div>
-      <div class="manager-qa-summary"><b>Краткий архитектурный вывод.</b><br>Я бы внедрял CRM через пользу для менеджера: система сама напоминает, считает forecast, собирает партии, проверяет допуски и показывает риски, а не заставляет вести второй отчёт. Запуск — пилотом, с короткими регламентами по ролям и обучением на реальных сделках; Audit Trail объясняется как защита процесса и сотрудника.</div>
+      <div class="manager-qa-summary"><b>Краткий архитектурный вывод.</b><br>Внедрение Grain строится вокруг пользы для менеджера: система сама напоминает, считает forecast, собирает партии, проверяет допуски и показывает риски, а не заставляет вести второй отчёт. Запуск — пилотом, с короткими регламентами по ролям и обучением на реальных сделках; Audit Trail объясняется как защита процесса и сотрудника.</div>
     </div>
   </article>
 
@@ -781,7 +790,7 @@ dialog{background:#fffdf8}button:focus-visible,a:focus-visible,input:focus-visib
           </div>
         </details>
       </div>
-      <div class="manager-qa-summary"><b>Краткий архитектурный вывод.</b><br>Да, юрист сможет согласовать из Telegram или WhatsApp, но кнопка должна обращаться к защищённому Grain API. Backend проверяет пользователя, права и актуальную версию, после чего изменяет workflow и пишет Audit Trail. Мессенджер остаётся каналом действия, Grain — источником истины.</div>
+      <div class="manager-qa-summary"><b>Краткий архитектурный вывод.</b><br>Telegram или WhatsApp могут использоваться как внешний канал согласования, но кнопка должна обращаться к защищённому Grain API. Backend проверяет пользователя, права и актуальную версию, после чего изменяет workflow и пишет Audit Trail. Мессенджер остаётся каналом действия, Grain — источником истины.</div>
     </div>
   </article>
 
