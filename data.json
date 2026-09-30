@@ -1,6 +1,6 @@
 {
   "meta": {
-    "schemaVersion": "0.11.0",
+    "schemaVersion": "0.12.0",
     "demoDate": "2026-09-30",
     "defaultCurrency": "MDL",
     "language": "ru-RU",
@@ -335,7 +335,8 @@
       "blocked": "",
       "agreed": "Товар: пшеница; объём 500 т; доставка в Бельцы в октябре.",
       "openQuestions": "Клиент просит снизить цену и предоставить отсрочку оплаты.",
-      "productId": "PRD-001"
+      "productId": "PRD-001",
+      "businessUnitId": "BU-MD-SALES"
     },
     {
       "id": "GR-002",
@@ -354,7 +355,8 @@
       "blocked": "",
       "agreed": "Объём 300 т; доставка в Оргеев до 20 октября.",
       "openQuestions": "Осталось согласовать график оплаты и подписать контракт.",
-      "productId": "PRD-002"
+      "productId": "PRD-002",
+      "businessUnitId": "BU-MD-SALES"
     },
     {
       "id": "GR-003",
@@ -373,7 +375,8 @@
       "blocked": "Не подтверждён транспорт",
       "agreed": "Контракт подписан; цена зафиксирована; поставки в октябре и ноябре.",
       "openQuestions": "Нужно подтвердить транспорт для первой партии.",
-      "productId": "PRD-001"
+      "productId": "PRD-001",
+      "businessUnitId": "BU-MD-SALES"
     },
     {
       "id": "GR-004",
@@ -392,7 +395,8 @@
       "blocked": "Ожидается предоплата",
       "agreed": "Подписан контракт на 120 т NPK с поставкой в ноябре.",
       "openQuestions": "Ожидается предусмотренная договором предоплата.",
-      "productId": "PRD-003"
+      "productId": "PRD-003",
+      "businessUnitId": "BU-MD-SALES"
     },
     {
       "id": "GR-005",
@@ -411,7 +415,8 @@
       "blocked": "",
       "agreed": "Клиент заинтересован в кукурузе; ориентир — ноябрь и декабрь.",
       "openQuestions": "Нужно подтвердить объёмы партий и требования к качеству.",
-      "productId": "PRD-002"
+      "productId": "PRD-002",
+      "businessUnitId": "BU-MD-SALES"
     },
     {
       "id": "GR-006",
@@ -430,7 +435,8 @@
       "blocked": "",
       "agreed": "Получен первичный запрос на удобрения NPK.",
       "openQuestions": "Объём и дата пока ориентировочные; требуется первый разговор.",
-      "productId": "PRD-003"
+      "productId": "PRD-003",
+      "businessUnitId": "BU-MD-SALES"
     }
   ],
   "shipments": [
@@ -765,7 +771,9 @@
         "category": "Оплата клиента",
         "amount": 1800000,
         "status": "planned",
-        "source": "Коммерческие условия"
+        "source": "Коммерческие условия",
+        "categoryGroup": "Customer Cash In",
+        "costCenterId": null
       },
       {
         "id": "CF-002",
@@ -775,7 +783,9 @@
         "category": "Оплата клиента",
         "amount": 960000,
         "status": "planned",
-        "source": "Коммерческие условия"
+        "source": "Коммерческие условия",
+        "categoryGroup": "Customer Cash In",
+        "costCenterId": null
       },
       {
         "id": "CF-003",
@@ -785,7 +795,9 @@
         "category": "Оплата клиента",
         "amount": 1420000,
         "status": "planned",
-        "source": "Коммерческие условия"
+        "source": "Коммерческие условия",
+        "categoryGroup": "Customer Cash In",
+        "costCenterId": null
       },
       {
         "id": "CF-004",
@@ -795,7 +807,9 @@
         "category": "Оплата клиента",
         "amount": 1065000,
         "status": "planned",
-        "source": "Коммерческие условия"
+        "source": "Коммерческие условия",
+        "categoryGroup": "Customer Cash In",
+        "costCenterId": null
       },
       {
         "id": "CF-005",
@@ -805,57 +819,295 @@
         "category": "Оплата клиента",
         "amount": 1248000,
         "status": "planned",
-        "source": "Коммерческие условия"
+        "source": "Коммерческие условия",
+        "categoryGroup": "Customer Cash In",
+        "costCenterId": null
       },
       {
-        "id": "CF-OUT-001",
+        "id": "CF-OUT-001-01",
         "shipmentId": "SH-001",
         "date": "2026-10-15",
         "direction": "out",
-        "category": "Оплата поставщику и прямые расходы",
-        "amount": 1675000,
+        "category": "Оплата поставщику / товар",
+        "categoryGroup": "COGS",
+        "costCenterId": "CC-100",
+        "financeField": "unitCost",
+        "amount": 1575000,
         "status": "planned",
-        "source": "Финансовый план"
+        "source": "Финансовый план · аналитический компонент"
       },
       {
-        "id": "CF-OUT-002",
+        "id": "CF-OUT-001-02",
+        "shipmentId": "SH-001",
+        "date": "2026-10-15",
+        "direction": "out",
+        "category": "Логистика",
+        "categoryGroup": "Direct Cost",
+        "costCenterId": "CC-200",
+        "financeField": "logistics",
+        "amount": 90000,
+        "status": "planned",
+        "source": "Финансовый план · аналитический компонент"
+      },
+      {
+        "id": "CF-OUT-001-03",
+        "shipmentId": "SH-001",
+        "date": "2026-10-15",
+        "direction": "out",
+        "category": "Погрузка / разгрузка",
+        "categoryGroup": "Direct Cost",
+        "costCenterId": "CC-300",
+        "financeField": "loading",
+        "amount": 6000,
+        "status": "planned",
+        "source": "Финансовый план · аналитический компонент"
+      },
+      {
+        "id": "CF-OUT-001-04",
+        "shipmentId": "SH-001",
+        "date": "2026-10-15",
+        "direction": "out",
+        "category": "Лаборатория / качество",
+        "categoryGroup": "Direct Cost",
+        "costCenterId": "CC-400",
+        "financeField": "laboratory",
+        "amount": 4000,
+        "status": "planned",
+        "source": "Финансовый план · аналитический компонент"
+      },
+      {
+        "id": "CF-OUT-002-01",
         "shipmentId": "SH-002",
         "date": "2026-10-20",
         "direction": "out",
-        "category": "Оплата поставщику и прямые расходы",
-        "amount": 887100,
+        "category": "Оплата поставщику / товар",
+        "categoryGroup": "COGS",
+        "costCenterId": "CC-100",
+        "financeField": "unitCost",
+        "amount": 834000,
         "status": "planned",
-        "source": "Финансовый план"
+        "source": "Финансовый план · аналитический компонент"
       },
       {
-        "id": "CF-OUT-003",
+        "id": "CF-OUT-002-02",
+        "shipmentId": "SH-002",
+        "date": "2026-10-20",
+        "direction": "out",
+        "category": "Логистика",
+        "categoryGroup": "Direct Cost",
+        "costCenterId": "CC-200",
+        "financeField": "logistics",
+        "amount": 48000,
+        "status": "planned",
+        "source": "Финансовый план · аналитический компонент"
+      },
+      {
+        "id": "CF-OUT-002-03",
+        "shipmentId": "SH-002",
+        "date": "2026-10-20",
+        "direction": "out",
+        "category": "Погрузка / разгрузка",
+        "categoryGroup": "Direct Cost",
+        "costCenterId": "CC-300",
+        "financeField": "loading",
+        "amount": 3000,
+        "status": "planned",
+        "source": "Финансовый план · аналитический компонент"
+      },
+      {
+        "id": "CF-OUT-002-04",
+        "shipmentId": "SH-002",
+        "date": "2026-10-20",
+        "direction": "out",
+        "category": "Лаборатория / качество",
+        "categoryGroup": "Direct Cost",
+        "costCenterId": "CC-400",
+        "financeField": "laboratory",
+        "amount": 2100,
+        "status": "planned",
+        "source": "Финансовый план · аналитический компонент"
+      },
+      {
+        "id": "CF-OUT-003-01",
         "shipmentId": "SH-003",
         "date": "2026-10-05",
         "direction": "out",
-        "category": "Оплата поставщику и прямые расходы",
-        "amount": 1322000,
+        "category": "Оплата поставщику / товар",
+        "categoryGroup": "COGS",
+        "costCenterId": "CC-100",
+        "financeField": "unitCost",
+        "amount": 1236000,
         "status": "planned",
-        "source": "Финансовый план"
+        "source": "Финансовый план · аналитический компонент"
       },
       {
-        "id": "CF-OUT-004",
+        "id": "CF-OUT-003-02",
+        "shipmentId": "SH-003",
+        "date": "2026-10-05",
+        "direction": "out",
+        "category": "Логистика",
+        "categoryGroup": "Direct Cost",
+        "costCenterId": "CC-200",
+        "financeField": "logistics",
+        "amount": 76000,
+        "status": "planned",
+        "source": "Финансовый план · аналитический компонент"
+      },
+      {
+        "id": "CF-OUT-003-03",
+        "shipmentId": "SH-003",
+        "date": "2026-10-05",
+        "direction": "out",
+        "category": "Погрузка / разгрузка",
+        "categoryGroup": "Direct Cost",
+        "costCenterId": "CC-300",
+        "financeField": "loading",
+        "amount": 4800,
+        "status": "planned",
+        "source": "Финансовый план · аналитический компонент"
+      },
+      {
+        "id": "CF-OUT-003-04",
+        "shipmentId": "SH-003",
+        "date": "2026-10-05",
+        "direction": "out",
+        "category": "Лаборатория / качество",
+        "categoryGroup": "Direct Cost",
+        "costCenterId": "CC-400",
+        "financeField": "laboratory",
+        "amount": 3200,
+        "status": "planned",
+        "source": "Финансовый план · аналитический компонент"
+      },
+      {
+        "id": "CF-OUT-003-05",
+        "shipmentId": "SH-003",
+        "date": "2026-10-05",
+        "direction": "out",
+        "category": "Прочие прямые",
+        "categoryGroup": "Direct Cost",
+        "costCenterId": "CC-900",
+        "financeField": "otherDirect",
+        "amount": 2000,
+        "status": "planned",
+        "source": "Финансовый план · аналитический компонент"
+      },
+      {
+        "id": "CF-OUT-004-01",
         "shipmentId": "SH-004",
         "date": "2026-11-05",
         "direction": "out",
-        "category": "Оплата поставщику и прямые расходы",
-        "amount": 997500,
+        "category": "Оплата поставщику / товар",
+        "categoryGroup": "COGS",
+        "costCenterId": "CC-100",
+        "financeField": "unitCost",
+        "amount": 927000,
         "status": "planned",
-        "source": "Финансовый план"
+        "source": "Финансовый план · аналитический компонент"
       },
       {
-        "id": "CF-OUT-005",
+        "id": "CF-OUT-004-02",
+        "shipmentId": "SH-004",
+        "date": "2026-11-05",
+        "direction": "out",
+        "category": "Логистика",
+        "categoryGroup": "Direct Cost",
+        "costCenterId": "CC-200",
+        "financeField": "logistics",
+        "amount": 63000,
+        "status": "planned",
+        "source": "Финансовый план · аналитический компонент"
+      },
+      {
+        "id": "CF-OUT-004-03",
+        "shipmentId": "SH-004",
+        "date": "2026-11-05",
+        "direction": "out",
+        "category": "Погрузка / разгрузка",
+        "categoryGroup": "Direct Cost",
+        "costCenterId": "CC-300",
+        "financeField": "loading",
+        "amount": 3600,
+        "status": "planned",
+        "source": "Финансовый план · аналитический компонент"
+      },
+      {
+        "id": "CF-OUT-004-04",
+        "shipmentId": "SH-004",
+        "date": "2026-11-05",
+        "direction": "out",
+        "category": "Лаборатория / качество",
+        "categoryGroup": "Direct Cost",
+        "costCenterId": "CC-400",
+        "financeField": "laboratory",
+        "amount": 2400,
+        "status": "planned",
+        "source": "Финансовый план · аналитический компонент"
+      },
+      {
+        "id": "CF-OUT-004-05",
+        "shipmentId": "SH-004",
+        "date": "2026-11-05",
+        "direction": "out",
+        "category": "Прочие прямые",
+        "categoryGroup": "Direct Cost",
+        "costCenterId": "CC-900",
+        "financeField": "otherDirect",
+        "amount": 1500,
+        "status": "planned",
+        "source": "Финансовый план · аналитический компонент"
+      },
+      {
+        "id": "CF-OUT-005-01",
         "shipmentId": "SH-005",
         "date": "2026-11-10",
         "direction": "out",
-        "category": "Оплата поставщику и прямые расходы",
-        "amount": 1178400,
+        "category": "Оплата поставщику / товар",
+        "categoryGroup": "COGS",
+        "costCenterId": "CC-100",
+        "financeField": "unitCost",
+        "amount": 1116000,
         "status": "planned",
-        "source": "Финансовый план"
+        "source": "Финансовый план · аналитический компонент"
+      },
+      {
+        "id": "CF-OUT-005-02",
+        "shipmentId": "SH-005",
+        "date": "2026-11-10",
+        "direction": "out",
+        "category": "Логистика",
+        "categoryGroup": "Direct Cost",
+        "costCenterId": "CC-200",
+        "financeField": "logistics",
+        "amount": 50400,
+        "status": "planned",
+        "source": "Финансовый план · аналитический компонент"
+      },
+      {
+        "id": "CF-OUT-005-03",
+        "shipmentId": "SH-005",
+        "date": "2026-11-10",
+        "direction": "out",
+        "category": "Погрузка / разгрузка",
+        "categoryGroup": "Direct Cost",
+        "costCenterId": "CC-300",
+        "financeField": "loading",
+        "amount": 2400,
+        "status": "planned",
+        "source": "Финансовый план · аналитический компонент"
+      },
+      {
+        "id": "CF-OUT-005-04",
+        "shipmentId": "SH-005",
+        "date": "2026-11-10",
+        "direction": "out",
+        "category": "Прочие прямые",
+        "categoryGroup": "Direct Cost",
+        "costCenterId": "CC-900",
+        "financeField": "otherDirect",
+        "amount": 9600,
+        "status": "planned",
+        "source": "Финансовый план · аналитический компонент"
       }
     ]
   },
@@ -943,6 +1195,18 @@
       "source": "data.json",
       "oldValue": "0.10.0",
       "newValue": "0.11.0"
+    },
+    {
+      "id": "AUD-008",
+      "at": "2026-10-01T02:00:00+03:00",
+      "actor": "Система",
+      "role": "Система",
+      "action": "Инициализация Analytical Dashboard & Cost Centers",
+      "entityType": "dataset",
+      "entityId": "0.12.0",
+      "source": "data.json",
+      "oldValue": "0.11.0",
+      "newValue": "0.12.0"
     }
   ],
   "market": {
@@ -1612,5 +1876,179 @@
       "exactDuplicateBlocking": true,
       "fuzzyNameMatch": "warning_only"
     }
+  },
+  "analytics": {
+    "businessUnits": [
+      {
+        "id": "BU-MD-SALES",
+        "name": "Коммерческий блок Молдова",
+        "country": "MD",
+        "status": "active"
+      }
+    ],
+    "costCenters": [
+      {
+        "id": "CC-100",
+        "name": "Товар / закупка",
+        "classification": "COGS",
+        "type": "direct",
+        "owner": "Trading / Procurement"
+      },
+      {
+        "id": "CC-200",
+        "name": "Логистика",
+        "classification": "Direct Cost",
+        "type": "direct",
+        "owner": "Logistics"
+      },
+      {
+        "id": "CC-300",
+        "name": "Терминал Джурджулешты",
+        "classification": "Direct / Shared",
+        "type": "operational",
+        "owner": "Terminal Operations"
+      },
+      {
+        "id": "CC-400",
+        "name": "Качество / лаборатория",
+        "classification": "Direct Cost",
+        "type": "direct",
+        "owner": "Quality"
+      },
+      {
+        "id": "CC-500",
+        "name": "Коммерческий отдел Молдова",
+        "classification": "Direct / Shared",
+        "type": "shared",
+        "owner": "Commercial"
+      },
+      {
+        "id": "CC-600",
+        "name": "Риск / страхование",
+        "classification": "Direct Cost",
+        "type": "direct",
+        "owner": "Finance / Risk"
+      },
+      {
+        "id": "CC-900",
+        "name": "Прочие прямые",
+        "classification": "Direct Cost",
+        "type": "direct",
+        "owner": "Finance"
+      }
+    ],
+    "costCategoryMappings": [
+      {
+        "financeField": "unitCost",
+        "category": "Оплата поставщику / товар",
+        "categoryGroup": "COGS",
+        "costCenterId": "CC-100"
+      },
+      {
+        "financeField": "logistics",
+        "category": "Логистика",
+        "categoryGroup": "Direct Cost",
+        "costCenterId": "CC-200"
+      },
+      {
+        "financeField": "loading",
+        "category": "Погрузка / разгрузка",
+        "categoryGroup": "Direct Cost",
+        "costCenterId": "CC-300"
+      },
+      {
+        "financeField": "storage",
+        "category": "Хранение",
+        "categoryGroup": "Direct Cost",
+        "costCenterId": "CC-300"
+      },
+      {
+        "financeField": "laboratory",
+        "category": "Лаборатория / качество",
+        "categoryGroup": "Direct Cost",
+        "costCenterId": "CC-400"
+      },
+      {
+        "financeField": "commission",
+        "category": "Комиссия",
+        "categoryGroup": "Direct Cost",
+        "costCenterId": "CC-500"
+      },
+      {
+        "financeField": "insurance",
+        "category": "Страхование",
+        "categoryGroup": "Direct Cost",
+        "costCenterId": "CC-600"
+      },
+      {
+        "financeField": "otherDirect",
+        "category": "Прочие прямые",
+        "categoryGroup": "Direct Cost",
+        "costCenterId": "CC-900"
+      }
+    ],
+    "allocationRules": [
+      {
+        "id": "AR-REV",
+        "name": "По доле выручки",
+        "driver": "revenue",
+        "scope": "period",
+        "description": "Распределение shared cost пропорционально Revenue Shipment в выбранном периоде."
+      },
+      {
+        "id": "AR-TONS",
+        "name": "По плановому тоннажу",
+        "driver": "plannedQty",
+        "scope": "period",
+        "description": "Распределение shared cost пропорционально plannedQty Shipment в выбранном периоде."
+      }
+    ],
+    "sharedCosts": [
+      {
+        "id": "SC-001",
+        "date": "2026-10-31",
+        "businessUnitId": "BU-MD-SALES",
+        "costCenterId": "CC-500",
+        "category": "Коммерческий overhead",
+        "amount": 40000,
+        "status": "planned",
+        "allocationRuleId": "AR-REV",
+        "source": "Управленческий план (демо)"
+      },
+      {
+        "id": "SC-002",
+        "date": "2026-11-30",
+        "businessUnitId": "BU-MD-SALES",
+        "costCenterId": "CC-500",
+        "category": "Коммерческий overhead",
+        "amount": 30000,
+        "status": "planned",
+        "allocationRuleId": "AR-REV",
+        "source": "Управленческий план (демо)"
+      },
+      {
+        "id": "SC-003",
+        "date": "2026-11-30",
+        "businessUnitId": "BU-MD-SALES",
+        "costCenterId": "CC-300",
+        "category": "Фиксированные расходы терминала",
+        "amount": 20000,
+        "status": "planned",
+        "allocationRuleId": "AR-TONS",
+        "source": "Управленческий план (демо)"
+      }
+    ],
+    "dimensions": [
+      "Date",
+      "Business Unit",
+      "Business Line",
+      "Region",
+      "Product",
+      "Counterparty",
+      "Manager",
+      "Deal",
+      "Shipment",
+      "Cost Center"
+    ]
   }
 }
