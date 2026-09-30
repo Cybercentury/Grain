@@ -1082,14 +1082,38 @@ Server-side merge ещё не реализован, но правило зафи
 **Должна ли Grain менять свою бизнес-модель под ограничения внешнего API?**  
 Нет. Canonical model Grain остаётся источником полной бизнес-семантики: Party, Product, Deal, Shipment, Logistics Movement, Documents, Finance. Если внешняя система не поддерживает ETA, transport status или маршрут, отсутствие этих полей в API не должно приводить к их удалению из Grain.
 
-**Что уже подготовлено для интеграционного слоя?**  
-Реализованы stable Master Party ID, Master Product ID, Shipment ID, Logistics Movement ID, external mappings и Field Ownership. Это позволяет интеграции однозначно определить сущность без поиска по названию и понимать, какая система является authoritative owner поля.
+**Что такое canonical model и что уже подготовлено для интеграционного слоя?**  
+**Canonical model** — это внутренняя единая бизнес-модель Grain, которая описывает сущности, их поля, связи и стабильные идентификаторы независимо от формата внешней системы. Например, Party, Product, Deal, Shipment и Logistics Movement имеют собственную семантику и ID даже в том случае, если 1С не умеет хранить часть логистических атрибутов.
+
+В Grain уже реализованы stable Master Party ID, Master Product ID, Shipment ID, Logistics Movement ID и Field Ownership. Это позволяет интеграции однозначно определить сущность без поиска по названию и понимать, какая система является authoritative owner конкретного поля.
+
+**Что такое mappings?**  
+**Mappings** — это явные соответствия между canonical ID / полями Grain и идентификаторами / полями внешней системы. Например `PTY-003 ↔ 1C Counterparty GUID`, `PRD-001 ↔ 1C Nomenclature GUID`, `SH-003 ↔ external shipment reference`. Mapping также должен фиксировать режим передачи поля: `direct`, `transformed`, `Grain-only` или `custom backend mapping`.
+
+Mapping нужен для того, чтобы интеграция не пыталась искать контрагента по названию и чтобы неподдерживаемое поле не исчезало молча.
+
 
 **Что делать с данными, которых нет в стандартном API 1С / внешней системы?**  
 Integration Adapter должен явно классифицировать mapping: direct / transformed / Grain-only / custom backend mapping. Возможные технические варианты — дополнительный регистр, custom HTTP service, extension или отдельное integration storage. Неподдерживаемое поле не должно молча исчезать.
 
-**Где проходит граница текущего CRM-прототипа?**  
-Canonical data model, mappings, Field Ownership и reconciliation rules реализованы. Исполняемый Integration Hub — transport, queues, retries, idempotency, API authentication и delivery acknowledgement — относится к backend и в текущем статичном прототипе не реализован.
+**Что такое executable Integration Hub и где проходит граница текущего CRM-прототипа?**  
+**Executable Integration Hub** — это уже не описание данных, а работающий backend-компонент обмена. Он должен принять бизнес-событие из Grain, проверить payload, найти mappings, выполнить transformation, авторизоваться во внешней системе, отправить запрос, получить acknowledgement и сохранить технический результат.
+
+В его ответственность входят:
+
+- event outbox / delivery queue;
+- validation;
+- mapping / transformation;
+- authentication;
+- idempotency — защита от повторного проведения одного события;
+- retry policy;
+- timeout / error classification;
+- API log;
+- acknowledgement;
+- Dead Letter / Manual Review для событий, которые нельзя доставить автоматически.
+
+Canonical model, mappings, Field Ownership и reconciliation rules в Grain уже реализованы. Сам executable Integration Hub относится к backend и в текущем статичном прототипе **не реализован**.
+
 
 **Как формулируется задача backend-разработчику?**  
 Не «интегрировать 1С», а формальный integration contract: business event, payload, source/target system, ID mappings, field transformations, unsupported fields, validation, authentication, idempotency key, retry policy, timeout, error classes, acknowledgement и Audit Trail.
