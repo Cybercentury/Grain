@@ -221,3 +221,81 @@ PTY-001
 Под-вопросы построены на нативных HTML `details/summary`, поэтому по умолчанию закрыты и раскрываются только по клику.
 
 Старая отдельная карточка «Товарный поток против классической воронки продаж» удалена из интерфейса.
+
+
+## Analytical Dashboard & Cost Centers — v0.12
+
+После раздела **«Финансы»** добавлен отдельный раздел **«Аналитика»**.
+
+Главное разделение:
+
+- «Финансы» — первичные финансовые данные и контроль конкретной Shipment;
+- «Аналитика» — управленческие P&L / Cash Flow / Cost Centers / Deal Profitability поверх тех же исходных сущностей.
+
+### Dimensions
+
+Единые аналитические измерения:
+
+- Date;
+- Business Unit;
+- Business Line;
+- Region;
+- Product;
+- Counterparty;
+- Manager;
+- Deal;
+- Shipment;
+- Cost Center.
+
+### Cost Centers
+
+Текущий demo-набор:
+
+- CC-100 — Товар / закупка;
+- CC-200 — Логистика;
+- CC-300 — Терминал Джурджулешты;
+- CC-400 — Качество / лаборатория;
+- CC-500 — Коммерческий отдел Молдова;
+- CC-600 — Риск / страхование;
+- CC-900 — Прочие прямые.
+
+### Cash Flow
+
+Planned cash-out разбит на аналитические компоненты COGS / logistics / terminal / quality / other direct.
+
+Суммы базового Cash Flow сохранены:
+
+- Oct 2026: in 1 420 000 / out 3 884 100 MDL;
+- Nov 2026: in 5 073 000 / out 2 175 900 MDL.
+
+### Shared costs
+
+В Analytical P&L добавлены отдельные shared cost pools и allocation rules:
+
+- по доле Revenue;
+- по planned tons.
+
+Shared costs не переписывают Shipment Contribution.
+
+### Dashboard
+
+Раздел содержит:
+
+- KPI;
+- P&L Structure;
+- Cash Flow Timeline;
+- Cost Centers;
+- проверки качества аналитической модели;
+- Deal / Shipment Profitability;
+- drill-down к финансовой карточке Shipment.
+
+Контрольный consolidated analytical result demo-набора:
+
+- Revenue 6 493 000 MDL;
+- Contribution 433 000 MDL;
+- Shared Costs 90 000 MDL;
+- Operating Result 343 000 MDL;
+- Unrealized MTM 56 000 MDL;
+- Economic Result 399 000 MDL.
+
+В «Ответы руководителю» добавлена отдельная раскрывающаяся карточка про переход от CRM-виджетов к полноценной аналитической модели.
