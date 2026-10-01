@@ -1,6 +1,6 @@
 {
   "meta": {
-    "schemaVersion": "0.13.0",
+    "schemaVersion": "0.15.0",
     "demoDate": "2026-09-30",
     "defaultCurrency": "MDL",
     "language": "ru-RU",
@@ -2068,7 +2068,7 @@
       {
         "movementId": "LM-001",
         "shipmentId": "SH-003",
-        "quantityTons": 180,
+        "quantityTons": 80,
         "mode": "truck",
         "status": "in_transit",
         "origin": "Cahul, MD",
@@ -2082,7 +2082,7 @@
       {
         "movementId": "LM-002",
         "shipmentId": "SH-003",
-        "quantityTons": 120,
+        "quantityTons": 60,
         "mode": "truck",
         "status": "delayed",
         "origin": "Cantemir, MD",
@@ -2126,13 +2126,13 @@
         "shipmentId": "SH-002",
         "quantityTons": 140,
         "mode": "truck",
-        "status": "delivered",
+        "status": "planned",
         "origin": "Chișinău, MD",
         "destination": "Client delivery point",
-        "plannedDeparture": "2026-09-28T07:30:00+03:00",
-        "actualDeparture": "2026-09-28T07:45:00+03:00",
-        "plannedArrival": "2026-09-28T14:00:00+03:00",
-        "eta": "2026-09-28T13:50:00+03:00",
+        "plannedDeparture": "2026-10-19T07:30:00+03:00",
+        "actualDeparture": null,
+        "plannedArrival": "2026-10-20T14:00:00+03:00",
+        "eta": null,
         "transportRef": "TRK-DEMO-021"
       }
     ]
@@ -2182,7 +2182,7 @@
         "terminalId": "TERM-GIU-01",
         "date": "2026-09-24",
         "type": "in",
-        "quantityTons": 420,
+        "quantityTons": 520,
         "shipmentId": "SH-003",
         "source": "Demo terminal log"
       },
@@ -2218,7 +2218,7 @@
         "terminalId": "TERM-GIU-01",
         "date": "2026-09-28",
         "type": "in",
-        "quantityTons": 500,
+        "quantityTons": 410,
         "shipmentId": "SH-001",
         "source": "Demo terminal log"
       },
@@ -2236,7 +2236,7 @@
         "terminalId": "TERM-GIU-01",
         "date": "2026-09-30",
         "type": "in",
-        "quantityTons": 330,
+        "quantityTons": 320,
         "shipmentId": "SH-005",
         "source": "Demo terminal log"
       },
@@ -2259,27 +2259,27 @@
       {
         "terminalId": "TERM-GIU-01",
         "date": "2026-09-25",
-        "stockTons": 680
+        "stockTons": 260
       },
       {
         "terminalId": "TERM-GIU-01",
         "date": "2026-09-26",
-        "stockTons": 770
+        "stockTons": 620
       },
       {
         "terminalId": "TERM-GIU-01",
         "date": "2026-09-27",
-        "stockTons": 590
+        "stockTons": 350
       },
       {
         "terminalId": "TERM-GIU-01",
         "date": "2026-09-28",
-        "stockTons": 680
+        "stockTons": 760
       },
       {
         "terminalId": "TERM-GIU-01",
         "date": "2026-09-29",
-        "stockTons": 610
+        "stockTons": 350
       },
       {
         "terminalId": "TERM-GIU-01",

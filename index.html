@@ -316,6 +316,10 @@ aside .brand-subtitle{max-width:182px;margin:7px 0 18px;color:#c7c8ad;font-size:
 @media(max-width:980px){#overview #queue-content{grid-template-columns:1fr}}
 @media(max-width:650px){.overview-contact-panel .panel-head{align-items:stretch}.overview-work-date{width:100%}}
 
+</style><link rel="stylesheet" href="./assistant.css">
+<style>
+/* v0.15: common readable type, wrapping and schematic sales funnel. */
+body{font-size:15px}button,input,select,textarea{font-size:14px}td{font-size:14px}th{font-size:12px}h2,h3,td,th,.metric,.deal{overflow-wrap:anywhere}.manager-qa-item-body p,.manager-qa-answer{font-size:15px;line-height:1.7}.manager-qa-quote{font-size:15px}.qa-group{font-size:20px;margin-top:24px;padding-bottom:12px;border-bottom:2px solid var(--gold)}.pipeline-summary{padding:22px;margin-bottom:24px}#pipeline-funnel{display:grid;justify-items:center;gap:7px;margin:20px auto;max-width:760px}.funnel-step{width:var(--step-width);min-height:68px;padding:12px 28px;display:flex;align-items:center;justify-content:space-between;gap:12px;border:0;background:var(--green);color:#fff9e9;clip-path:polygon(0 0,100% 0,97% 100%,3% 100%);cursor:pointer;font:inherit}.funnel-step:nth-child(even){background:#426650}.funnel-step:nth-child(n+5){background:#b38a3b;color:#172f21}.funnel-step:focus-visible{outline:0;box-shadow:inset 0 0 0 4px #edc660}.funnel-step span{white-space:nowrap;font-size:13px}@media(max-width:650px){.funnel-step{width:calc(100% - (100% - var(--step-width)) / 2);padding:12px 20px;display:grid;gap:2px}.funnel-step b{font-size:13px}}
 </style></head><body>
 <aside><div class="brand"><svg class="brand-wheat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 22V5M12 5c-3-2-2-4 0-4 2 0 3 2 0 4ZM12 10C7 10 5 7 5 4c4 0 7 2 7 6ZM12 15c-5 0-7-3-7-6 4 0 7 2 7 6ZM12 20c-5 0-7-3-7-6 4 0 7 2 7 6ZM12 10c5 0 7-3 7-6-4 0-7 2-7 6ZM12 15c5 0 7-3 7-6-4 0-7 2-7 6ZM12 20c5 0 7-3 7-6-4 0-7 2-7 6Z"/></svg><span class="brand-name">Grain <span class="brand-crm">CRM</span></span></div><small class="brand-subtitle">ЦЕЛОСТНАЯ СИСТЕМА УПРАВЛЕНИЯ СДЕЛКАМИ И ТОВАРНЫМИ ПОТОКАМИ</small><nav aria-label="Основная навигация"><button class="active" data-view="overview"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg><span>Обзор</span></button><button data-view="executive"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20h18M5 17V9h4v8M11 17V5h4v12M17 17v-4h4v4"/><path d="M4 6l5-3 4 4 7-5"/></svg><span>Дашборд руководителя</span></button><button data-view="pipeline"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 4h18l-7 8v6l-4 2v-8z"/></svg><span>Воронка продаж</span></button><button data-view="shipments"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 6h11v12H3zM14 10h4l3 4v4h-7"/><path d="M14 14h7"/><circle cx="7" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg><span>План отгрузок</span></button><button data-view="clients"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="9" cy="7" r="3"/><path d="M3 21v-3a6 6 0 0 1 12 0v3M16 4a3 3 0 0 1 0 6M18 14a5 5 0 0 1 3 4v3"/></svg><span>База клиентов</span></button><button data-view="finance"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/><path d="M3 7l6-4 6 6 6-5"/></svg><span>Финансы</span></button><button data-view="analytics"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="8" height="6" rx="1.3"/><rect x="13" y="3" width="8" height="10" rx="1.3"/><rect x="3" y="11" width="8" height="10" rx="1.3"/><rect x="13" y="15" width="8" height="6" rx="1.3"/></svg><span>Аналитика</span></button><button data-view="documents"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H5v20h14V7zM14 2v6h5M8 12h8M8 16h5"/></svg><span>Документооборот</span></button><button data-view="masterdata"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v7c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12v7c0 1.7 3.6 3 8 3s8-1.3 8-3v-7"/></svg><span>Master Data</span></button><button data-view="managerqa"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v7M12 17h.01"/></svg><span>Ответы руководителю</span></button></nav><footer>МОЛДОВА · B2B<br>Зерно и минеральные удобрения<br><br>Прототип / 01<br>Все компании и сделки вымышлены</footer></aside>
 <main><div class="top"><span>Рабочее пространство / Продажи по Молдове</span><span class="demo">Демонстрационные данные</span></div><button class="task-banner" id="task-banner" aria-haspopup="dialog" aria-controls="task-drawer"></button><div class="heading"><div><h1 id="page-title">Продажи в деталях.</h1><p id="subtitle">От первого запроса до последней отгруженной тонны.</p></div></div>
@@ -357,7 +361,7 @@ aside .brand-subtitle{max-width:182px;margin:7px 0 18px;color:#c7c8ad;font-size:
   <section class="panel"><div class="panel-head"><h2>Логистика и Transit</h2><small>Текущие физические перемещения по Shipment</small></div><div class="table-wrap" id="exec-logistics"></div></section>
   <p class="note">Верхний уровень трейдингового dashboard — товар, контракты, маржа, деньги, риски и терминал. Звонки, лиды и CRM-конверсия остаются операционными метриками команды.</p>
 </section>
-<section id="pipeline" class="hidden"><div class="board" id="board"></div><p class="note">Все активные сделки по выбранным товару и району, независимо от месяца. Тонны — весь оставшийся объём. Этап меняется в карточке сделки.</p></section>
+<section id="pipeline" class="hidden"><section class="panel pipeline-summary"><h2>Воронка активных сделок</h2><p class="note">Ширина показывает порядок этапов, не конверсию. Объёмы и количество — текущее состояние выбранных товара и района.</p><div id="pipeline-funnel"></div></section><div class="board" id="board"></div><p class="note">Все активные сделки по выбранным товару и району, независимо от месяца. Тонны — весь оставшийся объём. Этап меняется в карточке сделки.</p></section>
 <section id="shipments" class="hidden"><section class="panel"><div class="panel-head"><h2>График партий <button class="help" data-help="schedule" aria-label="О графике партий">?</button></h2><small>Факт и остаток по каждой партии</small></div><div class="table-wrap" id="shipment-table"></div></section></section>
 
 
@@ -389,7 +393,7 @@ aside .brand-subtitle{max-width:182px;margin:7px 0 18px;color:#c7c8ad;font-size:
     <label>Контрагент<select id="an-party"><option value="all">Все контрагенты</option></select></label>
     <label>Менеджер<select id="an-manager"><option value="all">Все менеджеры</option></select></label>
     <label>Сделка<select id="an-deal"><option value="all">Все сделки</option></select></label>
-    <label>Cost Center<select id="an-costcenter"><option value="all">Все центры затрат</option></select></label>
+    <label>Партии с затратами центра<select id="an-costcenter" title="P&L показывает полную экономику отобранных партий; Cash Flow фильтруется по центру затрат."><option value="all">Все центры затрат</option></select></label>
   </div>
   <p class="analytics-note">P&L использует дату Shipment; Cash Flow — дату денежного движения. Shared costs распределяются по заранее заданному driver и не переписывают первичный Shipment P&L.</p>
   <div class="fin-summary" id="an-summary"></div>
@@ -432,10 +436,7 @@ aside .brand-subtitle{max-width:182px;margin:7px 0 18px;color:#c7c8ad;font-size:
 <section class="panel master-section"><div class="panel-head"><h2>Master Data Exceptions</h2><small>Дубли legalKey и отсутствующие mappings</small></div><div id="master-exceptions" style="padding:20px"></div></section>
 <p class="note">В демо IDNO и внешние идентификаторы вымышлены. В рабочей системе legalKey формируется из реального jurisdiction + fiscal / registration code.</p>
 </section>
-<section id="managerqa" class="hidden">
-<div class="manager-qa">
-
-  <article class="manager-qa-card">
+<section id="managerqa" class="hidden"><div class="manager-qa"><p class="note"><b>О личном опыте:</b> этот прототип демонстрирует проектный подход. Он не подтверждает опыт внедрения промышленной BI-системы, Grain Track или пяти направлений бизнеса. На вопросы «был ли опыт» нужно отвечать только подтверждёнными примерами из своей работы.</p><h2 class="qa-group">Основные вопросы · 1. B2B-воронка и повторные закупки</h2><article class="manager-qa-card">
     <div class="manager-qa-head">
       <span class="manager-qa-mark" aria-hidden="true">!</span>
       <div>
@@ -494,9 +495,7 @@ aside .brand-subtitle{max-width:182px;margin:7px 0 18px;color:#c7c8ad;font-size:
       </div>
       <div class="manager-qa-summary"><b>Краткий архитектурный вывод.</b><br>Grain разделяет коммерческую стадию и физический прогноз. Ранние сделки дают взвешенный forecast по вероятности стадии, подписанные — 100% контрактный остаток, а реальные даты и объёмы живут в Shipment. Поэтому в одном интерфейсе видно и состояние переговоров, и прогноз тонн по Молдове без двойного счёта.</div>
     </div>
-  </article>
-
-  <article class="manager-qa-card">
+  </article><article class="manager-qa-card">
     <div class="manager-qa-head">
       <span class="manager-qa-mark" aria-hidden="true">!</span>
       <div>
@@ -562,9 +561,7 @@ aside .brand-subtitle{max-width:182px;margin:7px 0 18px;color:#c7c8ad;font-size:
       </div>
       <div class="manager-qa-summary"><b>Краткий архитектурный вывод.</b><br>В статичной аграрной базе Grain автоматизирует не только сбор новых лидов, а повторный спрос: сезон, повторный заказ, целевую цену, окончание контракта и обещанную дату. Grain уже собирает эти события в рабочую очередь и не создаёт дублирующее напоминание, если по клиенту уже идёт активная сделка.</div>
     </div>
-  </article>
-
-  <article class="manager-qa-card">
+  </article><h2 class="qa-group">Основные вопросы · 2. Документооборот и дебиторская задолженность</h2><article class="manager-qa-card">
     <div class="manager-qa-head">
       <span class="manager-qa-mark" aria-hidden="true">!</span>
       <div>
@@ -616,9 +613,7 @@ aside .brand-subtitle{max-width:182px;margin:7px 0 18px;color:#c7c8ad;font-size:
       </div>
       <div class="manager-qa-summary"><b>Краткий архитектурный вывод.</b><br>Grain использует version-specific workflow: текущая версия документа последовательно проходит юриста и коммерческого директора, у каждого есть SLA, возврат всегда содержит причину, а новая версия не наследует старое согласование. История решения остаётся в Grain, а не растворяется в мессенджерах.</div>
     </div>
-  </article>
-
-  <article class="manager-qa-card">
+  </article><article class="manager-qa-card">
     <div class="manager-qa-head">
       <span class="manager-qa-mark" aria-hidden="true">!</span>
       <div>
@@ -677,9 +672,7 @@ aside .brand-subtitle{max-width:182px;margin:7px 0 18px;color:#c7c8ad;font-size:
       </div>
       <div class="manager-qa-summary"><b>Краткий архитектурный вывод.</b><br>Grain использует кредитный барьер на каждую Shipment. Перед отгрузкой CRM проверяет актуальный долг из финансовой системы, просрочку, предоплату, лимит, резервы и подписанный договор. Без допуска фактическая отгрузка блокируется; исключение директора возможно только на конкретную партию и не скрывает саму задолженность.</div>
     </div>
-  </article>
-
-  <article class="manager-qa-card">
+  </article><h2 class="qa-group">Основные вопросы · 3. Управленческий учёт</h2><article class="manager-qa-card">
     <div class="manager-qa-head">
       <span class="manager-qa-mark" aria-hidden="true">!</span>
       <div>
@@ -745,9 +738,7 @@ aside .brand-subtitle{max-width:182px;margin:7px 0 18px;color:#c7c8ad;font-size:
       </div>
       <div class="manager-qa-summary"><b>Краткий архитектурный вывод.</b><br>Grain обеспечивает чистые данные через Financial Gate на Shipment и поэтапную обязательность полей. Маржа считается системой, План / Подтверждено / Факт разделены, после закрытия действует Financial Lock, а корректировки журналируются. В сводный P&L и Cash Flow попадают одни и те же проверяемые первичные данные.</div>
     </div>
-  </article>
-
-  <article class="manager-qa-card">
+  </article><h2 class="qa-group">Основные вопросы · 4. Онбординг</h2><article class="manager-qa-card">
     <div class="manager-qa-head">
       <span class="manager-qa-mark" aria-hidden="true">!</span>
       <div>
@@ -806,112 +797,7 @@ aside .brand-subtitle{max-width:182px;margin:7px 0 18px;color:#c7c8ad;font-size:
       </div>
       <div class="manager-qa-summary"><b>Краткий архитектурный вывод.</b><br>Внедрение Grain строится вокруг пользы для менеджера: система сама напоминает, считает forecast, собирает партии, проверяет допуски и показывает риски, а не заставляет вести второй отчёт. Запуск — пилотом, с короткими регламентами по ролям и обучением на реальных сделках; Audit Trail объясняется как защита процесса и сотрудника.</div>
     </div>
-  </article>
-
-  <article class="manager-qa-card">
-    <div class="manager-qa-head">
-      <span class="manager-qa-mark" aria-hidden="true">!</span>
-      <div>
-        <small>ДОПОЛНИТЕЛЬНЫЙ АРХИТЕКТУРНЫЙ ВОПРОС · TELEGRAM / WHATSAPP</small>
-        <h2>Согласование из мессенджера без входа в CRM</h2>
-        <p>Мессенджер как внешний интерфейс к Grain Workflow, а не отдельный источник решений.</p>
-      </div>
-    </div>
-    <div class="manager-qa-body">
-      <div class="manager-qa-quote"><small>ДОСЛОВНЫЙ ВОПРОС</small>«Допустим в Телеграме он нажал одобрить, скажем юрист, да, и в системе это автоматически подтвердилось, чтобы ему не обязательно было заходить в систему.»</div>
-      <h3 class="manager-qa-subtitle">Какие проблемы и вопросы из этого следуют</h3>
-      <div class="manager-qa-items">
-        
-        <details class="manager-qa-item">
-          <summary>Можно ли технически согласовать документ из Telegram или WhatsApp?</summary>
-          <div class="manager-qa-item-body">
-            <span class="manager-qa-status arch">АРХИТЕКТУРА ГОТОВА</span>
-            <p>Да. Мессенджер может отображать назначенную Grain-задачу и отправлять действие «Согласовать» или «Вернуть». Но само бизнес-решение принимает и сохраняет backend Grain после проверки запроса.</p><p>То есть Telegram/WhatsApp — только внешний пользовательский интерфейс, а не вторая база документов.</p>
-          </div>
-        </details>
-        <details class="manager-qa-item">
-          <summary>Что должен проверить backend перед принятием нажатия?</summary>
-          <div class="manager-qa-item-body">
-            <span class="manager-qa-status future">ПОСЛЕ BACKEND</span>
-            <p>Нужно проверить идентичность пользователя, связь Telegram/WhatsApp account с Grain user, роль и право на действие, Document ID, актуальную версию, текущий workflow stage и срок действия action token.</p><p>Без этих проверок пересланное или старое сообщение могло бы изменить документ не тем пользователем или не на той версии.</p>
-          </div>
-        </details>
-        <details class="manager-qa-item">
-          <summary>Что произойдёт, если юрист нажмёт кнопку под старой версией?</summary>
-          <div class="manager-qa-item-body">
-            <span class="manager-qa-status done">ПРАВИЛО ЗАФИКСИРОВАНО</span>
-            <p>Backend сравнит version ID из action с текущей версией Grain и отклонит действие. Пользователь получит сообщение, что версия устарела и нужно открыть актуальную задачу.</p><p>Это сохраняет тот же version-specific принцип, который уже действует внутри документооборота.</p>
-          </div>
-        </details>
-        <details class="manager-qa-item">
-          <summary>Где будет храниться результат согласования?</summary>
-          <div class="manager-qa-item-body">
-            <span class="manager-qa-status future">ПОСЛЕ BACKEND</span>
-            <p>После успешной валидации Grain обновляет workflow и создаёт Audit Trail event с actor, ролью, Document ID, version ID и каналом Telegram/WhatsApp. Сообщение в мессенджере лишь отражает этот результат.</p><p>Таким образом история не зависит от сохранности чата.</p>
-          </div>
-        </details>
-        <details class="manager-qa-item">
-          <summary>Что реально работает в текущем статичном прототипе?</summary>
-          <div class="manager-qa-item-body">
-            <span class="manager-qa-status prototype">ТОЛЬКО АРХИТЕКТУРА</span>
-            <p>Сейчас реализованы внутренний workflow, версии, SLA, Audit Trail и информационное описание будущей интеграции. Реального webhook, защищённого API и bot approval нет.</p><p>Это сознательно отложено до появления backend, постоянной базы, авторизации и RBAC.</p>
-          </div>
-        </details>
-      </div>
-      <div class="manager-qa-summary"><b>Краткий архитектурный вывод.</b><br>Telegram или WhatsApp могут использоваться как внешний канал согласования, но кнопка должна обращаться к защищённому Grain API. Backend проверяет пользователя, права и актуальную версию, после чего изменяет workflow и пишет Audit Trail. Мессенджер остаётся каналом действия, Grain — источником истины.</div>
-    </div>
-  </article>
-
-  <article class="manager-qa-card">
-    <div class="manager-qa-head">
-      <span class="manager-qa-mark" aria-hidden="true">!</span>
-      <div>
-        <small>ВОПРОС РУКОВОДИТЕЛЯ · TRADING DASHBOARD</small>
-        <h2>Какие KPI должны быть на dashboard руководителя</h2>
-        <p>Физический товарный поток и экономика выше CRM-активности.</p>
-      </div>
-    </div>
-    <div class="manager-qa-body">
-      <div class="manager-qa-quote"><small>ДОСЛОВНЫЙ ВОПРОС</small>«Представьте, что мы внедряем трейдинговый дашборд. Какие метрики вы бы предложили мне на согласование в первую очередь?»</div>
-      <h3 class="manager-qa-subtitle">Какие управленческие проблемы из этого следуют</h3>
-      <div class="manager-qa-items">
-        <details class="manager-qa-item"><summary>Как увидеть реальную физическую позицию товара, а не только CRM-статус сделки?</summary><div class="manager-qa-item-body"><span class="manager-qa-status done">РЕАЛИЗОВАНО v0.13</span><p>В dashboard отдельно показываются подписанный объём, открытый остаток, объём в пути, stock на терминале и фактически отгруженный объём. «В пути» считается только из Logistics Movements со статусом in_transit / delayed, а не из общего plannedQty.</p><p>Поэтому руководитель видит, где физически находится товар, а не делает вывод о движении из стадии Deal.</p></div></details>
-        <details class="manager-qa-item"><summary>Как контролировать исполнение контракта после подписания?</summary><div class="manager-qa-item-body"><span class="manager-qa-status done">РЕАЛИЗОВАНО</span><p>Для signed Deal рассчитываются contracted tons, shipped tons, transit, terminal stock, open remainder, execution % и следующая Shipment. Подписанный документ становится началом контроля исполнения, а не финальной точкой CRM.</p><p>В таблице руководитель одновременно видит физический прогресс и задержки transit.</p></div></details>
-        <details class="manager-qa-item"><summary>Маржинальность действительно показывает выгоду контракта?</summary><div class="manager-qa-item-body"><span class="manager-qa-status done">РЕАЛИЗОВАНО</span><p>Да, но нужно различать уровни. Contribution Margin показывает результат после COGS и прямых расходов; Operating Margin дополнительно учитывает allocated shared costs и поэтому ближе к реальной управленческой выгоде контракта.</p><p>Это не бухгалтерская чистая прибыль: налоги, финансирование, FX и другие корпоративные статьи могут находиться вне этой модели. В executive dashboard для signed Deal показывается именно Operating Margin и сумма Analytical Operating Result.</p></div></details>
-        <details class="manager-qa-item"><summary>Как измерить эффективность терминала?</summary><div class="manager-qa-item-body"><span class="manager-qa-status done">РЕАЛИЗОВАНО DEMO</span><p>Добавлен Terminal Operations layer: capacity, current stock, inbound/outbound throughput, average stock, utilization, turnover и average dwell time. Turnover считается как outbound throughput / average stock.</p><p>Это отделено от Cost Center терминала: Cost Center отвечает за деньги, Terminal Operations — за физическую производительность инфраструктуры.</p></div></details>
-        <details class="manager-qa-item"><summary>Что должно быть выше обычных метрик CRM?</summary><div class="manager-qa-item-body"><span class="manager-qa-status done">ЗАФИКСИРОВАН ПРИНЦИП</span><p>На верхний уровень вынесены товар, контракт, Operating Margin, Cash Gap, MTM, Integrity и terminal utilization. Звонки, лиды и конверсия могут оставаться метриками работы команды, но не заменяют бизнес-KPI трейдинга.</p><p>Dashboard руководителя поэтому отвечает на вопрос «что происходит с товаром и экономикой», а не «сколько действий сделал менеджер».</p></div></details>
-        <details class="manager-qa-item"><summary>Как руководитель понимает, куда смотреть в первую очередь?</summary><div class="manager-qa-item-body"><span class="manager-qa-status done">РЕАЛИЗОВАНО</span><p>Executive Risk Board объединяет Integrity Critical, блокировки Shipment clearance, задержки Logistics, stale MTM marks, кассовый разрыв и перегрузку терминала. Исключения идут рядом с KPI, а не скрываются в отдельных модулях.</p><p>Тем самым dashboard становится инструментом принятия решений, а не только витриной средних показателей.</p></div></details>
-      </div>
-      <div class="manager-qa-summary"><b>Краткий архитектурный вывод.</b><br>Дашборд руководителя в Grain строится вокруг физического положения товара, исполнения подписанных контрактов, Operating Margin, Cash Gap, MTM, управленческих рисков и эффективности терминала. CRM activity metrics остаются вторичным уровнем, потому что они не показывают напрямую ни движение товара, ни реальную экономику контракта.</div>
-    </div>
-  </article>
-
-  <article class="manager-qa-card">
-    <div class="manager-qa-head">
-      <span class="manager-qa-mark" aria-hidden="true">!</span>
-      <div>
-        <small>ВОПРОС РУКОВОДИТЕЛЯ · BI / АНАЛИТИКА</small>
-        <h2>От CRM-виджетов к P&L, Cash Flow и Cost Centers</h2>
-        <p>Не отдельные красивые отчёты, а единая аналитическая модель поверх первичных операций.</p>
-      </div>
-    </div>
-    <div class="manager-qa-body">
-      <div class="manager-qa-quote"><small>ДОСЛОВНЫЙ ВОПРОС</small>«Создание дашбордов для мониторинга операционной команды — это базовый уровень. Мне для управления коммерческим блоком нужна сложная аналитика: структуры PnL, модели кэш-флоу, классификация центров затрат, маржинальность по сделкам. Был ли у вас опыт проектирования моделей данных для полноценных BI-систем, или ваш инструментарий ограничивается внутренними отчетами Битрикс24?»</div>
-      <h3 class="manager-qa-subtitle">Какие управленческие проблемы из этого следуют</h3>
-      <div class="manager-qa-items">
-        <details class="manager-qa-item"><summary>Как перейти от CRM-виджетов к единой финансовой модели?</summary><div class="manager-qa-item-body"><span class="manager-qa-status done">РЕАЛИЗОВАНО v0.12</span><p>В Grain появился отдельный Analytical Dashboard, который не хранит собственные первичные цифры, а читает Deal, Shipment, Finance, Cash Movements, MTM и Master Data. Это означает, что новые аналитические разрезы строятся поверх общей модели, а не через новый независимый отчёт с копией данных.</p><p>Общими dimensions стали Date, Business Unit, Business Line, Region, Product, Counterparty, Manager, Deal, Shipment и Cost Center.</p></div></details>
-        <details class="manager-qa-item"><summary>Как строится P&L по коммерческому блоку?</summary><div class="manager-qa-item-body"><span class="manager-qa-status done">РЕАЛИЗОВАНО</span><p>Shipment остаётся минимальной единицей экономики: Revenue, COGS и Direct Costs формируют Contribution. Новый аналитический слой добавляет Allocated Shared Costs, после чего рассчитывает Analytical Operating Result.</p><p>MTM остаётся отдельным нереализованным слоем, поэтому Economic Result не смешивает его с прямым Contribution без явного отображения.</p></div></details>
-        <details class="manager-qa-item"><summary>Как P&L и Cash Flow используют одинаковые аналитические измерения, но разные даты?</summary><div class="manager-qa-item-body"><span class="manager-qa-status done">РЕАЛИЗОВАНО</span><p>P&L фильтруется по Shipment и её экономическому контексту, а Cash Flow — по дате конкретного денежного движения. При этом оба слоя используют одну связь с Business Line, Product, Party, Deal, Shipment и Cost Center.</p><p>Поэтому прибыльная октябрьская Shipment может иметь ноябрьский cash-in и одновременно создавать октябрьский кассовый разрыв.</p></div></details>
-        <details class="manager-qa-item"><summary>Как классифицируются центры затрат?</summary><div class="manager-qa-item-body"><span class="manager-qa-status done">РЕАЛИЗОВАНО</span><p>Добавлен справочник Cost Centers: товар/закупка, логистика, терминал Джурджулешты, качество/лаборатория, коммерческий отдел, риск/страхование и прочие прямые расходы.</p><p>Cost Center не заменяет Business Line: Business Line показывает, на каком направлении получен результат, а Cost Center — где и каким процессом возник расход.</p></div></details>
-        <details class="manager-qa-item"><summary>Как учитывать общие расходы, которые нельзя честно привязать к одной Shipment?</summary><div class="manager-qa-item-body"><span class="manager-qa-status done">DEMO ALLOCATION</span><p>Shared costs хранятся отдельными cost pools и не маскируются под direct cost конкретной партии. Для них задаётся allocation driver — в демо по доле Revenue или planned tons.</p><p>Распределённая сумма показывается только в Analytical P&L после Contribution, поэтому исходная экономика Shipment не переписывается задним числом.</p></div></details>
-        <details class="manager-qa-item"><summary>Как увидеть маржинальность конкретной сделки или партии?</summary><div class="manager-qa-item-body"><span class="manager-qa-status done">РЕАЛИЗОВАНО</span><p>В dashboard есть таблица Deal / Shipment Profitability: Revenue, Contribution, Margin %, allocated shared cost, Operating Result, MTM и Economic Result. Строка ведёт обратно к существующей финансовой карточке Shipment.</p><p>Это сохраняет drill-down от агрегата к первичной операции вместо создания отдельной «BI-копии» финансовых данных.</p></div></details>
-        <details class="manager-qa-item"><summary>Как контролировать качество данных для такой аналитики?</summary><div class="manager-qa-item-body"><span class="manager-qa-status done">РЕАЛИЗОВАН ПРОТОТИП</span><p>Analytics показывает неполный Financial Gate, cash-out без Cost Center, shared pool без allocation и Master Data Exceptions. Это превращает проблему качества данных в видимый управленческий exception.</p><p>Production BI всё равно потребует backend / DWH / reconciliation с 1С, но аналитическая модель и контрольные связи уже заданы.</p></div></details>
-      </div>
-      <div class="manager-qa-summary"><b>Краткий архитектурный вывод.</b><br>Grain теперь отделяет операционные финансовые данные от аналитического представления: одни и те же Shipment, Cash Movements, Master Parties и Products используются для P&L, Cash Flow, Cost Centers и маржинальности. Shared costs распределяются отдельным правилом, а drill-down возвращает к исходной операции, поэтому аналитика строится как модель данных, а не набор независимых CRM-виджетов.</div>
-    </div>
-  </article>
-
-  <article class="manager-qa-card">
+  </article><h2 class="qa-group">Сложные вопросы · 1. Товарные потоки и мастер-данные</h2><article class="manager-qa-card"><div class="manager-qa-head"><span class="manager-qa-mark">!</span><div><h2>Аудит товарных потоков, логистики и действующего вещества</h2></div></div><div class="manager-qa-body"><div class="manager-qa-quote"><small>ДОСЛОВНЫЙ ВОПРОС</small>«В вашем резюме упомянуты автоматизация записи на прием и настройка потоков в CRM. У нас в Grain Track уже зашиты жесткие правила бизнес-процессов: тикеты, контракты, логистика, M2M-оценка. Сможете ли вы сходу описать, как бы вы подошли к аудиту процесса, где ошибка в алгоритме логистического трекинга или расчете действующего вещества (ДВ) минеральных удобрений ведет к прямым финансовым потерям компании?»</div><div class="manager-qa-items"><details class="manager-qa-item"><summary>С чего начать аудит?</summary><div class="manager-qa-item-body"><span class="manager-qa-status arch">ПРОЕКТНЫЙ ПОДХОД</span><p>Согласовать карту событий Ticket → Contract → Shipment → Movement → расчёты, владельцев полей и денежную значимость ошибок. Получить обезличенные примеры, спецификации Grain Track и эталонные расчёты. Уточнить значение M2M в используемой системе: не приравнивать его автоматически к MTM. Не менять производственные алгоритмы без воспроизведения дефекта.</p></div></details><details class="manager-qa-item"><summary>Какие проверки обязательны?</summary><div class="manager-qa-item-body"><span class="manager-qa-status arch">ДЕМО + ПЛАН РАЗВИТИЯ</span><p>В прототипе есть проверки веса, счёта, качества/ДВ и котировки. Для рабочего контура нужны также единицы кг/т и доли/проценты, база влажности, брутто/тара/нетто, хронология логистики, уникальность событий и идемпотентность повторной доставки. ДВ = масса на согласованной базе × доля вещества; базу и показатели подтверждает технолог. Перепутанные проценты и доли дают ошибку в 100 раз.</p></div></details><details class="manager-qa-item"><summary>Как безопасно исправить финансово значимую ошибку?</summary><div class="manager-qa-item-body"><span class="manager-qa-status arch">ПЛАН ВНЕДРЕНИЯ</span><p>Зафиксировать входные данные, ожидаемый и фактический результат, затронутые партии и сумму воздействия. Написать регрессионные примеры, прогнать исправление в тестовом контуре и теневом расчёте. Сверить с логистом, технологом и финансистом. Выпустить с мониторингом и откатом; закрытые периоды исправлять документированными корректировками, а не переписыванием истории.</p></div></details></div></div></article><article class="manager-qa-card">
     <div class="manager-qa-head">
       <span class="manager-qa-mark" aria-hidden="true">!</span>
       <div>
@@ -998,9 +884,52 @@ aside .brand-subtitle{max-width:182px;margin:7px 0 18px;color:#c7c8ad;font-size:
       </div>
       <div class="manager-qa-summary"><b>Краткий архитектурный вывод.</b><br>Одна реальная компания и один товар существуют как одна master-сущность. CRM, Grain Track и 1С могут иметь свои локальные ID, но они маппятся на единый Master Party ID / Master Product ID. Legal key предотвращает дубли, Field Ownership задаёт источник истины по полям, API/events распространяют изменения, а reconciliation выявляет конфликты и пропавшие mappings.</div>
     </div>
-  </article>
-</div>
-  <article class="manager-qa-card">
+  </article><h2 class="qa-group">Сложные вопросы · 2. BI и метрики трейдинга</h2><article class="manager-qa-card">
+    <div class="manager-qa-head">
+      <span class="manager-qa-mark" aria-hidden="true">!</span>
+      <div>
+        <small>ВОПРОС РУКОВОДИТЕЛЯ · BI / АНАЛИТИКА</small>
+        <h2>От CRM-виджетов к P&L, Cash Flow и Cost Centers</h2>
+        <p>Не отдельные красивые отчёты, а единая аналитическая модель поверх первичных операций.</p>
+      </div>
+    </div>
+    <div class="manager-qa-body">
+      <div class="manager-qa-quote"><small>ДОСЛОВНЫЙ ВОПРОС</small>«Создание дашбордов для мониторинга операционной команды — это базовый уровень. Мне для управления коммерческим блоком нужна сложная аналитика: структуры PnL, модели кэш-флоу, классификация центров затрат, маржинальность по сделкам. Был ли у вас опыт проектирования моделей данных для полноценных BI-систем, или ваш инструментарий ограничивается внутренними отчетами Битрикс24?»</div>
+      <h3 class="manager-qa-subtitle">Какие управленческие проблемы из этого следуют</h3>
+      <div class="manager-qa-items">
+        <details class="manager-qa-item"><summary>Как перейти от CRM-виджетов к единой финансовой модели?</summary><div class="manager-qa-item-body"><span class="manager-qa-status done">РЕАЛИЗОВАНО v0.12</span><p>В Grain появился отдельный Analytical Dashboard, который не хранит собственные первичные цифры, а читает Deal, Shipment, Finance, Cash Movements, MTM и Master Data. Это означает, что новые аналитические разрезы строятся поверх общей модели, а не через новый независимый отчёт с копией данных.</p><p>Общими dimensions стали Date, Business Unit, Business Line, Region, Product, Counterparty, Manager, Deal, Shipment и Cost Center.</p></div></details>
+        <details class="manager-qa-item"><summary>Как строится P&L по коммерческому блоку?</summary><div class="manager-qa-item-body"><span class="manager-qa-status done">РЕАЛИЗОВАНО</span><p>Shipment остаётся минимальной единицей экономики: Revenue, COGS и Direct Costs формируют Contribution. Новый аналитический слой добавляет Allocated Shared Costs, после чего рассчитывает Analytical Operating Result.</p><p>MTM остаётся отдельным нереализованным слоем, поэтому Economic Result не смешивает его с прямым Contribution без явного отображения.</p></div></details>
+        <details class="manager-qa-item"><summary>Как P&L и Cash Flow используют одинаковые аналитические измерения, но разные даты?</summary><div class="manager-qa-item-body"><span class="manager-qa-status done">РЕАЛИЗОВАНО</span><p>P&L фильтруется по Shipment и её экономическому контексту, а Cash Flow — по дате конкретного денежного движения. При этом оба слоя используют одну связь с Business Line, Product, Party, Deal, Shipment и Cost Center.</p><p>Поэтому прибыльная октябрьская Shipment может иметь ноябрьский cash-in и одновременно создавать октябрьский кассовый разрыв.</p></div></details>
+        <details class="manager-qa-item"><summary>Как классифицируются центры затрат?</summary><div class="manager-qa-item-body"><span class="manager-qa-status done">РЕАЛИЗОВАНО</span><p>Добавлен справочник Cost Centers: товар/закупка, логистика, терминал Джурджулешты, качество/лаборатория, коммерческий отдел, риск/страхование и прочие прямые расходы.</p><p>Cost Center не заменяет Business Line: Business Line показывает, на каком направлении получен результат, а Cost Center — где и каким процессом возник расход.</p></div></details>
+        <details class="manager-qa-item"><summary>Как учитывать общие расходы, которые нельзя честно привязать к одной Shipment?</summary><div class="manager-qa-item-body"><span class="manager-qa-status done">DEMO ALLOCATION</span><p>Shared costs хранятся отдельными cost pools и не маскируются под direct cost конкретной партии. Для них задаётся allocation driver — в демо по доле Revenue или planned tons.</p><p>Распределённая сумма показывается только в Analytical P&L после Contribution, поэтому исходная экономика Shipment не переписывается задним числом.</p></div></details>
+        <details class="manager-qa-item"><summary>Как увидеть маржинальность конкретной сделки или партии?</summary><div class="manager-qa-item-body"><span class="manager-qa-status done">РЕАЛИЗОВАНО</span><p>В dashboard есть таблица Deal / Shipment Profitability: Revenue, Contribution, Margin %, allocated shared cost, Operating Result, MTM и Economic Result. Строка ведёт обратно к существующей финансовой карточке Shipment.</p><p>Это сохраняет drill-down от агрегата к первичной операции вместо создания отдельной «BI-копии» финансовых данных.</p></div></details>
+        <details class="manager-qa-item"><summary>Как контролировать качество данных для такой аналитики?</summary><div class="manager-qa-item-body"><span class="manager-qa-status done">РЕАЛИЗОВАН ПРОТОТИП</span><p>Analytics показывает неполный Financial Gate, cash-out без Cost Center, shared pool без allocation и Master Data Exceptions. Это превращает проблему качества данных в видимый управленческий exception.</p><p>Production BI всё равно потребует backend / DWH / reconciliation с 1С, но аналитическая модель и контрольные связи уже заданы.</p></div></details>
+      </div>
+      <div class="manager-qa-summary"><b>Краткий архитектурный вывод.</b><br>Grain теперь отделяет операционные финансовые данные от аналитического представления: одни и те же Shipment, Cash Movements, Master Parties и Products используются для P&L, Cash Flow, Cost Centers и маржинальности. Shared costs распределяются отдельным правилом, а drill-down возвращает к исходной операции, поэтому аналитика строится как модель данных, а не набор независимых CRM-виджетов.</div>
+    </div>
+  </article><article class="manager-qa-card">
+    <div class="manager-qa-head">
+      <span class="manager-qa-mark" aria-hidden="true">!</span>
+      <div>
+        <small>ВОПРОС РУКОВОДИТЕЛЯ · TRADING DASHBOARD</small>
+        <h2>Какие KPI должны быть на dashboard руководителя</h2>
+        <p>Физический товарный поток и экономика выше CRM-активности.</p>
+      </div>
+    </div>
+    <div class="manager-qa-body">
+      <div class="manager-qa-quote"><small>ДОСЛОВНЫЙ ВОПРОС</small>«Представьте, что мы внедряем трейдинговый дашборд. Какие метрики вы бы предложили мне на согласование в первую очередь?»</div>
+      <h3 class="manager-qa-subtitle">Какие управленческие проблемы из этого следуют</h3>
+      <div class="manager-qa-items">
+        <details class="manager-qa-item"><summary>Как увидеть реальную физическую позицию товара, а не только CRM-статус сделки?</summary><div class="manager-qa-item-body"><span class="manager-qa-status done">РЕАЛИЗОВАНО v0.13</span><p>В dashboard отдельно показываются подписанный объём, открытый остаток, объём в пути, stock на терминале и фактически отгруженный объём. «В пути» считается только из Logistics Movements со статусом in_transit / delayed, а не из общего plannedQty.</p><p>Поэтому руководитель видит, где физически находится товар, а не делает вывод о движении из стадии Deal.</p></div></details>
+        <details class="manager-qa-item"><summary>Как контролировать исполнение контракта после подписания?</summary><div class="manager-qa-item-body"><span class="manager-qa-status done">РЕАЛИЗОВАНО</span><p>Для signed Deal рассчитываются contracted tons, shipped tons, transit, terminal stock, open remainder, execution % и следующая Shipment. Подписанный документ становится началом контроля исполнения, а не финальной точкой CRM.</p><p>В таблице руководитель одновременно видит физический прогресс и задержки transit.</p></div></details>
+        <details class="manager-qa-item"><summary>Маржинальность действительно показывает выгоду контракта?</summary><div class="manager-qa-item-body"><span class="manager-qa-status done">РЕАЛИЗОВАНО</span><p>Да, но нужно различать уровни. Contribution Margin показывает результат после COGS и прямых расходов; Operating Margin дополнительно учитывает allocated shared costs и поэтому ближе к реальной управленческой выгоде контракта.</p><p>Это не бухгалтерская чистая прибыль: налоги, финансирование, FX и другие корпоративные статьи могут находиться вне этой модели. В executive dashboard для signed Deal показывается именно Operating Margin и сумма Analytical Operating Result.</p></div></details>
+        <details class="manager-qa-item"><summary>Как измерить эффективность терминала?</summary><div class="manager-qa-item-body"><span class="manager-qa-status done">РЕАЛИЗОВАНО DEMO</span><p>Добавлен Terminal Operations layer: capacity, current stock, inbound/outbound throughput, average stock, utilization, turnover и average dwell time. Turnover считается как outbound throughput / average stock.</p><p>Это отделено от Cost Center терминала: Cost Center отвечает за деньги, Terminal Operations — за физическую производительность инфраструктуры.</p></div></details>
+        <details class="manager-qa-item"><summary>Что должно быть выше обычных метрик CRM?</summary><div class="manager-qa-item-body"><span class="manager-qa-status done">ЗАФИКСИРОВАН ПРИНЦИП</span><p>На верхний уровень вынесены товар, контракт, Operating Margin, Cash Gap, MTM, Integrity и terminal utilization. Звонки, лиды и конверсия могут оставаться метриками работы команды, но не заменяют бизнес-KPI трейдинга.</p><p>Dashboard руководителя поэтому отвечает на вопрос «что происходит с товаром и экономикой», а не «сколько действий сделал менеджер».</p></div></details>
+        <details class="manager-qa-item"><summary>Как руководитель понимает, куда смотреть в первую очередь?</summary><div class="manager-qa-item-body"><span class="manager-qa-status done">РЕАЛИЗОВАНО</span><p>Executive Risk Board объединяет Integrity Critical, блокировки Shipment clearance, задержки Logistics, stale MTM marks, кассовый разрыв и перегрузку терминала. Исключения идут рядом с KPI, а не скрываются в отдельных модулях.</p><p>Тем самым dashboard становится инструментом принятия решений, а не только витриной средних показателей.</p></div></details>
+      </div>
+      <div class="manager-qa-summary"><b>Краткий архитектурный вывод.</b><br>Дашборд руководителя в Grain строится вокруг физического положения товара, исполнения подписанных контрактов, Operating Margin, Cash Gap, MTM, управленческих рисков и эффективности терминала. CRM activity metrics остаются вторичным уровнем, потому что они не показывают напрямую ни движение товара, ни реальную экономику контракта.</div>
+    </div>
+  </article><h2 class="qa-group">Сложные вопросы · 3. Границы интеграций</h2><article class="manager-qa-card">
     <div class="manager-qa-head">
       <span class="manager-qa-mark" aria-hidden="true">!</span>
       <div>
@@ -1023,9 +952,59 @@ aside .brand-subtitle{max-width:182px;margin:7px 0 18px;color:#c7c8ad;font-size:
       </div>
       <div class="manager-qa-summary"><b>Краткий архитектурный вывод.</b><br>Grain уже имеет canonical business model, стабильные ID, mappings и Field Ownership — то есть определяет, какие данные существуют и кому они принадлежат. Исполняемый Integration Hub является отдельным backend-слоем доставки: mapping, transformation, API transport, retries, idempotency и технический контроль ошибок. В текущем статичном прототипе этот backend transport layer намеренно не имитируется как будто он уже работает.</div>
     </div>
-  </article>
-<p class="note">Каждый под-вопрос раскрывается отдельно. Раздел является внутренней архитектурной базой знаний и не изменяет бизнес-расчёты CRM.</p>
-</section>
+  </article><h2 class="qa-group">Сложные вопросы · 4. ИИ для бизнеса</h2><article class="manager-qa-card"><div class="manager-qa-head"><span class="manager-qa-mark">!</span><div><h2>ИИ для бизнеса: данные, прогнозы и решения</h2></div></div><div class="manager-qa-body"><div class="manager-qa-quote"><small>ДОСЛОВНЫЙ ВОПРОС</small>«В резюме указано использование ИИ для автоматизации повторяющихся задач и документации. Оставим генерацию текстов. Видите ли вы практические сценарии применения AI для предиктивной аналитики цепей поставок, оптимизации логистических маршрутов или автоматического парсинга коммерческих условий контрактов?»</div><div class="manager-qa-items"><details class="manager-qa-item"><summary>Что можно показать руководителю уже сейчас?</summary><div class="manager-qa-item-body"><span class="manager-qa-status arch">РАБОТАЕТ В ДЕМО</span><p>Открыть Колоска и спросить об остатке зерна или заполненности Джурджулешт. Ответ рассчитывается из текущих складских партий: 350 т зерновых + 70 т удобрений = 420 т, вместимость 1 500 т, заполненность 28%. Это локальная демонстрация интерфейса интеграции, внешний ИИ не подключён. Числа не зашиты в текст ответа.</p></div></details><details class="manager-qa-item"><summary>Как прогнозировать задержки цепи поставок?</summary><div class="manager-qa-item-body"><span class="manager-qa-status arch">БУДУЩИЙ ПИЛОТ</span><p>Собрать историю рейсов, плановые и фактические времена, очереди, погоду и пропуски данных. Начать с простого базового прогноза ETA, затем сравнить модель по ошибке ETA и качеству выявления задержек на более позднем временном периоде. Показывать диапазон неопределённости и факторы риска. Не выдавать правило или LLM-ответ за обученную предиктивную модель.</p></div></details><details class="manager-qa-item"><summary>Как оптимизировать маршруты?</summary><div class="manager-qa-item-body"><span class="manager-qa-status arch">БУДУЩИЙ ПИЛОТ</span><p>Использовать алгоритм оптимизации с ограничениями вместимости, совместимости грузов, окон приёмки, дорог и графиков водителей. Сравнивать стоимость, срок и долю своевременных доставок с текущим планом. ИИ может объяснять варианты; исполнимость маршрута проверяет расчётный сервис и подтверждает логист.</p></div></details><details class="manager-qa-item"><summary>Как извлекать условия договора?</summary><div class="manager-qa-item-body"><span class="manager-qa-status arch">БУДУЩИЙ ПИЛОТ</span><p>OCR для сканов и структурированный разбор: стороны, товар, тоннаж, качество, цена, валюта, базис, график и оплата. Для каждого поля сохранять страницу/цитату, неопределённость и статус проверки. Сопоставлять с мастер-данными; спорные значения передавать менеджеру. Запись — только после предпросмотра и подтверждения, без автоматического согласования.</p></div></details><details class="manager-qa-item"><summary>Нужен ли сейчас ChatGPT Business?</summary><div class="manager-qa-item-body"><span class="manager-qa-status arch">ДЕМОНСТРАЦИЯ БЕЗ КЛЮЧЕЙ</span><p>Для текущего сценария — нет. Рабочее встраивание модели потребует серверного адаптера, отдельной настройки доступа и проверки прав на данные. Нельзя класть API-ключ в статическую страницу. Колосок сейчас не отправляет данные во внешние сервисы и не создаёт видимость активной API-интеграции.</p></div></details></div></div></article><h2 class="qa-group">Дополнение из обсуждения · мессенджеры</h2><article class="manager-qa-card">
+    <div class="manager-qa-head">
+      <span class="manager-qa-mark" aria-hidden="true">!</span>
+      <div>
+        <small>ДОПОЛНИТЕЛЬНЫЙ АРХИТЕКТУРНЫЙ ВОПРОС · TELEGRAM / WHATSAPP</small>
+        <h2>Согласование из мессенджера без входа в CRM</h2>
+        <p>Мессенджер как внешний интерфейс к Grain Workflow, а не отдельный источник решений.</p>
+      </div>
+    </div>
+    <div class="manager-qa-body">
+      <div class="manager-qa-quote"><small>ДОСЛОВНЫЙ ВОПРОС</small>«Допустим в Телеграме он нажал одобрить, скажем юрист, да, и в системе это автоматически подтвердилось, чтобы ему не обязательно было заходить в систему.»</div>
+      <h3 class="manager-qa-subtitle">Какие проблемы и вопросы из этого следуют</h3>
+      <div class="manager-qa-items">
+        
+        <details class="manager-qa-item">
+          <summary>Можно ли технически согласовать документ из Telegram или WhatsApp?</summary>
+          <div class="manager-qa-item-body">
+            <span class="manager-qa-status arch">АРХИТЕКТУРА ГОТОВА</span>
+            <p>Да. Мессенджер может отображать назначенную Grain-задачу и отправлять действие «Согласовать» или «Вернуть». Но само бизнес-решение принимает и сохраняет backend Grain после проверки запроса.</p><p>То есть Telegram/WhatsApp — только внешний пользовательский интерфейс, а не вторая база документов.</p>
+          </div>
+        </details>
+        <details class="manager-qa-item">
+          <summary>Что должен проверить backend перед принятием нажатия?</summary>
+          <div class="manager-qa-item-body">
+            <span class="manager-qa-status future">ПОСЛЕ BACKEND</span>
+            <p>Нужно проверить идентичность пользователя, связь Telegram/WhatsApp account с Grain user, роль и право на действие, Document ID, актуальную версию, текущий workflow stage и срок действия action token.</p><p>Без этих проверок пересланное или старое сообщение могло бы изменить документ не тем пользователем или не на той версии.</p>
+          </div>
+        </details>
+        <details class="manager-qa-item">
+          <summary>Что произойдёт, если юрист нажмёт кнопку под старой версией?</summary>
+          <div class="manager-qa-item-body">
+            <span class="manager-qa-status done">ПРАВИЛО ЗАФИКСИРОВАНО</span>
+            <p>Backend сравнит version ID из action с текущей версией Grain и отклонит действие. Пользователь получит сообщение, что версия устарела и нужно открыть актуальную задачу.</p><p>Это сохраняет тот же version-specific принцип, который уже действует внутри документооборота.</p>
+          </div>
+        </details>
+        <details class="manager-qa-item">
+          <summary>Где будет храниться результат согласования?</summary>
+          <div class="manager-qa-item-body">
+            <span class="manager-qa-status future">ПОСЛЕ BACKEND</span>
+            <p>После успешной валидации Grain обновляет workflow и создаёт Audit Trail event с actor, ролью, Document ID, version ID и каналом Telegram/WhatsApp. Сообщение в мессенджере лишь отражает этот результат.</p><p>Таким образом история не зависит от сохранности чата.</p>
+          </div>
+        </details>
+        <details class="manager-qa-item">
+          <summary>Что реально работает в текущем статичном прототипе?</summary>
+          <div class="manager-qa-item-body">
+            <span class="manager-qa-status prototype">ТОЛЬКО АРХИТЕКТУРА</span>
+            <p>Сейчас реализованы внутренний workflow, версии, SLA, Audit Trail и информационное описание будущей интеграции. Реального webhook, защищённого API и bot approval нет.</p><p>Это сознательно отложено до появления backend, постоянной базы, авторизации и RBAC.</p>
+          </div>
+        </details>
+      </div>
+      <div class="manager-qa-summary"><b>Краткий архитектурный вывод.</b><br>Telegram или WhatsApp могут использоваться как внешний канал согласования, но кнопка должна обращаться к защищённому Grain API. Backend проверяет пользователя, права и актуальную версию, после чего изменяет workflow и пишет Audit Trail. Мессенджер остаётся каналом действия, Grain — источником истины.</div>
+    </div>
+  </article></div></section>
 <section id="clients" class="hidden">
 <div class="client-summary" id="client-stats"></div>
 <div class="client-toolbar">
@@ -1055,7 +1034,7 @@ try{
 }
 let financeState=structuredClone(DB.finance.shipmentFinancials||[]),cashMovements=structuredClone(DB.finance.cashMovements||[]),marketMarks=structuredClone(DB.market?.marks||[]),integrityState=structuredClone(DB.integrity||{}),masterData=structuredClone(DB.masterData||{}),analyticsState=structuredClone(DB.analytics||{}),logisticsState=structuredClone(DB.logistics||{}),terminalState=structuredClone(DB.terminal||{}),auditTrail=structuredClone(DB.auditSeed||[]);
 const stages=['Новый запрос','Потребность уточнена','Предложение отправлено','Согласование условий','Контракт подписан','Исполнение'];
-const probability=[0,.2,.4,.7,1,1], today='2026-09-30';
+const probability=[0,.2,.4,.7,1,1], today=DB.meta.demoDate;
 const sourceClients=Object.fromEntries(DB.clients.map(c=>[c.id,c]));
 const sourceDeals=Object.fromEntries(DB.deals.map(d=>[d.id,d]));
 const seed=DB.deals.map(d=>{
@@ -1090,7 +1069,7 @@ function parts(d,m=$('#month').value){return d.parts.filter(p=>m==='all'||p.date
 function base(){return deals.filter(d=>($('#product').value==='all'||d.product===$('#product').value)&&($('#region').value==='all'||d.region===$('#region').value))}
 function selected(){return base().filter(d=>parts(d).length)}
 function remaining(d,m=$('#month').value){return parts(d,m).reduce((s,p)=>s+p.qty-p.shipped,0)}
-function pipelineVolume(d){const scheduled=remaining(d,'all');return scheduled>0?scheduled:(d.expectedVolume||0)}
+function pipelineVolume(d){const scheduled=remaining(d,'all');return d.parts.length?scheduled:(d.expectedVolume||0)}
 function sums(m){let fact=0,contract=0,forecast=0;for(const d of base()){fact+=parts(d,m).reduce((s,p)=>s+p.shipped,0);let r=remaining(d,m);if(d.stage>=4)contract+=r;else forecast+=r*probability[d.stage]}return {fact,contract,forecast,expected:contract+forecast}}
 function risks(d){let a=[];if(!d.fixed&&d.expires<today)a.push('Цена устарела');if(d.next<today)a.push('Контакт просрочен');if(parts(d).some(p=>p.date<today&&p.qty>p.shipped))a.push('Отгрузка просрочена');if(d.blocked)a.push(d.blocked);return a}
 function escapeHTML(value){return String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
@@ -1126,12 +1105,13 @@ $('#overview-upcoming').innerHTML='<table><thead><tr><th>Дата</th><th>Shipme
 const flagged=list.filter(d=>risks(d).length);$('#risk-count').textContent=flagged.length+' сделки';$('#risks').innerHTML=flagged.length?flagged.map(d=>'<button class="risk" data-deal="'+d.id+'"><span class="badge warn">'+risks(d).join(' · ')+'</span><b>'+escapeHTML(d.client)+'</b><small>'+escapeHTML(d.product)+' · '+fmt(remaining(d))+' т · '+escapeHTML(d.manager)+'</small></button>').join(''):'<div class="empty">Нет предупреждений по выбранным сделкам.</div>';
 
 $('#deals-table').innerHTML='<table><thead><tr><th>Клиент / район</th><th>Товар</th><th>Статус переговоров '+qhelp('stage')+'</th><th>Результат переговоров '+qhelp('negotiation')+'</th><th>Остаток, т '+qhelp('schedule')+'</th><th>Цена, MDL/т '+qhelp('price')+'</th></tr></thead><tbody>'+list.map(d=>'<tr><td>'+openButton(d)+'<small>'+escapeHTML(d.region)+'</small></td><td>'+escapeHTML(d.product)+'</td><td><span class="badge">'+stages[d.stage]+'</span></td><td class="negotiation-preview"><b>Открыто:</b> '+(escapeHTML(d.openQuestions)||'Нет открытых вопросов')+'<small><b>Далее:</b> '+escapeHTML(d.action)+' · '+date(d.next)+'</small></td><td>'+fmt(remaining(d))+'</td><td>'+fmt(d.price)+'<small>'+(d.fixed?'Зафиксирована':'Предварительная')+'</small></td></tr>').join('')+'</tbody></table>'+(list.length?'':'<div class="empty">Нет сделок. Измените фильтры.</div>');
+$('#pipeline-funnel').innerHTML=stages.map((st,i)=>{const a=base().filter(d=>d.stage===i);return '<button class="funnel-step" style="--step-width:'+ (100-i*8)+'%" data-funnel-stage="'+i+'"><b>'+escapeHTML(st)+'</b><span>'+'Сделки: '+a.length+' · '+fmt(a.reduce((n,d)=>n+pipelineVolume(d),0))+' т</span></button>'}).join('');
 $('#board').innerHTML=stages.map((st,i)=>{const a=base().filter(d=>d.stage===i);return `<div class="column"><h3>${i+1}. ${st}</h3><p class="client-meta">${['Первичное обращение клиента','Товар, качество, объём и срок','Цена и условия поставки','Переговоры об оплате и договоре','Зафиксированы обязательства','Допуск партий и отгрузка'][i]}</p><small>${a.length} сделки · ${fmt(a.reduce((n,d)=>n+pipelineVolume(d),0))} т · ${Math.round(probability[i]*100)}%</small>${a.map(d=>`<button class="deal" data-deal="${d.id}"><span class="badge">${d.product}</span><strong>${d.client}</strong><p>${d.region}</p><span class="tons">${fmt(pipelineVolume(d))} <small>т</small></span>${d.parts.length?'':'<p class="client-meta">Ориентировочная потребность · партии ещё не созданы</p>'}<p>${d.fixed?'Фикс.':'Предв.'} ${fmt(d.price)} MDL/т</p><p class="open-question"><b>Открыто:</b> ${escapeHTML(d.openQuestions)||'Нет открытых вопросов'}<br><b>Далее:</b> ${escapeHTML(d.action)} · ${date(d.next)}</p>${risks(d).length?'<span class="badge warn" style="margin-top:12px">Требует внимания</span>':''}</button>`).join('')}</div>`}).join('');
 $('#shipment-table').innerHTML=`<table><thead><tr><th>Дата</th><th>Клиент / товар</th><th>Основание</th><th>План, т</th><th>Факт, т</th><th>Остаток, т</th></tr></thead><tbody>${list.flatMap(d=>parts(d).map(p=>({d,p}))).sort((a,b)=>a.p.date.localeCompare(b.p.date)).map(({d,p})=>`<tr><td>${date(p.date)}</td><td>${openButton(d)}<small>${d.product}</small></td><td>${d.stage>=4?'Контракт':'Переговоры · '+probability[d.stage]*100+'%'}</td><td>${fmt(p.qty)}</td><td>${fmt(p.shipped)}</td><td>${fmt(p.qty-p.shipped)}</td></tr>`).join('')}</tbody></table>${list.length?'':'<div class="empty">Нет партий в выбранном периоде.</div>'}`}
 function detail(id){const d=deals.find(x=>x.id===id);$('#detail').innerHTML=`<form id="edit"><div class="panel-head"><div><small>СДЕЛКА ${d.sourceId}</small><h2 style="margin-top:7px">${d.client}</h2></div><button type="button" class="close" aria-label="Закрыть карточку">×</button></div><div class="dialog-body"><p>${d.product} · ${d.region} · ${d.manager}</p><div class="form-grid"><label>Статус переговоров ${qhelp('stage')}<select name="stage">${stages.map((s,i)=>`<option value="${i}" ${i===d.stage?'selected':''}>${s}</option>`).join('')}</select></label><label>Цена, MDL/т ${qhelp('price')}<input name="price" type="number" min="0" step="0.01" required value="${d.price}"></label><label>Статус цены<select name="fixed"><option value="false" ${!d.fixed?'selected':''}>Предварительная</option><option value="true" ${d.fixed?'selected':''}>Зафиксирована</option></select></label><label>Предложение действительно до ${qhelp('expiry')}<input name="expires" type="date" required value="${d.expires}"></label><label>Следующий контакт<input name="next" type="date" required value="${d.next}"></label><label>Препятствие для исполнения<select name="blocked">${['','Не подтверждён транспорт','Ожидается предоплата','Нет товара'].map(v=>`<option ${v===d.blocked?'selected':''} value="${v}">${v||'Нет препятствий'}</option>`).join('')}</select></label></div><h2>Результат переговоров ${qhelp('negotiation')}</h2><div class="negotiation-fields"><label>Согласованные условия<textarea name="agreed" maxlength="2000">${escapeHTML(d.agreed)}</textarea></label><label>Открытые вопросы<textarea name="openQuestions" maxlength="2000">${escapeHTML(d.openQuestions)}</textarea></label><label>Следующий шаг<textarea name="action" maxlength="1000" required>${escapeHTML(d.action)}</textarea></label></div><h2>Партии поставки ${qhelp('schedule')}</h2><p style="font-size:12px;margin:9px 0">${d.parts.length?'В карточке показан весь график сделки, независимо от фильтра.':'Реальные партии ещё не созданы. Ориентировочная потребность: '+fmt(d.expectedVolume||0)+' т · '+escapeHTML(d.desiredPeriod||'период уточняется')+'.'}</p><div class="table-wrap"><table class="schedule"><thead><tr><th>Дата</th><th>План, т</th><th>Факт, т</th></tr></thead><tbody>${d.parts.map((p,i)=>`<tr class="${isShipmentFinanciallyLocked(p.shipmentId)?'fin-locked-row':''}"><td><small>${p.shipmentId||'—'}</small><input name="date${i}" type="date" required ${isShipmentFinanciallyLocked(p.shipmentId)?'disabled':''} value="${p.date}"></td><td><input name="qty${i}" style="min-width:80px;width:100px" type="number" min="0" step="0.1" required ${isShipmentFinanciallyLocked(p.shipmentId)?'disabled':''} value="${p.qty}"></td><td><input name="shipped${i}" style="min-width:80px;width:100px" type="number" min="0" step="0.1" required ${isShipmentFinanciallyLocked(p.shipmentId)?'disabled':''} value="${p.shipped}"></td></tr>`).join('')}</tbody></table></div><div class="summary" id="deal-summary" style="margin-top:20px"></div><p id="form-error" role="alert" style="color:#a33"></p></div><div class="dialog-footer"><button type="button" class="btn close-detail">Отмена</button><button class="btn primary" type="submit">Применить изменения</button></div></form>`;
 const form=$('#edit');function draft(){const f=new FormData(form);return {...d,stage:+f.get('stage'),price:+f.get('price'),fixed:f.get('fixed')==='true',expires:f.get('expires'),next:f.get('next'),blocked:f.get('blocked'),agreed:f.get('agreed').trim(),openQuestions:f.get('openQuestions').trim(),action:f.get('action').trim(),parts:d.parts.map((p,i)=>{const locked=isShipmentFinanciallyLocked(p.shipmentId);return {shipmentId:p.shipmentId,status:p.status,date:locked?p.date:f.get('date'+i),qty:locked?p.qty:+f.get('qty'+i),shipped:locked?p.shipped:+f.get('shipped'+i)}})}}
 function update(){const x=draft(),r=remaining(x,'all'),displayVolume=x.parts.length?r:(x.expectedVolume||0);$('#deal-summary').innerHTML=`<b>${x.parts.length?'Весь оставшийся объём':'Ориентировочная потребность'}: ${fmt(displayVolume)} т</b><br>${x.stage>=4?'По контракту':'Взвешенный ориентир'}: ${fmt(displayVolume*probability[x.stage])} т<br>Оценка объёма ${qhelp('revenue')}: <b>${fmt(displayVolume*x.price)} MDL</b><br><span style="font-size:12px">${x.fixed?'Сумма по фиксированной цене':'Предварительная сумма'} · без взвешивания по вероятности</span>`}
-form.addEventListener('input',update);form.addEventListener('change',update);form.onsubmit=e=>{e.preventDefault();const x=draft();if(x.parts.some(p=>p.shipped>p.qty)){$('#form-error').textContent='Фактическая отгрузка не может превышать план партии.';return}if(x.parts.some(p=>p.shipped>0)&&x.stage<4){$('#form-error').textContent='В этой модели факт отгрузки доступен только для подписанных сделок.';return}if(x.parts.some(p=>p.shipped>0&&p.date>today)){$('#form-error').textContent='Нельзя отметить будущую партию отгруженной. Дата примера: 30.09.2026.';return}auditDiff('Сделка',d.sourceId,d,x,d.manager,'Менеджер продаж');auditShipmentChanges(d,x);deals[deals.findIndex(y=>y.id===id)]=x;$('#detail').close();render();toast('Сделка обновлена. Прогноз пересчитан.')};update();$('#detail').showModal()}
+form.addEventListener('input',update);form.addEventListener('change',update);form.onsubmit=e=>{e.preventDefault();const x=draft();if(x.stage>=4&&!wfDocs.some(doc=>doc.dealId===d.id&&doc.stage==='signed')){$('#form-error').textContent='Сначала завершите согласование и подписание связанного договора.';return}if(x.parts.some(p=>p.shipped>p.qty)){$('#form-error').textContent='Фактическая отгрузка не может превышать план партии.';return}if(x.parts.some(p=>p.shipped>0)&&x.stage<4){$('#form-error').textContent='В этой модели факт отгрузки доступен только для подписанных сделок.';return}if(x.parts.some(p=>p.shipped>0&&p.date>today)){$('#form-error').textContent='Нельзя отметить будущую партию отгруженной. Дата примера: 30.09.2026.';return}auditDiff('Сделка',d.sourceId,d,x,d.manager,'Менеджер продаж');auditShipmentChanges(d,x);deals[deals.findIndex(y=>y.id===id)]=x;for(const p of x.parts){const row=financeRow(p.shipmentId);if(row&&!row.locked)syncPlannedCashBase(p.shipmentId,row,{d:x,p})}$('#detail').close();render();renderFinance();renderAnalytics();renderExecutive();toast('Сделка обновлена. Прогноз пересчитан.')};update();$('#detail').showModal()}
 function toast(s){$('#toast').textContent=s;$('#toast').classList.remove('hidden');clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>$('#toast').classList.add('hidden'),3200)}
 document.addEventListener('click',e=>{const h=e.target.closest('[data-help]');if(h){const [title,body]=help[h.dataset.help];$('#tip-title').textContent=title;$('#tip-text').textContent=body;$('#tip').showModal();return}const d=e.target.closest('[data-deal]');if(d){detail(+d.dataset.deal);return}if(e.target.closest('.close,.close-detail'))e.target.closest('dialog').close();const n=e.target.closest('[data-view]');if(n){currentView=n.dataset.view;const pfl=$('#period-filter-label');if(pfl)pfl.textContent=currentView==='overview'?'Период обзора':currentView==='shipments'?'Период отгрузки':'Период';if(currentView==='masterdata')renderMasterData();if(currentView==='analytics')renderAnalytics();if(currentView==='executive')renderExecutive();for(const id of ['overview','executive','pipeline','shipments','finance','analytics','clients','documents','masterdata','managerqa'])$('#'+id).classList.toggle('hidden',id!==currentView);document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b===n));n.scrollIntoView({block:'nearest',inline:'nearest'});$('#page-title').textContent={overview:'Продажи в деталях.',executive:'Трейдинг под контролем.',pipeline:'От запроса к контракту.',shipments:'Каждая тонна — по плану.',finance:'Финансы продаж.',analytics:'Управленческая аналитика.',clients:'Клиенты и новые закупки.',documents:'Договоры в движении.',masterdata:'Master Data и синхронизация.',managerqa:'Ответы на вопросы руководителя.'}[currentView];$('#subtitle').textContent={overview:'От первого запроса до последней отгруженной тонны.',executive:'Товар, контракт, деньги, риски и терминал — в одном управленческом представлении.',pipeline:'Этапы переговоров и объёмы будущих поставок.',shipments:'График отгрузок по клиентам и партиям.',finance:'P&L, Cash Flow и контроль финансовых данных по реальным партиям.',analytics:'P&L, Cash Flow, центры затрат и маржинальность по единой модели данных.',clients:'История отношений, поводы для контакта и напоминания менеджеру.',documents:'От подготовки договора до согласования и подписания.',masterdata:'Единые контрагенты, номенклатура, mappings и владельцы полей.',managerqa:'Вопросы, которые формируют архитектуру Grain, и зафиксированные ответы на них.'}[currentView];$('.filters').classList.toggle('hidden',['executive','finance','analytics','clients','documents','masterdata','managerqa'].includes(currentView));$('#month').closest('label').classList.toggle('hidden',currentView==='pipeline')}});
 for(const dlg of document.querySelectorAll('dialog'))dlg.addEventListener('click',e=>{if(e.target===dlg){const r=dlg.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dlg.close()}});
@@ -1316,9 +1296,9 @@ function render(){renderSales();renderClients()}
 render();renderMasterData();
 
 // Document approval workflow. Simulation only; no delivery or signature service.
-const wfBase=Date.UTC(2026,8,30,10),wfNames={draft:'Подготовка',legal:'Проверка юристом',director:'Коммерческое согласование',rework:'Доработка',ready:'Готов к подписанию',signed:'Подписан',rejected:'Отклонён'};
+const wfBase=new Date(DB.meta.demoDate+'T10:00:00+03:00').getTime(),wfNames={draft:'Подготовка',legal:'Проверка юристом',director:'Коммерческое согласование',rework:'Доработка',ready:'Готов к подписанию',signed:'Подписан',rejected:'Отклонён'};
 let wfNow=wfBase,wfOpened=null;
-const wfTime=n=>new Date(n).toLocaleString('ru-RU',{timeZone:'UTC',day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'});
+const wfTime=n=>new Date(n).toLocaleString('ru-RU',{timeZone:'Europe/Chisinau',day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'});
 const wfOwner=d=>d.stage==='legal'?'Ирина Ботнарь · юрист':d.stage==='director'?'Виктор Чебан · коммерческий директор':d.manager+' · менеджер продаж';
 function wfRecord(d,text){d.history.push({at:wfNow,text,version:d.version});auditAdd({actor:wfOwner(d),role:'Документооборот',action:text,entityType:'Документ',entityId:d.sourceId||('DOC-'+d.id),source:'Интерфейс'})}
 const wfSeeds=DB.documents.map(x=>{
@@ -1329,7 +1309,7 @@ const wfSeeds=DB.documents.map(x=>{
     title:x.title,body:x.body,due:x.dueMinutes==null?null:wfBase+x.dueMinutes*60000,remark:x.remark
   };
 });
-function wfSeed(){return wfSeeds.map(s=>{const c=clients.find(c=>c.id===s.clientId),d={...s,manager:c.manager,client:c.name,history:[],versions:[],approvals:[],escalated:false,reviewedVersion:null};d.versions.push({version:d.version,body:d.body,at:wfBase});d.history.push({at:wfBase,text:'Демонстрационный документ создан · '+wfNames[d.stage],version:d.version});if(d.stage==='director'){d.approvals.push({role:'legal',version:d.version});d.history.push({at:wfBase,text:'Юрист согласовал текущую версию (демо)',version:d.version})}return d})}
+function wfSeed(){return wfSeeds.map(s=>{const c=clients.find(c=>c.id===s.clientId),d={...s,manager:c.manager,client:c.name,history:[],versions:[],approvals:[],escalated:false,reviewedVersion:null};d.versions.push({version:d.version,body:d.body,at:wfBase});d.history.push({at:wfBase,text:'Демонстрационный документ создан · '+wfNames[d.stage],version:d.version});if(d.stage==='signed')d.signedVersion=d.version;if(d.stage==='director'){d.approvals.push({role:'legal',version:d.version});d.history.push({at:wfBase,text:'Юрист согласовал текущую версию (демо)',version:d.version})}return d})}
 let wfDocs=wfSeed();
 Object.assign(help,{workflow:['Маршрут договора','Менеджер готовит документ → юрист проверяет → коммерческий директор согласует → подписание. Жёлтый — текущий этап. Красный — просроченная задача. Решения относятся к версии документа. Возврат создаёт задачу менеджеру; новая версия повторно проходит весь маршрут.'],wfSla:['Сроки и эскалация','В демонстрации юридическая проверка занимает до 2 часов, коммерческая — до 4 часов. При достижении срока нерешённая задача становится красной. Через час просрочки в журнале появляется демонстрация уведомления руководителя. Автоматического согласования нет.\n\nКнопки +2 часа и +1 час двигают только часы документооборота. В рабочей системе нужен фоновый планировщик и рабочий календарь. Здесь сообщения не отправляются.']});
 function wfSeverity(d){return d.due!=null&&['legal','director'].includes(d.stage)?wfNow>=d.due+3600000?'escalated':wfNow>=d.due?'late':'pending':'none'}
@@ -1364,7 +1344,7 @@ if(action==='submit'&&['draft','rework'].includes(d.stage)){
  if(!remark.trim())return 'Укажите обязательную причину '+(action==='return'?'возврата.':'отклонения.');
  if(action==='reject'&&d.stage!=='director')return 'Отклонение доступно на этапе коммерческого согласования.';
  wfRecord(d,wfOwner(d)+(action==='return'?' вернул на доработку: ':' отклонил: ')+remark.trim());d.remark=remark.trim();d.stage=action==='return'?'rework':'rejected';d.due=null;d.reviewedVersion=null;d.escalated=false;
-}else if(action==='sign'&&d.stage==='ready'){d.stage='signed';d.signedVersion=d.version;wfRecord(d,'Менеджер отметил получение подписей обеих сторон (демо). Подписанная версия заблокирована.');}
+}else if(action==='sign'&&d.stage==='ready'){d.stage='signed';d.signedVersion=d.version;const deal=deals.find(x=>x.id===d.dealId);if(deal&&deal.stage<4){auditAdd({actor:d.manager,role:'Менеджер продаж',action:'Подписание связанного договора',entityType:'Сделка',entityId:deal.sourceId,field:'stage',oldValue:deal.stage,newValue:4});deal.stage=4}wfRecord(d,'Менеджер отметил получение подписей обеих сторон (демо). Подписанная версия заблокирована.');}
 else return 'Действие недоступно на текущем этапе.';
 return '';
 }
@@ -1379,26 +1359,26 @@ wfRender();
 let arAccounts={},arRequests=[],arAccounting=[],arReservations={},arLog=[],arOpened=null;
 const arKey=(id,i)=>deals.find(d=>d.id===id)?.parts[i]?.shipmentId||('UNSCHEDULED-'+id+'-'+i);
 function arDeal(key){for(const d of deals){const i=d.parts.findIndex(p=>p.shipmentId===key);if(i>=0)return {d,i}}return {d:null,i:-1}}
-function arFingerprint(d,i){return JSON.stringify([d.client,d.product,d.stage,d.price,d.parts[i]])}
-function arAmount(d,i){return Math.max(0,d.parts[i].qty-d.parts[i].shipped)*d.price}
+function arFingerprint(d,i){return JSON.stringify([d.clientId,d.productId,d.stage,d.price,d.parts[i],arAmount(d,i)])}
+function arAmount(d,i){const row=financeState.find(r=>r.shipmentId===d.parts[i].shipmentId);return Math.max(0,d.parts[i].qty-d.parts[i].shipped)*(row?.finalPrice??d.price)}
 function arRecord(text){arLog.push({at:wfNow,text});auditAdd({actor:'Система / финансовый контур',role:'Система',action:text,entityType:'Финансовый допуск',entityId:arOpened||'',source:text.includes('1С')?'Импорт 1С (демо)':'Интерфейс'})}
 function arSeed(){
   arAccounts=Object.fromEntries(DB.finance.accounts.map(a=>{
     const c=sourceClients[a.clientId];
-    return [c.name,{balance:a.balance,overdue:a.overdue,limit:a.limit,prepaid:a.prepaid,requiresPrepay:a.requiresPrepay,synced:a.synced,failed:a.failed}];
+    return [a.clientId,{balance:a.balance,overdue:a.overdue,limit:a.limit,prepaid:a.prepaid,requiresPrepay:a.requiresPrepay,synced:a.synced,failed:a.failed}];
   }));
   arRequests=structuredClone(DB.finance.clearanceRequests||[]);arAccounting=[];arReservations={};arLog=[];
 }
 arSeed();
 function hasSignedContract(d){return d.stage>=4&&wfDocs.some(doc=>doc.dealId===d.id&&doc.stage==='signed')}
 function arException(key){const {d,i}=arDeal(key);return arRequests.find(r=>r.key===key&&r.state==='approved'&&r.fingerprint===arFingerprint(d,i)&&wfNow<r.expires&&arAmount(d,i)<=r.amount)}
-function arCheck(key){const {d,i}=arDeal(key),a=arAccounts[d.client],p=d.parts[i],amount=arAmount(d,i),reasons=[];
+function arCheck(key){const {d,i}=arDeal(key),a=arAccounts[d.clientId],p=d.parts[i],amount=arAmount(d,i),reasons=[];
  if(p.qty<=p.shipped)return {status:'Отгружена',reasons:[],allow:false};
  if(!hasSignedContract(d))reasons.push('Нет актуального связанного договора со статусом «Подписан». Финансовое исключение не заменяет договор.');
  const ex=arException(key);
  if(!ex){if(a.synced===null||a.failed||wfNow-a.synced>=86400000)reasons.push('Требуется актуальная проверка расчётов из 1С.');
  else {if(a.overdue>0)reasons.push('Просроченный долг: '+fmt(a.overdue)+' MDL.');if(a.requiresPrepay&&a.prepaid<amount)reasons.push('Недостаточно предоплаты за партию.');
- const reserved=Object.entries(arReservations).filter(([k,r])=>{const x=arDeal(k);return k!==key&&x.d.client===d.client&&r.fingerprint===arFingerprint(x.d,x.i)&&wfNow<r.expires}).reduce((s,[k,r])=>s+r.amount,0);
+ const reserved=Object.entries(arReservations).filter(([k,r])=>{const x=arDeal(k);return k!==key&&x.d.clientId===d.clientId&&r.fingerprint===arFingerprint(x.d,x.i)&&wfNow<r.expires}).reduce((s,[k,r])=>s+r.amount,0);
  if(a.balance+reserved+amount>a.limit)reasons.push('Превышен кредитный лимит с учётом других разрешённых партий.');}}
  const pending=arRequests.some(r=>r.key===key&&r.state==='pending'&&r.fingerprint===arFingerprint(d,i));
  return {status:reasons.length?(pending?'Исключение на согласовании':a.synced===null?'Не проверена':'Заблокирована'):ex?'Разрешена по исключению':'Разрешена',reasons,allow:!reasons.length,exception:ex};
@@ -1411,9 +1391,9 @@ function arRender(){
  if(entries.length){$('#task-banner').classList.add('urgent');$('#task-banner strong').textContent+=' · Срочные отгрузки: '+entries.length}
 }
 Object.assign(help,{arGate:['Допуск к отгрузке','Проверяем подписанный контракт, актуальность расчётов, просроченный долг, предоплату и кредитный лимит. Утверждённое исключение действует только на одну партию с неизменными условиями в течение 24 демонстрационных часов. Оно не подтверждает оплату и не списывает долг.\n\nВ макете нет подключения к 1С или складу. Данные, обращения и решения моделируются.'],arImport:['Импорт из 1С','В рабочей системе обмен получает задолженность и подтверждённые платежи из 1С. В демонстрации выбирается тестовый ответ сервера. Повторный импорт заменяет снимок расчётов, а не повторно вычитает оплату. При ошибке старые данные не дают автоматического допуска.']});
-function arOpen(key){arOpened=key;const {d,i}=arDeal(key),a=arAccounts[d.client],s=arCheck(key),p=d.parts[i],req=arRequests.filter(r=>r.key===key).at(-1),job=arAccounting.find(r=>r.key===key&&r.state==='pending');if($('#task-drawer').open)$('#task-drawer').close();
+function arOpen(key){arOpened=key;const {d,i}=arDeal(key),a=arAccounts[d.clientId],s=arCheck(key),p=d.parts[i],req=arRequests.filter(r=>r.key===key).at(-1),job=arAccounting.find(r=>r.key===key&&r.state==='pending');if($('#task-drawer').open)$('#task-drawer').close();
  $('#clearance-detail').innerHTML='<div class="panel-head"><div><small>ПАРТИЯ '+key+' · МЕНЕДЖЕР ПРОДАЖ</small><h2 id="clearance-title">'+escapeHTML(d.client)+'</h2><p class="client-meta">'+escapeHTML(d.product)+' · '+date(p.date)+' · '+fmt(p.qty-p.shipped)+' т · '+fmt(arAmount(d,i))+' MDL</p></div><button class="close" aria-label="Закрыть допуск">×</button></div><div class="dialog-body"><div class="wf-assignment '+(!s.allow?'wf-late':'')+'"><b>'+s.status+'</b>'+s.reasons.map(t=>'<p>'+escapeHTML(t)+'</p>').join('')+(s.exception?'<p>Коммерческий директор разрешил только эту партию до '+wfTime(s.exception.expires)+'. Долг остаётся непогашенным.</p>':'')+'</div><div class="ar-metrics"><div>Долг<b>'+fmt(a.balance)+' MDL</b></div><div>Просрочено<b>'+fmt(a.overdue)+' MDL</b></div><div>Лимит<b>'+fmt(a.limit)+' MDL</b></div></div><p class="client-meta">'+(a.synced===null?'Данные ещё не запрошены.':'Последний успешный импорт: '+wfTime(a.synced))+(a.failed?' · Последний обмен завершился ошибкой.':'')+'</p><div class="wf-buttons"><button class="btn primary" id="ar-import">Импортировать данные из 1С</button><button class="btn" id="ar-accounting">Связаться с бухгалтерией</button><button class="btn ar-blocked" id="ar-urgent" '+(req?.state==='pending'&&req.fingerprint===arFingerprint(d,i)?'disabled':'')+'>Срочно запросить право отгрузки</button></div><p class="note">Демонстрация: сервер 1С, телефония и отправка сообщений не подключены.</p><details class="wf-demo"><summary>Сценарий ответа 1С '+qhelp('arImport')+'</summary><label>Ответ сервера<select id="ar-source"><option value="debt">Текущий долг / без нового платежа</option><option value="paid">Платёж подтверждён бухгалтерией (демо)</option><option value="error">Сервер недоступен</option></select></label><p>Тестовый импорт относится только к этому клиенту. Данные одинаковы для всех его партий.</p></details><div id="ar-request-form" class="hidden wf-demo"><label>Причина срочной отгрузки<textarea id="ar-reason" maxlength="1500" placeholder="Например: клиент ссылается на договорённость с директором"></textarea></label><p>Сразу коммерческому директору · конкретная партия · '+fmt(arAmount(d,i))+' MDL · срок исключения 24 часа с решения.</p><button class="btn primary" id="ar-send-request">Создать срочную задачу директору (демо)</button></div><div id="ar-accounting-form" class="hidden wf-demo"><b>Бухгалтерия</b><p>Телефон не настроен. Автоматический звонок в демонстрации недоступен.</p><label>Что уточнить<textarea id="ar-accounting-note" maxlength="1500">Проверьте поступление и разнесение платежа клиента '+escapeHTML(d.client)+'.</textarea></label><button class="btn" id="ar-accounting-send" '+(job?'disabled':'')+'>'+(job?'Обращение уже создано':'Создать обращение в бухгалтерию (демо)')+'</button></div>'+(req?'<div class="wf-demo"><b>Запрос директору: '+({pending:'на рассмотрении',approved:'одобрен',rejected:'отклонён',invalid:'условия партии изменились'})[req.state]+'</b><p>'+escapeHTML(req.reason)+'</p>'+(req.fingerprint!==arFingerprint(d,i)?'<p>Условия партии изменились. Старый запрос не даёт разрешения.</p>':'')+(req.state==='pending'?'<details><summary>Демонстрация решения коммерческого директора</summary><p>Менеджер не согласовывает свой запрос. Кнопки имитируют отдельного участника.</p><label>Комментарий директора<textarea id="ar-decision-note" maxlength="1500"></textarea></label><div class="wf-buttons"><button class="btn primary" data-ar-decision="approve">Разрешить эту партию (демо)</button><button class="btn" data-ar-decision="reject">Отказать (демо)</button></div></details>':'')+'</div>':'')+'<div class="wf-buttons"><button class="btn primary" id="ar-release" '+(!s.allow?'disabled':'')+'>Передать партию в отгрузку</button></div><p id="ar-feedback" role="status" class="client-meta">'+(arReservations[key]&&arReservations[key].fingerprint===arFingerprint(d,i)&&wfNow<arReservations[key].expires?'Передача зарегистрирована. Перед фактическим отпуском нужна повторная проверка.':'')+'</p><p id="ar-error" role="alert" class="wf-error"></p><h3>Журнал действий</h3><ol class="wf-history">'+arLog.filter(x=>x.text.includes(d.client)).slice(-8).reverse().map(x=>'<li>'+wfTime(x.at)+' · '+escapeHTML(x.text)+'</li>').join('')+'</ol></div>';
- $('#ar-import').onclick=()=>{const mode=$('#ar-source').value;if(mode==='error'){a.failed=true;arRecord(d.client+': обмен с 1С недоступен (демо).')}else{const idx=clients.findIndex(c=>c.name===d.client);Object.assign(a,{balance:idx===0?(mode==='paid'?230000:350000):idx===2?(mode==='paid'?0:80000):0,overdue:idx===0&&mode!=='paid'?120000:0,prepaid:idx===3&&mode!=='paid'?0:99999999,synced:wfNow,failed:false});arRecord(d.client+': импортирован снимок расчётов из 1С (демо); '+(mode==='paid'?'платёж подтверждён.':'новый платёж не подтверждён.'));if(mode==='paid')arAccounting.filter(j=>j.client===d.client&&j.state==='pending').forEach(j=>j.state='resolved')}
+ $('#ar-import').onclick=()=>{const mode=$('#ar-source').value;if(mode==='error'){a.failed=true;arRecord(d.client+': обмен с 1С недоступен (демо).')}else{const idx=clients.findIndex(c=>c.sourceId===d.clientId);Object.assign(a,{balance:idx===0?(mode==='paid'?230000:350000):idx===2?(mode==='paid'?0:80000):0,overdue:idx===0&&mode!=='paid'?120000:0,prepaid:idx===3&&mode!=='paid'?0:99999999,synced:wfNow,failed:false});arRecord(d.client+': импортирован снимок расчётов из 1С (демо); '+(mode==='paid'?'платёж подтверждён.':'новый платёж не подтверждён.'));if(mode==='paid')arAccounting.filter(j=>j.client===d.client&&j.state==='pending').forEach(j=>j.state='resolved')}
  arRefresh();arOpen(key)};
  $('#ar-accounting').onclick=()=>$('#ar-accounting-form').classList.toggle('hidden');$('#ar-urgent').onclick=()=>$('#ar-request-form').classList.toggle('hidden');
  $('#ar-accounting-send').onclick=()=>{const note=$('#ar-accounting-note').value.trim();if(!note){$('#ar-error').textContent='Укажите вопрос бухгалтерии.';return}if(!arAccounting.some(j=>j.key===key&&j.state==='pending')){arAccounting.push({key,client:d.client,note,state:'pending'});arRecord(d.client+': обращение в бухгалтерию создано (демо).')}arRefresh();arOpen(key)};
@@ -1516,7 +1496,7 @@ function syncPlannedCashOutComponents(shipmentId,row,ctx,actor=ctx.d.manager){
     if(amount>0){
       if(m){
         if(m.amount!==amount){const old=m.amount;m.amount=amount;auditAdd({actor,role:'Менеджер продаж',action:'Синхронизация компонента Cash Flow',entityType:'Партия',entityId:shipmentId,field:m.id,oldValue:old,newValue:amount,source:'Финансовый план'})}
-        m.category=map.category;m.categoryGroup=map.categoryGroup;m.costCenterId=map.costCenterId;
+        if(m.date!==ctx.p.date){const old=m.date;m.date=ctx.p.date;auditAdd({actor,action:'Перенос плановой даты Cash Flow',entityType:'Партия',entityId:shipmentId,field:m.id+'.date',oldValue:old,newValue:m.date})}m.category=map.category;m.categoryGroup=map.categoryGroup;m.costCenterId=map.costCenterId;
       }else{
         const created={id:'CF-RC-'+shipmentId+'-'+field,shipmentId,date:ctx.p.date,direction:'out',category:map.category,categoryGroup:map.categoryGroup,costCenterId:map.costCenterId,financeField:field,amount,status:'planned',source:'Финансовый план · аналитический компонент'};
         cashMovements.push(created);auditAdd({actor,role:'Менеджер продаж',action:'Добавлен компонент Cash Flow',entityType:'Партия',entityId:shipmentId,field:created.id,newValue:created,source:'Финансовый план'});
@@ -1529,6 +1509,7 @@ function syncPlannedCashOutComponents(shipmentId,row,ctx,actor=ctx.d.manager){
 function syncPlannedCashBase(shipmentId,row,ctx,actor=ctx.d.manager){
   const baseIn=shipmentCash(shipmentId).find(m=>m.direction==='in'&&m.status==='planned'&&m.source==='Коммерческие условия');
   const plannedRevenue=(+ctx.p.qty||0)*(+row.finalPrice||0);
+  if(baseIn){const date=new Date(ctx.p.date+'T12:00:00Z');date.setUTCDate(date.getUTCDate()+(+row.paymentTermsDays||0));const target=date.toISOString().slice(0,10);if(baseIn.date!==target){const old=baseIn.date;baseIn.date=target;auditAdd({actor,action:'Перенос планового поступления',entityType:'Партия',entityId:shipmentId,field:baseIn.id+'.date',oldValue:old,newValue:target})}}
   if(baseIn&&baseIn.amount!==plannedRevenue){const old=baseIn.amount;baseIn.amount=plannedRevenue;auditAdd({actor,role:'Менеджер продаж',action:'Синхронизация планового Cash Flow',entityType:'Партия',entityId:shipmentId,field:baseIn.id,oldValue:old,newValue:plannedRevenue,source:'Коммерческие условия'})}
   syncPlannedCashOutComponents(shipmentId,row,ctx,actor);
 }
@@ -1654,9 +1635,9 @@ function renderFinance(){
 function executiveMovements(){return logisticsState.movements||[]}
 function executiveTerminal(){return (terminalState.terminals||[])[0]||null}
 function executiveMovementTons(statuses){const set=new Set(statuses);return executiveMovements().filter(x=>set.has(x.status)).reduce((n,x)=>n+(+x.quantityTons||0),0)}
-function executiveCurrentTerminalStock(){return (terminalState.inventory||[]).filter(x=>x.status==='stored').reduce((n,x)=>n+(+x.quantityTons||0),0)}
+function executiveCurrentTerminalStock(){return (terminalState.inventory||[]).filter(x=>x.status==='stored'&&x.terminalId===executiveTerminal()?.terminalId).reduce((n,x)=>n+(+x.quantityTons||0),0)}
 function executiveTerminalStats(){
-  const t=executiveTerminal(),ops=terminalState.operations||[],snaps=terminalState.stockSnapshots||[],closed=terminalState.completedLots||[];
+  const t=executiveTerminal(),ops=(terminalState.operations||[]).filter(x=>x.terminalId===t?.terminalId),snaps=(terminalState.stockSnapshots||[]).filter(x=>x.terminalId===t?.terminalId),closed=(terminalState.completedLots||[]).filter(x=>x.terminalId===t?.terminalId);
   const inbound=ops.filter(x=>x.type==='in').reduce((n,x)=>n+(+x.quantityTons||0),0),outbound=ops.filter(x=>x.type==='out').reduce((n,x)=>n+(+x.quantityTons||0),0);
   const avgStock=snaps.length?snaps.reduce((n,x)=>n+(+x.stockTons||0),0)/snaps.length:0,current=executiveCurrentTerminalStock(),capacity=+t?.capacityTons||0;
   const utilization=capacity?current/capacity*100:0,turnover=avgStock?outbound/avgStock:0;
@@ -1681,8 +1662,8 @@ function executiveSignedDealRows(){
 function executiveFinance(){
   const list=analyticsUniverse(),alloc=analyticsAllocationRows(),agg=analyticsAggregate(list,alloc),margin=agg.revenue?agg.operating/agg.revenue*100:0;
   const byMonth={};
-  for(const m of cashMovements){const month=m.date.slice(0,7);byMonth[month]??={in:0,out:0};byMonth[month][m.direction]+=+m.amount||0}
-  for(const sc of analyticsState.sharedCosts||[]){const month=sc.date.slice(0,7);byMonth[month]??={in:0,out:0};byMonth[month].out+=+sc.amount||0}
+  for(const m of cashMovements.filter(m=>m.status==='planned')){const month=m.date.slice(0,7);byMonth[month]??={in:0,out:0};byMonth[month][m.direction]+=+m.amount||0}
+  for(const sc of (analyticsState.sharedCosts||[]).filter(sc=>sc.status==='planned')){const month=sc.date.slice(0,7);byMonth[month]??={in:0,out:0};byMonth[month].out+=+sc.amount||0}
   const months=Object.entries(byMonth).map(([month,v])=>({month,net:v.in-v.out,...v})).sort((a,b)=>a.month.localeCompare(b.month));
   const worst=months.slice().sort((a,b)=>a.net-b.net)[0]||{month:'—',net:0};
   return {agg,margin,months,worst};
@@ -1713,7 +1694,7 @@ function renderExecutive(){
     ['Объём в пути',fmt(transit)+' т','in_transit + delayed',''],
     ['Исполнение контрактов',fmt(execution)+'%','Факт / подписанный объём',''],
     ['Operating Margin',fmt(fin.margin)+'%','После direct + shared costs',fin.margin<0?'critical':''],
-    ['Cash Gap',money(fin.worst.net),analyticsMonthName(fin.worst.month),fin.worst.net<0?'warning':''],
+    ['Плановый Cash Gap',money(fin.worst.net),analyticsMonthName(fin.worst.month),fin.worst.net<0?'warning':''],
     ['Unrealized MTM',money(fin.agg.mtm),'Открытая рыночная позиция',fin.agg.mtm<0?'warning':''],
     ['Terminal Utilization',fmt(terminal.utilization)+'%','Stock / capacity',terminal.utilization>=85?'warning':''],
     ['Критические Integrity',String(integrityCritical),'Физика / качество / invoice','critical'],
@@ -1729,15 +1710,15 @@ function renderExecutive(){
   ].map(([l,v,p])=>'<article><small>'+l+'</small><b>'+fmt(v)+' т</b><small>'+p+'</small></article>').join('');
 
   $('#exec-terminal').innerHTML='<div class="exec-terminal-grid">'+[
-    ['Текущий stock',fmt(terminal.current)+' т'],
-    ['Utilization',fmt(terminal.utilization)+'%'],
-    ['Inbound throughput',fmt(terminal.inbound)+' т'],
-    ['Outbound throughput',fmt(terminal.outbound)+' т'],
-    ['Средний stock',fmt(terminal.avgStock)+' т'],
-    ['Turnover',fmt(terminal.turnover)+'×'],
-    ['Avg dwell time',fmt(terminal.avgDwell)+' дн.'],
-    ['Capacity',fmt(terminal.capacity)+' т']
-  ].map(([l,v])=>'<article><small>'+l+'</small><b>'+v+'</b></article>').join('')+'</div><div class="exec-mini-bar"><span style="width:'+Math.min(100,terminal.utilization)+'%"></span></div>';
+    ['Текущий остаток',fmt(terminal.current)+' т'],
+    ['Заполненность склада',fmt(terminal.utilization)+'%'],
+    ['Принято за период',fmt(terminal.inbound)+' т'],
+    ['Отпущено за период',fmt(terminal.outbound)+' т'],
+    ['Средний остаток',fmt(terminal.avgStock)+' т'],
+    ['Оборотность',fmt(terminal.turnover)+'×'],
+    ['Средний срок хранения',fmt(terminal.avgDwell)+' дн.'],
+    ['Вместимость склада',fmt(terminal.capacity)+' т']
+  ].map(([l,v])=>'<article><small>'+l+'</small><b>'+v+'</b></article>').join('')+'</div><p><b>Заполненность склада: '+fmt(terminal.current)+' из '+fmt(terminal.capacity)+' т · '+fmt(terminal.utilization)+'%</b><br>Свободно '+fmt(Math.max(0,terminal.capacity-terminal.current))+' т. Учитываются все товары; шкала показывает занятую вместимость, а не скорость перевалки.</p><div class="exec-mini-bar" role="meter" aria-label="Заполненность склада" aria-valuemin="0" aria-valuemax="100" aria-valuenow="'+terminal.utilization+'"><span style="width:'+Math.min(100,terminal.utilization)+'%"></span></div>';
 
   $('#exec-contracts').innerHTML='<table><thead><tr><th>Deal</th><th>Контрагент / товар</th><th>Контракт</th><th>В пути</th><th>Терминал</th><th>Исполнение</th><th>Operating Margin</th><th>Следующая партия</th></tr></thead><tbody>'+contracts.map(x=>
     '<tr><td><button class="link" data-deal="'+x.d.id+'">'+x.d.sourceId+'</button></td><td>'+escapeHTML(x.d.client)+'<small>'+escapeHTML(x.d.product)+'</small></td><td>'+fmt(x.contracted)+' т<small>open '+fmt(x.open)+' т</small></td><td>'+fmt(x.transit)+' т</td><td>'+fmt(x.terminal)+' т</td><td>'+fmt(x.execution)+'%<div class="exec-mini-bar"><span style="width:'+Math.min(100,x.execution)+'%"></span></div></td><td class="'+(x.operatingMargin<0?'analytics-profit-negative':'analytics-profit-positive')+'"><b>'+fmt(x.operatingMargin)+'%</b><small>'+money(x.financial.operating)+'</small></td><td>'+(x.next?date(x.next.date)+' · '+fmt(x.next.qty-x.next.shipped)+' т':'—')+(x.delayed?'<small class="analytics-profit-negative">Есть задержка transit</small>':'')+'</td></tr>'
@@ -1789,7 +1770,7 @@ function analyticsFilteredContexts(){
 }
 function analyticsFilteredAllocations(list=analyticsFilteredContexts()){
   const sel=analyticsSelection(),ids=new Set(list.map(x=>x.p.shipmentId));
-  return analyticsAllocationRows().filter(a=>ids.has(a.shipmentId)&&(sel.period==='all'||a.date.startsWith(sel.period))&&(sel.costCenter==='all'||a.costCenterId===sel.costCenter));
+  return analyticsAllocationRows().filter(a=>ids.has(a.shipmentId)&&(sel.period==='all'||a.date.startsWith(sel.period)));
 }
 function analyticsAggregate(list,allocations){
   const a={revenue:0,cogs:0,direct:0,contribution:0,shared:0,operating:0,mtm:0,economic:0,shipments:list.length};
@@ -1811,7 +1792,7 @@ function analyticsDirectCashRows(){
 }
 function analyticsSharedCashRows(){
   const sel=analyticsSelection();
-  return analyticsAllocationRows().filter(a=>analyticsBaseMatch(a.ctx,sel)&&(sel.period==='all'||a.date.startsWith(sel.period))&&(sel.costCenter==='all'||a.costCenterId===sel.costCenter)).map(a=>({m:{date:a.date,direction:'out',amount:a.amount,status:a.status,category:a.category,categoryGroup:'Shared / Overhead',costCenterId:a.costCenterId},ctx:a.ctx,shared:true}));
+  return analyticsAllocationRows().filter(a=>analyticsBaseMatch(a.ctx,sel)&&(sel.period==='all'||a.date.startsWith(sel.period))).map(a=>({m:{date:a.date,direction:'out',amount:a.amount,status:a.status,category:a.category,categoryGroup:'Shared / Overhead',costCenterId:a.costCenterId},ctx:a.ctx,shared:true}));
 }
 function analyticsCashAggregate(){
   const rows=[...analyticsDirectCashRows(),...analyticsSharedCashRows()],a={plannedIn:0,plannedOut:0,actualIn:0,actualOut:0};
@@ -1911,6 +1892,7 @@ function openFinancial(shipmentId){
   const form=$('#finance-form');
   if(!row.locked)form.onsubmit=e=>{
     e.preventDefault();const fd=new FormData(form),before=structuredClone(row);
+    const numeric=['finalPrice','unitCost',...finCostFields,'paymentTermsDays'];if(numeric.some(k=>!Number.isFinite(+fd.get(k))||+fd.get(k)<0)){$('#finance-error').textContent='Финансовые значения должны быть конечными неотрицательными числами.';return}
     row.valueStatus=fd.get('valueStatus');
     for(const k of ['finalPrice','unitCost','logistics','loading','storage','laboratory','commission','insurance','otherDirect','paymentTermsDays'])row[k]=+fd.get(k)||0;
     row.outstandingObligationsRegistered=fd.get('outstanding')==='true';row.outstandingObligationsNote=String(fd.get('outstandingNote')||'').trim();
@@ -1934,10 +1916,11 @@ function openFinancial(shipmentId){
   };
   const cashAdd=$('#cash-add');if(cashAdd)cashAdd.onclick=()=>{
     const dt=$('#cash-date').value,dir=$('#cash-direction').value,status=$('#cash-status').value,amount=+$('#cash-amount').value,category=$('#cash-category').value.trim();
-    if(!dt||!(amount>0)||!category){$('#cash-error').textContent='Укажите дату, сумму и категорию движения.';return}
+    if(!dt||!Number.isFinite(amount)||!(amount>0)||!category){$('#cash-error').textContent='Укажите дату, сумму и категорию движения.';return}
+    if(status==='actual'&&dt>today){$('#cash-error').textContent='Фактическое движение не может быть позже даты демо '+today;return}
     const m={id:'CF-R'+String(cashMovements.length+1).padStart(3,'0'),shipmentId,date:dt,direction:dir,category,categoryGroup:'Manual',costCenterId:null,amount,status,source:'Ручной ввод (демо)'};
     cashMovements.push(m);auditAdd({actor:ctx.d.manager,role:'Менеджер продаж',action:'Добавлено движение Cash Flow',entityType:'Партия',entityId:shipmentId,field:m.id,newValue:m,source:'Интерфейс'});
-    toast('Движение Cash Flow добавлено.');renderFinance();renderAnalytics();openFinancial(shipmentId);
+    toast('Движение Cash Flow добавлено.');finRefresh();openFinancial(shipmentId);
   };
   const marketSave=$('#market-save');if(marketSave)marketSave.onclick=()=>{
     const price=+$('#market-price').value,source=$('#market-source').value.trim(),localTime=$('#market-time').value,reason=$('#market-reason').value.trim();
@@ -1980,7 +1963,7 @@ clientDialog=function(id){
   const c=clients.find(x=>x.id===id),ds=deals.filter(d=>d.clientId===c.sourceId),ship=ds.flatMap(d=>d.parts.map(p=>({d,p}))),box=$('#client-detail .dialog-body');
   if(box)box.insertAdjacentHTML('beforeend','<section class="wf-links"><h3>Финансовые партии клиента</h3>'+(ship.length?ship.map(x=>{const calc=financeCalc(financeRow(x.p.shipmentId),{d:x.d,p:x.p,c});return '<button type="button" class="link" data-financial="'+x.p.shipmentId+'">'+x.p.shipmentId+' · '+x.d.product+' · '+date(x.p.date)+'<small>MTM '+money(calc.mtm)+' · open '+fmt(calc.openQty)+' т</small></button>'}).join(''):'<p class="client-meta">Реальных партий пока нет.</p>')+'</section>');
 };
-function finRefresh(){enhanceShipmentFinance();if(currentView==='finance')renderFinance()}
+function finRefresh(){arRefresh();renderFinance();renderAnalytics();renderExecutive()}
 document.addEventListener('click',e=>{const b=e.target.closest('[data-financial]');if(b){openFinancial(b.dataset.financial);return}const nav=e.target.closest('[data-view="finance"]');if(nav)renderFinance()});
 for(const id of ['fin-period','fin-line','fin-product','fin-client','fin-manager']){const el=$('#'+id);if(el)el.onchange=renderFinance}
 for(const v of [...new Set(deals.map(d=>d.product))])$('#fin-product').add(new Option(v,v));
@@ -2165,9 +2148,24 @@ document.addEventListener('click',e=>{
   const b=e.target.closest('[data-integrity]');if(b){openIntegrity(b.dataset.integrity);return}
 });
 
+document.addEventListener('click',e=>{const b=e.target.closest('[data-funnel-stage]');if(b){const column=document.querySelectorAll('#board .column')[+b.dataset.funnelStage];column?.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'center',inline:'center'});const deal=column?.querySelector('button');if(deal)deal.focus({preventScroll:true})}});
 // Explain Integrity block and refresh every affected surface.
 render();
 arRefresh();
+
+import {initAssistant} from './assistant.js';
+initAssistant({
+  snapshot:()=>{
+    const t=executiveTerminal();
+    const lots=(terminalState.inventory||[]).filter(l=>l.terminalId===t?.terminalId&&l.status==='stored');
+    const qty=category=>lots.filter(l=>masterProduct(l.productId)?.category===category).reduce((n,l)=>n+(+l.quantityTons||0),0);
+    const total=lots.reduce((n,l)=>n+(+l.quantityTons||0),0),grain=qty('Grain'),fertilizers=qty('Fertilizers');
+    return {date:DB.meta.demoDate,terminal:t?{name:t.name,total,grain,fertilizers,other:total-grain-fertilizers,capacity:+t.capacityTons||0}:null,inTransit:executiveMovementTons(['in_transit','delayed']),delayed:executiveMovements().filter(x=>x.status==='delayed').length,documents:wfDocs,deals};
+  },
+  navigate:view=>document.querySelector('nav [data-view="'+view+'"]').click(),
+  openDeal:id=>detail(id)
+});
 </script></body></html>
+
 
 

@@ -1,0 +1,3 @@
+node_modules/
+.audit-artifacts/
+package-lock.json
